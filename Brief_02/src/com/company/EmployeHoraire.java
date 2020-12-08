@@ -8,8 +8,8 @@ public class EmployeHoraire extends Employe{
         return nbH;
     }
     //
-    public EmployeHoraire(String nom, Double salaire, int nbH, Double tauxH){
-        super(nom, salaire);
+    public EmployeHoraire(String nom, int nbH, Double tauxH){
+        super(nom);
         this.nbH = nbH;
         this.tauxH = tauxH;
     }
