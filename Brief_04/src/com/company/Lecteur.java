@@ -8,20 +8,30 @@ public class Lecteur {
     private String mail;
     private int idCarteFidel;
     //
+    private CarteFidelite carteFidelite;
+    //
     private static int compteur = 0;
+
     public static int getCompteur() {
         return compteur;
     }
+
     //
-    public Lecteur(String nom, String prenom, int numTel, String mail){
+    public Lecteur(String nom, String prenom, int numTel, String mail) {
         compteur++;
         this.identifiant = compteur;
         //
-
+        carteFidelite = new CarteFidelite();
         //
         this.nom = nom;
         this.prenom = prenom;
         this.numTel = numTel;
         this.mail = mail;
+    }
+
+    //
+    @Override
+    public String toString() {
+        return String.format("Nom: %s, Prénom: %s, Numéro téléphone: %d, Adresse email: %s", this.nom, this.prenom, this.numTel, this.mail);
     }
 }

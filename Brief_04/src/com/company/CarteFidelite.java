@@ -18,7 +18,17 @@ public class CarteFidelite {
         this.statu = "non fidèle";
     }
     //
-    public void ajouterPoint(){
+    public void ajouterPoint(String type){
         this.nbPoints++;
+        //
+        int pointsCeil = 4;
+        if(type != "Lecteur")
+            pointsCeil = 3;
+        if(this.nbPoints == pointsCeil){
+            if(type == "Lecteur")
+                this.statu = "fidèle";
+            else
+                this.statu = "super-fidèle";
+        }
     }
 }
