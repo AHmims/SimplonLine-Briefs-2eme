@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -74,7 +73,7 @@ public class Main {
                     Date date;
                     Calendar dateEdition = Calendar.getInstance();
                     try {
-                        date = format.parse("20/10/2020");
+                        date = format.parse(sc.nextLine());
                         dateEdition = format.getCalendar();
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -88,19 +87,18 @@ public class Main {
                         System.out.printf("%d: %s\n", pos, bienfaiteur.getSurnom());
                         pos++;
                     }
-                    System.out.println("0: Annuler");
+                    System.out.println("---\n0: Annuler");
                     int choixB = -1;
                     while (choixB != 0) {
                         System.out.print("Choix : ");
                         choixB = sc.nextInt();
                         if (choixB != 0) {
                             if (bienfaiteurs[choixB - 1] != null) {
-                                choixB = 0;
-                                //
                                 int idB = bienfaiteurs[choixB - 1].getIdentifiant();
                                 //
                                 livres[arraySize(livres)] = new Livre(titre, edition, idB, dateEdition);
                                 System.out.println("Livre ajouté avec succès.");
+                                choixB = 0;
                             } else
                                 System.out.println("---\nChoix invalide!\n---");
                         }
@@ -110,15 +108,24 @@ public class Main {
             case 2:
                 System.out.print("Nom : ");
                 String nom = sc.nextLine();
-                System.out.println("Prenom : ");
-                String prenom =sc.nextLine();
-                System.out.println("Numéro de téléphone : ");
+                System.out.print("Prenom : ");
+                String prenom = sc.nextLine();
+                System.out.print("Numéro de téléphone : ");
                 int numTel = sc.nextInt();
-                System.out.println("Adresse email : ");
-                String mail = sc.nextLine();
+                System.out.print("Adresse email : ");
+                String mail_L = sc.next();
                 //
-                lecteurs[arraySize(lecteurs)]= new Lecteur(nom,prenom,numTel,mail);
+                lecteurs[arraySize(lecteurs)] = new Lecteur(nom, prenom, numTel, mail_L);
                 System.out.println("Lecteur ajouté avec succès.");
+                break;
+            case 3:
+                System.out.print("Surnom : ");
+                String surnom = sc.nextLine();
+                System.out.print("Adresse email : ");
+                String mail_B = sc.nextLine();
+                //
+                bienfaiteurs[arraySize(bienfaiteurs)] = new Bienfaiteur(surnom, mail_B);
+                System.out.println("Bienfaiteur ajouté avec succès.");
                 break;
         }
     }
