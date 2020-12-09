@@ -9,6 +9,12 @@ public class CarteFidelite {
     public static int getCompteur() {
         return compteur;
     }
+    public int getIdentifiant() {
+        return identifiant;
+    }
+    public String getStatu() {
+        return statu;
+    }
     //
     public CarteFidelite(){
         compteur++;
