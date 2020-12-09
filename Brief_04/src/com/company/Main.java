@@ -45,8 +45,10 @@ public class Main {
                             supprimer(choix);
                             break;
                         case 4:
+
                             break;
                         case 5:
+                            afficher(choix);
                             break;
                         default:
                             System.out.println("---\nChoix invalide!\n---");
@@ -136,6 +138,7 @@ public class Main {
     public static void modifier(int choix) {
         Scanner sc = new Scanner(System.in);
         displayData(choix);
+        System.out.println("---\n0: Annuler");
         switch (choix) {
             case 1:
                 int choix_L = -1;
@@ -205,15 +208,15 @@ public class Main {
                     //
                     if (choix_LT != 0) {
                         if (lecteurs[choix_LT - 1] != null && lecteurs.length > choix_LT - 1) {
-                            System.out.println("_** Laissez le champ vide si vous ne voulez pas le modifier **_");
+                            System.out.println("_** Ecrire '*' si vous ne voulez pas modifier le champ **_");
                             System.out.print("Nom : ");
-                            String nom = sc.nextLine();
+                            String nom = sc.next();
                             System.out.print("Prenom : ");
-                            String prenom = sc.nextLine();
+                            String prenom = sc.next();
                             System.out.print("Numéro de téléphone : ");
-                            String strNumTel = sc.nextLine();
+                            String strNumTel = sc.next();
                             int numTel = 0;
-                            if (strNumTel != "")
+                            if (!strNumTel.equals("*"))
                                 numTel = Integer.parseInt(strNumTel);
                             System.out.print("Adresse email : ");
                             String mail_L = sc.next();
@@ -254,6 +257,7 @@ public class Main {
     //
     public static void supprimer(int choix) {
         displayData(choix);
+        System.out.println("---\n0: Annuler");
         int choix_D = -1;
         Scanner sc = new Scanner(System.in);
         while (choix_D != 0) {
@@ -306,6 +310,44 @@ public class Main {
     }
 
     //
+    public static void afficher(int choix) {
+        switch (choix) {
+            case 1:
+                System.out.printf("Nombre total des livres disponibles : %d\n", arraySize(livres));
+                break;
+            case 2:
+                int nbLecteurF = 0;
+                for (Lecteur lecteur : lecteurs) {
+                    if (lecteur == null)
+                        break;
+                    else {
+                        if (!lecteur.getCarteFidelite().getStatu().equals("non fidèle"))
+                            nbLecteurF++;
+                    }
+                }
+                //
+                System.out.printf("Nombre total des lecteurs : %d, nombre total des lecteurs fidèles: %d\n", arraySize(lecteurs), nbLecteurF);
+                break;
+            case 3:
+                int nbBienfaiteurF = 0;
+                for (Bienfaiteur bienfaiteur : bienfaiteurs) {
+                    if (bienfaiteur == null)
+                        break;
+                    else {
+                        if (bienfaiteur.getCarteFidelite().getStatu().equals("super-fidèle"))
+                            nbBienfaiteurF++;
+                    }
+                }
+                System.out.printf("Nombre total des bienfaiteurs : %d, nombre total des bienfaiteurs super-fidèles : %d\n", arraySize(bienfaiteurs), nbBienfaiteurF);
+                break;
+        }
+        displayData(choix);
+        System.out.println("---");
+    }
+
+    //
+    //
+    //
     public static int arraySize(Livre[] array) {
         int pos = 0;
         for (Livre livre : array) {
@@ -347,7 +389,7 @@ public class Main {
                 for (Livre livre : livres) {
                     if (livre != null) {
                         pos++;
-                        System.out.printf("%d : %s", livre.toString());
+                        System.out.printf("%d : %s\n", pos, livre.toString());
                     } else break;
                 }
                 break;
@@ -355,7 +397,7 @@ public class Main {
                 for (Lecteur lecteur : lecteurs) {
                     if (lecteur != null) {
                         pos++;
-                        System.out.printf("%d : %s", lecteur.toString());
+                        System.out.printf("%d : %s\n", pos, lecteur.toString());
                     } else break;
                 }
                 break;
@@ -363,11 +405,10 @@ public class Main {
                 for (Bienfaiteur bienfaiteur : bienfaiteurs) {
                     if (bienfaiteur != null) {
                         pos++;
-                        System.out.printf("%d : %s", bienfaiteur.toString());
+                        System.out.printf("%d : %s\n", pos, bienfaiteur.toString());
                     } else break;
                 }
                 break;
         }
-        System.out.println("---\n0: Annuler");
     }
 }

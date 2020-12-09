@@ -10,6 +10,11 @@ public class Lecteur {
     private CarteFidelite carteFidelite;
     //
     private static int compteur = 0;
+
+    public CarteFidelite getCarteFidelite() {
+        return carteFidelite;
+    }
+
     public static int getCompteur() {
         return compteur;
     }
@@ -34,13 +39,13 @@ public class Lecteur {
     }
     //
     public void modifier(String nom, String prenom, int numTel, String mail){
-        if(nom != "")
+        if(!nom.equals("*"))
             this.nom = nom;
-        if(prenom != "")
+        if(!prenom.equals("*"))
             this.prenom = prenom;
         if(numTel != 0)
             this.numTel = numTel;
-        if(mail != "")
+        if(!mail.equals("*"))
             this.mail = mail;
     }
 }

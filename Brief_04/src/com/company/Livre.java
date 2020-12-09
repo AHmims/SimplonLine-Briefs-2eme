@@ -34,9 +34,9 @@ public class Livre {
     }
     //
     public void modifier(String titre, String edition, int idBienfaiteur, Calendar dateEdition){
-        if(titre != "")
+        if(!titre.equals("*"))
             this.titre = titre;
-        if(edition != "")
+        if(!edition.equals("*"))
             this.edition = edition;
         if(idBienfaiteur > 0)
             this.idBienfaiteur = idBienfaiteur;

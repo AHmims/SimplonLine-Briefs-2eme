@@ -14,6 +14,9 @@ public class Bienfaiteur {
     public int getIdentifiant() {
         return identifiant;
     }
+    public CarteFidelite getCarteFidelite() {
+        return carteFidelite;
+    }
     public static int getCompteur() {
         return compteur;
     }
@@ -36,9 +39,9 @@ public class Bienfaiteur {
     //
     //
     public void modifier(String surnom, String mail){
-        if(surnom != "")
+        if(!surnom.equals("*"))
             this.surnom = surnom;
-        if(mail != "")
+        if(!mail.equals("*"))
             this.mail = mail;
     }
 }
