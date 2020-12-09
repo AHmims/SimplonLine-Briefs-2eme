@@ -29,7 +29,8 @@ public class Main {
             if (choix >= 1 && choix <= 3) {
                 int choix2 = -1;
                 while (choix2 != 0) {
-                    System.out.println("***|choisissez une opération |***\n1: Ajouter.\n2: Modifier.\n3: Supprimer.\n4: Rechercher.\n5: Afficher.\n0: Précédent.");
+                    System.out.println("***|choisissez une opération |***\n1: Ajouter.\n2: Modifier.\n3: Supprimer.\n4: Rechercher.\n5: Afficher.");
+                    System.out.println("0: Précédent.");
                     System.out.print("Choix: ");
                     choix2 = sc.nextInt();
                     switch (choix2) {
@@ -99,14 +100,27 @@ public class Main {
                                 int idB = bienfaiteurs[choixB - 1].getIdentifiant();
                                 //
                                 livres[arraySize(livres)] = new Livre(titre, edition, idB, dateEdition);
+                                System.out.println("Livre ajouté avec succès.");
                             } else
                                 System.out.println("---\nChoix invalide!\n---");
                         }
                     }
                 } else System.out.println("Ajouter un bienfaiteur d'abord");
                 break;
+            case 2:
+                System.out.print("Nom : ");
+                String nom = sc.nextLine();
+                System.out.println("Prenom : ");
+                String prenom =sc.nextLine();
+                System.out.println("Numéro de téléphone : ");
+                int numTel = sc.nextInt();
+                System.out.println("Adresse email : ");
+                String mail = sc.nextLine();
+                //
+                lecteurs[arraySize(lecteurs)]= new Lecteur(nom,prenom,numTel,mail);
+                System.out.println("Lecteur ajouté avec succès.");
+                break;
         }
-        System.out.println("Élément ajouté avec succès.");
     }
 
     //
