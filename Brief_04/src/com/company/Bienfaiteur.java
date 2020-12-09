@@ -29,4 +29,11 @@ public class Bienfaiteur {
     public String toString() {
         return String.format("Surnom: %s, Adresse email: %s", this.surnom, this.mail);
     }
+    //
+    public void modifier(String surnom, String mail){
+        if(surnom != "")
+            this.surnom = surnom;
+        if(mail != "")
+            this.mail = mail;
+    }
 }

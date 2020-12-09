@@ -32,4 +32,15 @@ public class Lecteur {
     public String toString() {
         return String.format("Nom: %s, Prénom: %s, Numéro téléphone: %d, Adresse email: %s", this.nom, this.prenom, this.numTel, this.mail);
     }
+    //
+    public void modifier(String nom, String prenom, int numTel, String mail){
+        if(nom != "")
+            this.nom = nom;
+        if(prenom != "")
+            this.prenom = prenom;
+        if(numTel != 0)
+            this.numTel = numTel;
+        if(mail != "")
+            this.mail = mail;
+    }
 }

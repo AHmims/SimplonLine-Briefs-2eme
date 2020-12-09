@@ -32,4 +32,15 @@ public class Livre {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         return String.format("Titre: %s, Edition: %s, Date d'édition: %s", this.titre, this.edition, format.format(this.dateEdition.getTime()));
     }
+    //
+    public void modifier(String titre, String edition, int idBienfaiteur, Calendar dateEdition){
+        if(titre != "")
+            this.titre = titre;
+        if(edition != "")
+            this.edition = edition;
+        if(idBienfaiteur > 0)
+            this.idBienfaiteur = idBienfaiteur;
+        if(dateEdition != null)
+            this.dateEdition = dateEdition;
+    }
 }
