@@ -198,16 +198,54 @@ public class Main {
                 break;
             case 2:
                 int choix_LT = -1;
-                while (choix_LT != 0){
+                while (choix_LT != 0) {
                     System.out.print("Choix : ");
                     choix_LT = sc.nextInt();
                     //
                     if (choix_LT != 0) {
-                        if (livres[choix_L - 1] != null && livres.length > choix_L - 1) {}
+                        if (lecteurs[choix_LT - 1] != null && lecteurs.length > choix_LT - 1) {
+                            System.out.println("_** Laissez le champ vide si vous ne voulez pas le modifier **_");
+                            System.out.print("Nom : ");
+                            String nom = sc.nextLine();
+                            System.out.print("Prenom : ");
+                            String prenom = sc.nextLine();
+                            System.out.print("Numéro de téléphone : ");
+                            String strNumTel = sc.nextLine();
+                            int numTel = 0;
+                            if (strNumTel != "")
+                                numTel = Integer.parseInt(strNumTel);
+                            System.out.print("Adresse email : ");
+                            String mail_L = sc.next();
+                            //
+                            lecteurs[choix_LT].modifier(nom, prenom, numTel, mail_L);
+                            System.out.println("Lecteur modifié avec succès.");
+                            //
+                            choix_LT = 0;
+                        } else System.out.println("---\nChoix invalide!\n---");
                     }
                 }
                 break;
             case 3:
+                int choix_B = -1;
+                while (choix_B != 0) {
+                    System.out.print("Choix : ");
+                    choix_B = sc.nextInt();
+                    //
+                    if (choix_B != 0) {
+                        if (bienfaiteurs[choix_B - 1] != null && bienfaiteurs.length > choix_B - 1) {
+                            System.out.println("_** Laissez le champ vide si vous ne voulez pas le modifier **_");
+                            System.out.print("Surnom : ");
+                            String surnom = sc.nextLine();
+                            System.out.print("Adresse email : ");
+                            String mail_B = sc.nextLine();
+                            //
+                            bienfaiteurs[choix_B].modifier(surnom, mail_B);
+                            System.out.println("Bienfaiteur modifié avec succès.");
+                            //
+                            choix_B = 0;
+                        } else System.out.println("---\nChoix invalide!\n---");
+                    }
+                }
                 break;
         }
     }
@@ -259,14 +297,15 @@ public class Main {
                 }
                 break;
             case 2:
-                for (Lecteur lecteur:lecteurs) {
+                for (Lecteur lecteur : lecteurs) {
                     if (lecteur != null) {
                         pos++;
                         System.out.printf("%d : %s", lecteur.toString());
                     } else break;
-                }break;
+                }
+                break;
             case 3:
-                for (Bienfaiteur bienfaiteur:bienfaiteurs) {
+                for (Bienfaiteur bienfaiteur : bienfaiteurs) {
                     if (bienfaiteur != null) {
                         pos++;
                         System.out.printf("%d : %s", bienfaiteur.toString());
