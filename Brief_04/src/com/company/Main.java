@@ -42,6 +42,7 @@ public class Main {
                             modifier(choix);
                             break;
                         case 3:
+                            supprimer(choix);
                             break;
                         case 4:
                             break;
@@ -247,6 +248,60 @@ public class Main {
                     }
                 }
                 break;
+        }
+    }
+
+    //
+    public static void supprimer(int choix) {
+        displayData(choix);
+        int choix_D = -1;
+        Scanner sc = new Scanner(System.in);
+        while (choix_D != 0) {
+            System.out.print("Choix : ");
+            choix_D = sc.nextInt();
+            if (choix_D != 0) {
+                switch (choix) {
+                    case 1:
+                        if (arraySize(livres) > choix_D - 1 && choix_D > 0) {
+                            System.out.print("Etes-vous de supprimer cette élément ? (oui(O) / non(N))");
+                            String confirmD_l = sc.nextLine().toLowerCase();
+                            if (confirmD_l.equals("oui") || confirmD_l.equals("o")) {
+                                for (int i = choix_D - 1; i < arraySize(livres) - 1; i++) {
+                                    livres[i] = livres[i + 1];
+                                }
+                                System.out.println("Livre supprimé avec succès");
+                            }
+                            choix_D = 0;
+                        } else System.out.println("---\nChoix invalide!\n---");
+                        break;
+                    case 2:
+                        if (arraySize(lecteurs) > choix_D - 1 && choix_D > 0) {
+                            System.out.print("Etes-vous de supprimer élément element ? (oui(O) / non(N))");
+                            String confirmD_lc = sc.nextLine().toLowerCase();
+                            if (confirmD_lc.equals("oui") || confirmD_lc.equals("o")) {
+                                for (int i = choix_D - 1; i < arraySize(lecteurs) - 1; i++) {
+                                    lecteurs[i] = lecteurs[i + 1];
+                                }
+                                System.out.println("Lecteur supprimé avec succès");
+                            }
+                            choix_D = 0;
+                        } else System.out.println("---\nChoix invalide!\n---");
+                        break;
+                    case 3:
+                        if (arraySize(bienfaiteurs) > choix_D - 1 && choix_D > 0) {
+                            System.out.print("Etes-vous de supprimer élément element ? (oui(O) / non(N))");
+                            String confirmD_b = sc.nextLine().toLowerCase();
+                            if (confirmD_b.equals("oui") || confirmD_b.equals("o")) {
+                                for (int i = choix_D - 1; i < arraySize(bienfaiteurs) - 1; i++) {
+                                    bienfaiteurs[i] = bienfaiteurs[i + 1];
+                                }
+                                System.out.println("Bienfaiteur supprimé avec succès");
+                            }
+                            choix_D = 0;
+                        } else System.out.println("---\nChoix invalide!\n---");
+                        break;
+                }
+            }
         }
     }
 
