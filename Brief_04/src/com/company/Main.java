@@ -39,6 +39,7 @@ public class Main {
                             ajouter(choix);
                             break;
                         case 2:
+                            modifier(choix);
                             break;
                         case 3:
                             break;
@@ -93,7 +94,7 @@ public class Main {
                         System.out.print("Choix : ");
                         choixB = sc.nextInt();
                         if (choixB != 0) {
-                            if (bienfaiteurs[choixB - 1] != null) {
+                            if (bienfaiteurs[choixB - 1] != null && bienfaiteurs.length > choixB - 1) {
                                 int idB = bienfaiteurs[choixB - 1].getIdentifiant();
                                 //
                                 livres[arraySize(livres)] = new Livre(titre, edition, idB, dateEdition);
@@ -132,6 +133,83 @@ public class Main {
 
     //
     public static void modifier(int choix) {
+        Scanner sc = new Scanner(System.in);
+        displayData(choix);
+        switch (choix) {
+            case 1:
+                int choix_L = -1;
+                while (choix_L != 0) {
+                    System.out.print("Choix : ");
+                    choix_L = sc.nextInt();
+                    //
+                    if (choix_L != 0) {
+                        if (livres[choix_L - 1] != null && livres.length > choix_L - 1) {
+                            System.out.println("_** Laissez le champ vide si vous ne voulez pas le modifier **_");
+                            //
+                            System.out.print("Titre : ");
+                            String titre = sc.nextLine();
+                            //
+                            System.out.print("Edition : ");
+                            String edition = sc.nextLine();
+                            //
+                            System.out.print("Date d'édition (jj/mm/aaaa) : ");
+                            SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+                            Date date;
+                            Calendar dateEdition = Calendar.getInstance();
+                            try {
+                                date = format.parse(sc.nextLine());
+                                dateEdition = format.getCalendar();
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            //
+                            System.out.println("Choisire un bienfaiteur :");
+                            int pos = 1;
+                            for (Bienfaiteur bienfaiteur : bienfaiteurs) {
+                                if (bienfaiteur == null)
+                                    break;
+                                System.out.printf("%d: %s\n", pos, bienfaiteur.getSurnom());
+                                pos++;
+                            }
+                            System.out.println("---\n-1: valeur par défaut.\n0: Annuler");
+                            int choixB = -1;
+                            while (choixB != 0) {
+                                System.out.print("Choix : ");
+                                choixB = sc.nextInt();
+                                if (choixB != 0) {
+                                    if (choixB == -1) {
+                                        livres[choix_L - 1].modifier(titre, edition, -1, dateEdition);
+                                        System.out.println("Livre modifié avec succès.");
+                                        choixB = 0;
+                                    } else if (bienfaiteurs[choixB - 1] != null && bienfaiteurs.length > choixB - 1) {
+                                        int idB = bienfaiteurs[choixB - 1].getIdentifiant();
+                                        //
+                                        livres[choix_L - 1].modifier(titre, edition, idB, dateEdition);
+                                        System.out.println("Livre modifié avec succès.");
+                                        choixB = 0;
+                                    } else
+                                        System.out.println("---\nChoix invalide!\n---");
+                                }
+                            }
+                            choix_L = 0;
+                        } else System.out.println("---\nChoix invalide!\n---");
+                    }
+                }
+                break;
+            case 2:
+                int choix_LT = -1;
+                while (choix_LT != 0){
+                    System.out.print("Choix : ");
+                    choix_LT = sc.nextInt();
+                    //
+                    if (choix_LT != 0) {
+                        if (livres[choix_L - 1] != null && livres.length > choix_L - 1) {}
+                    }
+                }
+                break;
+            case 3:
+                break;
+        }
     }
 
     //
@@ -166,5 +244,36 @@ public class Main {
         }
         //
         return pos;
+    }
+
+    //
+    public static void displayData(int choix) {
+        int pos = 0;
+        switch (choix) {
+            case 1:
+                for (Livre livre : livres) {
+                    if (livre != null) {
+                        pos++;
+                        System.out.printf("%d : %s", livre.toString());
+                    } else break;
+                }
+                break;
+            case 2:
+                for (Lecteur lecteur:lecteurs) {
+                    if (lecteur != null) {
+                        pos++;
+                        System.out.printf("%d : %s", lecteur.toString());
+                    } else break;
+                }break;
+            case 3:
+                for (Bienfaiteur bienfaiteur:bienfaiteurs) {
+                    if (bienfaiteur != null) {
+                        pos++;
+                        System.out.printf("%d : %s", bienfaiteur.toString());
+                    } else break;
+                }
+                break;
+        }
+        System.out.println("---\n0: Annuler");
     }
 }
