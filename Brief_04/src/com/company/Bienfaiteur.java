@@ -8,11 +8,15 @@ public class Bienfaiteur {
     private CarteFidelite carteFidelite;
     //
     private static int compteur = 0;
-
+    public String getSurnom() {
+        return surnom;
+    }
+    public int getIdentifiant() {
+        return identifiant;
+    }
     public static int getCompteur() {
         return compteur;
     }
-
     //
     public Bienfaiteur(String surnom, String mail) {
         compteur++;
@@ -29,6 +33,7 @@ public class Bienfaiteur {
     public String toString() {
         return String.format("Surnom: %s, Adresse email: %s", this.surnom, this.mail);
     }
+    //
     //
     public void modifier(String surnom, String mail){
         if(surnom != "")
