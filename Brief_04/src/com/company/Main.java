@@ -221,7 +221,7 @@ public class Main {
                             System.out.print("Adresse email : ");
                             String mail_L = sc.next();
                             //
-                            lecteurs[choix_LT].modifier(nom, prenom, numTel, mail_L);
+                            lecteurs[choix_LT - 1].modifier(nom, prenom, numTel, mail_L);
                             System.out.println("Lecteur modifié avec succès.");
                             //
                             choix_LT = 0;
@@ -243,7 +243,7 @@ public class Main {
                             System.out.print("Adresse email : ");
                             String mail_B = sc.nextLine();
                             //
-                            bienfaiteurs[choix_B].modifier(surnom, mail_B);
+                            bienfaiteurs[choix_B-1].modifier(surnom, mail_B);
                             System.out.println("Bienfaiteur modifié avec succès.");
                             //
                             choix_B = 0;
