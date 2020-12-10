@@ -29,6 +29,8 @@ public class Main {
                 int choix2 = -1;
                 while (choix2 != 0) {
                     System.out.println("***|choisissez une opération |***\n1: Ajouter.\n2: Modifier.\n3: Supprimer.\n4: Rechercher.\n5: Afficher.");
+                    if (choix == 2)
+                        System.out.println("6: Lire un livre.");
                     System.out.println("0: Précédent.");
                     System.out.print("Choix: ");
                     choix2 = sc.nextInt();
@@ -49,6 +51,10 @@ public class Main {
                             break;
                         case 5:
                             afficher(choix);
+                            break;
+                        case 6:
+                            if (choix == 2)
+                                lire();
                             break;
                         default:
                             System.out.println("---\nChoix invalide!\n---");
@@ -99,6 +105,7 @@ public class Main {
                         if (choixB != 0) {
                             if (bienfaiteurs[choixB - 1] != null && bienfaiteurs.length > choixB - 1) {
                                 int idB = bienfaiteurs[choixB - 1].getIdentifiant();
+                                bienfaiteurs[choixB - 1].getCarteFidelite().ajouterPoint();
                                 //
                                 livres[arraySize(livres)] = new Livre(titre, edition, idB, dateEdition);
                                 System.out.println("Livre ajouté avec succès.");
@@ -321,7 +328,7 @@ public class Main {
                     if (lecteur == null)
                         break;
                     else {
-                        if (!lecteur.getCarteFidelite().getStatu().equals("non fidèle"))
+                        if (!lecteur.getCarteFidelite().getStatu(lecteur.getClass().getSimpleName()).equals("non fidèle"))
                             nbLecteurF++;
                     }
                 }
@@ -334,7 +341,7 @@ public class Main {
                     if (bienfaiteur == null)
                         break;
                     else {
-                        if (bienfaiteur.getCarteFidelite().getStatu().equals("super-fidèle"))
+                        if (bienfaiteur.getCarteFidelite().getStatu(bienfaiteur.getClass().getSimpleName()).equals("super-fidèle"))
                             nbBienfaiteurF++;
                     }
                 }
@@ -391,6 +398,32 @@ public class Main {
                 else
                     System.out.println("Bienfaiteurs non trouvé !");
                 break;
+        }
+    }
+
+    //
+    public static void lire() {
+        int choix_L = -1;
+        Scanner sc = new Scanner(System.in);
+        while (choix_L != 0) {
+            System.out.println("Mercide choisire un lecteur :");
+            displayData(2);
+            System.out.println("---\n0: Annuler");
+            System.out.print("Choix : ");
+            choix_L = sc.nextInt();
+            //
+            if (lecteurs[choix_L - 1] != null && lecteurs.length > choix_L - 1) {
+                displayData(1);
+                System.out.println("---\n0: Annuler");
+                System.out.print("Choix : ");
+                int choix_Lv = sc.nextInt();
+                if (livres[choix_Lv - 1] != null && livres.length > choix_Lv - 1) {
+                    lecteurs[choix_L - 1].getCarteFidelite().ajouterPoint();
+                    //
+                    choix_Lv = 0;
+                    choix_L = 0;
+                } else System.out.println("---\nChoix invalide!\n---");
+            } else System.out.println("---\nChoix invalide!\n---");
         }
     }
 

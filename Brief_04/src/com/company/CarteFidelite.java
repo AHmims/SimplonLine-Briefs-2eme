@@ -3,7 +3,7 @@ package com.company;
 public class CarteFidelite {
     private int identifiant;
     private int nbPoints;
-    private String statu;
+    //private String statu;
     //
     private static int compteur = 0;
     public static int getCompteur() {
@@ -12,8 +12,18 @@ public class CarteFidelite {
     public int getIdentifiant() {
         return identifiant;
     }
-    public String getStatu() {
-        return statu;
+    public String getStatu(String type) {
+        //
+        int pointsCeil = 4;
+        if(type != "Lecteur")
+            pointsCeil = 3;
+        if(this.nbPoints == pointsCeil){
+            if(type == "Lecteur")
+                return "fidèle";
+            else
+            return "super-fidèle";
+        }
+        return "non fidèle";
     }
     //
     public CarteFidelite(){
@@ -21,20 +31,10 @@ public class CarteFidelite {
         this.identifiant = compteur;
         //
         this.nbPoints = 0;
-        this.statu = "non fidèle";
+        //this.statu = "non fidèle";
     }
     //
-    public void ajouterPoint(String type){
+    public void ajouterPoint(){
         this.nbPoints++;
-        //
-        int pointsCeil = 4;
-        if(type != "Lecteur")
-            pointsCeil = 3;
-        if(this.nbPoints == pointsCeil){
-            if(type == "Lecteur")
-                this.statu = "fidèle";
-            else
-                this.statu = "super-fidèle";
-        }
     }
 }
