@@ -10,7 +10,9 @@ public class Lecteur {
     private CarteFidelite carteFidelite;
     //
     private static int compteur = 0;
-
+    public int getIdentifiant() {
+        return identifiant;
+    }
     public CarteFidelite getCarteFidelite() {
         return carteFidelite;
     }

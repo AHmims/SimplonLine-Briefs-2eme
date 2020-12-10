@@ -11,7 +11,9 @@ public class Livre {
     private Calendar dateEdition;
     //
     private static int compteur = 0;
-
+    public int getIdentifiant() {
+        return identifiant;
+    }
     public static int getCompteur() {
         return compteur;
     }

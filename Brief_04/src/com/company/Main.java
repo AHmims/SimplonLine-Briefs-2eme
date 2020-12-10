@@ -45,7 +45,7 @@ public class Main {
                             supprimer(choix);
                             break;
                         case 4:
-
+                            rechercher(choix);
                             break;
                         case 5:
                             afficher(choix);
@@ -243,7 +243,7 @@ public class Main {
                             System.out.print("Adresse email : ");
                             String mail_B = sc.nextLine();
                             //
-                            bienfaiteurs[choix_B-1].modifier(surnom, mail_B);
+                            bienfaiteurs[choix_B - 1].modifier(surnom, mail_B);
                             System.out.println("Bienfaiteur modifié avec succès.");
                             //
                             choix_B = 0;
@@ -268,9 +268,9 @@ public class Main {
                     case 1:
                         if (arraySize(livres) > choix_D - 1 && choix_D > 0) {
                             System.out.print("Etes-vous de supprimer cette élément ? (oui(O) / non(N))");
-                            String confirmD_l = sc.nextLine().toLowerCase();
+                            String confirmD_l = sc.next().toLowerCase();
                             if (confirmD_l.equals("oui") || confirmD_l.equals("o")) {
-                                for (int i = choix_D - 1; i < arraySize(livres) - 1; i++) {
+                                for (int i = choix_D - 1; i < arraySize(livres); i++) {
                                     livres[i] = livres[i + 1];
                                 }
                                 System.out.println("Livre supprimé avec succès");
@@ -281,9 +281,9 @@ public class Main {
                     case 2:
                         if (arraySize(lecteurs) > choix_D - 1 && choix_D > 0) {
                             System.out.print("Etes-vous de supprimer élément element ? (oui(O) / non(N))");
-                            String confirmD_lc = sc.nextLine().toLowerCase();
+                            String confirmD_lc = sc.next().toLowerCase();
                             if (confirmD_lc.equals("oui") || confirmD_lc.equals("o")) {
-                                for (int i = choix_D - 1; i < arraySize(lecteurs) - 1; i++) {
+                                for (int i = choix_D - 1; i < arraySize(lecteurs); i++) {
                                     lecteurs[i] = lecteurs[i + 1];
                                 }
                                 System.out.println("Lecteur supprimé avec succès");
@@ -294,9 +294,9 @@ public class Main {
                     case 3:
                         if (arraySize(bienfaiteurs) > choix_D - 1 && choix_D > 0) {
                             System.out.print("Etes-vous de supprimer élément element ? (oui(O) / non(N))");
-                            String confirmD_b = sc.nextLine().toLowerCase();
+                            String confirmD_b = sc.next().toLowerCase();
                             if (confirmD_b.equals("oui") || confirmD_b.equals("o")) {
-                                for (int i = choix_D - 1; i < arraySize(bienfaiteurs) - 1; i++) {
+                                for (int i = choix_D - 1; i < arraySize(bienfaiteurs); i++) {
                                     bienfaiteurs[i] = bienfaiteurs[i + 1];
                                 }
                                 System.out.println("Bienfaiteur supprimé avec succès");
@@ -343,6 +343,55 @@ public class Main {
         }
         displayData(choix);
         System.out.println("---");
+    }
+
+    //
+    public static void rechercher(int choix) {
+        System.out.print("---\nIdentifiant : ");
+        Scanner sc = new Scanner(System.in);
+        int idC = sc.nextInt();
+        //
+        switch (choix) {
+            case 1:
+                int exists_livre = -1;
+                for (int i = 0; i < arraySize(livres); i++) {
+                    if (livres[i].getIdentifiant() == idC) {
+                        exists_livre = i;
+                        break;
+                    }
+                }
+                if (exists_livre != -1)
+                    System.out.printf("Livre trouvée :\n%s\n", livres[exists_livre].toString());
+                else
+                    System.out.println("Livre non trouvé !");
+                break;
+            case 2:
+                int exists_lecteur = -1;
+                for (int i = 0; i < arraySize(lecteurs); i++) {
+                    if (lecteurs[i].getIdentifiant() == idC) {
+                        exists_lecteur = i;
+                        break;
+                    }
+                }
+                if (exists_lecteur != -1)
+                    System.out.printf("Lecteur trouvée :\n%s\n", lecteurs[exists_lecteur].toString());
+                else
+                    System.out.println("Lecteur non trouvé !");
+                break;
+            case 3:
+                int exists_bienfaiteur = -1;
+                for (int i = 0; i < arraySize(bienfaiteurs); i++) {
+                    if (bienfaiteurs[i].getIdentifiant() == idC) {
+                        exists_bienfaiteur = i;
+                        break;
+                    }
+                }
+                if (exists_bienfaiteur != -1)
+                    System.out.printf("Bienfaiteur trouvée :\n%s\n", bienfaiteurs[exists_bienfaiteur].toString());
+                else
+                    System.out.println("Bienfaiteurs non trouvé !");
+                break;
+        }
     }
 
     //
