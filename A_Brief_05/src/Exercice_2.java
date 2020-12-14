@@ -7,6 +7,7 @@ import java.util.Enumeration;
 //
 public class Exercice_2 {
     public static void main(String[] args) {
+        //ALI HMIMS
         JFrame frame = new JFrame("-- Fiche technique --");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(300, 350));

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Exercice_1_2 {
     public static void main(String[] args) {
+        //ALI HMIMS
         JPanel root = new JPanel(new GridLayout(3, 1));
         //
         JLabel label = new JLabel("Bienvenue",SwingConstants.CENTER);
