@@ -1,52 +1,46 @@
 package com.company;
 
-public class Lecteur {
+public class Bienfaiteur {
     private int identifiant;
-    private String nom;
-    private String prenom;
-    private int numTel;
+    private String surnom;
     private String mail;
     //
     private CarteFidelite carteFidelite;
     //
     private static int compteur = 0;
+    public String getSurnom() {
+        return surnom;
+    }
     public int getIdentifiant() {
         return identifiant;
     }
     public CarteFidelite getCarteFidelite() {
         return carteFidelite;
     }
-
     public static int getCompteur() {
         return compteur;
     }
-
     //
-    public Lecteur(String nom, String prenom, int numTel, String mail) {
+    public Bienfaiteur(String surnom, String mail) {
         compteur++;
         this.identifiant = compteur;
         //
         carteFidelite = new CarteFidelite();
         //
-        this.nom = nom;
-        this.prenom = prenom;
-        this.numTel = numTel;
+        this.surnom = surnom;
         this.mail = mail;
     }
 
     //
     @Override
     public String toString() {
-        return String.format("Nom: %s, Prénom: %s, Numéro téléphone: %d, Adresse email: %s", this.nom, this.prenom, this.numTel, this.mail);
+        return String.format("Surnom: %s, Adresse email: %s", this.surnom, this.mail);
     }
     //
-    public void modifier(String nom, String prenom, int numTel, String mail){
-        if(!nom.equals("*"))
-            this.nom = nom;
-        if(!prenom.equals("*"))
-            this.prenom = prenom;
-        if(numTel != 0)
-            this.numTel = numTel;
+    //
+    public void modifier(String surnom, String mail){
+        if(!surnom.equals("*"))
+            this.surnom = surnom;
         if(!mail.equals("*"))
             this.mail = mail;
     }

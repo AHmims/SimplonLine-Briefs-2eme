@@ -37,7 +37,7 @@ public class Lecteur {
     //
     @Override
     public String toString() {
-        return String.format("Nom: %s, Prénom: %s, Numéro téléphone: %d, Adresse email: %s", this.nom, this.prenom, this.numTel, this.mail);
+        return String.format("Nom: %s, PrÃ©nom: %s, NumÃ©ro tÃ©lÃ©phone: %d, Adresse email: %s", this.nom, this.prenom, this.numTel, this.mail);
     }
     //
     public void modifier(String nom, String prenom, int numTel, String mail){

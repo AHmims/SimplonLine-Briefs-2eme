@@ -14,6 +14,7 @@ public class Main {
 
     //
     public static void main(String[] args) {
+		//ALI HMIMS - MERYAME EL BETTAL
         menu();
     }
 
@@ -28,8 +29,10 @@ public class Main {
             if (choix >= 1 && choix <= 3) {
                 int choix2 = -1;
                 while (choix2 != 0) {
-                    System.out.println("***|choisissez une opération |***\n1: Ajouter.\n2: Modifier.\n3: Supprimer.\n4: Rechercher.\n5: Afficher.");
-                    System.out.println("0: Précédent.");
+                    System.out.println("***|choisissez une opÃ©ration |***\n1: Ajouter.\n2: Modifier.\n3: Supprimer.\n4: Rechercher.\n5: Afficher.");
+                    if (choix == 2)
+                        System.out.println("6: Lire un livre.");
+                    System.out.println("0: PrÃ©cÃ©dent.");
                     System.out.print("Choix: ");
                     choix2 = sc.nextInt();
                     switch (choix2) {
@@ -50,6 +53,10 @@ public class Main {
                         case 5:
                             afficher(choix);
                             break;
+                        case 6:
+                            if (choix == 2)
+                                lire();
+                            break;
                         default:
                             System.out.println("---\nChoix invalide!\n---");
                     }
@@ -57,7 +64,7 @@ public class Main {
             } else if (choix != 0)
                 System.out.println("---\nChoix invalide!\n---");
         }
-        System.out.println("Programme arrêté");
+        System.out.println("Programme arrÃªtÃ©");
     }
 
     //
@@ -72,7 +79,7 @@ public class Main {
                     System.out.print("Edition : ");
                     String edition = sc.nextLine();
                     //
-                    System.out.print("Date d'édition (jj/mm/aaaa) : ");
+                    System.out.print("Date d'Ã©dition (jj/mm/aaaa) : ");
                     SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
                     Date date;
                     Calendar dateEdition = Calendar.getInstance();
@@ -83,7 +90,7 @@ public class Main {
                         e.printStackTrace();
                     }
                     //
-                    System.out.println("Choisir un bienfaiteur :");
+                    System.out.println("Choisire un bienfaiteur :");
                     int pos = 1;
                     for (Bienfaiteur bienfaiteur : bienfaiteurs) {
                         if (bienfaiteur == null)
@@ -99,9 +106,10 @@ public class Main {
                         if (choixB != 0) {
                             if (bienfaiteurs[choixB - 1] != null && bienfaiteurs.length > choixB - 1) {
                                 int idB = bienfaiteurs[choixB - 1].getIdentifiant();
+                                bienfaiteurs[choixB - 1].getCarteFidelite().ajouterPoint();
                                 //
                                 livres[arraySize(livres)] = new Livre(titre, edition, idB, dateEdition);
-                                System.out.println("Livre ajouté avec succès.");
+                                System.out.println("Livre ajoutÃ© avec succÃ¨s.");
                                 choixB = 0;
                             } else
                                 System.out.println("---\nChoix invalide!\n---");
@@ -114,13 +122,13 @@ public class Main {
                 String nom = sc.nextLine();
                 System.out.print("Prenom : ");
                 String prenom = sc.nextLine();
-                System.out.print("Numéro de téléphone : ");
+                System.out.print("NumÃ©ro de tÃ©lÃ©phone : ");
                 int numTel = sc.nextInt();
                 System.out.print("Adresse email : ");
                 String mail_L = sc.next();
                 //
                 lecteurs[arraySize(lecteurs)] = new Lecteur(nom, prenom, numTel, mail_L);
-                System.out.println("Lecteur ajouté avec succès.");
+                System.out.println("Lecteur ajoutÃ© avec succÃ¨s.");
                 break;
             case 3:
                 System.out.print("Surnom : ");
@@ -129,7 +137,7 @@ public class Main {
                 String mail_B = sc.nextLine();
                 //
                 bienfaiteurs[arraySize(bienfaiteurs)] = new Bienfaiteur(surnom, mail_B);
-                System.out.println("Bienfaiteur ajouté avec succès.");
+                System.out.println("Bienfaiteur ajoutÃ© avec succÃ¨s.");
                 break;
         }
     }
@@ -156,7 +164,7 @@ public class Main {
                             System.out.print("Edition : ");
                             String edition = sc.nextLine();
                             //
-                            System.out.print("Date d'édition (jj/mm/aaaa) : ");
+                            System.out.print("Date d'Ã©dition (jj/mm/aaaa) : ");
                             SimpleDateFormat format = new SimpleDateFormat("dd/mm/yyyy");
                             Date date;
                             Calendar dateEdition = Calendar.getInstance();
@@ -167,7 +175,7 @@ public class Main {
                                 e.printStackTrace();
                             }
                             //
-                            System.out.println("Choisir un bienfaiteur :");
+                            System.out.println("Choisire un bienfaiteur :");
                             int pos = 1;
                             for (Bienfaiteur bienfaiteur : bienfaiteurs) {
                                 if (bienfaiteur == null)
@@ -175,7 +183,7 @@ public class Main {
                                 System.out.printf("%d: %s\n", pos, bienfaiteur.getSurnom());
                                 pos++;
                             }
-                            System.out.println("---\n-1: valeur par défaut.\n0: Annuler");
+                            System.out.println("---\n-1: valeur par dÃ©faut.\n0: Annuler");
                             int choixB = -1;
                             while (choixB != 0) {
                                 System.out.print("Choix : ");
@@ -183,13 +191,13 @@ public class Main {
                                 if (choixB != 0) {
                                     if (choixB == -1) {
                                         livres[choix_L - 1].modifier(titre, edition, -1, dateEdition);
-                                        System.out.println("Livre modifié avec succès.");
+                                        System.out.println("Livre modifiÃ© avec succÃ¨s.");
                                         choixB = 0;
                                     } else if (bienfaiteurs[choixB - 1] != null && bienfaiteurs.length > choixB - 1) {
                                         int idB = bienfaiteurs[choixB - 1].getIdentifiant();
                                         //
                                         livres[choix_L - 1].modifier(titre, edition, idB, dateEdition);
-                                        System.out.println("Livre modifié avec succès.");
+                                        System.out.println("Livre modifiÃ© avec succÃ¨s.");
                                         choixB = 0;
                                     } else
                                         System.out.println("---\nChoix invalide!\n---");
@@ -213,7 +221,7 @@ public class Main {
                             String nom = sc.next();
                             System.out.print("Prenom : ");
                             String prenom = sc.next();
-                            System.out.print("Numéro de téléphone : ");
+                            System.out.print("NumÃ©ro de tÃ©lÃ©phone : ");
                             String strNumTel = sc.next();
                             int numTel = 0;
                             if (!strNumTel.equals("*"))
@@ -222,7 +230,7 @@ public class Main {
                             String mail_L = sc.next();
                             //
                             lecteurs[choix_LT - 1].modifier(nom, prenom, numTel, mail_L);
-                            System.out.println("Lecteur modifié avec succès.");
+                            System.out.println("Lecteur modifiÃ© avec succÃ¨s.");
                             //
                             choix_LT = 0;
                         } else System.out.println("---\nChoix invalide!\n---");
@@ -244,7 +252,7 @@ public class Main {
                             String mail_B = sc.nextLine();
                             //
                             bienfaiteurs[choix_B - 1].modifier(surnom, mail_B);
-                            System.out.println("Bienfaiteur modifié avec succès.");
+                            System.out.println("Bienfaiteur modifiÃ© avec succÃ¨s.");
                             //
                             choix_B = 0;
                         } else System.out.println("---\nChoix invalide!\n---");
@@ -267,39 +275,39 @@ public class Main {
                 switch (choix) {
                     case 1:
                         if (arraySize(livres) > choix_D - 1 && choix_D > 0) {
-                            System.out.print("Etes-vous sûr de supprimer cette élément ? (oui(O) / non(N))");
+                            System.out.print("Etes-vous de supprimer cette Ã©lÃ©ment ? (oui(O) / non(N))");
                             String confirmD_l = sc.next().toLowerCase();
                             if (confirmD_l.equals("oui") || confirmD_l.equals("o")) {
                                 for (int i = choix_D - 1; i < arraySize(livres); i++) {
                                     livres[i] = livres[i + 1];
                                 }
-                                System.out.println("Livre supprimé avec succès");
+                                System.out.println("Livre supprimÃ© avec succÃ¨s");
                             }
                             choix_D = 0;
                         } else System.out.println("---\nChoix invalide!\n---");
                         break;
                     case 2:
                         if (arraySize(lecteurs) > choix_D - 1 && choix_D > 0) {
-                            System.out.print("Etes-vous sûr de supprimer cette élément ? (oui(O) / non(N))");
+                            System.out.print("Etes-vous de supprimer Ã©lÃ©ment element ? (oui(O) / non(N))");
                             String confirmD_lc = sc.next().toLowerCase();
                             if (confirmD_lc.equals("oui") || confirmD_lc.equals("o")) {
                                 for (int i = choix_D - 1; i < arraySize(lecteurs); i++) {
                                     lecteurs[i] = lecteurs[i + 1];
                                 }
-                                System.out.println("Lecteur supprimé avec succès");
+                                System.out.println("Lecteur supprimÃ© avec succÃ¨s");
                             }
                             choix_D = 0;
                         } else System.out.println("---\nChoix invalide!\n---");
                         break;
                     case 3:
                         if (arraySize(bienfaiteurs) > choix_D - 1 && choix_D > 0) {
-                            System.out.print("Etes-vous sûr de supprimer cette élément ? (oui(O) / non(N))");
+                            System.out.print("Etes-vous de supprimer Ã©lÃ©ment element ? (oui(O) / non(N))");
                             String confirmD_b = sc.next().toLowerCase();
                             if (confirmD_b.equals("oui") || confirmD_b.equals("o")) {
                                 for (int i = choix_D - 1; i < arraySize(bienfaiteurs); i++) {
                                     bienfaiteurs[i] = bienfaiteurs[i + 1];
                                 }
-                                System.out.println("Bienfaiteur supprimé avec succès");
+                                System.out.println("Bienfaiteur supprimÃ© avec succÃ¨s");
                             }
                             choix_D = 0;
                         } else System.out.println("---\nChoix invalide!\n---");
@@ -321,12 +329,12 @@ public class Main {
                     if (lecteur == null)
                         break;
                     else {
-                        if (!lecteur.getCarteFidelite().getStatu().equals("non fidèle"))
+                        if (!lecteur.getCarteFidelite().getStatu(lecteur.getClass().getSimpleName()).equals("non fidÃ¨le"))
                             nbLecteurF++;
                     }
                 }
                 //
-                System.out.printf("Nombre total des lecteurs : %d, nombre total des lecteurs fidèles: %d\n", arraySize(lecteurs), nbLecteurF);
+                System.out.printf("Nombre total des lecteurs : %d, nombre total des lecteurs fidÃ¨les: %d\n", arraySize(lecteurs), nbLecteurF);
                 break;
             case 3:
                 int nbBienfaiteurF = 0;
@@ -334,11 +342,11 @@ public class Main {
                     if (bienfaiteur == null)
                         break;
                     else {
-                        if (bienfaiteur.getCarteFidelite().getStatu().equals("super-fidèle"))
+                        if (bienfaiteur.getCarteFidelite().getStatu(bienfaiteur.getClass().getSimpleName()).equals("super-fidÃ¨le"))
                             nbBienfaiteurF++;
                     }
                 }
-                System.out.printf("Nombre total des bienfaiteurs : %d, nombre total des bienfaiteurs super-fidèles : %d\n", arraySize(bienfaiteurs), nbBienfaiteurF);
+                System.out.printf("Nombre total des bienfaiteurs : %d, nombre total des bienfaiteurs super-fidÃ¨les : %d\n", arraySize(bienfaiteurs), nbBienfaiteurF);
                 break;
         }
         displayData(choix);
@@ -361,9 +369,9 @@ public class Main {
                     }
                 }
                 if (exists_livre != -1)
-                    System.out.printf("Livre trouvée :\n%s\n", livres[exists_livre].toString());
+                    System.out.printf("Livre trouvÃ©e :\n%s\n", livres[exists_livre].toString());
                 else
-                    System.out.println("Livre non trouvé !");
+                    System.out.println("Livre non trouvÃ© !");
                 break;
             case 2:
                 int exists_lecteur = -1;
@@ -374,9 +382,9 @@ public class Main {
                     }
                 }
                 if (exists_lecteur != -1)
-                    System.out.printf("Lecteur trouvée :\n%s\n", lecteurs[exists_lecteur].toString());
+                    System.out.printf("Lecteur trouvÃ©e :\n%s\n", lecteurs[exists_lecteur].toString());
                 else
-                    System.out.println("Lecteur non trouvé !");
+                    System.out.println("Lecteur non trouvÃ© !");
                 break;
             case 3:
                 int exists_bienfaiteur = -1;
@@ -387,10 +395,36 @@ public class Main {
                     }
                 }
                 if (exists_bienfaiteur != -1)
-                    System.out.printf("Bienfaiteur trouvée :\n%s\n", bienfaiteurs[exists_bienfaiteur].toString());
+                    System.out.printf("Bienfaiteur trouvÃ©e :\n%s\n", bienfaiteurs[exists_bienfaiteur].toString());
                 else
-                    System.out.println("Bienfaiteurs non trouvé !");
+                    System.out.println("Bienfaiteurs non trouvÃ© !");
                 break;
+        }
+    }
+
+    //
+    public static void lire() {
+        int choix_L = -1;
+        Scanner sc = new Scanner(System.in);
+        while (choix_L != 0) {
+            System.out.println("Mercide choisire un lecteur :");
+            displayData(2);
+            System.out.println("---\n0: Annuler");
+            System.out.print("Choix : ");
+            choix_L = sc.nextInt();
+            //
+            if (lecteurs[choix_L - 1] != null && lecteurs.length > choix_L - 1) {
+                displayData(1);
+                System.out.println("---\n0: Annuler");
+                System.out.print("Choix : ");
+                int choix_Lv = sc.nextInt();
+                if (livres[choix_Lv - 1] != null && livres.length > choix_Lv - 1) {
+                    lecteurs[choix_L - 1].getCarteFidelite().ajouterPoint();
+                    //
+                    choix_Lv = 0;
+                    choix_L = 0;
+                } else System.out.println("---\nChoix invalide!\n---");
+            } else System.out.println("---\nChoix invalide!\n---");
         }
     }
 
@@ -461,4 +495,3 @@ public class Main {
         }
     }
 }
-

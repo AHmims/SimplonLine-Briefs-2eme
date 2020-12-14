@@ -32,7 +32,7 @@ public class Livre {
     @Override
     public String toString() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        return String.format("Titre: %s, Edition: %s, Date d'édition: %s", this.titre, this.edition, format.format(this.dateEdition.getTime()));
+        return String.format("Titre: %s, Edition: %s, Date d'Ã©dition: %s", this.titre, this.edition, format.format(this.dateEdition.getTime()));
     }
     //
     public void modifier(String titre, String edition, int idBienfaiteur, Calendar dateEdition){
