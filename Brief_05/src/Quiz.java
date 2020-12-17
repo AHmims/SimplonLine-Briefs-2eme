@@ -47,10 +47,11 @@ public class Quiz {
                     minElapsed++;
                 }
                 //
-                timer.setText(String.format("%02d:%02d", minElapsed, secElapsed));
-                //
                 if (programEnd)
                     timerC.cancel();
+                else
+                    timer.setText(String.format("%02d:%02d", minElapsed, secElapsed));
+                //
                 if (minElapsed == 5 && !programEnd)
                     endQuiz(form, false);
             }
