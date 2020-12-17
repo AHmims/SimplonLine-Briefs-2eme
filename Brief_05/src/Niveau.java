@@ -3,6 +3,20 @@ public class Niveau {
     private String[] reponse;
     private int solution;
     //
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public String[] getReponse() {
+        return reponse;
+    }
+
+    public int getSolution() {
+        return solution;
+    }
+
+    //
     public Niveau(String question, String[] reponse, int solution){
         this.question = question;
         this.reponse = reponse;

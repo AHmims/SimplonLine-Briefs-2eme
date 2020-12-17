@@ -4,13 +4,9 @@ import java.util.ArrayList;
 
 //
 public class Quiz {
-    private static ArrayList<String[][]> niveau_1 = new ArrayList<String[][]>();
-    private static ArrayList<String[][]> niveau_2 = new ArrayList<String[][]>();
-    private static ArrayList<String[][]> niveau_3 = new ArrayList<String[][]>();
-
+    private static Serie serie = new Serie();
     //
     public static void main(String[] args) {
-        fillCollection();
         JFrame frame = new JFrame("Quiz");
         //frame.setPreferredSize(new Dimension(400, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,17 +14,20 @@ public class Quiz {
         JPanel root = new JPanel(new GridLayout(2, 1));
         frame.setContentPane(root);
         //
-        JPanel form = new JPanel(new GridLayout(1, 1, 0, 5));
+        JPanel form = new JPanel(new GridLayout(4, 1));
         //form.setPreferredSize(new Dimension(400,300));
-        int pos = 0;
-        fillForm(form, niveau_1, pos);
+        int _pos = 0;
+        fillForm(form, 1, _pos);
         root.add(form);
         //
         JPanel extra = new JPanel(new GridLayout(1, 3, 0, 0));
         JLabel timer = new JLabel("*");
         extra.add(timer);
-        root.add(extra);
         timer.setText("yuh");
+        JLabel progress = new JLabel("1/15");
+        extra.add(progress);
+        JButton btnNext = new JButton("Suivant");
+        root.add(extra);
         //
         frame.pack();
         frame.setVisible(true);
@@ -37,33 +36,16 @@ public class Quiz {
     //
 
     //
-    public static void fillForm(JPanel form, ArrayList<String[][]> list) {
+    public static void fillForm(JPanel form, int niv, int pos) {
         form.removeAll();
-        for (String[][] qSet : list) {
-            JPanel row = new JPanel(new GridLayout(4, 1));
-            row.add(new JLabel(qSet[0][0]));
-            ButtonGroup grp = new ButtonGroup();
-            for (int i = 0; i < qSet[1].length; i++) {
-                JRadioButton option = new JRadioButton(qSet[1][i]);
-                grp.add(option);
-                row.add(option);
-            }
-            form.add(row);
-        }
-    }
-
-    public static void fillForm(JPanel form, ArrayList<String[][]> list, int pos) {
-        form.removeAll();
-        String[][] qSet = list.get(pos);
-        JPanel row = new JPanel(new GridLayout(4, 1));
-        row.add(new JLabel(qSet[0][0]));
+        Niveau niveau = serie.getQuestion(niv,pos);
+        form.add(new JLabel(niveau.getQuestion()));
         ButtonGroup grp = new ButtonGroup();
-        for (int i = 0; i < qSet[1].length; i++) {
-            JRadioButton option = new JRadioButton(qSet[1][i]);
+        for (int i = 0; i < niveau.getReponse().length; i++) {
+            JRadioButton option = new JRadioButton(niveau.getReponse()[i]);
             grp.add(option);
-            row.add(option);
+            form.add(option);
         }
-        form.add(row);
     }
 
     //
