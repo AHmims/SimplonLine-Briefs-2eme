@@ -43,7 +43,7 @@ public class Quiz {
 
         timerC.schedule(new TimerTask() {
             @Override
-            public void run(){
+            public void run() {
                 secElapsed++;
                 if (secElapsed == 60) {
                     secElapsed = 0;
@@ -104,7 +104,7 @@ public class Quiz {
                         boolean res = niveau.isCorrect(i);
                         if (res)
                             points += 20;
-                        pointsC.setText(String.format("Points : %03d/100",points));
+                        pointsC.setText(String.format("Points : %03d/100", points));
                         break;
                     }
                     i++;
@@ -112,7 +112,6 @@ public class Quiz {
                 //
                 int nextNiv = niv;
                 if (pos == 4) {//5
-                    points = 0;
                     nextNiv = niv + 1;
                 }
                 //
@@ -130,22 +129,21 @@ public class Quiz {
                         case 1:
                             if (points < 40)
                                 pass = false;
-                            else
+                            else {
+                                points = 0;
                                 pointsC.setText("Points : 000/100");
+                            }
                             break;
                         case 2:
                             if (points < 60)
                                 pass = false;
-                            else
+                            else {
+                                points = 0;
                                 pointsC.setText("Points : 000/100");
+                            }
                             break;
                         case 3:
                             int localPoints = 0;
-                            /*for (int j = 0; j < 5; j++) {
-                                Niveau niveau1 = serie.getQuestion(3, j);
-                                if (niveau1.isCorrect(results.get(j + 10)))
-                                    localPoints++;
-                            }*/
                             if (points < 4)
                                 pass = false;
                             break;
