@@ -24,6 +24,7 @@ public class Niveau {
     }
     //
     public boolean isCorrect(int rep){
+        rep++;
         boolean res = false;
         if(rep == this.solution)
             res = true;
