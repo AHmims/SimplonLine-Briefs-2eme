@@ -9,6 +9,7 @@ import java.util.TimerTask;
 
 //
 public class Quiz {
+
     private static Serie serie = new Serie();
     private static int points = 0;
     private static ArrayList<Integer> results = new ArrayList<Integer>();
@@ -23,24 +24,25 @@ public class Quiz {
     //
     public static void main(String[] args) {
         JFrame frame = new JFrame("Quiz");
-        //frame.setPreferredSize(new Dimension(400, 600));
+        frame.setPreferredSize(new Dimension(600, 500));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //
-        JPanel root = new JPanel();
+        JPanel root = new JPanel(new GridLayout(2, 1));
         frame.setContentPane(root);
         //
         JPanel form = new JPanel(new GridLayout(5, 1));
-        //form.setPreferredSize(new Dimension(400,300));
+        form.setBorder(new EmptyBorder(30, 30, 0, 30));
         int _pos = 0;
         fillForm(form, 1, _pos);
         root.add(form);
         //
-        JPanel extra = new JPanel();
+        JPanel extra = new JPanel(new GridLayout(1, 0));
         Timer timerC = new Timer();
         JLabel timer = new JLabel("00:00");
+
         timerC.schedule(new TimerTask() {
             @Override
-            public void run() {
+            public void run(){
                 secElapsed++;
                 if (secElapsed == 60) {
                     secElapsed = 0;
@@ -63,6 +65,7 @@ public class Quiz {
         extra.add(progress);
         extra.add(pointsC);
         extra.add(niveauI);
+        extra.setBorder(new EmptyBorder(0, 30, 0, 0));
         root.add(extra);
         //
         frame.pack();
