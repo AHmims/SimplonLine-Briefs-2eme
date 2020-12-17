@@ -1,7 +1,17 @@
+import com.sun.tools.javac.Main;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Timer;
@@ -18,7 +28,7 @@ public class Quiz {
     private static int secElapsed = 0;
     private static int minElapsed = 0;
     private static boolean programEnd = false;
-
+    private static Player player = new Player();
     //
     public static void main(String[] args) {
         JFrame frame = new JFrame("Quiz");
@@ -48,7 +58,7 @@ public class Quiz {
                 //
                 timer.setText(String.format("0%d:%d", minElapsed, secElapsed));
                 //
-                if(programEnd)
+                if (programEnd)
                     timerC.cancel();
                 if (minElapsed == 5 && !programEnd)
                     endQuiz(form, false);
@@ -162,6 +172,8 @@ public class Quiz {
             } else {
                 form.add(new JLabel("Vous avez réussi l'examen"));
             }
+            //
+            player.playSound(pass);
         }
     }
 }
