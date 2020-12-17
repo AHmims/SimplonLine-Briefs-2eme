@@ -166,13 +166,17 @@ public class Quiz {
             form.removeAll();
             JLabel msg = new JLabel("Quiz terminé");
             form.add(msg);
+            player.playSound(pass);
             if (!pass) {
                 form.add(new JLabel("Vous n'avez pas réussi l'examen!"));
+                JOptionPane.showMessageDialog(form,
+                        "GAME OVER");
             } else {
                 form.add(new JLabel("Vous avez réussi l'examen"));
+                JOptionPane.showMessageDialog(form,
+                        "YOU WIN !!");
             }
             //
-            player.playSound(pass);
         }
     }
 }
