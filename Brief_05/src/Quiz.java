@@ -1,17 +1,7 @@
-import com.sun.tools.javac.Main;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Timer;
@@ -29,6 +19,7 @@ public class Quiz {
     private static int minElapsed = 0;
     private static boolean programEnd = false;
     private static Player player = new Player();
+
     //
     public static void main(String[] args) {
         JFrame frame = new JFrame("Quiz");
@@ -46,7 +37,7 @@ public class Quiz {
         //
         JPanel extra = new JPanel();
         Timer timerC = new Timer();
-        JLabel timer = new JLabel("0:0");
+        JLabel timer = new JLabel("00:00");
         timerC.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -56,7 +47,7 @@ public class Quiz {
                     minElapsed++;
                 }
                 //
-                timer.setText(String.format("0%d:%d", minElapsed, secElapsed));
+                timer.setText(String.format("%02d:%02d", minElapsed, secElapsed));
                 //
                 if (programEnd)
                     timerC.cancel();
@@ -66,7 +57,7 @@ public class Quiz {
         }, 1000, 1000);
         extra.add(timer);
         progress = new JLabel("Progress : 1/15");
-        pointsC = new JLabel("Points : 0");
+        pointsC = new JLabel("Points : 000/100");
         niveauI = new JLabel("Niveau 1");
         extra.add(progress);
         extra.add(pointsC);
@@ -104,11 +95,11 @@ public class Quiz {
                     if (temp.isSelected()) {
                         results.add(i);
                         if (results.size() < 15)
-                            progress.setText(String.format("Progress : %d/15", results.size() + 1));
+                            progress.setText(String.format("Progress : %02d/15", results.size() + 1));
                         boolean res = niveau.isCorrect(i);
                         if (res)
                             points += 20;
-                        pointsC.setText("Points : " + points);
+                        pointsC.setText(String.format("Points : %03d/100",points));
                         break;
                     }
                     i++;
@@ -116,6 +107,7 @@ public class Quiz {
                 //
                 int nextNiv = niv;
                 if (pos == 4) {//5
+                    points = 0;
                     nextNiv = niv + 1;
                 }
                 //
@@ -133,19 +125,23 @@ public class Quiz {
                         case 1:
                             if (points < 40)
                                 pass = false;
+                            else
+                                pointsC.setText("Points : 000/100");
                             break;
                         case 2:
                             if (points < 60)
                                 pass = false;
+                            else
+                                pointsC.setText("Points : 000/100");
                             break;
                         case 3:
                             int localPoints = 0;
-                            for (int j = 0; j < 5; j++) {
+                            /*for (int j = 0; j < 5; j++) {
                                 Niveau niveau1 = serie.getQuestion(3, j);
                                 if (niveau1.isCorrect(results.get(j + 10)))
                                     localPoints++;
-                            }
-                            if (localPoints < 4)
+                            }*/
+                            if (points < 4)
                                 pass = false;
                             break;
                     }
