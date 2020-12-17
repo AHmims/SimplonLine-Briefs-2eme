@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Timer;
+import java.util.TimerTask;
 
 //
 public class Quiz {
@@ -13,6 +15,10 @@ public class Quiz {
     private static JLabel progress;
     private static JLabel pointsC;
     private static JLabel niveauI;
+    private static int secElapsed = 0;
+    private static int minElapsed = 0;
+    private static boolean programEnd = false;
+
     //
     public static void main(String[] args) {
         JFrame frame = new JFrame("Quiz");
@@ -29,7 +35,25 @@ public class Quiz {
         root.add(form);
         //
         JPanel extra = new JPanel();
-        JLabel timer = new JLabel("0");
+        Timer timerC = new Timer();
+        JLabel timer = new JLabel("0:0");
+        timerC.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                secElapsed++;
+                if (secElapsed == 60) {
+                    secElapsed = 0;
+                    minElapsed++;
+                }
+                //
+                timer.setText(String.format("0%d:%d", minElapsed, secElapsed));
+                //
+                if(programEnd)
+                    timerC.cancel();
+                if (minElapsed == 5 && !programEnd)
+                    endQuiz(form, false);
+            }
+        }, 1000, 1000);
         extra.add(timer);
         progress = new JLabel("Progress : 1/15");
         pointsC = new JLabel("Points : 0");
@@ -69,7 +93,8 @@ public class Quiz {
                     JRadioButton temp = (JRadioButton) radsV.nextElement();
                     if (temp.isSelected()) {
                         results.add(i);
-                        progress.setText(String.format("Progress : %d/15", results.size() + 1));
+                        if (results.size() < 15)
+                            progress.setText(String.format("Progress : %d/15", results.size() + 1));
                         boolean res = niveau.isCorrect(i);
                         if (res)
                             points += 20;
@@ -90,15 +115,53 @@ public class Quiz {
                 else if (pos == 4)
                     nextPos = 0;
                 //
-                if(nextNiv != niv)
-                    niveauI.setText("Niveau " + nextNiv);
+                boolean pass = true;
+                if (nextNiv != niv) {
+                    if (nextNiv <= 3)
+                        niveauI.setText("Niveau " + nextNiv);
+                    switch (niv) {
+                        case 1:
+                            if (points < 40)
+                                pass = false;
+                            break;
+                        case 2:
+                            if (points < 60)
+                                pass = false;
+                            break;
+                        case 3:
+                            int localPoints = 0;
+                            for (int j = 0; j < 5; j++) {
+                                Niveau niveau1 = serie.getQuestion(3, j);
+                                if (niveau1.isCorrect(results.get(j + 10)))
+                                    localPoints++;
+                            }
+                            if (localPoints < 4)
+                                pass = false;
+                            break;
+                    }
+                }
                 //
-                if (nextNiv <= 3 && nextPos <= 4)
+                if (nextNiv <= 3 && nextPos <= 4 && pass)
                     fillForm(form, nextNiv, nextPos);
+                else
+                    endQuiz(form, pass);
             }
         });
         form.add(btnNext);
     }
 
     //
+    private static void endQuiz(JPanel form, boolean pass) {
+        if (!programEnd) {
+            programEnd = true;
+            form.removeAll();
+            JLabel msg = new JLabel("Quiz terminé");
+            form.add(msg);
+            if (!pass) {
+                form.add(new JLabel("Vous n'avez pas réussi l'examen!"));
+            } else {
+                form.add(new JLabel("Vous avez réussi l'examen"));
+            }
+        }
+    }
 }
