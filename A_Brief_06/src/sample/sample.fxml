@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <VBox alignment="CENTER" prefHeight="356.0" prefWidth="577.0" spacing="14.0" style="-fx-background-color: #F0F4F8;">
+         <children>
+            <Label fx:id="lb1" contentDisplay="CENTER" text="- Compteur -" textFill="#06908e">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font></Label>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <Label fx:id="lb2" text="Résultat : 0" textFill="#055e65">
+                     <font>
+                        <Font name="Comic Sans MS" size="20.0" />
+                     </font></Label>
+                  <HBox alignment="CENTER" prefHeight="126.0" prefWidth="577.0" spacing="40.0">
+                     <children>
+                        <VBox alignment="CENTER" onMouseClicked="#addPoints" prefHeight="120.0" prefWidth="289.0" spacing="30.0" style="-fx-background-color: #C0D6E4;">
+                           <children>
+                              <SVGPath fx:id="img1" content="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" fill="TRANSPARENT" scaleX="3.0" scaleY="3.0" stroke="#fc5c5c" />
+                              <Label fx:id="lb3" text="J'AI GAGNE UN POINT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Comic Sans MS Bold" size="19.0" />
+                                 </font></Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" onMouseClicked="#rmvPoints" prefHeight="100.0" prefWidth="292.0" spacing="30.0" style="-fx-background-color: #E66A6A;">
+                           <children>
+                              <SVGPath fx:id="img2" content="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76.94m-7 10v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.904 0-.715.211-1.413.608-2.008L17 13V4m-7 10h2m5-10h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" fill="TRANSPARENT" scaleX="2.5" scaleY="2.5" stroke="BLACK" />
+                              <Label fx:id="lb4" text="J'AI PERDU UN POINT" textFill="WHITE">
+                                 <font>
+                                    <Font name="Comic Sans MS Bold" size="19.0" />
+                                 </font></Label>
+                           </children>
+                           <padding>
+                              <Insets top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding></HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</GridPane>
