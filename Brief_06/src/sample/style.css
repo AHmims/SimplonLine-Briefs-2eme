@@ -1,0 +1,58 @@
+@font-face {
+    -fx-font-family: inter;
+    -fx-font-weight: 900;
+    src: url('fonts/Inter-Black.ttf');
+}
+@font-face {
+    -fx-font-family: inter;
+    -fx-font-weight: 800;
+    src: url('fonts/Inter-ExtraBold.ttf');
+}
+@font-face {
+    -fx-font-family: inter;
+    -fx-font-weight: 700;
+    src: url('fonts/Inter-Bold.ttf');
+}
+@font-face {
+    -fx-font-family: inter;
+    -fx-font-weight: 600;
+    src: url('fonts/Inter-SemiBold.ttf');
+}
+@font-face {
+    -fx-font-family: inter;
+    -fx-font-weight: 500;
+    src: url('fonts/Inter-Medium.ttf');
+}
+@font-face {
+    -fx-font-family: inter;
+    -fx-font-weight: 400;
+    src: url('fonts/Inter-Regular.ttf');
+}
+/**/
+*{
+    -fx-font-family: inter, serif;
+}
+#h_lb1{
+    -fx-font-weight: 800;
+    -fx-font-size: 34;
+}
+#h_lb2{
+    -fx-font-weight: 700;
+    -fx-font-size: 20;
+ }
+#h_lb3,#h_lb4,#h_lb5{
+    -fx-font-weight: 500;
+    -fx-font-size: 14;
+}
+.button{
+    /*-fx-background-color: red;*/
+    -fx-background-color: #2855bd;
+    -fx-text-fill: white;
+    -fx-font-weight: 800;
+}
+/**/
+#btnStart{
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 14px;
+}

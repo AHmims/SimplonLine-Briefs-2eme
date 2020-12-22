@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="600.0" prefWidth="800.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<GridPane fx:id="root" alignment="TOP_CENTER" hgap="10" prefHeight="600.0" prefWidth="800.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -12,15 +12,15 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <VBox fx:id="container" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="CENTER" onDragDetected="#startQuiz" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Bienvenue au quiz ^_^" />
-                  <Label text="Relevez le défi des 3 niveaux que nous vous proposons" />
-                  <Label text="Vous avez 5min au total pour passer le quiz" />
-                  <Label text="Vous aurez 2 tentatives dans chaque niveau " />
-                  <Label text="Bonne chance !" />
+                  <Label fx:id="h_lb1" text="Bienvenue au quiz ^_^" />
+                  <Label fx:id="h_lb2" text="Relevez le défi des 3 niveaux que nous vous proposons" />
+                  <Label fx:id="h_lb3" text="Vous avez 5min au total pour passer le quiz" />
+                  <Label fx:id="h_lb4" text="Vous aurez 2 tentatives dans chaque niveau " />
+                  <Label fx:id="h_lb5" text="Bonne chance !" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -28,32 +28,32 @@
                   <HBox alignment="CENTER" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label prefWidth="60.0" text="Nom :" textAlignment="RIGHT" />
-                        <TextField />
+                        <TextField fx:id="txt_nom" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label prefWidth="60.0" text="Prénom :" textAlignment="RIGHT" />
-                        <TextField />
+                        <TextField fx:id="txt_prenom" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" maxHeight="50.0" prefHeight="50.0" prefWidth="200.0" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label prefWidth="60.0" text="Age :" textAlignment="RIGHT" />
-                        <TextField />
+                        <TextField fx:id="txt_age" />
                      </children>
                   </HBox>
                </children>
             </VBox>
             <HBox alignment="CENTER" VBox.vgrow="NEVER">
                <children>
-                  <Button mnemonicParsing="false" text="Démarrer le quiz" />
+                  <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startQuiz" text="Démarrer le quiz" />
                </children>
             </HBox>
          </children>
       </VBox>
    </children>
    <padding>
-      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
    </padding>
 </GridPane>
