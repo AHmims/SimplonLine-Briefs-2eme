@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
@@ -7,12 +8,16 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
+import java.util.TimerTask;
+import java.util.Timer;
 public class Form implements Initializable {
     private boolean musiqueState = true;
     private musiquePlayer player;
@@ -21,6 +26,8 @@ public class Form implements Initializable {
     private int lvlCount = 1;
     private ArrayList<Quiz> listeQuiz = new ArrayList<Quiz>();
     private ArrayList<ToggleGroup> listeButtonGroup;
+    private Timer t = new Timer();
+    private Players player1;
     //@FXML Button btnTest ;
     @FXML
     SVGPath btnMusique;
@@ -34,6 +41,23 @@ public class Form implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         player = new musiquePlayer("quiz-show.mp3");
+        //
+        player1 = new Players("ss", "ss", 77);
+        //
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (player1.getDuration() > 0) {
+                    player1.setDuration(player1.getDuration() - 1);
+                    Platform.runLater(() -> lbComp.setText(LocalTime.MIN.plusSeconds(player1.getDuration()).toString()));
+                } else {
+                    t.cancel();
+                    JOptionPane.showMessageDialog(null, "GAME OVER");
+                    System.exit(0);
+                }
+            }
+        },1000,1000);
+        //
         niveau1();
     }
 
@@ -84,6 +108,7 @@ public class Form implements Initializable {
         musiqueState = !musiqueState;
         player.playState(musiqueState);
     }
+
     //
     private void niveau1() {
         Quiz quiz1 = new Quiz("JAVA est  un langage", "Compilé et interpreté", "Compilé", "Interprété", "Compilé et interpreté");
@@ -106,7 +131,7 @@ public class Form implements Initializable {
         Quiz quiz1 = new Quiz("Après la compilation, un programme écrit en JAVA, il se transforme en programme en bytecode. Quelle est l’extension du programme en bytecode ?", ".Class", "aucun des choix", ".JAVA", ".Class");
         Quiz quiz2 = new Quiz("Class Test{Public Test () {System.out.println(”Bonjour”);}public Test (int i) {this(); System.out.println(”Nous sommes en ”+i+”!”);}; }qu’affichera l’instruction suivante? Test t1=new Test (2020);", "Bonjour Nous sommes en 2020 !", "aucun des choix", "Bonjour Nous sommes en 2020 !", "Nous sommes en 2020 !");
         Quiz quiz3 = new Quiz("Voici un constructeur de la classe Employee, y-a-t'il un problème Public void Employe(String n){Nom=n;}", "vrai", "vrai", "faux");
-        Quiz quiz4 = new Quiz("Pour spécifier que la variable ne pourra plus être modifiée et doit être initialisée dès sa déclaration, on la déclare comme une constante avec le mot réservé", "final", "aucun des choix", "final","const");
+        Quiz quiz4 = new Quiz("Pour spécifier que la variable ne pourra plus être modifiée et doit être initialisée dès sa déclaration, on la déclare comme une constante avec le mot réservé", "final", "aucun des choix", "final", "const");
         Quiz quiz5 = new Quiz("Dans une classe, on accède à ses variables grâce au mot clé", "this", "aucun des choix", "this", "super");
 
         listeQuiz.add(quiz1);
@@ -155,11 +180,17 @@ public class Form implements Initializable {
         //
         for (int i = start; i < end; i++) {
             VBox container = new VBox();
-            Label lb = new Label(listeQuiz.get(i).getQuestion());
+            container.setSpacing(10);
+            container.setMinHeight(60);
+            //
+            Text lb = new Text(listeQuiz.get(i).getQuestion());
+            lb.setWrappingWidth(750);
+            //
             contentPane.getChildren().add(lb);
             lb.setId(String.format("%s%d", idLabel, i + 1));
             //
             HBox answers = new HBox();
+            answers.setSpacing(40);
             //TEST IF THERE IS 2 OR 3 ANSWERS
             int answersCount = 2;
             if (listeQuiz.get(i).getChoice_three() != null)
@@ -176,7 +207,7 @@ public class Form implements Initializable {
             }
             listeButtonGroup.add(radiosContainer);
             //
-            if (i != 0)
+            if (i != start)
                 container.getChildren().add(new Separator(Orientation.HORIZONTAL));
             container.getChildren().addAll(lb, answers);
             //
