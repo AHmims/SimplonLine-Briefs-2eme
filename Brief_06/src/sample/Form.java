@@ -11,13 +11,13 @@ import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.TimerTask;
 import java.util.Timer;
+import java.util.TimerTask;
+
 public class Form implements Initializable {
     private boolean musiqueState = true;
     private musiquePlayer player;
@@ -44,6 +44,7 @@ public class Form implements Initializable {
         //
         player1 = new Players("ss", "ss", 77);
         //
+        //
         t.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -52,23 +53,18 @@ public class Form implements Initializable {
                     Platform.runLater(() -> lbComp.setText(LocalTime.MIN.plusSeconds(player1.getDuration()).toString()));
                 } else {
                     t.cancel();
-                    JOptionPane.showMessageDialog(null, "GAME OVER");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("GAME OVER");
+                    alert.setHeaderText("Vous avez échoué le quiz");
+                    alert.setContentText("Temps écoulé");
+                    alert.showAndWait();
                     System.exit(0);
                 }
             }
-        },1000,1000);
+        }, 1000, 1000);
         //
         niveau1();
     }
-
-    //
-    //on page load
-    /*public Form() {
-        //play music
-        player = new musiquePlayer("quiz-show.mp3");
-        //niveau1();
-        //System.out.println("slm");
-    }*/
 
     //Validate the form
     @FXML
@@ -86,8 +82,6 @@ public class Form implements Initializable {
                 lbNbt.setText(String.format("Tentatives : %d", attemptsCount));
             } else {
                 final ImageIcon icon = new ImageIcon("lose.gif");
-                //JOptionPane.showMessageDialog(null,invisibleChar, "YOU LOST HAHAHAH", JOptionPane.INFORMATION_MESSAGE, icon);
-                //JOptionPane.showMessageDialog(null, "GAME OVER\nNombre de tentatives a atteint 0.", "GAME OVER", JOptionPane.INFORMATION_MESSAGE, icon);
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("GAME OVER");
                 alert.setHeaderText("Vous avez échoué le quiz");
