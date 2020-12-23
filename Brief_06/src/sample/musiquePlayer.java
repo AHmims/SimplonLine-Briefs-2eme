@@ -19,7 +19,7 @@ public class musiquePlayer {
     }
 
     //play/ pause the music
-    public void volumeControll(boolean state) {
+    public void playState(boolean state) {
         if (!state)
             player.stop();
         else
