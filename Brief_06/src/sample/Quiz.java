@@ -83,4 +83,16 @@ public class Quiz {
         this.choice_three = choice_three;
     }
 
+    //
+    public String getChoice(int choice) {
+        switch (choice) {
+            case 0:
+                return getChoice_one();
+            case 1:
+                return getChoice_two();
+            default:
+                return getChoice_three();
+        }
+    }
+
 }

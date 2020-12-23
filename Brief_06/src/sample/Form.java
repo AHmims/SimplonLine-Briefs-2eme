@@ -1,19 +1,26 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 
 import javax.swing.*;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class Form {
+public class Form implements Initializable {
     private boolean musiqueState = true;
     private musiquePlayer player;
     //
     private int attemptsCount = 2;
     private int lvlCount = 1;
+    private ArrayList<Quiz> listeQuiz = new ArrayList<Quiz>();
+    private ArrayList<ToggleGroup> listeButtonGroup;
     //@FXML Button btnTest ;
     @FXML
     SVGPath btnMusique;
@@ -21,24 +28,34 @@ public class Form {
     Button btnDebut;
     @FXML
     Label lbNbt, lbNiv, lbComp, lbNom;
+    @FXML
+    VBox contentPane;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        player = new musiquePlayer("quiz-show.mp3");
+        niveau1();
+    }
 
     //
     //on page load
-    public Form() {
+    /*public Form() {
         //play music
         player = new musiquePlayer("quiz-show.mp3");
+        //niveau1();
         //System.out.println("slm");
-    }
+    }*/
 
     //Validate the form
     @FXML
     public void validateForm() {
-        boolean valide = false;
+        boolean valide = true;
         //Code de validation ici
         //
         //traitment apres validation
         if (valide) {
             //next level
+            niveau2();
         } else {
             if (attemptsCount > 0) {
                 attemptsCount--;
@@ -68,4 +85,103 @@ public class Form {
         player.playState(musiqueState);
     }
     //
+    private void niveau1() {
+        Quiz quiz1 = new Quiz("JAVA est  un langage", "Compilé et interpreté", "Compilé", "Interprété", "Compilé et interpreté");
+        Quiz quiz2 = new Quiz("Toutes les classes héritent de la classe", "Object", "Main", "Object", "AWT");
+        Quiz quiz3 = new Quiz("Par convention une classe", "commence par une majuscule", "est en minuscule", "commence par une majuscule", "est en majuscules");
+        Quiz quiz4 = new Quiz("Est-ce que on peut avoir plusieurs constructeurs pour la même classe", "oui", "oui", "non");
+        Quiz quiz5 = new Quiz("Dans la ligne \"public class A implements B\", B est:", "Interfacce", "Interfacce", "Classe parent", "Package");
+
+        listeQuiz.add(quiz1);
+        listeQuiz.add(quiz2);
+        listeQuiz.add(quiz3);
+        listeQuiz.add(quiz4);
+        listeQuiz.add(quiz5);
+
+        remplirePanelNiveau(1);
+    }
+
+    private void niveau2() {
+
+        Quiz quiz1 = new Quiz("Après la compilation, un programme écrit en JAVA, il se transforme en programme en bytecode. Quelle est l’extension du programme en bytecode ?", ".Class", "aucun des choix", ".JAVA", ".Class");
+        Quiz quiz2 = new Quiz("Class Test{Public Test () {System.out.println(”Bonjour”);}public Test (int i) {this(); System.out.println(”Nous sommes en ”+i+”!”);}; }qu’affichera l’instruction suivante? Test t1=new Test (2020);", "Bonjour Nous sommes en 2020 !", "aucun des choix", "Bonjour Nous sommes en 2020 !", "Nous sommes en 2020 !");
+        Quiz quiz3 = new Quiz("Voici un constructeur de la classe Employee, y-a-t'il un problème Public void Employe(String n){Nom=n;}", "vrai", "vrai", "faux");
+        Quiz quiz4 = new Quiz("Pour spécifier que la variable ne pourra plus être modifiée et doit être initialisée dès sa déclaration, on la déclare comme une constante avec le mot réservé", "final", "aucun des choix", "final","const");
+        Quiz quiz5 = new Quiz("Dans une classe, on accède à ses variables grâce au mot clé", "this", "aucun des choix", "this", "super");
+
+        listeQuiz.add(quiz1);
+        listeQuiz.add(quiz2);
+        listeQuiz.add(quiz3);
+        listeQuiz.add(quiz4);
+        listeQuiz.add(quiz5);
+
+        remplirePanelNiveau(2);
+    }
+
+    private void niveau3() {
+        Quiz quiz1 = new Quiz("calculerSalaire(int) calculerSalaire(int, double)La méthode calculerSalaire est:", "surchargée", "aucun des choix", "surchargée", "redéfinie");
+        Quiz quiz2 = new Quiz("Une classe qui contient au moins une méthode abstraite doit être déclarée abstraite.", "vrai", "vrai", "faux");
+        Quiz quiz3 = new Quiz("Est-ce qu’une classe peut implémenter plusieurs interfaces?", "vrai", "vrai", "faux");
+        Quiz quiz4 = new Quiz("La déclaration d'une méthode suivante :public void traitement() throws IOExceptionprécise que la méthode propage une exception contrôlée", "vrai", "vrai", "faux");
+        Quiz quiz5 = new Quiz("class Test{public static void main (String[] args) {try {int a =10;System.out.println (\"a = \" + a );int b = 0 / a;System.out.println (\"b = \" + b);}catch(ArithmeticException e){System.out.println (\"diviser par 0!\"); }finally{System.out.println(\"je suis à l’intérieur de finally\");}}}", "a=10 b=0 Je suis à l’intérieur de finally", "aucun des choix", "a=10 b=0 Je suis à l’intérieur de finally", "a=10 b=0 diviser par 0! je suis à l’intérieur de finally");
+
+        listeQuiz.add(quiz1);
+        listeQuiz.add(quiz2);
+        listeQuiz.add(quiz3);
+        listeQuiz.add(quiz4);
+        listeQuiz.add(quiz5);
+
+        remplirePanelNiveau(3);
+    }
+
+    //
+    private void remplirePanelNiveau(int niveau) {
+        int start, end;
+        if (niveau == 1) {
+            start = 0;
+            end = 5;
+        } else if (niveau == 2) {
+            start = 5;
+            end = 10;
+        } else {
+            start = 10;
+            end = 15;
+        }
+        //remove the questions
+        contentPane.getChildren().clear();
+        //
+        String idLabel = "qu_", idRadio = "rd_qu_", idGroup = "question_";
+        listeButtonGroup = new ArrayList<ToggleGroup>();
+        //
+        for (int i = start; i < end; i++) {
+            VBox container = new VBox();
+            Label lb = new Label(listeQuiz.get(i).getQuestion());
+            contentPane.getChildren().add(lb);
+            lb.setId(String.format("%s%d", idLabel, i + 1));
+            //
+            HBox answers = new HBox();
+            //TEST IF THERE IS 2 OR 3 ANSWERS
+            int answersCount = 2;
+            if (listeQuiz.get(i).getChoice_three() != null)
+                answersCount = 3;
+            //
+            ToggleGroup radiosContainer = new ToggleGroup();
+            for (int j = 0; j < answersCount; j++) {
+                RadioButton choice = new RadioButton();
+                choice.setId(String.format("%s%d_%d", idRadio, i, j));
+                choice.setText(listeQuiz.get(i).getChoice(j));
+                choice.setToggleGroup(radiosContainer);
+                //
+                answers.getChildren().add(choice);
+            }
+            listeButtonGroup.add(radiosContainer);
+            //
+            if (i != 0)
+                container.getChildren().add(new Separator(Orientation.HORIZONTAL));
+            container.getChildren().addAll(lb, answers);
+            //
+            contentPane.getChildren().add(container);
+        }
+    }
+
 }
