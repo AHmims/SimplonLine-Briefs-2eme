@@ -1,3 +1,8 @@
+#Projet réalisé par
+
+* Ali HMIMS
+* Zakaria KAMILI
+
 ##Instalation
 
 Windows->preferences->install Javafx
