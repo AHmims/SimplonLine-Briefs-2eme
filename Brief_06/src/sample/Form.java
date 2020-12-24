@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
@@ -23,11 +24,15 @@ public class Form implements Initializable {
     private musiquePlayer player;
     //
     private int attemptsCount = 2;
+    int cpt = 0;
+    int cptN = 0;
+    static int niv;
     private int lvlCount = 1;
     private ArrayList<Quiz> listeQuiz = new ArrayList<Quiz>();
     private ArrayList<ToggleGroup> listeButtonGroup;
-    private Timer t = new Timer();
-    private Players player1;
+    ArrayList<Player_QUIZ> listePlayer_QUIZ = new ArrayList<Player_QUIZ>();
+    private Timer t;
+    Players player1;
     //@FXML Button btnTest ;
     @FXML
     SVGPath btnMusique;
@@ -41,10 +46,9 @@ public class Form implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         player = new musiquePlayer("quiz-show.mp3");
-        //
-        player1 = new Players("ss", "ss", 77);
-        //
-        //
+        player1 = new Players(Controller.name, Controller.prenom, Integer.parseInt(Controller.age));
+        lbNom.setText(String.format("Nom : %s Prenom : %s", Controller.name, Controller.prenom));
+        t = new Timer();
         t.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -53,11 +57,7 @@ public class Form implements Initializable {
                     Platform.runLater(() -> lbComp.setText(LocalTime.MIN.plusSeconds(player1.getDuration()).toString()));
                 } else {
                     t.cancel();
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("GAME OVER");
-                    alert.setHeaderText("Vous avez échoué le quiz");
-                    alert.setContentText("Temps écoulé");
-                    alert.showAndWait();
+                    JOptionPane.showMessageDialog(null, "GAME OVER");
                     System.exit(0);
                 }
             }
@@ -69,26 +69,7 @@ public class Form implements Initializable {
     //Validate the form
     @FXML
     public void validateForm() {
-        boolean valide = true;
-        //Code de validation ici
-        //
-        //traitment apres validation
-        if (valide) {
-            //next level
-            niveau2();
-        } else {
-            if (attemptsCount > 0) {
-                attemptsCount--;
-                lbNbt.setText(String.format("Tentatives : %d", attemptsCount));
-            } else {
-                final ImageIcon icon = new ImageIcon("lose.gif");
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("GAME OVER");
-                alert.setHeaderText("Vous avez échoué le quiz");
-                alert.setContentText("Nombre de tentatives a atteint 0!");
-                alert.showAndWait();
-            }
-        }
+        ActionDB(niv);
     }
 
     //on_click de button de volume
@@ -118,10 +99,11 @@ public class Form implements Initializable {
         listeQuiz.add(quiz5);
 
         remplirePanelNiveau(1);
+        niv = 1;
     }
 
     private void niveau2() {
-
+        System.out.println("niveau 2");
         Quiz quiz1 = new Quiz("Après la compilation, un programme écrit en JAVA, il se transforme en programme en bytecode. Quelle est l’extension du programme en bytecode ?", ".Class", "aucun des choix", ".JAVA", ".Class");
         Quiz quiz2 = new Quiz("Class Test{Public Test () {System.out.println(”Bonjour”);}public Test (int i) {this(); System.out.println(”Nous sommes en ”+i+”!”);}; }qu’affichera l’instruction suivante? Test t1=new Test (2020);", "Bonjour Nous sommes en 2020 !", "aucun des choix", "Bonjour Nous sommes en 2020 !", "Nous sommes en 2020 !");
         Quiz quiz3 = new Quiz("Voici un constructeur de la classe Employee, y-a-t'il un problème Public void Employe(String n){Nom=n;}", "vrai", "vrai", "faux");
@@ -135,6 +117,7 @@ public class Form implements Initializable {
         listeQuiz.add(quiz5);
 
         remplirePanelNiveau(2);
+        niv = 2;
     }
 
     private void niveau3() {
@@ -151,10 +134,161 @@ public class Form implements Initializable {
         listeQuiz.add(quiz5);
 
         remplirePanelNiveau(3);
+        niv = 3;
+        System.out.println("remplire");
     }
 
     //
+    public void ActionDB(int niveau) {
+        System.out.println(niveau);
+        if (checkReponseAllQuestion(niveau)) {
+            Tentation(niveau);
+        } else {
+            JOptionPane.showMessageDialog(null, "Merci de répondre à toutes les questions");
+        }
+    }
+    //CHECK IF EVERY RADIO BUTTON GROUP HAS A SELECTED RADIO BUTTON
+    public boolean checkReponseAllQuestion(int niveau) {
+        boolean ret = true;
+        for (int i = 0; i < 5; i++) {
+            if (listeButtonGroup.get(i).getSelectedToggle() == null) {
+                ret = false;
+            }
+        }
+        return ret;
+    }
+    //
+    public void Tentation(int niveau) {
+        if (cpt == 0) {
+            getreponses(niveau);
+            if (cptN == 0) {
+                if ((niveau == 1 && calculeScore(1) >= 40) || (niveau == 2 && calculeScore(2) >= 60) || (niveau == 3 && calculeScore(3) >= 80)) {
+                    correction(niveau);
+                    afficheCorrection(niveau);
+                } else {
+                    cptN = 1;
+                    lbNbt.setText(String.format("Tentative : %d", cptN));
+                    lbNbt.setStyle("-fx-text-fill:orange");
+                    //
+                    for (int i = 0; i < 5; i++) {
+                        listePlayer_QUIZ.remove(listePlayer_QUIZ.size() - 1);
+                    }
+                    JOptionPane.showMessageDialog(null, "Error tu peut reprendre");
+                }
+            } else {
+                cptN = 0;
+                afficheCorrection(niveau);
+            }
+        } else {
+            afficheCorrection(niveau);
+        }
+    }
+    //FILL THE GLOBAL ARRAY LIST WITH CLASS INSTANCES OF THE QESUTION RESPONSES + USER INPUT RESPONSE
+    public void getreponses(int niveau) {
+        int start, end;
+        if (niveau == 1) {
+            start = 0;
+            end = 5;
+
+        } else if (niveau == 2) {
+            start = 5;
+            end = 10;
+        } else {
+            start = 10;
+            end = 15;
+        }
+        int btngroupIndex = 0;
+        //System.out.println(listeButtonGroup.size());
+        for (int i = start; i < end; i++) {
+            boolean choice;
+            RadioButton chk = (RadioButton) listeButtonGroup.get(btngroupIndex).getSelectedToggle();
+            choice = listeQuiz.get(i).getReponse().equals(chk.getText());
+            //
+            System.out.println(chk.getText() + " responses " + listeQuiz.get(i).getReponse());
+            //
+            Player_QUIZ player_QUIZ = new Player_QUIZ(player1.getId_Player(), listeQuiz.get(i).getId_quiz(), chk.getText(), choice);
+            listePlayer_QUIZ.add(player_QUIZ);
+            //
+            btngroupIndex++;
+        }
+
+
+    }
+    //CALCULATE USER SCORE AND RETURN IT
+    public int calculeScore(int niveau) {
+        int start, end;
+        if (niveau == 1) {
+            start = 0;
+            end = 5;
+
+        } else if (niveau == 2) {
+            start = 5;
+            end = 10;
+        } else {
+            start = 10;
+            end = 15;
+        }
+        int score = 0;
+        for (int i = start; i < end; i++) {
+            if (listePlayer_QUIZ.get(i).isGoodchoice()) {
+                score += 20;
+            }
+        }
+        System.out.println(score);
+        return score;
+    }
+    //
+    public void afficheCorrection(int niveau) {
+        if (cpt == 0)
+            cpt = 1;
+        else {
+            cpt = 0;
+            if (niveau == 1) {
+                if (calculeScore(1) >= 40) {
+                    niv = 2;
+                    niveau2();
+                    System.out.println(calculeScore(1));
+                } else {
+                    String invisibleChar = "\u200e";
+                    final ImageIcon icon = new ImageIcon("lose.gif");
+                    JOptionPane.showMessageDialog(null, invisibleChar, "YOU LOST HAHAHAH", JOptionPane.INFORMATION_MESSAGE, icon);
+                    System.exit(0);
+                }
+            } else if (niveau == 2) {
+                if (calculeScore(2) >= 60) {
+                    niv = 3;
+                    niveau3();
+                } else {
+                    new musiquePlayer("lose.mp3");
+                    String invisibleChar = "\u200e";
+                    final ImageIcon icon = new ImageIcon("lose.gif");
+                    JOptionPane.showMessageDialog(null, invisibleChar, "YOU LOST HAHAHAH ", JOptionPane.INFORMATION_MESSAGE, icon);
+
+                    System.exit(0);
+                }
+            } else {
+                if (calculeScore(3) >= 80) {
+                    new musiquePlayer("win.mp3");
+                    String invisibleChar = "\u200e";
+                    final ImageIcon icon = new ImageIcon("source.gif");
+                    JOptionPane.showMessageDialog(null, invisibleChar, "YOU WON ! ", JOptionPane.INFORMATION_MESSAGE, icon);
+                    System.exit(0);
+
+                } else {
+                    new musiquePlayer("lose.mp3");
+                    String invisibleChar = "\u200e";
+                    final ImageIcon icon = new ImageIcon("lose.gif");
+                    JOptionPane.showMessageDialog(null, invisibleChar, "YOU LOST HAHAHAH ", JOptionPane.INFORMATION_MESSAGE, icon);
+                    System.exit(0);
+                }
+            }
+        }
+    }
+    //
     private void remplirePanelNiveau(int niveau) {
+        lbNiv.setText(String.format("Niveau : %d", niveau));
+        lbNbt.setStyle("-fx-text-fill:green");
+        //
         int start, end;
         if (niveau == 1) {
             start = 0;
@@ -209,4 +343,39 @@ public class Form implements Initializable {
         }
     }
 
+    //
+    public void correction(int niveau) {
+        int start, end;
+        if (niveau == 1) {
+            start = 0;
+            end = 5;
+        } else if (niveau == 2) {
+            start = 5;
+            end = 10;
+        } else {
+            start = 10;
+            end = 15;
+        }
+        int btngroupIndex = 0;
+        //
+        for (int i = start; i < end; i++) {
+            ToggleGroup radsV = listeButtonGroup.get(btngroupIndex);
+            ObservableList<Toggle> collection = radsV.getToggles();
+            //
+            for (Toggle element : collection) {
+                RadioButton radioB = (RadioButton) element;
+                //
+                if (radioB.isSelected()) {
+                    if (listePlayer_QUIZ.get(i).isGoodchoice()) {
+                        radioB.setStyle("-fx-text-fill: green");
+                        break;
+                    } else
+                        radioB.setStyle("-fx-text-fill: red");
+                } else if (radioB.getText().equals(listeQuiz.get(i).getReponse()) && !listePlayer_QUIZ.get(i).isGoodchoice())
+                    radioB.setStyle("-fx-text-fill: green");
+            }
+            btngroupIndex++;
+        }
+    }
 }
+

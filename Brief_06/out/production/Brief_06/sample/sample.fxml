@@ -43,13 +43,11 @@
                         <TextField fx:id="txt_age" />
                      </children>
                   </HBox>
-               </children>
-            </VBox>
-            <HBox alignment="CENTER" VBox.vgrow="NEVER">
-               <children>
                   <Button fx:id="btnStart" mnemonicParsing="false" onAction="#startQuiz" text="Démarrer le quiz" />
                </children>
-            </HBox>
+            </VBox>
+            <HBox alignment="CENTER" VBox.vgrow="NEVER" />
+            <Label fx:id="lblerror" prefHeight="18.0" prefWidth="0.0" textFill="RED" />
          </children>
       </VBox>
    </children>
