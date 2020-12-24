@@ -6,12 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 
-import javax.swing.*;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -57,7 +58,8 @@ public class Form implements Initializable {
                     Platform.runLater(() -> lbComp.setText(LocalTime.MIN.plusSeconds(player1.getDuration()).toString()));
                 } else {
                     t.cancel();
-                    JOptionPane.showMessageDialog(null, "GAME OVER");
+                    new musiquePlayer("lose.mp3");
+                    showAlert("Lose.gif", "GAME OVER", "");
                     System.exit(0);
                 }
             }
@@ -83,6 +85,8 @@ public class Form implements Initializable {
         musiqueState = !musiqueState;
         player.playState(musiqueState);
     }
+
+    //
 
     //
     private void niveau1() {
@@ -139,14 +143,18 @@ public class Form implements Initializable {
     }
 
     //
+
+
+    //
     public void ActionDB(int niveau) {
         System.out.println(niveau);
         if (checkReponseAllQuestion(niveau)) {
             Tentation(niveau);
         } else {
-            JOptionPane.showMessageDialog(null, "Merci de répondre à toutes les questions");
+            showAlert("", "Erreur", "Veuillez répondre à toutes les questions");
         }
     }
+
     //CHECK IF EVERY RADIO BUTTON GROUP HAS A SELECTED RADIO BUTTON
     public boolean checkReponseAllQuestion(int niveau) {
         boolean ret = true;
@@ -157,13 +165,14 @@ public class Form implements Initializable {
         }
         return ret;
     }
+
     //
     public void Tentation(int niveau) {
         if (cpt == 0) {
             getreponses(niveau);
+            // correction(niveau);
             if (cptN == 0) {
                 if ((niveau == 1 && calculeScore(1) >= 40) || (niveau == 2 && calculeScore(2) >= 60) || (niveau == 3 && calculeScore(3) >= 80)) {
-                    correction(niveau);
                     afficheCorrection(niveau);
                 } else {
                     cptN = 1;
@@ -173,7 +182,7 @@ public class Form implements Initializable {
                     for (int i = 0; i < 5; i++) {
                         listePlayer_QUIZ.remove(listePlayer_QUIZ.size() - 1);
                     }
-                    JOptionPane.showMessageDialog(null, "Error tu peut reprendre");
+                    showAlert("", "Vous avez échoué", "Vous pouvez encore essayer");
                 }
             } else {
                 cptN = 0;
@@ -183,6 +192,7 @@ public class Form implements Initializable {
             afficheCorrection(niveau);
         }
     }
+
     //FILL THE GLOBAL ARRAY LIST WITH CLASS INSTANCES OF THE QESUTION RESPONSES + USER INPUT RESPONSE
     public void getreponses(int niveau) {
         int start, end;
@@ -198,7 +208,6 @@ public class Form implements Initializable {
             end = 15;
         }
         int btngroupIndex = 0;
-        //System.out.println(listeButtonGroup.size());
         for (int i = start; i < end; i++) {
             boolean choice;
             RadioButton chk = (RadioButton) listeButtonGroup.get(btngroupIndex).getSelectedToggle();
@@ -214,6 +223,7 @@ public class Form implements Initializable {
 
 
     }
+
     //CALCULATE USER SCORE AND RETURN IT
     public int calculeScore(int niveau) {
         int start, end;
@@ -237,11 +247,13 @@ public class Form implements Initializable {
         System.out.println(score);
         return score;
     }
+
     //
     public void afficheCorrection(int niveau) {
-        if (cpt == 0)
+        if (cpt == 0) {
             cpt = 1;
-        else {
+            correction(niveau);
+        } else {
             cpt = 0;
             if (niveau == 1) {
                 if (calculeScore(1) >= 40) {
@@ -249,9 +261,8 @@ public class Form implements Initializable {
                     niveau2();
                     System.out.println(calculeScore(1));
                 } else {
-                    String invisibleChar = "\u200e";
-                    final ImageIcon icon = new ImageIcon("lose.gif");
-                    JOptionPane.showMessageDialog(null, invisibleChar, "YOU LOST HAHAHAH", JOptionPane.INFORMATION_MESSAGE, icon);
+                    new musiquePlayer("lose.mp3");
+                    showAlert("Lose.gif", "GAME OVER", "");
                     System.exit(0);
                 }
             } else if (niveau == 2) {
@@ -260,30 +271,24 @@ public class Form implements Initializable {
                     niveau3();
                 } else {
                     new musiquePlayer("lose.mp3");
-                    String invisibleChar = "\u200e";
-                    final ImageIcon icon = new ImageIcon("lose.gif");
-                    JOptionPane.showMessageDialog(null, invisibleChar, "YOU LOST HAHAHAH ", JOptionPane.INFORMATION_MESSAGE, icon);
-
+                    showAlert("Lose.gif", "GAME OVER", "");
                     System.exit(0);
                 }
             } else {
                 if (calculeScore(3) >= 80) {
                     new musiquePlayer("win.mp3");
-                    String invisibleChar = "\u200e";
-                    final ImageIcon icon = new ImageIcon("source.gif");
-                    JOptionPane.showMessageDialog(null, invisibleChar, "YOU WON ! ", JOptionPane.INFORMATION_MESSAGE, icon);
+                    showAlert("source.gif", "YOU WIN !!", "");
                     System.exit(0);
 
                 } else {
                     new musiquePlayer("lose.mp3");
-                    String invisibleChar = "\u200e";
-                    final ImageIcon icon = new ImageIcon("lose.gif");
-                    JOptionPane.showMessageDialog(null, invisibleChar, "YOU LOST HAHAHAH ", JOptionPane.INFORMATION_MESSAGE, icon);
+                    showAlert("Lose.gif", "GAME OVER", "");
                     System.exit(0);
                 }
             }
         }
     }
+
     //
     private void remplirePanelNiveau(int niveau) {
         lbNiv.setText(String.format("Niveau : %d", niveau));
@@ -358,6 +363,7 @@ public class Form implements Initializable {
         }
         int btngroupIndex = 0;
         //
+        System.out.println("Correction");
         for (int i = start; i < end; i++) {
             ToggleGroup radsV = listeButtonGroup.get(btngroupIndex);
             ObservableList<Toggle> collection = radsV.getToggles();
@@ -376,6 +382,22 @@ public class Form implements Initializable {
             }
             btngroupIndex++;
         }
+    }
+
+    //
+    public void showAlert(String img, String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setResizable(true);
+        if (!img.equals("")) {
+            alert.getDialogPane().setPrefSize(400, 320);
+            Image image = new Image(String.format("file:%s", img));
+            ImageView imageView = new ImageView(image);
+            alert.setGraphic(imageView);
+        } else
+            alert.setContentText(content);
+        alert.showAndWait();
     }
 }
 
