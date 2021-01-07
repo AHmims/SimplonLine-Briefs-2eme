@@ -25,9 +25,6 @@ public class Controller {
     @FXML
     private void test(){
         try {
-            /*VBox content = FXMLLoader.load(getClass().getResource("apprenant_comp.fxml"));
-            root.getChildren().setAll(content);
-            System.out.println(content.getHeight());*/
             FXMLLoader loader = new FXMLLoader(getClass().getResource("apprenant_comp.fxml"));
             Stage stage = (Stage) root.getScene().getWindow();
             Scene scene = new Scene(loader.load());

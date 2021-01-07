@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="420.0" fitWidth="727.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@res/background-simplon-pattern.png" />
+            <Image url="@res/img/background-simplon-pattern.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000001a" height="420.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="657.0" />
@@ -19,7 +19,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@res/sol-logo.png" />
+                  <Image url="@res/img/sol-logo.png" />
                </image>
             </ImageView>
             <VBox prefHeight="380.0" prefWidth="325.0" spacing="20.0" style="-fx-background-color: #fff; -fx-background-radius: 10;">

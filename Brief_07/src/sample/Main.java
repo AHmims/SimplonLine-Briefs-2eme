@@ -15,7 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("SimplonLine");
         primaryStage.setScene(new Scene(root));
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/favicon.ico")));
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/favicon.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/img/favicon.png")));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
