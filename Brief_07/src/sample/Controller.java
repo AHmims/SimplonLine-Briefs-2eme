@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,9 +20,17 @@ public class Controller {
     PasswordField input_pass;
     @FXML
     Button btn_login;
+
     //
     @FXML
-    private void test(){
+    private void test() {
+        SimplonLine sl = new SimplonLine();
+        sl.login(input_email.getText(), input_pass.getText());
+        //switchScene();
+    }
+
+    //Method called when user logges in successfully
+    private void switchScene() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("apprenant_comp.fxml"));
             Stage stage = (Stage) root.getScene().getWindow();

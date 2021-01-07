@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("SimplonLine");
+        primaryStage.setTitle("sample.SimplonLine");
         primaryStage.setScene(new Scene(root));
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/favicon.ico")));
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/img/favicon.png")));
