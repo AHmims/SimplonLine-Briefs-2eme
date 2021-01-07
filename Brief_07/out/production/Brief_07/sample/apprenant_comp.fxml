@@ -5,24 +5,24 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="657.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ApprenantComp">
+<VBox fx:id="root" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ApprenantComp">
    <children>
-      <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="657.0" style="-fx-background-color: #ce0033;">
-         <children>
-            <HBox alignment="CENTER" spacing="10.0">
-               <children>
-                  <Circle fx:id="img_avatar" fill="#ce0033" radius="17.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
-                  <Text fx:id="lb_nom" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom PRENOM">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-         </children>
+      <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="657.0" style="-fx-background-color: #ce0033;" VBox.vgrow="ALWAYS">
          <padding>
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
+         <HBox alignment="CENTER_LEFT" spacing="10.0" HBox.hgrow="ALWAYS">
+            <children>
+               <Circle fx:id="img_avatar" fill="#ce0033" radius="17.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" />
+               <Text fx:id="lb_nom" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom PRENOM">
+                  <font>
+                     <Font name="System Bold" size="14.0" />
+                  </font>
+               </Text>
+            </children>
+         </HBox>
+         <SVGPath fx:id="btn_logout" content="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" fill="WHITE" />
       </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
    </children>
-</Pane>
+</VBox>

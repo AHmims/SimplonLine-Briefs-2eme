@@ -5,6 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +14,10 @@ import java.util.ResourceBundle;
 public class ApprenantComp implements Initializable {
     @FXML
     Circle img_avatar;
+    @FXML
+    Text lb_nom;
+    @FXML
+    SVGPath btn_logout;
     //
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

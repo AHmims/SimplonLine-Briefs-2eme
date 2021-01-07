@@ -2,10 +2,13 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -22,8 +25,13 @@ public class Controller {
     @FXML
     private void test(){
         try {
-            Pane content = FXMLLoader.load(getClass().getResource("apprenant_comp.fxml"));
+            /*VBox content = FXMLLoader.load(getClass().getResource("apprenant_comp.fxml"));
             root.getChildren().setAll(content);
+            System.out.println(content.getHeight());*/
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("apprenant_comp.fxml"));
+            Stage stage = (Stage) root.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
