@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" prefHeight="420.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <ImageView fitHeight="420.0" fitWidth="657.0" pickOnBounds="true" preserveRatio="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+         <image>
+            <Image url="@res/background-simplon-pattern.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000001a" height="420.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="657.0" GridPane.rowIndex="1" />
+      <HBox alignment="CENTER_RIGHT" spacing="60.0" GridPane.rowIndex="1">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@res/sol-logo.png" />
+               </image>
+            </ImageView>
+            <VBox prefHeight="380.0" prefWidth="325.0" spacing="20.0" style="-fx-background-color: #fff; -fx-background-radius: 10;">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Connexion">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Text>
+                  <VBox spacing="10.0">
+                     <children>
+                        <VBox prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <Label text="Adresse email" />
+                              <TextField />
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="100.0" spacing="5.0">
+                           <children>
+                              <Label text="Mot de passe" />
+                              <PasswordField />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="285.0" style="-fx-background-color: #504dc1; -fx-background-radius: 5;" text="Se connecter" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="1.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vous n'avez pas encore vos identifiants ?">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Demandez votre invitation à :" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- votre formateur ou formatrice si vous êtes apprenant">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- votre responsable si vous êtes formateur ou formatrice">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- support-sol@simplon.co pour un accès admin">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children></VBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </HBox>
+   </children>
+</GridPane>
