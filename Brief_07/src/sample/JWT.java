@@ -1,8 +1,8 @@
 package sample;
 
 public class JWT {
-    private String token = null;
-    private String refresh_token = null;
+    private String token;
+    private String refresh_token;
     //
     public JWT(String token, String refresh_token) {
         this.token = token;

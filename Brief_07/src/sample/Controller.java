@@ -29,6 +29,9 @@ public class Controller {
         if (login_res == 1) {
             System.out.println("In");
             //DO SOMETHING HERE
+            //CHECK IF USER IN DB, IF NOT CREATE USER | SKILLS
+            //IF YES, CHECK IF THERE IS A CHANGE IN USER'S PERSONAL INFOS, IF YES UPDATE
+            //ON SUCCESS, REDIRECT TO THE NEXT WINDOW BASED ON USER'S ROLE, APPRENANT / STAFF
         } else {
             if (login_res == 0) System.out.println("INVALID CREDENTIALS");
             else System.out.printf("code : %d, FUNCTION : login()\n", login_res);
