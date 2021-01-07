@@ -7,7 +7,6 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-
 <Pane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <ImageView fitHeight="420.0" fitWidth="727.0" pickOnBounds="true" preserveRatio="true">
@@ -41,18 +40,18 @@
                         <VBox prefWidth="100.0" spacing="5.0">
                            <children>
                               <Label text="Adresse email" />
-                              <TextField />
+                              <TextField fx:id="input_email" />
                            </children>
                         </VBox>
                         <VBox prefWidth="100.0" spacing="5.0">
                            <children>
                               <Label text="Mot de passe" />
-                              <PasswordField />
+                              <PasswordField fx:id="input_pass" />
                            </children>
                         </VBox>
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="285.0" style="-fx-background-color: #504dc1; -fx-background-radius: 5;" text="Se connecter" textFill="WHITE">
+                  <Button fx:id="btn_login" mnemonicParsing="false" prefHeight="30.0" prefWidth="285.0" style="-fx-background-color: #504dc1; -fx-background-radius: 5;" text="Se connecter" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -65,17 +64,17 @@
                            </font>
                         </Text>
                         <Text layoutX="10.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Demandez votre invitation à :" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- votre formateur ou formatrice si vous êtes apprenant">
+                        <Text fill="#3c3c3c" strokeType="OUTSIDE" strokeWidth="0.0" text="- votre formateur ou formatrice si vous êtes apprenant">
                            <font>
                               <Font size="11.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- votre responsable si vous êtes formateur ou formatrice">
+                        <Text fill="#3c3c3c" layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- votre responsable si vous êtes formateur ou formatrice">
                            <font>
                               <Font size="11.0" />
                            </font>
                         </Text>
-                        <Text layoutX="10.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- support-sol@simplon.co pour un accès admin">
+                        <Text fill="#3c3c3c" layoutX="10.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- support-sol@simplon.co pour un accès admin">
                            <font>
                               <Font size="11.0" />
                            </font>
