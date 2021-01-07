@@ -7,22 +7,16 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" prefHeight="420.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-   </rowConstraints>
+
+<Pane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <ImageView fitHeight="420.0" fitWidth="657.0" pickOnBounds="true" preserveRatio="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+      <ImageView fitHeight="499.0" fitWidth="727.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@res/background-simplon-pattern.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000001a" height="420.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="657.0" GridPane.rowIndex="1" />
-      <HBox alignment="CENTER_RIGHT" spacing="60.0" GridPane.rowIndex="1">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000001a" height="420.0" stroke="TRANSPARENT" strokeType="INSIDE" strokeWidth="0.0" width="657.0" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="420.0" prefWidth="657.0" spacing="60.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -88,11 +82,12 @@
                         </Text>
                      </children>
                   </VBox>
-               </children></VBox>
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </HBox>
    </children>
-</GridPane>
+</Pane>
