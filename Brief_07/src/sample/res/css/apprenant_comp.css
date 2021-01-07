@@ -1,8 +1,46 @@
 .progress-indicator .percentage {
-    -fx-fill:null;
+    -fx-fill: null;
 }
 
-.progress-indicator  {
+.progress-indicator {
     -fx-padding: 5 0 -16 0;
     -fx-progress-color: #504dc1;
+}
+
+/**/
+
+#cb_promo {
+    -fx-background-color: transparent;
+    -fx-mark-color: white;
+    -fx-border-width: 2;
+    -fx-border-color: white;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+#cb_promo > .label {
+    -fx-text-fill: white;
+}
+
+#cb_promo .context-menu {
+    -fx-background-color: white;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    box-sizing: border-box;
+    -fx-padding: 5;
+}
+
+#cb_promo .menu-item > .label {
+    -fx-text-fill: black;
+    -fx-pref-width: 110;
+}
+
+#cb_promo .menu-item:focused {
+    -fx-background-color: #504dc1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+#cb_promo .menu-item:focused > .label {
+    -fx-text-fill: white;
 }
