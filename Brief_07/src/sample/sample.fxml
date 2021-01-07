@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane fx:id="root" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
       <ImageView fitHeight="420.0" fitWidth="727.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -51,7 +51,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <Button fx:id="btn_login" mnemonicParsing="false" prefHeight="30.0" prefWidth="285.0" style="-fx-background-color: #504dc1; -fx-background-radius: 5;" text="Se connecter" textFill="WHITE">
+                  <Button fx:id="btn_login" mnemonicParsing="false" onAction="#test" prefHeight="30.0" prefWidth="285.0" style="-fx-background-color: #504dc1; -fx-background-radius: 5;" text="Se connecter" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
