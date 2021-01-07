@@ -1,5 +1,7 @@
 package sample;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +14,7 @@ public class SimplonLine {
     }
 
     //Function to Login and get AUTH token
-    public void login(String email, String pass) {
+    public int login(String email, String pass) {
         HttpURLConnection con = null;
         try {
             con = setupHTTPRequest("https://api.simplonline.co/login", "POST");
@@ -33,36 +35,39 @@ public class SimplonLine {
             }
             in.close();
             //
-            System.out.println("Response:-" + response.toString());
+            Gson g = new Gson();
+            JWT cnx = g.fromJson(response.toString(), JWT.class);
             //
-            /*Gson g = new Gson();
-            Post[] posts = g.fromJson(response.toString(), Post[].class);
+            Connexion.refresh_token = cnx.getRefresh_token();
+            Connexion.token = cnx.getToken();
             //
-            System.out.println(posts[0].toString());*/
+            return 1;
         } catch (Exception e) {
             if(con != null) {
                 try {
                     if (con.getResponseCode() != 200)
-                        System.out.println("invalid login/pass");
+                        return 0;
+                        //System.out.println("invalid login/pass");
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    return 0;
                 }
             }else
-                e.printStackTrace();
+                return -1;
         }
+        return -2;
     }
 
     //
     private HttpURLConnection setupHTTPRequest(String URL, String method) {
         HttpURLConnection con;
         try {
-            URL url = new URL("https://api.simplonline.co/login");
+            URL url = new URL(URL);
             con = (HttpURLConnection) url.openConnection();
             //
             con.setDoOutput(true);
             con.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             con.setRequestProperty("Accept", "application/json, text/plain, */*");
-            con.setRequestMethod("POST");
+            con.setRequestMethod(method);
             //
             return con;
         } catch (Exception e) {

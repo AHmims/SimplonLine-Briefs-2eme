@@ -23,13 +23,20 @@ public class Controller {
 
     //
     @FXML
-    private void test() {
+    private void login() {
         SimplonLine sl = new SimplonLine();
-        sl.login(input_email.getText(), input_pass.getText());
+        int login_res = sl.login(input_email.getText(), input_pass.getText());
+        if (login_res == 1) {
+            System.out.println("In");
+            //DO SOMETHING HERE
+        } else {
+            if (login_res == 0) System.out.println("INVALID CREDENTIALS");
+            else System.out.printf("code : %d, FUNCTION : login()\n", login_res);
+        }
         //switchScene();
     }
 
-    //Method called when user logges in successfully
+    //Method called when user authenticates successfully
     private void switchScene() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("apprenant_comp.fxml"));
