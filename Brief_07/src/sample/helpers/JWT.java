@@ -1,4 +1,4 @@
-package sample;
+package sample.helpers;
 
 public class JWT {
     private String token;

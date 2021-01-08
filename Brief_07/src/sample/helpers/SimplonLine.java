@@ -1,6 +1,8 @@
-package sample;
+package sample.helpers;
 
 import com.google.gson.Gson;
+import sample.helpers.Connexion;
+import sample.helpers.JWT;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class SimplonLine {
         HttpURLConnection con = null;
         try {
             con = setupHTTPRequest("https://api.simplonline.co/login", "POST");
-            if(con == null)
+            if (con == null)
                 throw new Exception("Error initializing request");
             //
             String str = String.format("{\"email\": \"%s\",\"password\":\"%s\"}", email, pass);
@@ -27,34 +29,50 @@ public class SimplonLine {
             os.write(outputInBytes);
             os.close();
             //
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String output;
-            StringBuffer response = new StringBuffer();
-            while ((output = in.readLine()) != null) {
-                response.append(output);
-            }
-            in.close();
+            StringBuffer response = requestResponse(con);
+            if (response == null)
+                throw new Exception("Request response to String error");
             //
             Gson g = new Gson();
             JWT cnx = g.fromJson(response.toString(), JWT.class);
             //
             Connexion.refresh_token = cnx.getRefresh_token();
             Connexion.token = cnx.getToken();
+            Connexion.email = email;
             //
             return 1;
         } catch (Exception e) {
-            if(con != null) {
+            if (con != null) {
                 try {
                     if (con.getResponseCode() != 200)
                         return 0;
-                        //System.out.println("invalid login/pass");
+                    //System.out.println("invalid login/pass");
                 } catch (IOException ex) {
                     return 0;
                 }
-            }else
+            } else
                 return -1;
         }
         return -2;
+    }
+
+    //Get user data
+    public void getUserData(String email) {
+        HttpURLConnection con = null;
+        try {
+            con = setupHTTPRequest(String.format("https://api.simplonline.co/users?email=%s", email), "GET");
+            if (con == null)
+                throw new Exception("Error initializing request");
+            //
+            StringBuffer response = requestResponse(con);
+            if (response == null)
+                throw new Exception("Request response to String error");
+            //
+            //Gson g = new Gson();
+            System.out.println(response.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //
@@ -67,10 +85,30 @@ public class SimplonLine {
             con.setDoOutput(true);
             con.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
             con.setRequestProperty("Accept", "application/json, text/plain, */*");
+            if (method.equals("GET") && Connexion.token != null)
+                con.setRequestProperty("Authorization", "Bearer " + Connexion.token);
             con.setRequestMethod(method);
             //
             return con;
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    //
+    private StringBuffer requestResponse(HttpURLConnection con) {
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String output;
+            StringBuffer response = new StringBuffer();
+            while ((output = in.readLine()) != null) {
+                response.append(output);
+            }
+            in.close();
+            //
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }

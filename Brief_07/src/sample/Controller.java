@@ -8,6 +8,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import sample.helpers.Connexion;
+import sample.helpers.SimplonLine;
 
 import java.io.IOException;
 
@@ -29,7 +31,7 @@ public class Controller {
         if (login_res == 1) {
             System.out.println("In");
             Connexion db_cnx = new Connexion();
-            System.out.println(db_cnx.db_connect());
+            sl.getUserData(input_email.getText());
             //DO SOMETHING HERE
             //CHECK IF USER IN DB, IF NOT CREATE USER | SKILLS
             //IF YES, CHECK IF THERE IS A CHANGE IN USER'S PERSONAL INFOS, IF YES UPDATE
