@@ -28,6 +28,8 @@ public class Controller {
         int login_res = sl.login(input_email.getText(), input_pass.getText());
         if (login_res == 1) {
             System.out.println("In");
+            Connexion db_cnx = new Connexion();
+            System.out.println(db_cnx.db_connect());
             //DO SOMETHING HERE
             //CHECK IF USER IN DB, IF NOT CREATE USER | SKILLS
             //IF YES, CHECK IF THERE IS A CHANGE IN USER'S PERSONAL INFOS, IF YES UPDATE
