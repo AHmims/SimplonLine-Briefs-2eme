@@ -2,6 +2,7 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -13,8 +14,10 @@ import sample.helpers.Connexion;
 import sample.helpers.SimplonLine;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
     @FXML
     Pane root;
     @FXML
@@ -24,6 +27,14 @@ public class Controller {
     @FXML
     Button btn_login;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        //TEST IF THIS THE FIRST TIME THE APPLICATION IS RUNNING
+        SimplonLine sl = new SimplonLine();
+        Connexion db_cnx = new Connexion();
+        //
+
+    }
     //
     @FXML
     private void login() {
@@ -43,6 +54,9 @@ public class Controller {
                 if (db_user == null) {
                     //Add new User
                     operation_res = db_cnx.addUser(loged_in_user);
+                    if(operation_res){
+                        operation_res = sl.setupUser(loged_in_user.getIdUser());
+                    }
                 } else if (!db_user.equals(loged_in_user)) {
                     //Update DB
                     operation_res = db_cnx.updateUser(loged_in_user);

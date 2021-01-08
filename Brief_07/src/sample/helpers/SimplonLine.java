@@ -3,18 +3,19 @@ package sample.helpers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
-import com.google.gson.reflect.TypeToken;
+import sample.custom_gson.DeserializePromo;
 import sample.custom_gson.DeserializeUser;
+import sample.custom_gson.DeserializeUserExtra;
+import sample.db_classes.Promo;
 import sample.db_classes.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Collection;
+import java.util.ArrayList;
 
 public class SimplonLine {
     public SimplonLine() {
@@ -79,12 +80,77 @@ public class SimplonLine {
             Gson g = gsonBuilder.create();
             User user = g.fromJson(response.toString(), User.class);
             //
-            if(user == null)
+            if (user == null)
                 throw new Exception("Error while formatting User data");
             //
             return user;
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    //Setup user's first interactions with the system
+    public boolean setupUser(String id) {
+        HttpURLConnection con = null;
+        try {
+            con = setupHTTPRequest(String.format("https://api.simplonline.co/users/%s", id), "GET");
+            if (con == null)
+                throw new Exception("Error initializing request");
+            //
+            StringBuffer response = requestResponse(con);
+            if (response == null)
+                throw new Exception("Request response to String error");
+            //
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            JsonDeserializer<ArrayList<String[]>> deserializer = new DeserializeUserExtra();
+            gsonBuilder.registerTypeAdapter(ArrayList.class, deserializer);
+            Gson g = gsonBuilder.create();
+            ArrayList user_data = g.fromJson(response.toString(), ArrayList.class);
+            //
+            Connexion db_con = new Connexion();
+            for (int i = 0; i < user_data.size(); i++) {
+                String[] row = (String[]) user_data.get(i);
+                //See if classroom exists in DB
+                boolean exists = db_con.search("Promo", "idPromo", row[0]);
+                if (!exists) { // add new classroom
+                    Promo promo = getPromo(row[0]);
+                    if (promo != null) {
+                        boolean add_promo_res = db_con.addPromo(promo);
+                        System.out.println(add_promo_res);
+                    }
+                }
+            }
+            //
+            //System.out.println([0].split("|")[0]);
+            //
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    //
+    private Promo getPromo(String id) {
+        HttpURLConnection con = null;
+        try {
+            con = setupHTTPRequest(String.format("https://api.simplonline.co/classrooms/%s", id), "GET");
+            if (con == null)
+                throw new Exception("Error initializing request");
+            //
+            StringBuffer response = requestResponse(con);
+            if (response == null)
+                throw new Exception("Request response to String error");
+            //
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            JsonDeserializer<Promo> deserializer = new DeserializePromo();
+            gsonBuilder.registerTypeAdapter(Promo.class, deserializer);
+            Gson g = gsonBuilder.create();
+            return g.fromJson(response.toString(), Promo.class);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }
