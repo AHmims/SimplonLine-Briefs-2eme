@@ -1,39 +1,48 @@
 package sample.db_classes;
 
 public class User {
-    private String id;
-    private String name;
-    private String surname;
-    private String email;
-    private String[] roles;
+    private String idUser;
+    private String nomUser;
+    private String prenomUser;
+    private String emailUser;
+    private String roleUser;
 
     //
-    public User(String id, String name, String surname, String email, String[] roles) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.roles = roles;
+    public User(String idUser, String nomUser, String prenomUser, String emailUser, String roleUser) {
+        this.idUser = idUser;
+        this.nomUser = nomUser;
+        this.prenomUser = prenomUser;
+        this.emailUser = emailUser;
+        this.roleUser = roleUser;
     }
     //
 
-    public String getId() {
-        return id;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public String getName() {
-        return name;
+    public String getNomUser() {
+        return nomUser;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getPrenomUser() {
+        return prenomUser;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailUser() {
+        return emailUser;
     }
 
-    public String getRole() {
-        return roles[0];
+    public String getRoleUser() {
+        return roleUser;
+    }
+    //
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idUser='" + idUser + '\'' +
+                ", roleUser='" + roleUser + '\'' +
+                '}';
     }
 }

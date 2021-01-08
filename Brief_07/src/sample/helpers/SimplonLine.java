@@ -1,15 +1,20 @@
 package sample.helpers;
 
 import com.google.gson.Gson;
-import sample.helpers.Connexion;
-import sample.helpers.JWT;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.reflect.TypeToken;
+import sample.custom_gson.DeserializeUser;
+import sample.db_classes.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Collection;
 
 public class SimplonLine {
     public SimplonLine() {
@@ -68,8 +73,15 @@ public class SimplonLine {
             if (response == null)
                 throw new Exception("Request response to String error");
             //
-            //Gson g = new Gson();
-            System.out.println(response.toString());
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            JsonDeserializer<User> deserializer = new DeserializeUser();
+            gsonBuilder.registerTypeAdapter(User.class, deserializer);
+            Gson g = gsonBuilder.create();
+            User user = g.fromJson(response.toString(), User.class);
+            //
+            if(user == null)
+                throw new Exception("Error while formatting User data");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
