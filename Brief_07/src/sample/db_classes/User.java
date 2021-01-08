@@ -6,14 +6,15 @@ public class User {
     private String prenomUser;
     private String emailUser;
     private String roleUser;
-
+    private String avatarUrl;
     //
-    public User(String idUser, String nomUser, String prenomUser, String emailUser, String roleUser) {
+    public User(String idUser, String nomUser, String prenomUser, String emailUser, String roleUser,String avatarUrl) {
         this.idUser = idUser;
         this.nomUser = nomUser;
         this.prenomUser = prenomUser;
         this.emailUser = emailUser;
         this.roleUser = roleUser;
+        this.avatarUrl = avatarUrl;
     }
     //
 
@@ -35,6 +36,10 @@ public class User {
 
     public String getRoleUser() {
         return roleUser;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
     //
 

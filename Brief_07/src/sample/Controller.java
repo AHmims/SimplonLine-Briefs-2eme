@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import sample.db_classes.User;
 import sample.helpers.Connexion;
 import sample.helpers.SimplonLine;
 
@@ -31,7 +32,29 @@ public class Controller {
         if (login_res == 1) {
             System.out.println("In");
             Connexion db_cnx = new Connexion();
-            sl.getUserData(input_email.getText());
+            User loged_in_user = sl.getUserData(input_email.getText());
+            if (loged_in_user != null) {
+                boolean operation_res = false;
+                //Set env globals
+                Connexion.nom = String.format("%s %s", loged_in_user.getNomUser(), loged_in_user.getPrenomUser().toUpperCase());
+                Connexion.avatar = loged_in_user.getAvatarUrl();
+                //Check if user in DB
+                User db_user = db_cnx.getUser(loged_in_user.getIdUser());
+                if (db_user == null) {
+                    //Add new User
+                    operation_res = db_cnx.addUser(loged_in_user);
+                } else if (!db_user.equals(loged_in_user)) {
+                    //Update DB
+                    operation_res = db_cnx.updateUser(loged_in_user);
+                }
+                //
+                if (operation_res) {
+                    if (db_user == null)
+                        switchScene(loged_in_user.getRoleUser().equals("ROLE_LEARNER"));
+                    else //to create an alt user in DB to have access to staff instance (we have a staff login dont have a)
+                        switchScene(db_user.getRoleUser().equals("ROLE_LEARNER"));
+                } else System.out.println("error");
+            } else System.out.println("error");
             //DO SOMETHING HERE
             //CHECK IF USER IN DB, IF NOT CREATE USER | SKILLS
             //IF YES, CHECK IF THERE IS A CHANGE IN USER'S PERSONAL INFOS, IF YES UPDATE
@@ -44,9 +67,11 @@ public class Controller {
     }
 
     //Method called when user authenticates successfully
-    private void switchScene() {
+    private void switchScene(boolean apprenant) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("apprenant_comp.fxml"));
+            /* if(!apprenant) // staff interface
+                loader = new FXMLLoader(getClass().getResource("apprenant_comp.fxml")); */
             Stage stage = (Stage) root.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);

@@ -18,6 +18,6 @@ public class DeserializeUser implements JsonDeserializer<User> {
         //
         String roleUser = (jo_UserData.get("roles").getAsJsonArray()).get(0).getAsString(); //get the first role assigned to user
         //return User instance
-        return new User(jo_UserData.get("@id").getAsString().replace("/users/", ""), jo_UserData.get("name").getAsString(), jo_UserData.get("surname").getAsString(), jo_UserData.get("email").getAsString(), roleUser);
+        return new User(jo_UserData.get("@id").getAsString().replace("/users/", ""), jo_UserData.get("name").getAsString(), jo_UserData.get("surname").getAsString(), jo_UserData.get("email").getAsString(), roleUser, jo_UserData.get("avatarUrl").getAsString());
     }
 }

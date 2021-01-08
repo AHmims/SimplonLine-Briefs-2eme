@@ -62,7 +62,7 @@ public class SimplonLine {
     }
 
     //Get user data
-    public void getUserData(String email) {
+    public User getUserData(String email) {
         HttpURLConnection con = null;
         try {
             con = setupHTTPRequest(String.format("https://api.simplonline.co/users?email=%s", email), "GET");
@@ -72,7 +72,7 @@ public class SimplonLine {
             StringBuffer response = requestResponse(con);
             if (response == null)
                 throw new Exception("Request response to String error");
-            //
+            //Creation of User instance using a costume made adapter
             GsonBuilder gsonBuilder = new GsonBuilder();
             JsonDeserializer<User> deserializer = new DeserializeUser();
             gsonBuilder.registerTypeAdapter(User.class, deserializer);
@@ -81,9 +81,11 @@ public class SimplonLine {
             //
             if(user == null)
                 throw new Exception("Error while formatting User data");
-
+            //
+            return user;
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 

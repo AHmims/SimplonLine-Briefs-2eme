@@ -5,7 +5,8 @@ CREATE TABLE `User`(
     nomUser varchar(254),
     prenomUser varchar(254),
     emailUser varchar(254),
-    roleUser varchar(254)
+    roleUser varchar(254),
+    avatarUser varchar(254)
 );
 CREATE TABLE `Promo`(
 	idPromo varchar(254) PRIMARY KEY,
@@ -58,3 +59,4 @@ ALTER TABLE `NiveauCompetence`
 ALTER TABLE `NiveauCompetenceApprenant`
   ADD CONSTRAINT `fk_NiveauCompetenceApprenant_niveauCompetence` FOREIGN KEY (`idNiveauCompetence`) REFERENCES `NiveauCompetence` (`idNiveauCompetence`),
   ADD CONSTRAINT `fk_NiveauCompetenceApprenant_user` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`);
+-- ---
