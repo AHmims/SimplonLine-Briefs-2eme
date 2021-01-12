@@ -21,7 +21,7 @@ public class DeserializeUserExtra implements JsonDeserializer<ArrayList<String[]
             row[1] = "";
             for (JsonElement frame : frames) {
                 if (!row[1].equals(""))
-                    row[1] += "|";
+                    row[1] += ";";
                 row[1] += frame.getAsString().replace("/frameworks/", "");
             }
             //

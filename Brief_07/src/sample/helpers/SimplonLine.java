@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
 import sample.custom_gson.DeserializePromo;
+import sample.custom_gson.DeserializeSpecialite;
 import sample.custom_gson.DeserializeUser;
 import sample.custom_gson.DeserializeUserExtra;
 import sample.db_classes.Promo;
+import sample.db_classes.Specialite;
 import sample.db_classes.User;
 
 import java.io.BufferedReader;
@@ -16,6 +18,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SimplonLine {
     public SimplonLine() {
@@ -111,13 +114,40 @@ public class SimplonLine {
             Connexion db_con = new Connexion();
             for (int i = 0; i < user_data.size(); i++) {
                 String[] row = (String[]) user_data.get(i);
+                boolean add_promo_res = true;
                 //See if classroom exists in DB
                 boolean exists = db_con.search("Promo", "idPromo", row[0]);
                 if (!exists) { // add new classroom
                     Promo promo = getPromo(row[0]);
                     if (promo != null) {
-                        boolean add_promo_res = db_con.addPromo(promo);
-                        System.out.println(add_promo_res);
+                        add_promo_res = db_con.addPromo(promo);
+                        if (!add_promo_res)
+                            throw new Exception("Promo not added");
+                    }
+                }
+                if (add_promo_res) {
+                    boolean assigned_res = db_con.assignPromo(id, row[0]);
+                    if (!assigned_res)
+                        throw new Exception("Promo not assigned");
+                    else { //Assign Specialite
+                        ArrayList<String> list_Specialite = new ArrayList<>(Arrays.asList(row[1].split(";")));
+                        for (String str_idSpecialite : list_Specialite) {
+                            boolean add_specialite_res = true;
+                            //
+                            boolean specialite_exists = db_con.search("Specialite", "idSpecialite", str_idSpecialite);
+                            //
+                            if (!specialite_exists) {
+                                Specialite specialite = getSpecialite(str_idSpecialite);
+                                if (specialite != null) {
+                                    add_specialite_res = db_con.addSpecialite(specialite);
+                                    if (!add_specialite_res)
+                                        throw new Exception("Specialite not added");
+                                }
+                            }
+                            if (add_specialite_res) {
+
+                            }
+                        }
                     }
                 }
             }
@@ -147,8 +177,31 @@ public class SimplonLine {
             JsonDeserializer<Promo> deserializer = new DeserializePromo();
             gsonBuilder.registerTypeAdapter(Promo.class, deserializer);
             Gson g = gsonBuilder.create();
-            Promo promo = g.fromJson(response.toString(), Promo.class);
-            return promo;
+            return g.fromJson(response.toString(), Promo.class);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    //
+    private Specialite getSpecialite(String id) {
+        HttpURLConnection con = null;
+        try {
+            con = setupHTTPRequest(String.format("https://api.simplonline.co/frameworks/%s", id), "GET");
+            if (con == null)
+                throw new Exception("Error initializing request");
+            //
+            StringBuffer response = requestResponse(con);
+            if (response == null)
+                throw new Exception("Request response to String error");
+            //
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            JsonDeserializer<Specialite> deserializer = new DeserializeSpecialite();
+            gsonBuilder.registerTypeAdapter(Specialite.class, deserializer);
+            Gson g = gsonBuilder.create();
+            return g.fromJson(response.toString(), Specialite.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

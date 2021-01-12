@@ -1,6 +1,7 @@
 package sample.helpers;
 
 import sample.db_classes.Promo;
+import sample.db_classes.Specialite;
 import sample.db_classes.User;
 
 import java.sql.Connection;
@@ -8,8 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Connexion {
     public static String token = null;
@@ -141,6 +140,43 @@ public class Connexion {
         }catch(Exception e){
             e.printStackTrace();
             //System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    //
+    public boolean assignPromo(String idUser, String idPromo){
+        try{
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `PromoUser`(`idUser`, `idPromo`) VALUES (?, ?)");
+            statement.setString(1, idUser);
+            statement.setString(2, idPromo);
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        }catch(Exception e){
+            e.printStackTrace();
+            //System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    //
+    public boolean addSpecialite(Specialite specialite){
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `Specialite` (`idSpecialite`, `titreSpecialite`) VALUES (?, ?)");
+            statement.setString(1, specialite.getIdSpecialite());
+            statement.setString(2, specialite.getTitreSpecialite());
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
