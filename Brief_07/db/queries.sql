@@ -22,6 +22,10 @@ CREATE TABLE `Specialite`(
 	idSpecialite varchar(254) PRIMARY KEY,
     titreSpecialite varchar(254)
 );
+CREATE TABLE `PromoSpecialite`(
+	idPromo varchar(254),
+	idSpecialite varchar(254)
+);
 CREATE TABLE `SpecialiteApprenant`(
 	idSpecialite varchar(254),
 	idUser varchar(254)
@@ -48,6 +52,9 @@ CREATE TABLE `NiveauCompetenceApprenant`(
 ALTER TABLE `PromoUser`
   ADD CONSTRAINT `fk_PromoUser_user` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`),
   ADD CONSTRAINT `fk_PromoUser_promo` FOREIGN KEY (`idPromo`) REFERENCES `Promo` (`idPromo`);
+ALTER TABLE `PromoSpecialite`
+  ADD CONSTRAINT `fk_PromoSpecialite_promo` FOREIGN KEY (`idPromo`) REFERENCES `Promo` (`idPromo`),
+  ADD CONSTRAINT `fk_PromoSpecialite_specialite` FOREIGN KEY (`idSpecialite`) REFERENCES `Specialite` (`idSpecialite`);
 ALTER TABLE `SpecialiteApprenant`
   ADD CONSTRAINT `fk_SpecialiteApprenant_user` FOREIGN KEY (`idUser`) REFERENCES `User` (`idUser`),
   ADD CONSTRAINT `fk_SpecialiteApprenant_specialite` FOREIGN KEY (`idSpecialite`) REFERENCES `Specialite` (`idSpecialite`);
