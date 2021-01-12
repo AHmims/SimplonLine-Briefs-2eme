@@ -162,7 +162,7 @@ public class SimplonLine {
                                                 }
                                             }
                                             if(insert_competence_res) {
-                                                boolean assignSpecialite_Competence = db_con.assignSpecialite_Competence(id, competence.getIdCompetence());
+                                                boolean assignSpecialite_Competence = db_con.assignSpecialite_Competence(str_idSpecialite, competence.getIdCompetence());
                                                 if(!assignSpecialite_Competence)
                                                     throw new Exception("Competence n'a pas été assigné à la spécialité");
                                             }

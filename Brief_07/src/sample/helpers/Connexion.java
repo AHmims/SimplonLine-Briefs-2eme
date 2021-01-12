@@ -200,7 +200,7 @@ public class Connexion {
     }
 
     //
-    public boolean addNiveauCompetences(ArrayList<NiveauCompetence> niveauCompetences) {
+    /* public boolean addNiveauCompetences(ArrayList<NiveauCompetence> niveauCompetences) {
         try {
             Connection con = db_connect();
             if (con == null)
@@ -210,7 +210,9 @@ public class Connexion {
             for (int i = 0; i < niveauCompetences.size(); i++) {
                 NiveauCompetence niveau = niveauCompetences.get(i);
                 //
-                query.append(String.format("('%s', %d, '%s', '%s')", niveau.getIdCompetence(), niveau.getNumNiveauCompetence(), niveau.getDescNiveauCompetence(), niveau.getIdCompetence()));
+                String formatted_desc = niveau.getDescNiveauCompetence().replaceAll("'","''");
+                //
+                query.append(String.format("('%s', %d, '%s', '%s')", niveau.getIdCompetence(), niveau.getNumNiveauCompetence(), formatted_desc, niveau.getIdCompetence()));
                 if(i < niveauCompetences.size())
                     query.append(", ");
             }
@@ -224,6 +226,33 @@ public class Connexion {
             System.out.println(e.getMessage());
             return false;
         }
+    } */
+    public boolean addNiveauCompetences(ArrayList<NiveauCompetence> niveauCompetences) {
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            //
+            boolean ret_res = true;
+            for (NiveauCompetence niveau : niveauCompetences) {
+                PreparedStatement statement = con.prepareStatement("INSERT INTO `NiveauCompetence` (`idNiveauCompetence`, `numNiveauCompetence`, `descNiveauCompetence`, `idCompetence`) VALUES (?, ?, ?, ?)");
+                //
+                statement.setString(1, niveau.getIdNiveauCompetence());
+                statement.setInt(2, niveau.getNumNiveauCompetence());
+                statement.setString(3, niveau.getDescNiveauCompetence());
+                statement.setString(4, niveau.getIdCompetence());
+                //
+                ret_res = statement.executeUpdate() >= 1;
+                if (!ret_res)
+                    break;
+            }
+            //
+            con.close();
+            return ret_res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
     //
     public boolean assignSpecialite_Apprenant(String idUser, String idSpecialite) {
@@ -231,7 +260,7 @@ public class Connexion {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
-            PreparedStatement statement = con.prepareStatement("INSERT INTO `PromoUser`(`idUser`, `idPromo`) VALUES (?, ?)");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `SpecialiteApprenant`(`idUser`, `idSpecialite`) VALUES (?, ?)");
             statement.setString(1, idUser);
             statement.setString(2, idSpecialite);
             //
@@ -245,13 +274,13 @@ public class Connexion {
         }
     }
     //
-    public boolean assignSpecialite_Competence(String idUser, String idCompetence) {
+    public boolean assignSpecialite_Competence(String idSpecialite, String idCompetence) {
         try {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
-            PreparedStatement statement = con.prepareStatement("INSERT INTO `PromoUser`(`idUser`, `idPromo`) VALUES (?, ?)");
-            statement.setString(1, idUser);
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `SpecialiteCompetence`(`idSpecialite`, `idCompetence`) VALUES (?, ?)");
+            statement.setString(1, idSpecialite);
             statement.setString(2, idCompetence);
             //
             boolean res = statement.executeUpdate() >= 1;
