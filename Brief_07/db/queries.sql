@@ -37,7 +37,7 @@ CREATE TABLE `SpecialiteCompetence`(
 CREATE TABLE `NiveauCompetence`(
 	idNiveauCompetence varchar(254) PRIMARY KEY,
     numNiveauCompetence int(11),
-    descNiveauCompetence varchar(254),
+    descNiveauCompetence TEXT,
     idCompetence varchar(254)
 );
 CREATE TABLE `NiveauCompetenceApprenant`(
