@@ -32,7 +32,7 @@
 
 #cb_promo .menu-item > .label {
     -fx-text-fill: black;
-    -fx-pref-width: 110;
+    -fx-pref-width: 180;
 }
 
 #cb_promo .menu-item:focused {
@@ -43,4 +43,24 @@
 
 #cb_promo .menu-item:focused > .label {
     -fx-text-fill: white;
+}
+
+/**/
+.sp-title {
+    -fx-text-fill: rgb(37, 37, 37);
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+.btn_niveau_inactive{
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #6e6a69;
+}
+.btn_niveau_left{
+    -fx-background-radius: 5 0 0 5;
+}
+.btn_niveau_middle{
+    -fx-background-radius: 0;
+}
+.btn_niveau_right{
+    -fx-background-radius: 0 5 5 0;
 }

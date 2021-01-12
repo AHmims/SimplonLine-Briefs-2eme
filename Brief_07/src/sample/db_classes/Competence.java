@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Competence {
     private String idCompetence;
     private String titreCompetence;
-    ArrayList<NiveauCompetence> niveauCompetences;
+    private ArrayList<NiveauCompetence> niveauCompetences;
     //
     public Competence(String idCompetence, String titreCompetence) {
         this.idCompetence = idCompetence;
@@ -29,5 +29,13 @@ public class Competence {
 
     public ArrayList<NiveauCompetence> getNiveauCompetences() {
         return niveauCompetences;
+    }
+
+    public void setNiveauCompetences(ArrayList<NiveauCompetence> niveauCompetences) {
+        this.niveauCompetences = niveauCompetences;
+    }
+
+    public void addNiveau(NiveauCompetence niveau){
+        this.niveauCompetences.add(niveau);
     }
 }

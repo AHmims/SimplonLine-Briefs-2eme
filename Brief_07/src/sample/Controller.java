@@ -29,22 +29,21 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //TEST IF THIS THE FIRST TIME THE APPLICATION IS RUNNING
-        SimplonLine sl = new SimplonLine();
-        Connexion db_cnx = new Connexion();
-        //
-
     }
     //
     @FXML
     private void login() {
+        //CHECK IF USER IN DB, IF NOT CREATE USER | SKILLS
+        //IF YES, CHECK IF THERE IS A CHANGE IN USER'S PERSONAL INFOS, IF YES UPDATE
+        //ON SUCCESS, REDIRECT TO THE NEXT WINDOW BASED ON USER'S ROLE, APPRENANT / STAFF
         SimplonLine sl = new SimplonLine();
         int login_res = sl.login(input_email.getText(), input_pass.getText());
         if (login_res == 1) {
             System.out.println("In");
             Connexion db_cnx = new Connexion();
-            User loged_in_user = sl.getUserData(input_email.getText());
+            User loged_in_user = sl.getUserData(Connexion.email);
             if (loged_in_user != null) {
+                Connexion.userId = loged_in_user.getIdUser();
                 boolean operation_res = false;
                 //Set env globals
                 Connexion.nom = String.format("%s %s", loged_in_user.getNomUser(), loged_in_user.getPrenomUser().toUpperCase());
@@ -69,10 +68,6 @@ public class Controller implements Initializable {
                         switchScene(db_user.getRoleUser().equals("ROLE_LEARNER"));
                 } else System.out.println("error");
             } else System.out.println("error");
-            //DO SOMETHING HERE
-            //CHECK IF USER IN DB, IF NOT CREATE USER | SKILLS
-            //IF YES, CHECK IF THERE IS A CHANGE IN USER'S PERSONAL INFOS, IF YES UPDATE
-            //ON SUCCESS, REDIRECT TO THE NEXT WINDOW BASED ON USER'S ROLE, APPRENANT / STAFF
         } else {
             if (login_res == 0) System.out.println("INVALID CREDENTIALS");
             else System.out.printf("code : %d, FUNCTION : login()\n", login_res);

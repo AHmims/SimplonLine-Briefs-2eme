@@ -2,7 +2,10 @@ package sample.helpers;
 
 import sample.db_classes.*;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -10,6 +13,7 @@ public class Connexion {
     public static String token = null;
     public static String refresh_token = null;
     //
+    public static String userId = null;
     public static String email = null;
     public static String nom = null;
     public static String avatar = null;
@@ -58,7 +62,7 @@ public class Connexion {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
-            PreparedStatement statement = con.prepareStatement("INSERT INTO `User` VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `User`(`idUser`, `nomUser`, `prenomUser`, `emailUser`, `roleUser`, `avatarUser`) VALUES (?, ?, ?, ?, ?, ?)");
             statement.setString(1, user.getIdUser());
             statement.setString(2, user.getNomUser());
             statement.setString(3, user.getPrenomUser());
@@ -81,7 +85,7 @@ public class Connexion {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
-            PreparedStatement statement = con.prepareStatement("UPDATE User SET nomUser = ?, prenomUser = ?, emailUser = ?, avatarUser = ? WHERE idUser = ?");
+            PreparedStatement statement = con.prepareStatement("UPDATE `User` SET `nomUser` = ?, `prenomUser` = ?, `emailUser` = ?, `avatarUser` = ? WHERE `idUser` = ?");
             statement.setString(5, user.getIdUser());
             statement.setString(1, user.getNomUser());
             statement.setString(2, user.getPrenomUser());
@@ -254,14 +258,15 @@ public class Connexion {
             return false;
         }
     }
+
     //
-    public boolean assignSpecialite_Apprenant(String idUser, String idSpecialite) {
+    public boolean assignSpecialite_Promo(String idPromo, String idSpecialite) {
         try {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
-            PreparedStatement statement = con.prepareStatement("INSERT INTO `SpecialiteApprenant`(`idUser`, `idSpecialite`) VALUES (?, ?)");
-            statement.setString(1, idUser);
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `PromoSpecialite`(`idPromo`, `idSpecialite`) VALUES (?, ?)");
+            statement.setString(1, idPromo);
             statement.setString(2, idSpecialite);
             //
             boolean res = statement.executeUpdate() >= 1;
@@ -273,6 +278,7 @@ public class Connexion {
             return false;
         }
     }
+
     //
     public boolean assignSpecialite_Competence(String idSpecialite, String idCompetence) {
         try {
@@ -292,19 +298,90 @@ public class Connexion {
             return false;
         }
     }
+
     //
     //
     //
-    public boolean first_run() {
+    public ArrayList<Promo> getPromo_byUser(String userId) {
         try {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
-            PreparedStatement statement = con.prepareStatement("SELECT * FROM User WHERE idUser = ?");
-            return false;
+            PreparedStatement statement = con.prepareStatement("SELECT `idPromo`, `titrePromo` FROM `Promo` WHERE `idPromo` IN (SELECT `idPromo` FROM `PromoUser` WHERE `idUser` = ?) ORDER BY `dateDebut` DESC");
+            statement.setString(1, userId);
+            ResultSet res = statement.executeQuery();
+            ArrayList<Promo> promos = new ArrayList<Promo>();
+            while (res.next()) {
+                promos.add(new Promo(res.getString(1), res.getString(2), null, null));
+            }
+            con.close();
+            //
+            if (promos.size() == 0)
+                throw new Exception("No classroom has been found for this user");
+            else
+                return promos;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return true;
+            return null;
+        }
+    }
+
+    //
+    public ArrayList<Specialite> getSpecialite_byPromo(String idPromo) {
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM `Specialite` WHERE `idSpecialite` IN (SELECT `idSpecialite` FROM `PromoSpecialite` WHERE `idPromo` = ?)");
+            statement.setString(1, idPromo);
+            ResultSet res = statement.executeQuery();
+            ArrayList<Specialite> specialites = new ArrayList<Specialite>();
+            while (res.next()) {
+                specialites.add(new Specialite(res.getString(1), res.getString(2)));
+            }
+            con.close();
+            //
+            if (specialites.size() == 0)
+                throw new Exception("No framework has been found for this classroom");
+            else
+                return specialites;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    //
+    public ArrayList<Competence> getCompetences_bySpecialite(String idSpecialite) {
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("SELECT n_c.*, n.titreCompetence FROM `NiveauCompetence` AS n_c, `Competence` AS n WHERE n_c.idCompetence = n.idCompetence AND n.idCompetence IN (SELECT idCompetence FROM SpecialiteCompetence WHERE idSpecialite = ?) ORDER BY n.titreCompetence, n_c.numNiveauCompetence ASC");
+            statement.setString(1, idSpecialite);
+            ResultSet res = statement.executeQuery();
+            ArrayList<Competence> competences = new ArrayList<>();
+            //
+            String last_id = "";
+            while (res.next()) {
+                if (!last_id.equals(res.getString(1))) {
+                    ArrayList<NiveauCompetence> levels = new ArrayList<>();
+                    levels.add(new NiveauCompetence(res.getString(1), res.getInt(2), res.getString(3), res.getString(4)));
+                    competences.add(new Competence(res.getString(4), res.getString(5), levels));
+                } else {
+                    competences.get(competences.size() - 1).addNiveau(new NiveauCompetence(res.getString(1), res.getInt(2), res.getString(3), res.getString(4)));
+                }
+                last_id = res.getString(1);
+            }
+            con.close();
+            //
+            if (competences.size() == 0)
+                throw new Exception("No 'competence' has been found for this 'Specialite'");
+            else
+                return competences;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 }

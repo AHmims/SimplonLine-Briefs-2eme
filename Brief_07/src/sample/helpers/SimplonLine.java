@@ -171,9 +171,10 @@ public class SimplonLine {
                                 }
                             }
                             if (add_specialite_res) {
-                                boolean assignSpecialite_Apprenant_res = db_con.assignSpecialite_Apprenant(id, str_idSpecialite);
-                                if(!assignSpecialite_Apprenant_res)
-                                    throw new Exception("Spécielité n'a pas été assigné à l'apprenant");
+                                System.out.println("YUH HUY");
+                                boolean assignSpecialite_Promo_res = db_con.assignSpecialite_Promo(row[0], str_idSpecialite);
+                                if(!assignSpecialite_Promo_res)
+                                    throw new Exception("Spécielité n'a pas été assigné à la Promo");
                             }
                         }
                     }
