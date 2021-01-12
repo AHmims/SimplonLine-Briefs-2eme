@@ -25,4 +25,8 @@ public class Specialite {
     public String getTitreSpecialite() {
         return titreSpecialite;
     }
+
+    public ArrayList<Competence> getCompetences() {
+        return competences;
+    }
 }

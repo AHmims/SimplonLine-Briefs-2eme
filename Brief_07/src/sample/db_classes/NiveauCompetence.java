@@ -2,20 +2,20 @@ package sample.db_classes;
 
 public class NiveauCompetence {
     private String idNiveauCompetence;
-    private String nomNiveauCompetence;
+    private int numNiveauCompetence;
     private String descNiveauCompetence;
     private String idCompetence;
     //
 
-    public NiveauCompetence(String idNiveauCompetence, String nomNiveauCompetence, String descNiveauCompetence, String idCompetence) {
+    public NiveauCompetence(String idNiveauCompetence, int numNiveauCompetence, String descNiveauCompetence, String idCompetence) {
         this.idNiveauCompetence = idNiveauCompetence;
-        this.nomNiveauCompetence = nomNiveauCompetence;
+        this.numNiveauCompetence = numNiveauCompetence;
         this.descNiveauCompetence = descNiveauCompetence;
         this.idCompetence = idCompetence;
     }
     public NiveauCompetence(String idNiveauCompetence) {
         this.idNiveauCompetence = idNiveauCompetence;
-        this.nomNiveauCompetence = null;
+        this.numNiveauCompetence = -1;
         this.descNiveauCompetence = null;
         this.idCompetence = null;
 
@@ -26,8 +26,8 @@ public class NiveauCompetence {
         return idNiveauCompetence;
     }
 
-    public String getNomNiveauCompetence() {
-        return nomNiveauCompetence;
+    public int getNumNiveauCompetence() {
+        return numNiveauCompetence;
     }
 
     public String getDescNiveauCompetence() {

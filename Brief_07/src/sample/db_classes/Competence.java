@@ -26,4 +26,8 @@ public class Competence {
     public String getTitreCompetence() {
         return titreCompetence;
     }
+
+    public ArrayList<NiveauCompetence> getNiveauCompetences() {
+        return niveauCompetences;
+    }
 }

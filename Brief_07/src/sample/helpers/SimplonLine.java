@@ -3,13 +3,8 @@ package sample.helpers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializer;
-import sample.custom_gson.DeserializePromo;
-import sample.custom_gson.DeserializeSpecialite;
-import sample.custom_gson.DeserializeUser;
-import sample.custom_gson.DeserializeUserExtra;
-import sample.db_classes.Promo;
-import sample.db_classes.Specialite;
-import sample.db_classes.User;
+import sample.custom_gson.*;
+import sample.db_classes.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -142,10 +137,43 @@ public class SimplonLine {
                                     add_specialite_res = db_con.addSpecialite(specialite);
                                     if (!add_specialite_res)
                                         throw new Exception("Specialite not added");
+                                    else {
+                                        for (Competence competence : specialite.getCompetences()) {
+                                            boolean competence_exists = db_con.search("Competence", "idCompetence", competence.getIdCompetence());
+                                            boolean insert_competence_res = true;
+                                            if (!competence_exists) {
+                                                insert_competence_res = db_con.addCompetence(competence);
+                                                if(!insert_competence_res)
+                                                    throw new Exception("Competence not added");
+                                                else{
+                                                    Competence full_competence = getFullCompetence(competence.getIdCompetence());
+                                                    //SKILL LEVEL IS LINKED TO SKILL, SO THERE IS NO WAY A SKILL_LEVEL WON'T BE IN DB
+                                                    /* for (NiveauCompetence niveauCompetence: full_competence.getNiveauCompetences()) {
+                                                        boolean niveauCompetence_exists = db_con.search("NiveauCompetence","idNiveauCompetence",niveauCompetence.getIdCompetence());
+                                                        if(!niveauCompetence_exists){
+
+                                                        }
+                                                        // TO-DO
+                                                    } */
+                                                    assert full_competence != null;
+                                                    boolean add_niveau_competences = db_con.addNiveauCompetences(full_competence.getNiveauCompetences());
+                                                    if(!add_niveau_competences)
+                                                        throw new Exception("NiveauCompetences not added");
+                                                }
+                                            }
+                                            if(insert_competence_res) {
+                                                boolean assignSpecialite_Competence = db_con.assignSpecialite_Competence(id, competence.getIdCompetence());
+                                                if(!assignSpecialite_Competence)
+                                                    throw new Exception("Competence n'a pas été assigné à la spécialité");
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             if (add_specialite_res) {
-
+                                boolean assignSpecialite_Apprenant_res = db_con.assignSpecialite_Apprenant(id, str_idSpecialite);
+                                if(!assignSpecialite_Apprenant_res)
+                                    throw new Exception("Spécielité n'a pas été assigné à l'apprenant");
                             }
                         }
                     }
@@ -202,6 +230,29 @@ public class SimplonLine {
             gsonBuilder.registerTypeAdapter(Specialite.class, deserializer);
             Gson g = gsonBuilder.create();
             return g.fromJson(response.toString(), Specialite.class);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+    //
+    private Competence getFullCompetence(String id) {
+        HttpURLConnection con = null;
+        try {
+            con = setupHTTPRequest(String.format("https://api.simplonline.co/skills/%s", id), "GET");
+            if (con == null)
+                throw new Exception("Error initializing request");
+            //
+            StringBuffer response = requestResponse(con);
+            if (response == null)
+                throw new Exception("Request response to String error");
+            //
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            JsonDeserializer<Competence> deserializer = new DeserializeCompetence();
+            gsonBuilder.registerTypeAdapter(Competence.class, deserializer);
+            Gson g = gsonBuilder.create();
+            return g.fromJson(response.toString(), Competence.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();

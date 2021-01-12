@@ -1,14 +1,10 @@
 package sample.helpers;
 
-import sample.db_classes.Promo;
-import sample.db_classes.Specialite;
-import sample.db_classes.User;
+import sample.db_classes.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class Connexion {
     public static String token = null;
@@ -121,9 +117,10 @@ public class Connexion {
             return false;
         }
     }
+
     //
-    public boolean addPromo(Promo promo){
-        try{
+    public boolean addPromo(Promo promo) {
+        try {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
@@ -137,15 +134,16 @@ public class Connexion {
             boolean res = statement.executeUpdate() >= 1;
             con.close();
             return res;
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             //System.out.println(e.getMessage());
             return false;
         }
     }
+
     //
-    public boolean assignPromo(String idUser, String idPromo){
-        try{
+    public boolean assignPromo(String idUser, String idPromo) {
+        try {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
@@ -156,14 +154,15 @@ public class Connexion {
             boolean res = statement.executeUpdate() >= 1;
             con.close();
             return res;
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             //System.out.println(e.getMessage());
             return false;
         }
     }
+
     //
-    public boolean addSpecialite(Specialite specialite){
+    public boolean addSpecialite(Specialite specialite) {
         try {
             Connection con = db_connect();
             if (con == null)
@@ -180,6 +179,92 @@ public class Connexion {
             return false;
         }
     }
+
+    //
+    public boolean addCompetence(Competence competence) {
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `Competence` (`idCompetence`, `titreCompetence`) VALUES (?, ?)");
+            statement.setString(1, competence.getIdCompetence());
+            statement.setString(2, competence.getTitreCompetence());
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    //
+    public boolean addNiveauCompetences(ArrayList<NiveauCompetence> niveauCompetences) {
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            //
+            StringBuilder query = new StringBuilder("INSERT INTO `NiveauCompetence` (`idNiveauCompetence`, `numNiveauCompetence`, `descNiveauCompetence`, `idCompetence`) VALUES ");
+            for (int i = 0; i < niveauCompetences.size(); i++) {
+                NiveauCompetence niveau = niveauCompetences.get(i);
+                //
+                query.append(String.format("('%s', %d, '%s', '%s')", niveau.getIdCompetence(), niveau.getNumNiveauCompetence(), niveau.getDescNiveauCompetence(), niveau.getIdCompetence()));
+                if(i < niveauCompetences.size())
+                    query.append(", ");
+            }
+            //
+            PreparedStatement statement = con.prepareStatement(query.toString());
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    //
+    public boolean assignSpecialite_Apprenant(String idUser, String idSpecialite) {
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `PromoUser`(`idUser`, `idPromo`) VALUES (?, ?)");
+            statement.setString(1, idUser);
+            statement.setString(2, idSpecialite);
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            //System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    //
+    public boolean assignSpecialite_Competence(String idUser, String idCompetence) {
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `PromoUser`(`idUser`, `idPromo`) VALUES (?, ?)");
+            statement.setString(1, idUser);
+            statement.setString(2, idCompetence);
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            //System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    //
+    //
     //
     public boolean first_run() {
         try {
