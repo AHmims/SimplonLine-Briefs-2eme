@@ -132,12 +132,8 @@ public class Connexion {
             statement.setString(1, promo.getIdPromo());
             statement.setString(2, promo.getTitrePromo());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH-mm-ss");
-            /*Date dateDebut = promo.getDateDebut().getTime();
-            Date dateFin = promo.getDateFin().getTime();
-            statement.setString(3, sdf.format(dateDebut));
-            statement.setString(4, sdf.format(dateFin));*/
             statement.setString(3, sdf.format(promo.getDateDebut().getTime()));
-            statement.setString(4, promo.getDateFin().getTime().toString());
+            statement.setString(4, sdf.format(promo.getDateFin().getTime()));
             //
             boolean res = statement.executeUpdate() >= 1;
             con.close();

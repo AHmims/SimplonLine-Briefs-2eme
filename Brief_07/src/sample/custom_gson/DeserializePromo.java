@@ -16,16 +16,14 @@ public class DeserializePromo implements JsonDeserializer<Promo> {
         JsonObject jsonObject = jsonElement.getAsJsonObject(); //get the jsonObject
         Calendar dateDebut = Calendar.getInstance();
         Calendar dateFin = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd HH-mm-ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
         //
         try {
-            Date ff = sdf.parse(jsonObject.get("dateDebut").getAsString());
-            dateDebut.setTime(ff);
-            //dateDebut.setTime(sdf.parse());
-            dateFin.setTime(sdf.parse(jsonObject.get("dateFin").getAsString()));
+            dateDebut.setTime(sdf.parse(jsonObject.get("startDate").getAsString()));
+            dateFin.setTime(sdf.parse(jsonObject.get("endDate").getAsString()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return new Promo(jsonObject.get("@id").getAsString().replace("/classrooms/", ""), jsonObject.get("titrePromo").getAsString(), dateDebut, dateFin);
+        return new Promo(jsonObject.get("@id").getAsString().replace("/classrooms/", ""), jsonObject.get("title").getAsString(), dateDebut, dateFin);
     }
 }

@@ -147,7 +147,8 @@ public class SimplonLine {
             JsonDeserializer<Promo> deserializer = new DeserializePromo();
             gsonBuilder.registerTypeAdapter(Promo.class, deserializer);
             Gson g = gsonBuilder.create();
-            return g.fromJson(response.toString(), Promo.class);
+            Promo promo = g.fromJson(response.toString(), Promo.class);
+            return promo;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
