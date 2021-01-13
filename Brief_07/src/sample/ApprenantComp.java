@@ -17,19 +17,18 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
-import sample.db_classes.Competence;
-import sample.db_classes.NiveauCompetence;
-import sample.db_classes.Promo;
-import sample.db_classes.Specialite;
+import sample.db_classes.*;
 import sample.helpers.Connexion;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ApprenantComp implements Initializable {
     private ArrayList<Promo> promos;
     private ArrayList<Button> ui_levels = new ArrayList<>();
+    private ArrayList<Button> changed_levels = new ArrayList<>();
     //
     @FXML
     VBox root;
@@ -64,7 +63,35 @@ public class ApprenantComp implements Initializable {
 
     @FXML
     public void updateSkills() {
-
+        try {
+            Connexion db_con = new Connexion();
+            if (changed_levels.size() > 0) {
+                for (Button btn_niveau : changed_levels) {
+                    String idNiveauCompetence = btn_niveau.getProperties().get("idNiveauCompetence").toString();
+                    boolean already_validated = db_con.isSkillValidated(Connexion.userId, idNiveauCompetence);
+                    if (btn_niveau.getStyleClass().contains("btn_niveau_active")) {
+                        if (!already_validated) {
+                            Random rndm = new Random();
+                            boolean insert_res = db_con.addNiveauCompetenceApprenant(new NiveauCompetenceApprenant(String.format("my-id_%d", rndm.nextInt(10000000)), idNiveauCompetence, Connexion.userId));
+                            if (!insert_res)
+                                throw new Exception("Skill validation not inserted");
+                        }
+                    } else {
+                        if (already_validated) {
+                            boolean dlt_res = db_con.removeSkillValidation(Connexion.userId, idNiveauCompetence);
+                            if (!dlt_res)
+                                throw new Exception("Skill Validation not removed");
+                        }
+                    }
+                }
+                changed_levels.clear();
+                System.out.println("Done !");
+            } else
+                System.out.println("No changes were made");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error !!");
+        }
     }
 
     //Set current user profile image
@@ -144,6 +171,7 @@ public class ApprenantComp implements Initializable {
                                         HBox.setHgrow(btn_niveau, Priority.ALWAYS);
                                         btn_niveau.setMaxWidth(Double.MAX_VALUE);
                                         //choices.getToggles().add(btn_niveau);
+                                        btn_niveau.getProperties().put("idNiveauCompetence", niveau.getIdNiveauCompetence());
                                         //
                                         if (competence.getNiveauCompetences().size() == 3) {
                                             //btn_niveau.getStyleClass().clear();
@@ -162,6 +190,11 @@ public class ApprenantComp implements Initializable {
                                         }
                                         //
                                         btn_niveau.setOnAction(e -> {
+                                            if (changed_levels.contains(btn_niveau))
+                                                changed_levels.remove(btn_niveau);
+                                            else
+                                                changed_levels.add(btn_niveau);
+                                            //
                                             //System.out.println(btn_niveau.getStyleClass());
                                             if (btn_niveau.getStyleClass().contains("btn_niveau_active"))
                                                 btn_niveau.getStyleClass().remove("btn_niveau_active");
@@ -197,13 +230,25 @@ public class ApprenantComp implements Initializable {
     //
     private void update_progress() {
         progress_circle.setProgress(0);
-        Double step = (double) (1 / ui_levels.size());
+        float step = 1 / (float) ui_levels.size();
+        //System.out.println(step);
         for (Button button : ui_levels) {
-            Double current_progress = progress_circle.getProgress();
-            if (button.getStyleClass().contains("btn_niveau_active"))
-                progress_circle.setProgress(current_progress - step);
-            else
-                progress_circle.setProgress(current_progress + step);
+            float current_progress = (float) progress_circle.getProgress();
+            if (button.getStyleClass().contains("btn_niveau_active")) {
+                if (current_progress + step <= (float) 1)
+                    progress_circle.setProgress(current_progress + step);
+                else
+                    progress_circle.setProgress(1);
+            } else {
+                if (current_progress - step > (float) 0)
+                    progress_circle.setProgress(current_progress - step);
+                else
+                    progress_circle.setProgress(0);
+            }
+            //System.out.println("--" + progress_circle.getProgress());
         }
+        /* System.out.println("---");
+        System.out.println(progress_circle.getProgress());
+        System.out.println(step); */
     }
 }

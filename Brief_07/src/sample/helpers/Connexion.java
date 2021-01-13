@@ -405,4 +405,43 @@ public class Connexion {
             return null;
         }
     }
+    //
+    public boolean isSkillValidated(String idUser, String idNiveauCompetence){
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("SELECT COUNT(`idValidation`) AS `exists` FROM NiveauCompetenceApprenant WHERE `idUser` = ? AND `idNiveauCompetence` = ?");
+            statement.setString(1, idUser);
+            statement.setString(2, idNiveauCompetence);
+            ResultSet res = statement.executeQuery();
+            if (!res.next()) {
+                con.close();
+                throw new Exception("System failure");
+            } else {
+                return res.getInt("exists") > 0;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    //
+    public boolean removeSkillValidation(String idUser, String idNiveauCompetence){
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("DELETE FROM `NiveauCompetenceApprenant` WHERE `idUser` = ? AND `idNiveauCompetence` = ?");
+            statement.setString(1, idUser);
+            statement.setString(2, idNiveauCompetence);
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }
