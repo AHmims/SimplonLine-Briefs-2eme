@@ -36,12 +36,12 @@
                <content>
                   <VBox fx:id="skills_container" prefWidth="637.0" spacing="10.0" style="-fx-background-color: white;">
                      <children>
-                        <HBox prefWidth="200.0" spacing="10.0">
+                        <HBox alignment="BOTTOM_LEFT" prefWidth="200.0" spacing="10.0">
                            <children>
-                              <VBox maxWidth="1.7976931348623157E308" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                              <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <Label text="Label" />
-                                    <HBox VBox.vgrow="ALWAYS">
+                                    <HBox maxHeight="-Infinity" VBox.vgrow="ALWAYS">
                                        <children>
                                           <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #0d7a23; -fx-background-radius: 5 0 0 5;" text="Niveau" textFill="WHITE" HBox.hgrow="ALWAYS">
                                              <cursor>
@@ -64,7 +64,7 @@
                               </VBox>
                               <VBox layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefWidth="100.0" spacing="5.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label text="Label lqlskj kqs jlqk jlqksj lqs jqlsk jlqsj qls jqlsk  h iqjh ish qis hqish iqush iuhiuhiquh qiuhjql" />
+                                    <Label text="Label lqlskj kqs jlqk jlqksj lqs jqlsk jlqsj qls jqlsk  h iqjh ish qis hqish iqush iuhiuhiquh qiuhjql" wrapText="true" />
                                     <HBox VBox.vgrow="ALWAYS">
                                        <children>
                                           <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: #0d7a23; -fx-background-radius: 5 0 0 5;" text="Niveau" textFill="WHITE" HBox.hgrow="ALWAYS">
@@ -232,10 +232,10 @@
                   <HBox alignment="CENTER" spacing="3.0">
                      <children>
                         <Label text="Progrès :" />
-                        <ProgressIndicator prefWidth="27.0" progress="0.62" />
+                        <ProgressIndicator fx:id="progress_circle" prefWidth="27.0" progress="0.62" />
                      </children>
                   </HBox>
-                  <Button fx:id="btn_validate" mnemonicParsing="false" prefWidth="90.0" style="-fx-background-color: #504dc1; -fx-background-radius: 5;" text="Valider" textFill="WHITE">
+                  <Button fx:id="btn_validate" mnemonicParsing="false" onAction="#updateSkills" prefWidth="90.0" style="-fx-background-color: #504dc1; -fx-background-radius: 5;" text="Valider" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

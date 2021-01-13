@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -43,6 +44,8 @@ public class ApprenantComp implements Initializable {
     @FXML
     VBox skills_container;
     @FXML
+    ProgressIndicator progress_circle;
+    @FXML
     Button btn_validate;
 
     //
@@ -57,6 +60,11 @@ public class ApprenantComp implements Initializable {
                 changeDisplayedSkills();
             }
         });
+    }
+
+    @FXML
+    public void updateSkills() {
+
     }
 
     //Set current user profile image
@@ -109,7 +117,7 @@ public class ApprenantComp implements Initializable {
                             HBox row = new HBox();
                             VBox.setVgrow(row, Priority.ALWAYS);
                             row.setSpacing(10);
-                            row.setAlignment(Pos.TOP_LEFT);
+                            row.setAlignment(Pos.BOTTOM_LEFT);
                             for (int j = 0; j < 2; j++) {
                                 if (competences.size() - 1 >= i + j) {
                                     Competence competence = competences.get(i + j);
@@ -119,6 +127,7 @@ public class ApprenantComp implements Initializable {
                                     HBox.setHgrow(column, Priority.ALWAYS);
                                     column.setPrefWidth(100);
                                     column.setMaxWidth(Double.MAX_VALUE);
+                                    column.setMaxHeight(Double.NEGATIVE_INFINITY);
                                     //column.setMinWidth(Double.MAX_VALUE);
                                     //
                                     Label competence_title = new Label(competence.getTitreCompetence());
@@ -151,6 +160,18 @@ public class ApprenantComp implements Initializable {
                                             else
                                                 btn_niveau.getStyleClass().add("btn_niveau_right");
                                         }
+                                        //
+                                        btn_niveau.setOnAction(e -> {
+                                            //System.out.println(btn_niveau.getStyleClass());
+                                            if (btn_niveau.getStyleClass().contains("btn_niveau_active"))
+                                                btn_niveau.getStyleClass().remove("btn_niveau_active");
+                                            else
+                                                btn_niveau.getStyleClass().add("btn_niveau_active");
+                                            //
+                                            update_progress();
+                                        });
+                                        //
+                                        ui_levels.add(btn_niveau);
                                         btnGroup.getChildren().add(btn_niveau);
                                         x++;
                                     }
@@ -167,7 +188,22 @@ public class ApprenantComp implements Initializable {
                     //
                     skills_container.getChildren().add(setContainer);
                 }
+                //
+                update_progress();
             }
+        }
+    }
+
+    //
+    private void update_progress() {
+        progress_circle.setProgress(0);
+        Double step = (double) (1 / ui_levels.size());
+        for (Button button : ui_levels) {
+            Double current_progress = progress_circle.getProgress();
+            if (button.getStyleClass().contains("btn_niveau_active"))
+                progress_circle.setProgress(current_progress - step);
+            else
+                progress_circle.setProgress(current_progress + step);
         }
     }
 }

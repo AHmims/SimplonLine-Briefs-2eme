@@ -377,7 +377,7 @@ public class Connexion {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
-            PreparedStatement statement = con.prepareStatement("SELECT n_c.*, n.titreCompetence, CASE WHEN EXISTS (SELECT n_ca.idValidation FROM NiveauCompetenceApprenant as n_ca  WHERE n_ca.idNiveauCompetence = n_c.idNiveauCompetence AND n_ca.idUser = ?) THEN 1 ELSE 0 END AS `validated` FROM `NiveauCompetence` AS n_c, `Competence` AS n WHERE n_c.idCompetence = n.idCompetence AND n.idCompetence IN (SELECT idCompetence FROM SpecialiteCompetence WHERE idSpecialite = ?) ORDER BY `validated`  DESC");
+            PreparedStatement statement = con.prepareStatement("SELECT n_c.*, n.titreCompetence, CASE WHEN EXISTS (SELECT n_ca.idValidation FROM NiveauCompetenceApprenant as n_ca  WHERE n_ca.idNiveauCompetence = n_c.idNiveauCompetence AND n_ca.idUser = ?) THEN 1 ELSE 0 END AS `validated` FROM `NiveauCompetence` AS n_c, `Competence` AS n WHERE n_c.idCompetence = n.idCompetence AND n.idCompetence IN (SELECT idCompetence FROM SpecialiteCompetence WHERE idSpecialite = ?) ORDER BY `n`.titreCompetence, n_c.numNiveauCompetence ASC");
             statement.setString(1, idUser);
             statement.setString(2, idSpecialite);
             ResultSet res = statement.executeQuery();
