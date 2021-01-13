@@ -5,7 +5,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -93,13 +95,17 @@ public class ApprenantComp implements Initializable {
                 ArrayList<Specialite> specialites = db_con.getSpecialite_byPromo(promo.getIdPromo());
                 for (Specialite specialite : specialites) {
                     VBox setContainer = new VBox();
+                    setContainer.setSpacing(10);
                     Label setTitleText = new Label(String.format("%s :", specialite.getTitreSpecialite()));
                     setTitleText.getStyleClass().add("sp-title");
+                    setContainer.getChildren().add(setTitleText);
+                    HBox.setHgrow(setContainer, Priority.ALWAYS);
                     //
                     ArrayList<Competence> competences = db_con.getCompetences_bySpecialite(specialite.getIdSpecialite());
                     if (competences.size() >= 2) {
-                        for (int i = 0; i < competences.size() / 2; i++) {
+                        for (int i = 0; i < competences.size(); i = i + 2) {
                             HBox row = new HBox();
+                            VBox.setVgrow(row, Priority.ALWAYS);
                             row.setSpacing(10);
                             row.setAlignment(Pos.TOP_LEFT);
                             for (int j = 0; j < 2; j++) {
@@ -108,24 +114,31 @@ public class ApprenantComp implements Initializable {
                                     //
                                     VBox column = new VBox();
                                     column.setSpacing(5);
-                                    VBox.setVgrow(column, Priority.ALWAYS);
+                                    HBox.setHgrow(column, Priority.ALWAYS);
+                                    column.setPrefWidth(100);
+                                    column.setMaxWidth(Double.MAX_VALUE);
+                                    //column.setMinWidth(Double.MAX_VALUE);
                                     //
                                     Label competence_title = new Label(competence.getTitreCompetence());
+                                    competence_title.setWrapText(true);
+                                    //Label competence_title = new Label("Label");
                                     column.getChildren().add(competence_title);
                                     //
-                                    ToggleGroup choices = new ToggleGroup();
+                                    //ToggleGroup choices = new ToggleGroup();
                                     HBox btnGroup = new HBox();
-                                    HBox.setHgrow(btnGroup, Priority.ALWAYS);
+                                    VBox.setVgrow(btnGroup, Priority.ALWAYS);
                                     int x = 0;
+                                    System.out.println(competence.getNiveauCompetences().size());
                                     for (NiveauCompetence niveau : competence.getNiveauCompetences()) {
-                                        ToggleButton btn_niveau = new ToggleButton(String.format("Niveau %d", niveau.getNumNiveauCompetence()));
+                                        System.out.println(i + j);
+                                        Button btn_niveau = new Button(String.format("Niveau %d", niveau.getNumNiveauCompetence()));
                                         HBox.setHgrow(btn_niveau, Priority.ALWAYS);
                                         btn_niveau.setMaxWidth(Double.MAX_VALUE);
-                                        choices.getToggles().add(btn_niveau);
+                                        //choices.getToggles().add(btn_niveau);
                                         //
                                         if (competence.getNiveauCompetences().size() == 3) {
-                                            btn_niveau.getStyleClass().clear();
-                                            btn_niveau.getStyleClass().addAll("btn_niveau_inactive");
+                                            //btn_niveau.getStyleClass().clear();
+                                            btn_niveau.getStyleClass().add("btn_niveau_inactive");
                                             if (x == 0)
                                                 btn_niveau.getStyleClass().add("btn_niveau_left");
                                             else if (x == 1)
@@ -136,18 +149,18 @@ public class ApprenantComp implements Initializable {
                                         btnGroup.getChildren().add(btn_niveau);
                                         x++;
                                     }
+                                    System.out.println("---------");
                                     //
                                     column.getChildren().add(btnGroup);
                                     row.getChildren().add(column);
                                 }
                             }
-                            skills_container.getChildren().add(row);
+                            setContainer.getChildren().add(row);
                         }
                     } else {
 
                     }
                     //
-                    setContainer.getChildren().add(setTitleText);
                     skills_container.getChildren().add(setContainer);
                 }
             }

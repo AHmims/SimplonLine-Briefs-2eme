@@ -159,6 +159,7 @@ public class SimplonLine {
                                                     boolean add_niveau_competences = db_con.addNiveauCompetences(full_competence.getNiveauCompetences());
                                                     if(!add_niveau_competences)
                                                         throw new Exception("NiveauCompetences not added");
+
                                                 }
                                             }
                                             if(insert_competence_res) {
@@ -179,6 +180,8 @@ public class SimplonLine {
                         }
                     }
                 }
+                //
+                //add user's validated skills
             }
             //
             //System.out.println([0].split("|")[0]);
@@ -260,7 +263,8 @@ public class SimplonLine {
             return null;
         }
     }
-
+    //
+    public
     //
     private HttpURLConnection setupHTTPRequest(String URL, String method) {
         HttpURLConnection con;

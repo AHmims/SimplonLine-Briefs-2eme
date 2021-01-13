@@ -64,3 +64,6 @@
 .btn_niveau_right{
     -fx-background-radius: 0 5 5 0;
 }
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}

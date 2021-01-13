@@ -364,14 +364,14 @@ public class Connexion {
             //
             String last_id = "";
             while (res.next()) {
-                if (!last_id.equals(res.getString(1))) {
+                if (!last_id.equals(res.getString(4))) {
                     ArrayList<NiveauCompetence> levels = new ArrayList<>();
                     levels.add(new NiveauCompetence(res.getString(1), res.getInt(2), res.getString(3), res.getString(4)));
                     competences.add(new Competence(res.getString(4), res.getString(5), levels));
                 } else {
                     competences.get(competences.size() - 1).addNiveau(new NiveauCompetence(res.getString(1), res.getInt(2), res.getString(3), res.getString(4)));
                 }
-                last_id = res.getString(1);
+                last_id = res.getString(4);
             }
             con.close();
             //
