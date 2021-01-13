@@ -298,7 +298,25 @@ public class Connexion {
             return false;
         }
     }
-
+//
+    public boolean addNiveauCompetenceApprenant(NiveauCompetenceApprenant nca){
+        try {
+            Connection con = db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `NiveauCompetenceApprenant` (`idValidation`, `idNiveauCompetence`, `idUser`) VALUES (?, ?, ?)");
+            statement.setString(1, nca.getIdValidation());
+            statement.setString(2, nca.getIdNiveauCompetence());
+            statement.setString(3, nca.getIdUser());
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
     //
     //
     //

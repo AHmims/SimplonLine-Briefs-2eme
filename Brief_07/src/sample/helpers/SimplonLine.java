@@ -108,7 +108,7 @@ public class SimplonLine {
             //
             Connexion db_con = new Connexion();
             for (int i = 0; i < user_data.size(); i++) {
-                String[] row = (String[]) user_data.get(i);
+                String[] row = (String[]) user_data.get(i); //row[0] = idPromo | row[1] = "idFramework;idFramework";
                 boolean add_promo_res = true;
                 //See if classroom exists in DB
                 boolean exists = db_con.search("Promo", "idPromo", row[0]);
@@ -182,6 +182,17 @@ public class SimplonLine {
                 }
                 //
                 //add user's validated skills
+                ArrayList validatedSkills = getUersValidatedSkills(id, row[0]);
+                if(validatedSkills != null){
+                    for (int j = 0; j < validatedSkills.size(); j++) {
+                        NiveauCompetenceApprenant nca = (NiveauCompetenceApprenant) validatedSkills.get(j);
+                        nca.setIdUser(id);
+                        //
+                        boolean insert_res = db_con.addNiveauCompetenceApprenant(nca);
+                        if(!insert_res)
+                            throw new Exception("Validated skill not inserted");
+                    }
+                }
             }
             //
             //System.out.println([0].split("|")[0]);
@@ -264,7 +275,28 @@ public class SimplonLine {
         }
     }
     //
-    public
+    public ArrayList getUersValidatedSkills(String idUser, String idPromo){
+        HttpURLConnection con = null;
+        try {
+            con = setupHTTPRequest(String.format("https://api.simplonline.co/validations/?learner.uuid=%s&classroom.uuid=%s", idUser, idPromo), "GET");
+            if (con == null)
+                throw new Exception("Error initializing request");
+            //
+            StringBuffer response = requestResponse(con);
+            if (response == null)
+                throw new Exception("Request response to String error");
+            //
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            JsonDeserializer<ArrayList<NiveauCompetenceApprenant>> deserializer = new DeserializeNiveauCompetenceApprenant();
+            gsonBuilder.registerTypeAdapter(ArrayList.class, deserializer);
+            Gson g = gsonBuilder.create();
+            return g.fromJson(response.toString(), ArrayList.class);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
     //
     private HttpURLConnection setupHTTPRequest(String URL, String method) {
         HttpURLConnection con;
