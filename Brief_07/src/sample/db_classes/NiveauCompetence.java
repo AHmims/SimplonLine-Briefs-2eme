@@ -5,6 +5,7 @@ public class NiveauCompetence {
     private int numNiveauCompetence;
     private String descNiveauCompetence;
     private String idCompetence;
+    private boolean validated;
     //
 
     public NiveauCompetence(String idNiveauCompetence, int numNiveauCompetence, String descNiveauCompetence, String idCompetence) {
@@ -12,7 +13,17 @@ public class NiveauCompetence {
         this.numNiveauCompetence = numNiveauCompetence;
         this.descNiveauCompetence = descNiveauCompetence;
         this.idCompetence = idCompetence;
+        this.validated = false;
     }
+
+    public NiveauCompetence(String idNiveauCompetence, int numNiveauCompetence, String descNiveauCompetence, String idCompetence, boolean validated) {
+        this.idNiveauCompetence = idNiveauCompetence;
+        this.numNiveauCompetence = numNiveauCompetence;
+        this.descNiveauCompetence = descNiveauCompetence;
+        this.idCompetence = idCompetence;
+        this.validated = validated;
+    }
+
     public NiveauCompetence(String idNiveauCompetence) {
         this.idNiveauCompetence = idNiveauCompetence;
         this.numNiveauCompetence = -1;
@@ -36,5 +47,9 @@ public class NiveauCompetence {
 
     public String getIdCompetence() {
         return idCompetence;
+    }
+
+    public boolean isValidated() {
+        return validated;
     }
 }

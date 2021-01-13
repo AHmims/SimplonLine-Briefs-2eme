@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 
 public class ApprenantComp implements Initializable {
     private ArrayList<Promo> promos;
+    private ArrayList<Button> ui_levels = new ArrayList<>();
     //
     @FXML
     VBox root;
@@ -89,6 +90,7 @@ public class ApprenantComp implements Initializable {
         //Find the selected Promo
         for (Promo promo : promos) {
             if (promo.getTitrePromo().equals(cb_promo.getValue())) {
+                ui_levels.clear();
                 //EMPTY CONTAINER
                 skills_container.getChildren().clear();
                 //GET LIST OS SKILLS(COMPETENCES) GROUPED BY FRAMEWORK(SPECIALITE) FOR CURRENT CLASSROOM(PROMO)
@@ -101,7 +103,7 @@ public class ApprenantComp implements Initializable {
                     setContainer.getChildren().add(setTitleText);
                     HBox.setHgrow(setContainer, Priority.ALWAYS);
                     //
-                    ArrayList<Competence> competences = db_con.getCompetences_bySpecialite(specialite.getIdSpecialite());
+                    ArrayList<Competence> competences = db_con.getCompetences_bySpecialite(specialite.getIdSpecialite(), Connexion.userId);
                     if (competences.size() >= 2) {
                         for (int i = 0; i < competences.size(); i = i + 2) {
                             HBox row = new HBox();
@@ -128,9 +130,7 @@ public class ApprenantComp implements Initializable {
                                     HBox btnGroup = new HBox();
                                     VBox.setVgrow(btnGroup, Priority.ALWAYS);
                                     int x = 0;
-                                    System.out.println(competence.getNiveauCompetences().size());
                                     for (NiveauCompetence niveau : competence.getNiveauCompetences()) {
-                                        System.out.println(i + j);
                                         Button btn_niveau = new Button(String.format("Niveau %d", niveau.getNumNiveauCompetence()));
                                         HBox.setHgrow(btn_niveau, Priority.ALWAYS);
                                         btn_niveau.setMaxWidth(Double.MAX_VALUE);
@@ -139,6 +139,11 @@ public class ApprenantComp implements Initializable {
                                         if (competence.getNiveauCompetences().size() == 3) {
                                             //btn_niveau.getStyleClass().clear();
                                             btn_niveau.getStyleClass().add("btn_niveau_inactive");
+                                            if (niveau.isValidated()) {
+                                                //btn_niveau.getStyleClass().remove("btn_niveau_inactive");
+                                                btn_niveau.getStyleClass().add("btn_niveau_active");
+                                            }
+                                            //
                                             if (x == 0)
                                                 btn_niveau.getStyleClass().add("btn_niveau_left");
                                             else if (x == 1)
@@ -149,7 +154,6 @@ public class ApprenantComp implements Initializable {
                                         btnGroup.getChildren().add(btn_niveau);
                                         x++;
                                     }
-                                    System.out.println("---------");
                                     //
                                     column.getChildren().add(btnGroup);
                                     row.getChildren().add(column);
@@ -158,7 +162,7 @@ public class ApprenantComp implements Initializable {
                             setContainer.getChildren().add(row);
                         }
                     } else {
-
+                        //DO IT, OR DON'T IDK :3
                     }
                     //
                     skills_container.getChildren().add(setContainer);

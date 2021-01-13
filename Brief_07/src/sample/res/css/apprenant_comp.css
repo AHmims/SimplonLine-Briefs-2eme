@@ -55,6 +55,10 @@
     -fx-background-color: #f0f0f0;
     -fx-text-fill: #6e6a69;
 }
+.btn_niveau_active{
+    -fx-background-color: #0d7a23;
+    -fx-text-fill: white;
+}
 .btn_niveau_left{
     -fx-background-radius: 5 0 0 5;
 }

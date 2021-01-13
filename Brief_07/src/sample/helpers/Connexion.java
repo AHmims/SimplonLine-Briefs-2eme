@@ -298,8 +298,9 @@ public class Connexion {
             return false;
         }
     }
-//
-    public boolean addNiveauCompetenceApprenant(NiveauCompetenceApprenant nca){
+
+    //
+    public boolean addNiveauCompetenceApprenant(NiveauCompetenceApprenant nca) {
         try {
             Connection con = db_connect();
             if (con == null)
@@ -317,6 +318,7 @@ public class Connexion {
             return false;
         }
     }
+
     //
     //
     //
@@ -370,13 +372,14 @@ public class Connexion {
     }
 
     //
-    public ArrayList<Competence> getCompetences_bySpecialite(String idSpecialite) {
+    public ArrayList<Competence> getCompetences_bySpecialite(String idSpecialite, String idUser) {
         try {
             Connection con = db_connect();
             if (con == null)
                 throw new Exception("Connection error");
-            PreparedStatement statement = con.prepareStatement("SELECT n_c.*, n.titreCompetence FROM `NiveauCompetence` AS n_c, `Competence` AS n WHERE n_c.idCompetence = n.idCompetence AND n.idCompetence IN (SELECT idCompetence FROM SpecialiteCompetence WHERE idSpecialite = ?) ORDER BY n.titreCompetence, n_c.numNiveauCompetence ASC");
-            statement.setString(1, idSpecialite);
+            PreparedStatement statement = con.prepareStatement("SELECT n_c.*, n.titreCompetence, CASE WHEN EXISTS (SELECT n_ca.idValidation FROM NiveauCompetenceApprenant as n_ca  WHERE n_ca.idNiveauCompetence = n_c.idNiveauCompetence AND n_ca.idUser = ?) THEN 1 ELSE 0 END AS `validated` FROM `NiveauCompetence` AS n_c, `Competence` AS n WHERE n_c.idCompetence = n.idCompetence AND n.idCompetence IN (SELECT idCompetence FROM SpecialiteCompetence WHERE idSpecialite = ?) ORDER BY `validated`  DESC");
+            statement.setString(1, idUser);
+            statement.setString(2, idSpecialite);
             ResultSet res = statement.executeQuery();
             ArrayList<Competence> competences = new ArrayList<>();
             //
@@ -384,10 +387,10 @@ public class Connexion {
             while (res.next()) {
                 if (!last_id.equals(res.getString(4))) {
                     ArrayList<NiveauCompetence> levels = new ArrayList<>();
-                    levels.add(new NiveauCompetence(res.getString(1), res.getInt(2), res.getString(3), res.getString(4)));
+                    levels.add(new NiveauCompetence(res.getString(1), res.getInt(2), res.getString(3), res.getString(4), res.getBoolean(6)));
                     competences.add(new Competence(res.getString(4), res.getString(5), levels));
                 } else {
-                    competences.get(competences.size() - 1).addNiveau(new NiveauCompetence(res.getString(1), res.getInt(2), res.getString(3), res.getString(4)));
+                    competences.get(competences.size() - 1).addNiveau(new NiveauCompetence(res.getString(1), res.getInt(2), res.getString(3), res.getString(4), res.getBoolean(6)));
                 }
                 last_id = res.getString(4);
             }
