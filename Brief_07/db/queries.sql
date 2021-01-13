@@ -46,6 +46,7 @@ CREATE TABLE `NiveauCompetence`(
     idCompetence varchar(254)
 );
 CREATE TABLE `NiveauCompetenceApprenant`(
+    idValidation varchar(254) PRIMARY KEY,
 	idNiveauCompetence varchar(254),
     idUser varchar(254)
 );
