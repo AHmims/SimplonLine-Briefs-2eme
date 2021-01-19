@@ -6,6 +6,9 @@
     -fx-background-radius: 14;
     -fx-border-radius: 14;
 }
+#admin_root #navBar #nomUser{
+    -fx-fill: white;
+}
 #admin_root #navBar #imgAvatar{
     -fx-stroke-width: 3;
     -fx-fill: transparent;

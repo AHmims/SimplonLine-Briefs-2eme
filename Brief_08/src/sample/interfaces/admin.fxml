@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <HBox fx:id="admin_root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../res/css/admin.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.interfaces.Admin">
    <children>
@@ -18,7 +19,20 @@
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="76.0" prefHeight="80.0" valignment="TOP" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
-            <Circle fx:id="imgAvatar" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <Pane>
+               <children>
+                  <Circle fx:id="imgAvatar" fill="DODGERBLUE" layoutX="40.0" layoutY="30.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+                  <HBox alignment="CENTER" layoutX="9.0" prefHeight="60.0" prefWidth="60.0">
+                     <children>
+                        <Text fx:id="nomUser" strokeType="OUTSIDE" strokeWidth="0.0" text="AH" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="186.0" prefWidth="80.0" spacing="40.0" GridPane.rowIndex="1">
                <children>
                   <Button mnemonicParsing="false">
