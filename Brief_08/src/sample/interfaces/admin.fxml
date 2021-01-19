@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<HBox fx:id="admin_root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../res/css/admin.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.interfaces.Admin">
+   <children>
+      <GridPane fx:id="navBar" alignment="CENTER" prefWidth="80.0" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" valignment="TOP" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="248.0" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="76.0" prefHeight="80.0" valignment="TOP" vgrow="ALWAYS" />
+         </rowConstraints>
+         <children>
+            <Circle fx:id="imgAvatar" fill="DODGERBLUE" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="186.0" prefWidth="80.0" spacing="40.0" GridPane.rowIndex="1">
+               <children>
+                  <Button mnemonicParsing="false">
+                     <styleClass>
+                        <String fx:value="navLink" />
+                        <String fx:value="navLink-users" />
+                     </styleClass></Button>
+                  <Button layoutX="24.0" layoutY="132.0" mnemonicParsing="false">
+                     <styleClass>
+                        <String fx:value="navLink" />
+                        <String fx:value="navLink-add-user" />
+                     </styleClass></Button>
+               </children></VBox>
+            <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+               <children>
+                  <Button mnemonicParsing="false">
+                     <styleClass>
+                        <String fx:value="navLink" />
+                        <String fx:value="navLink-exit" />
+                     </styleClass></Button>
+               </children></VBox>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets bottom="15.0" top="15.0" />
+         </padding>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</HBox>
