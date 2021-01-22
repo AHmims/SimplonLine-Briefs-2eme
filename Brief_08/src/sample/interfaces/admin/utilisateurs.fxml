@@ -11,181 +11,318 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="content_title" text="Liste des utilisateurs" />
        <ScrollPane fx:id="users_list" hbarPolicy="NEVER" maxHeight="500.0" maxWidth="1.7976931348623157E308" minHeight="430.0" prefHeight="430.0" styleClass="edge-to-edge" VBox.vgrow="NEVER">
            <content>
-               <VBox fx:id="skills_container" prefWidth="680.0" spacing="10.0" style="-fx-background-color: white;">
+               <TilePane fx:id="skills_container" hgap="10.0" maxWidth="1.7976931348623157E308" prefWidth="680.0" style="-fx-background-color: white;" tileAlignment="TOP_LEFT" vgap="10.0">
                    <children>
-                       <HBox alignment="BOTTOM_LEFT" prefWidth="200.0" spacing="10.0">
+                         <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                             <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
                            <children>
-                               <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card" HBox.hgrow="NEVER">
-                                   <children>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                             <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
-                                    <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
-                                       <styleClass>
-                                          <String fx:value="card_role" />
-                                          <String fx:value="card_role_apprenant" />
-                                       </styleClass></Label>
-                                 </children>
-                              </HBox>
-                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
-                              <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
-                              <HBox spacing="10.0">
-                                 <children>
-                                    <Label styleClass="card_txt" text="Username :" />
-                                    <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                 <children>
-                                    <Label minWidth="-Infinity" styleClass="card_txt" text="Password :" />
-                                    <PasswordField styleClass="card_pass" text="sss" />
-                                 </children>
-                              </HBox>
-                                   </children>
-                               </VBox>
-                        <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                                       <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
+                                 <styleClass>
+                                    <String fx:value="card_role" />
+                                    <String fx:value="card_role_apprenant" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
                            <children>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
-                                    <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
-                                       <styleClass>
-                                          <String fx:value="card_role" />
-                                          <String fx:value="card_role_admin" />
-                                       </styleClass></Label>
-                                 </children>
-                              </HBox>
-                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
-                              <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
-                              <HBox spacing="10.0">
-                                 <children>
-                                    <Label styleClass="card_txt" text="Username :" />
-                                    <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                 <children>
-                                    <Label minWidth="-Infinity" styleClass="card_txt" text="Password :" />
-                                    <PasswordField styleClass="card_pass" />
-                                 </children>
-                              </HBox>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
                            </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
-                           <children>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
-                                    <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
-                                       <styleClass>
-                                          <String fx:value="card_role" />
-                                          <String fx:value="card_role_secret" />
-                                       </styleClass></Label>
-                                 </children>
-                              </HBox>
-                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
-                              <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
-                              <HBox spacing="10.0">
-                                 <children>
-                                    <Label styleClass="card_txt" text="Username :" />
-                                    <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                 <children>
-                                    <Label minWidth="-Infinity" styleClass="card_txt" text="Password :" />
-                                    <PasswordField styleClass="card_pass" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                           </children>
-                       </HBox>
-                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefWidth="200.0" spacing="10.0">
+                        </HBox>
+                             </children>
+                         </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
                      <children>
-                        <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card" HBox.hgrow="NEVER">
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
-                                    <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
-                                       <styleClass>
-                                          <String fx:value="card_role" />
-                                          <String fx:value="card_role_formateur" />
-                                       </styleClass></Label>
-                                 </children>
-                              </HBox>
-                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
-                              <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
-                              <HBox spacing="10.0">
-                                 <children>
-                                    <Label styleClass="card_txt" text="Username :" />
-                                    <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                 <children>
-                                    <Label minWidth="-Infinity" styleClass="card_txt" text="Password :" />
-                                    <PasswordField styleClass="card_pass" />
-                                 </children>
-                              </HBox>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
+                                 <styleClass>
+                                    <String fx:value="card_role" />
+                                    <String fx:value="card_role_admin" />
+                                 </styleClass>
+                              </Label>
                            </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
                            <children>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
-                                    <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
-                                 </children>
-                              </HBox>
-                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
-                              <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
-                              <HBox spacing="10.0">
-                                 <children>
-                                    <Label styleClass="card_txt" text="Username :" />
-                                    <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                 <children>
-                                    <Label minWidth="-Infinity" styleClass="card_txt" text="Password :" />
-                                    <PasswordField styleClass="card_pass" />
-                                 </children>
-                              </HBox>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
                            </children>
-                        </VBox>
-                        <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
-                           <children>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
-                                 <children>
-                                    <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
-                                    <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
-                                 </children>
-                              </HBox>
-                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
-                              <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
-                              <HBox spacing="10.0">
-                                 <children>
-                                    <Label styleClass="card_txt" text="Username :" />
-                                    <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" spacing="10.0">
-                                 <children>
-                                    <Label minWidth="-Infinity" styleClass="card_txt" text="Password :" />
-                                    <PasswordField styleClass="card_pass" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
+                        </HBox>
                      </children>
-                  </HBox>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
+                                 <styleClass>
+                                    <String fx:value="card_role" />
+                                    <String fx:value="card_role_secret" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
+                                 <styleClass>
+                                    <String fx:value="card_role" />
+                                    <String fx:value="card_role_formateur" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="270.0" layoutY="103.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
+                                 <styleClass>
+                                    <String fx:value="card_role" />
+                                    <String fx:value="card_role_formateur" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="196.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="270.0" layoutY="196.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="289.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
+                                 <styleClass>
+                                    <String fx:value="card_role" />
+                                    <String fx:value="card_role_formateur" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="270.0" layoutY="289.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="382.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="270.0" layoutY="382.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" text="Role">
+                                 <styleClass>
+                                    <String fx:value="card_role" />
+                                    <String fx:value="card_role_formateur" />
+                                 </styleClass>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="475.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="270.0" layoutY="475.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="250.0" spacing="5.0" styleClass="user_card">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="card_name" text="Nom PRkdjqshdkqshENOM" />
+                              <Label layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="card_role" text="Role" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="CIN" />
+                        <Label layoutX="10.0" layoutY="32.0" styleClass="card_txt" text="12/12/2020" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <Label styleClass="card_txt" text="Username :" />
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="card_txt" text="Username" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                    </children>
                    <padding>
                        <Insets right="15.0" />
                    </padding>
-               </VBox>
+               </TilePane>
            </content>
        </ScrollPane>
    </children>

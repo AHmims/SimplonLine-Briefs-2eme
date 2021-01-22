@@ -15,7 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("Youcode absence");
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("res/img/favicon.png")));
-        primaryStage.setResizable(false);
+        //primaryStage.setResizable(false);
         primaryStage.show();
     }
 
