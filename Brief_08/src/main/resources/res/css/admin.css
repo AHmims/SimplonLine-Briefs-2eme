@@ -1,0 +1,214 @@
+* {
+    font-family: system-ui;
+}
+
+#admin_root {
+    -fx-background-color: white;
+}
+
+#admin_root #navBar {
+    -fx-background-color: #272643;
+    -fx-background-radius: 14;
+    -fx-border-radius: 14;
+}
+
+#admin_root #navBar #nomUser {
+    -fx-fill: white;
+}
+
+#admin_root #navBar #imgAvatar {
+    -fx-stroke-width: 3;
+    -fx-fill: transparent;
+    -fx-stroke: white;
+}
+
+/**/
+#admin_root #navBar .navLink {
+    -fx-background-color: white;
+    -size: 24;
+    -height: 20;
+    -fx-min-height: -height;
+    -fx-min-width: -size;
+    -fx-max-height: -height;
+    -fx-max-width: -size;
+    -fx-cursor: hand;
+    -fx-scale-shape: false;
+}
+
+#admin_root #navBar .navLink:pressed, .navLink:focused, .navLink:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.15), 8, 1.0, 0, 0);
+}
+
+#admin_root #navBar .navLink-users {
+    -fx-shape: "M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z";
+}
+
+#admin_root #navBar .navLink-add-user {
+    -fx-shape: "M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z";
+}
+
+#admin_root #navBar .navLink-exit {
+    -fx-shape: "M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z";
+}
+
+/* */
+/* */
+#admin_root #admin_content .content_title {
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0F172A;
+}
+
+/* */
+#admin_root #admin_content #root_users #users_list {
+    -fx-background-color: transparent;
+}
+
+#admin_root #admin_content #root_users #users_list > .viewport {
+    -fx-background-color: transparent;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card {
+    -fx-background-color: white;
+    -fx-padding: 12;
+    -fx-pref-width: 213;
+    -fx-pref-height: 90;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-width: 2;
+    -fx-border-color: #E2E8F0;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .button {
+    -fx-background-color: #272643;
+    -size: 24;
+    -height: 20;
+    -fx-min-height: -height;
+    -fx-min-width: -size;
+    -fx-max-height: -height;
+    -fx-max-width: -size;
+    -fx-cursor: hand;
+    -fx-scale-shape: false;
+    -fx-shape: "M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z";
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_name {
+    -fx-text-fill: #0F172A;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_role {
+    -fx-text-fill: #475569;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-label-padding: 3 10;
+    -fx-background-color: #F1F5F9;
+    -fx-background-radius: 999;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_role_apprenant {
+    -fx-text-fill: #115E59;
+    -fx-background-color: #CCFBF1;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_role_admin {
+    -fx-text-fill: #D97706;
+    -fx-background-color: #FEF3C7;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_role_secret {
+    -fx-text-fill: #DC2626;
+    -fx-background-color: #FEE2E2;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_role_formateur {
+    -fx-text-fill: #C026D3;
+    -fx-background-color: #FAE8FF;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_txt {
+    -fx-text-fill: #64748B;
+    -fx-font-size: 12;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_pass {
+    -fx-padding: 2 4;
+    -fx-text-fill: #64748B;
+    -fx-border-width: 0;
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+}
+
+#admin_root #admin_content #root_users #users_list .user_card .card_pass:focused {
+    -fx-effect: dropshadow(gaussian, #E2E8F0, 2, 1.0, 0, 0);
+}
+
+/**/
+/**/
+#admin_root #admin_content #root_ajouter {
+}
+
+#admin_root #admin_content #root_ajouter #btn_add {
+    -fx-text-fill: white;
+    -fx-background-color: #272643;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+
+#admin_root #admin_content #root_ajouter #form_add .label {
+    -fx-text-fill: #272643;
+    -fx-font-size: 12;
+}
+
+#admin_root #admin_content #root_ajouter #form_add .text-field, .password-field {
+    -fx-text-fill: #64748B;
+    -fx-border-color: #bec4cc;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-background-insets: none;
+    -fx-background-color: white;
+}
+
+#admin_root #admin_content #root_ajouter #form_add .text-field:focused, .password-field:focused {
+    -fx-background-insets: none;
+    -fx-effect: dropshadow(gaussian, #CBD5E1, 3, 1.0, 0, 0);
+}
+
+#admin_root #admin_content #root_ajouter #form_add .choice-box {
+    -fx-background-color: transparent;
+    -fx-mark-color: #bec4cc;
+    -fx-border-width: 2;
+    -fx-border-color: #bec4cc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+#admin_root #admin_content #root_ajouter #form_add .choice-box > .label {
+    -fx-text-fill: #bec4cc;
+}
+
+#admin_root #admin_content #root_ajouter #form_add .choice-box .context-menu {
+    -fx-background-color: white;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    box-sizing: border-box;
+    -fx-padding: 5;
+}
+
+#admin_root #admin_content #root_ajouter #form_add .choice-box .menu-item > .label {
+    -fx-text-fill: black;
+    -fx-pref-width: 180;
+}
+
+#admin_root #admin_content #root_ajouter #form_add .choice-box .menu-item:focused {
+    -fx-background-color: #504dc1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+#admin_root #admin_content #root_ajouter #form_add .choice-box .menu-item:focused > .label {
+    -fx-text-fill: white;
+}
