@@ -11,17 +11,14 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class SeanceDao implements Dao<Seance> {
-    @Override
     public Optional<Seance> get(String pk) {
         return Optional.empty();
     }
 
-    @Override
     public Optional<Seance> get(Calendar pk) {
         return Optional.empty();
     }
 
-    @Override
     public ArrayList<Seance> getAll() {
         return null;
     }
@@ -54,7 +51,6 @@ public class SeanceDao implements Dao<Seance> {
         }
     }
 
-    @Override
     public boolean save(Seance seance) {
         try {
             Connection con = Connexion.db_connect();
@@ -78,12 +74,10 @@ public class SeanceDao implements Dao<Seance> {
         }
     }
 
-    @Override
     public boolean update(Seance seance) {
         return false;
     }
 
-    @Override
     public boolean delete(Seance seance) {
         return false;
     }

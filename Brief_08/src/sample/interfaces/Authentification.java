@@ -58,7 +58,7 @@ public class Authentification {
                                 scene_name = "formateur";
                                 break;
                             case "Apprenant":
-                                scene_name = "";
+                                scene_name = "apprenant";
                                 break;
                             default:
                                 System.out.println("Class unknown");

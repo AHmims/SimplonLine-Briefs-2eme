@@ -2,7 +2,7 @@ package sample.domainClasses;
 
 import java.util.Calendar;
 
-public abstract class Utilisateur {
+public class Utilisateur {
     private String cin;
     private String nom;
     private String prenom;
@@ -27,6 +27,9 @@ public abstract class Utilisateur {
         this.nom = nom;
         this.prenom = prenom;
         this.nivDroit = nivDroit;
+    }
+    public Utilisateur() {
+        // TODO Auto-generated constructor stub
     }
 
     public String getCin() {

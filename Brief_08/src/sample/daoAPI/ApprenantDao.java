@@ -13,17 +13,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class ApprenantDao implements Dao<Apprenant> {
-    @Override
     public Optional<Apprenant> get(String pk) {
         return Optional.empty();
     }
 
-    @Override
     public Optional<Apprenant> get(Calendar pk) {
         return Optional.empty();
     }
 
-    @Override
     public ArrayList<Apprenant> getAll() {
         return null;
     }
@@ -50,17 +47,35 @@ public class ApprenantDao implements Dao<Apprenant> {
         }
     }
 
-    @Override
     public boolean save(Apprenant apprenant) {
-        return false;
+        try {
+            Connection con = Connexion.db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            //
+            PreparedStatement statement = con.prepareStatement("INSERT INTO `Apprenant`(`cin`, `cne`, `promotion`, `nomTuteur`, `prenomTuteur`, `niveau`, `groupe`) VALUES(?, ?, ?, ?, ?, ?, ?)");
+
+            statement.setString(1, apprenant.getCin());
+            statement.setString(2, apprenant.getCne());
+            statement.setString(3, apprenant.getPromotion());
+            statement.setString(4, apprenant.getNomTuteur());
+            statement.setString(5, apprenant.getPrenomTuteur());
+            statement.setInt(6, apprenant.getNiveau());
+            statement.setString(7, apprenant.getGroupe());
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    @Override
     public boolean update(Apprenant apprenant) {
         return false;
     }
 
-    @Override
     public boolean delete(Apprenant apprenant) {
         return false;
     }

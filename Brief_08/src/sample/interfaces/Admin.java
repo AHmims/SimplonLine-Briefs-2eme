@@ -6,9 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.helpers.Session;
 import sample.helpers.Toast;
@@ -21,6 +23,8 @@ public class Admin implements Initializable {
     @FXML
     HBox admin_root;
     @FXML
+    Text nomUser;
+    @FXML
     Pane admin_content;
 
     //
@@ -28,6 +32,7 @@ public class Admin implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Toast t = new Toast(admin_root);
         //t.normal("qlj qjs iqjs hqj kqjhkjhk hkjh");
+        nomUser.setText(Session.nom.toUpperCase().substring(0, 1) + Session.prenom.toUpperCase().substring(0, 1));
         switchCntent("Utilisateurs");
     }
 

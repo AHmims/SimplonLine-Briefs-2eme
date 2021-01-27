@@ -20,6 +20,18 @@ public class Apprenant extends Utilisateur {
         this.niveau = niveau;
         this.groupe = groupe;
     }
+    public Apprenant(String cin, String nom, String prenom, Calendar dateNaissance, String user, String password,int nivDroit, String cne, String promotion, String nomTuteur, String prenomTuteur, int niveau, String groupe) {
+        super(cin, nom, prenom, dateNaissance, user, password, nivDroit);
+        this.cne = cne;
+        this.promotion = promotion;
+        this.nomTuteur = nomTuteur;
+        this.prenomTuteur = prenomTuteur;
+        this.niveau = niveau;
+        this.groupe = groupe;
+    }
+    public Apprenant(String cin, String nom, String prenom, Calendar dateNaissance, String user, String password) {
+        super(cin, nom, prenom, dateNaissance, user, password, 0);
+    }
 
     public Apprenant(String cin, String nom, String prenom) {
         super(cin, nom, prenom, 0);

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="root_gestion_absense" alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="680.0" spacing="25.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.interfaces.apprenant.FichePresence">
+   <children>
+      <HBox prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+         <children>
+            <Label text="Bienvenue" textFill="#070446">
+               <font>
+                  <Font name="Comic Sans MS" size="27.0" />
+               </font></Label>
+            <Label fx:id="idNom" text="Nom :" textFill="#180954">
+               <font>
+                  <Font name="Comic Sans MS" size="20.0" />
+               </font></Label>
+            <Label fx:id="idPrenom" text="Prénom :" textFill="#150551">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="59.0" prefWidth="680.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="463.0" styleClass="content_title" text="Visualisation de la fiche d'absence">
+               <HBox.margin>
+                  <Insets left="150.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="200.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox fillHeight="false" prefHeight="73.0" prefWidth="679.0" spacing="25.0" translateY="-150.0">
+         <children>
+            <Label layoutX="100.0" layoutY="200.0" text="Selectionner un mois" textAlignment="CENTER" textFill="#090e43" wrapText="true">
+               <HBox.margin>
+                  <Insets left="150.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Calibri" size="20.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="idMois" prefHeight="25.0" prefWidth="192.0" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="40.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox fx:id="idHboxTable" focusTraversable="true" prefHeight="200.0" prefWidth="680.0" translateY="-200.0" VBox.vgrow="NEVER">
+         <children>
+            <TableView fx:id="idTable" editable="true" prefHeight="66.0" prefWidth="680.0">
+              <columns>
+                <TableColumn fx:id="cellDate" prefWidth="133.0" text="Date" />
+                <TableColumn fx:id="cellHeure" prefWidth="204.0" text="Heure" />
+                  <TableColumn fx:id="cellAbsence" minWidth="0.0" prefWidth="87.0" text="Absence" />
+                  <TableColumn fx:id="cellRetard" prefWidth="85.0" text="Retard" />
+                  <TableColumn fx:id="cellJustif" prefWidth="169.0" text="Justificatif" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </HBox>
+      <VBox spacing="5.0">
+         <children>
+            <VBox layoutX="10.0" layoutY="10.0" spacing="15.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
