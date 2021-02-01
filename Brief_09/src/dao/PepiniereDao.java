@@ -2,7 +2,8 @@ package dao;
 
 import dao.api.DaoPepiniere;
 import model.Pepiniere;
-import sample.helpers.Connexion;
+import helpers.Connexion;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +18,8 @@ public class PepiniereDao implements DaoPepiniere {
             if (con == null)
                 throw new Exception("Connection error");
             //
-            PreparedStatement statement = con.prepareStatement("SELECT * FROM `Pepiniere WHERE `idPepiniere` = ?");
-            statement.setInt(1,pk);
+            PreparedStatement statement = con.prepareStatement("SELECT * FROM `Pepiniere` WHERE `idPepiniere` = ?");
+            statement.setInt(1, pk);
             ResultSet res = statement.executeQuery();
             if (res.next()) {
                 return new Pepiniere(res.getInt("idPepiniere"), res.getString("nomPepiniere"), res.getInt("capacitePepiniere"));

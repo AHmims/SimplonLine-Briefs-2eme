@@ -6,27 +6,19 @@
            version="4.0">
     <servlet>
         <servlet-name>router1</servlet-name>
-        <servlet-class>web.index</servlet-class>
+        <servlet-class>web.find</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>router2</servlet-name>
-        <servlet-class>web.test2</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>router3</servlet-name>
-        <servlet-class>web.test3</servlet-class>
+        <servlet-class>web.add</servlet-class>
     </servlet>
     /**/
     <servlet-mapping>
         <servlet-name>router1</servlet-name>
-        <url-pattern>/index.do</url-pattern>
+        <url-pattern>/rechercher</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>router2</servlet-name>
-        <url-pattern>/test2</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>router3</servlet-name>
-        <url-pattern>/test3.jsp</url-pattern>
+        <url-pattern>/add</url-pattern>
     </servlet-mapping>
 </web-app>
