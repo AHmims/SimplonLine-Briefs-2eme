@@ -3,33 +3,30 @@ package web;
 import dao.PepiniereDao;
 import model.Pepiniere;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.Servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class find extends HttpServlet {
+public class remove extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PepiniereDao pepiniereDao = new PepiniereDao();
-        int pk = Integer.parseInt(request.getParameter("input_value"));
-        Pepiniere pepiniere = pepiniereDao.get(pk);
+        Pepiniere pepiniere = new Pepiniere(Integer.parseInt(request.getParameter("input_value")), null, -1);
+        boolean remove_res = pepiniereDao.delete(pepiniere);
         //
         request.setAttribute("pepinieres", getAllData());
-        request.setAttribute("pepiniere", pepiniere);
-        //response.sendRedirect("find.jsp");
-        //RequestDispatcher dispatcher = getServletConfig().getServletContext().getRequestDispatcher("/find.jsp");
-        //dispatcher.forward(request, response);
-        request.getRequestDispatcher("find.jsp").forward(request, response);
+        String str_res = "true";
+        if (!remove_res)
+            str_res = "false";
+        request.setAttribute("remove_res", str_res);
+        request.getRequestDispatcher("remove.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //
         request.setAttribute("pepinieres", getAllData());
-        request.getRequestDispatcher("find.jsp").forward(request, response);
+        request.getRequestDispatcher("remove.jsp").forward(request, response);
     }
 
     //

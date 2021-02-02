@@ -2,21 +2,24 @@
 <%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Ali HMIMS
-  Date: 2/1/2021
-  Time: 2:15 PM
+  Date: 2/2/2021
+  Time: 9:20 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <head>
-    <title>Rechercher</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Title</title>
 </head>
-
 <body>
-<jsp:include page="components/navbar.jsp"/>
-<!--  -->
+<% if (request.getAttribute("remove_res") != null) { %>
+<% boolean res = Boolean.parseBoolean((String) request.getAttribute("remove_res")); %>
+<% if (res) { %>
+<div>Removed</div>
+<% } else { %>
+<div>Not Removed</div>
+<% } %>
+<% } %>
 <form method="POST">
     <label for="input_value">ID Pepiniere</label>
     <select name="input_value" id="input_value">
@@ -28,26 +31,7 @@
         <% } %>
         <% } %>
     </select>
-    <button>Find</button>
+    <button>Remove</button>
 </form>
-<% if (request.getAttribute("pepiniere") != null) {
-    Pepiniere pepiniere = (Pepiniere) request.getAttribute("pepiniere");%>
-<table border="1">
-    <thead>
-    <th>Id</th>
-    <th>Nom</th>
-    <th>Capacité</th>
-    </thead>
-    <tr>
-        <td><%= pepiniere.getIdPepiniere() %>
-        </td>
-        <td><%= pepiniere.getNomPepiniere() %>
-        </td>
-        <td><%= pepiniere.getCapacitePepiniere() %>
-        </td>
-    </tr>
-</table>
-<% } %>
 </body>
-
 </html>

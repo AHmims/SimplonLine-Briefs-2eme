@@ -81,7 +81,7 @@ public class PepiniereDao implements DaoPepiniere {
             if (con == null)
                 throw new Exception("Connection error");
             //
-            PreparedStatement statement = con.prepareStatement("UPDATE `Pepiniere` SET `nomPepiniere` = ? AND `capacitePepiniere` = ? WHERE `idPepiniere` = ?");
+            PreparedStatement statement = con.prepareStatement("UPDATE `Pepiniere` SET `nomPepiniere` = ?, `capacitePepiniere` = ? WHERE `idPepiniere` = ?");
             statement.setString(1, pepiniere.getNomPepiniere());
             statement.setInt(2, pepiniere.getCapacitePepiniere());
             statement.setInt(3, pepiniere.getIdPepiniere());
