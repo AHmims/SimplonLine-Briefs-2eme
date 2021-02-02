@@ -13,8 +13,7 @@
   <!--  -->
   <jsp:include page="components/navbar.jsp" />
   <!--  -->
-  <h1>Gestion des pépinières</h1>
-  <a href="./rechercher">Commencer</a>
+  <h1 class="px-28 text-center text-4xl font-bold text-gray-700">Gestion des pépinières</h1>
 </body>
 
 </html>
