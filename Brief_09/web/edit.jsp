@@ -23,15 +23,15 @@
         <% boolean res = Boolean.parseBoolean((String) request.getAttribute("edit_res")); %>
         <div class="flex flex-col items-center">
             <% if (res) { %>
-            <span class="py-4 px-12 bg-green-100 rounded-lg ring-4 ring-green-400 ring-inset text-green-900 font-medium mb-4 -mt-4">Element modifié avec succès</span>
+            <span class="py-4 px-12 bg-green-100 rounded-lg ring-4 ring-green-400 ring-inset text-green-900 font-medium mb-4 -mt-4">Pepiniere modifié avec succès</span>
             <% } else { %>
-            <span class="py-4 px-12 bg-red-100 rounded-lg ring-4 ring-red-400 ring-inset text-red-900 font-medium mb-4 -mt-4">Element n'a pas été modifié</span>
+            <span class="py-4 px-12 bg-red-100 rounded-lg ring-4 ring-red-400 ring-inset text-red-900 font-medium mb-4 -mt-4">Pepiniere n'a pas été modifié</span>
             <% } %>
         </div>
         <% } %>
         <form method="POST" class="flex flex-col rounded-2xl border border-gray-300 p-12 items-center">
             <div class="mb-2">
-                <label for="input_value">ID Pepiniere: </label>
+                <label for="input_value" class="mr-2">ID Pepiniere: </label>
                 <select name="input_value" id="input_value" class="p-2 border border-gray-200 rounded-md">
                     <% if (request.getAttribute("pepinieres") != null) { %>
                     <% for (Pepiniere pep : (ArrayList<Pepiniere>) request.getAttribute("pepinieres")) { %>

@@ -23,9 +23,9 @@
         <% boolean res = Boolean.parseBoolean((String) request.getAttribute("remove_res")); %>
         <div class="flex flex-col items-center">
             <% if (res) { %>
-            <span class="py-4 px-12 bg-green-100 rounded-lg ring-4 ring-green-400 ring-inset text-green-900 font-medium mb-4 -mt-4">Element supprimé avec succès</span>
+            <span class="py-4 px-12 bg-green-100 rounded-lg ring-4 ring-green-400 ring-inset text-green-900 font-medium mb-4 -mt-4">Pepiniere supprimé avec succès</span>
             <% } else { %>
-            <span class="py-4 px-12 bg-red-100 rounded-lg ring-4 ring-red-400 ring-inset text-red-900 font-medium mb-4 -mt-4">Element n'a pas été supprimé</span>
+            <span class="py-4 px-12 bg-red-100 rounded-lg ring-4 ring-red-400 ring-inset text-red-900 font-medium mb-4 -mt-4">Pepiniere n'a pas été supprimé</span>
             <% } %>
         </div>
         <% } %>
