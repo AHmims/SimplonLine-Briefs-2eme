@@ -11,9 +11,13 @@
 
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <!--  -->
+    <jsp:include page="components/navbar.jsp" />
+    <!--  -->
     <% if (request.getAttribute("edit_res") != null) { %>
     <% boolean res = Boolean.parseBoolean((String) request.getAttribute("edit_res")); %>
     <% if (res) { %>

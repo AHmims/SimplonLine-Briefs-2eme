@@ -18,37 +18,30 @@
     <!--  -->
     <jsp:include page="components/navbar.jsp" />
     <!--  -->
-    <form method="POST" class="w-10/12 mx-auto">
-        <label for="input_value">ID Pepiniere</label>
-        <select name="input_value" id="input_value">
-            <% if (request.getAttribute("pepinieres") != null) { %>
-            <% for (Pepiniere pep : (ArrayList<Pepiniere>) request.getAttribute("pepinieres")) { %>
-            <option value="<%= pep.getIdPepiniere() %>">
-                <%= pep.getNomPepiniere() %>
-            </option>
-            <% } %>
-            <% } %>
-        </select>
-        <button>Find</button>
-    </form>
-    <% if (request.getAttribute("pepiniere") != null) {
-    Pepiniere pepiniere = (Pepiniere) request.getAttribute("pepiniere");%>
-    <table border="1">
-        <thead>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Capacité</th>
-        </thead>
-        <tr>
-            <td><%= pepiniere.getIdPepiniere() %>
-            </td>
-            <td><%= pepiniere.getNomPepiniere() %>
-            </td>
-            <td><%= pepiniere.getCapacitePepiniere() %>
-            </td>
-        </tr>
-    </table>
-    <% } %>
+    <div class="px-24 lg:px-32 xl:px-96 w-full max-w-8xl mx-auto">
+        <form method="POST" class="flex flex-col rounded-2xl border border-gray-300 p-12 items-center">
+            <div class="mb-4">
+                <label for="input_value" class="mr-2">ID Pepiniere:</label>
+                <select name="input_value" id="input_value" class="p-2 border border-gray-200 rounded-md">
+                    <% if (request.getAttribute("pepinieres") != null) { %>
+                    <% for (Pepiniere pep : (ArrayList<Pepiniere>) request.getAttribute("pepinieres")) { %>
+                    <option value="<%= pep.getIdPepiniere() %>">
+                        <%= pep.getNomPepiniere() %>
+                    </option>
+                    <% } %>
+                    <% } %>
+                </select>
+            </div>
+            <button class="py-4 px-6 border border-gray-300 rounded-lg mt-4">rechercher</button>
+        </form>
+        <% if (request.getAttribute("pepiniere") != null) { Pepiniere pepiniere = (Pepiniere) request.getAttribute("pepiniere");%>
+        <div class="w-80 flex flex-col border border-gray-300 rounded-lg p-4 mx-auto">
+            <span class="font-medium text-lg text-gray-700 mb-1"><%= pepiniere.getNomPepiniere() %></span>
+            <span class="text-gray-600">Id: <%= pepiniere.getIdPepiniere() %></span>
+            <span class="text-gray-600">Capacité: <%= pepiniere.getCapacitePepiniere() %></span>
+        </div>
+        <% } %>
+    </div>
 </body>
 
 </html>
