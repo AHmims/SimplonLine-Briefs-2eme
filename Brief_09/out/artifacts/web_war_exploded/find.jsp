@@ -21,7 +21,7 @@
     <div class="px-24 lg:px-32 xl:px-96 w-full max-w-8xl mx-auto">
         <form method="POST" class="flex flex-col rounded-2xl border border-gray-300 p-12 items-center">
             <div class="mb-4">
-                <label for="input_value" class="mr-2">ID Pepiniere:</label>
+                <label for="input_value" class="mr-2">Pepiniere: </label>
                 <select name="input_value" id="input_value" class="p-2 border border-gray-200 rounded-md">
                     <% if (request.getAttribute("pepinieres") != null) { %>
                     <% for (Pepiniere pep : (ArrayList<Pepiniere>) request.getAttribute("pepinieres")) { %>

@@ -24,10 +24,10 @@
             <% if (res) { %>
             <span class="py-4 px-12 bg-green-100 rounded-lg ring-4 ring-green-400 ring-inset text-green-900 font-medium mb-4 -mt-4">Element ajoute avec succès</span>
             <% } else { %>
-            <span class="py-4 px-12 bg-red-100 rounded-lg ring-4 ring-red-400 ring-inset text-red-900 font-medium mb-4 -mt-4">Element non ajoutée</span>
-            <% } %>
+            <span class="py-4 px-12 bg-red-100 rounded-lg ring-4 ring-red-400 ring-inset text-red-900 font-medium mb-4 -mt-4">Element n'a pas été ajoutée</span>
             <% } %>
         </div>
+        <% } %>
         <form method="POST" class="flex flex-col rounded-2xl border border-gray-300 p-12 items-center">
             <div class="mb-2">
                 <Label for="input_nom">Nom:</Label>
