@@ -66,6 +66,43 @@
     -fx-text-fill: #0F172A;
 }
 
+#formateur_root #root_gestion_absense #slct_groupe {
+    -fx-background-color: transparent;
+    -fx-mark-color: #bec4cc;
+    -fx-border-width: 2;
+    -fx-border-color: #bec4cc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+#formateur_root #root_gestion_absense #slct_groupe > .label {
+    -fx-text-fill: #bec4cc;
+}
+
+#formateur_root #root_gestion_absense #slct_groupe .context-menu {
+    -fx-background-color: white;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    box-sizing: border-box;
+    -fx-padding: 5;
+}
+
+#formateur_root #root_gestion_absense #slct_groupe .menu-item > .label {
+    -fx-text-fill: black;
+    -fx-pref-width: 180;
+}
+
+#formateur_root #root_gestion_absense #slct_groupe .menu-item:focused {
+    -fx-background-color: #504dc1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+#formateur_root #root_gestion_absense #slct_groupe .menu-item:focused > .label {
+    -fx-text-fill: white;
+}
+
+/**/
 #formateur_root #root_gestion_absense .srch_input {
     -fx-background-radius: 6px;
     -fx-border-radius: 6px;
@@ -85,7 +122,7 @@
 
 #formateur_root #root_gestion_absense #list_apprenant .apprenant_card {
     -fx-background-color: transparent;
-    -fx-pref-width: 190;
+    -fx-pref-width: 210;
     -height: 80;
     -fx-pref-height: -height;
     -fx-max-height: -height;
@@ -96,14 +133,14 @@
     -fx-stroke: #E2E8F0;
     -fx-fill: white;
     -fx-stroke-width: 2;
-    -fx-translate-x: 174;
+    -fx-translate-x: 194;
     -fx-translate-y: 16;
 }
 
 #formateur_root #root_gestion_absense #list_apprenant .apprenant_card .inner_cont {
     -fx-background-color: white;
     -fx-padding: 6 8;
-    -fx-pref-width: 190;
+    -fx-pref-width: 210;
     -height: 80;
     -fx-pref-height: -height;
     -fx-max-height: -height;
@@ -122,9 +159,41 @@
     -fx-text-fill: #4f5b6d;
     -fx-font-size: 14;
     -fx-font-weight: bold;
-    -fx-max-width: 160;
+}
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card .inner_cont .choice-box{
+    -fx-background-color: transparent;
+    -fx-mark-color: #bec4cc;
+    -fx-border-width: 2;
+    -fx-border-color: #bec4cc;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+
+}
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card .inner_cont .choice-box > .label {
+    -fx-text-fill: #bec4cc;
 }
 
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card .inner_cont .choice-box .context-menu {
+    -fx-background-color: white;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    box-sizing: border-box;
+    -fx-padding: 5;
+}
+
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card .inner_cont .choice-box .menu-item > .label {
+    -fx-text-fill: black;
+}
+
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card .inner_cont .choice-box .menu-item:focused {
+    -fx-background-color: #504dc1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card .inner_cont .choice-box .menu-item:focused > .label {
+    -fx-text-fill: white;
+}
 /**/
 #formateur_root #root_gestion_absense #list_apprenant .apprenant_card_active .indicator {
     -fx-stroke: #B4E7DC;
@@ -137,6 +206,21 @@
     -fx-border-color: #51B6AB;
 }
 
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card_abs .inner_cont {
+    -fx-background-color: #FEF2F2;
+    -fx-border-color: #EF4444;
+}
+
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card_retS .inner_cont {
+    -fx-background-color: #FEFCE8;
+    -fx-border-color: #FDE047;
+}
+
+#formateur_root #root_gestion_absense #list_apprenant .apprenant_card_retB .inner_cont {
+    -fx-background-color: #FFF7ED;
+    -fx-border-color: #F97316;
+}
+
 /**/
 /* Seance */
 
@@ -147,6 +231,7 @@
 #formateur_root #root_gestion_absense #list_seance > .viewport {
     -fx-background-color: transparent;
 }
+
 #formateur_root #root_gestion_absense #list_seance .seance_card {
     -fx-background-color: transparent;
     -fx-pref-width: 190;
@@ -155,6 +240,7 @@
     -fx-max-height: -height;
     -fx-cursor: hand;
 }
+
 #formateur_root #root_gestion_absense #list_seance .seance_card .indicator {
     -fx-stroke: #E2E8F0;
     -fx-fill: white;
@@ -162,6 +248,7 @@
     -fx-translate-x: 174;
     -fx-translate-y: 16;
 }
+
 #formateur_root #root_gestion_absense #list_seance .seance_card .inner_cont {
     -fx-background-color: white;
     -fx-padding: 6 8;
@@ -174,26 +261,31 @@
     -fx-border-width: 2;
     -fx-border-color: #E2E8F0;
 }
+
 #formateur_root #root_gestion_absense #list_seance .seance_card .inner_cont .label {
     -fx-text-fill: #64748B;
     -fx-font-size: 12;
 }
+
 #formateur_root #root_gestion_absense #list_seance .seance_card .inner_cont .dateS {
     -fx-text-fill: #4f5b6d;
     -fx-font-size: 14;
     -fx-font-weight: bold;
     -fx-max-width: 160;
 }
+
 #formateur_root #root_gestion_absense #list_seance .seance_card_active .indicator {
     -fx-stroke: #B4E7DC;
     -fx-fill: #51B6AB;
     -fx-stroke-width: 3;
 }
+
 #formateur_root #root_gestion_absense #list_seance .seance_card_active .inner_cont {
     -fx-background-color: #F9FEFD;
     -fx-border-color: #51B6AB;
 }
-#formateur_root #root_gestion_absense #btn_add{
+
+#formateur_root #root_gestion_absense #btn_add {
     -fx-text-fill: white;
     -fx-background-color: #272643;
     -fx-background-radius: 6;
@@ -202,7 +294,8 @@
     -fx-font-size: 14;
     -fx-cursor: hand;
 }
-#formateur_root #root_gestion_absense #abs_duration{
+
+#formateur_root #root_gestion_absense #abs_duration {
     -fx-text-fill: #64748B;
     -fx-border-color: #bec4cc;
     -fx-border-radius: 4;

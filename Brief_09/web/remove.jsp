@@ -18,7 +18,7 @@
     <!--  -->
     <jsp:include page="components/navbar.jsp" />
     <!--  -->
-    <div class="px-24 lg:px-32 xl:px-96 w-full max-w-8xl mx-auto">
+    <div class="px-24 lg:px-32 xl:px-96 w-full">
         <% if (request.getAttribute("remove_res") != null) { %>
         <% boolean res = Boolean.parseBoolean((String) request.getAttribute("remove_res")); %>
         <div class="flex flex-col items-center">

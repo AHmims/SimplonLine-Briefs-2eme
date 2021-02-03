@@ -25,14 +25,15 @@ public class ApprenantDao implements Dao<Apprenant> {
         return null;
     }
 
-    public ArrayList<Apprenant> getAllByFormateur(String cin_formateur) {
+    public ArrayList<Apprenant> getAllByFormateur(String cin_formateur, int niveau) {
         try {
             Connection con = Connexion.db_connect();
             if (con == null)
                 throw new Exception("Connection error");
             //
-            PreparedStatement statement = con.prepareStatement("SELECT a.*, u.nom, u.prenom FROM `Utilisateur` AS u, `Utilisateur` AS u2, Apprenant AS a WHERE u2.cin = ? AND u2.nom = a.nomTuteur AND u2.prenom = a.prenomTuteur AND u.cin = a.cin");
+            PreparedStatement statement = con.prepareStatement("SELECT a.*, u.nom, u.prenom FROM `Utilisateur` AS u, `Utilisateur` AS u2, Apprenant AS a WHERE u2.cin = ? AND u.cin = a.cin AND a.niveau = ? AND a.groupe IN (SELECT groupe FROM Formateur WHERE `matricule` IN (SELECT `matricule` FROM Administrateur WHERE cin = u2.cin))");
             statement.setString(1, cin_formateur);
+            statement.setInt(2, niveau);
             ResultSet res = statement.executeQuery();
 
             ArrayList<Apprenant> list_apprenants = new ArrayList<>();
