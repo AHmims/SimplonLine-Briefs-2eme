@@ -1,9 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <div>
+<div>
     <ul>
-    <li>
-    <a href="/"></a>
-    </li>
+        <li>
+            <a href="/">Acceuil</a>
+        </li>
+        <li>
+            <a href="/">Articles</a>
+        </li>
+        <li>
+            <a href="/authentification">Identification</a>
+        </li>
+        <li>
+            <a href="/">Inscription</a>
+        </li>
     </ul>
-    </div>
-
+</div>
