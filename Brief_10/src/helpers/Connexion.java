@@ -15,7 +15,8 @@ public class Connexion {
             Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection(String.format("jdbc:postgresql://%s:%s/%s", props.getProperty("__HOST"), props.getProperty("__PORT"), props.getProperty("__DB_NAME")), props.getProperty("__USER"), props.getProperty("__PASSWORD"));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            //System.out.println(e.getMessage());
             return null;
         }
     }
