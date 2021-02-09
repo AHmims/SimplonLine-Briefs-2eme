@@ -8,7 +8,7 @@
             <a href="/">Articles</a>
         </li>
         <li>
-            <a href="/">Identification</a>
+            <a href="/authentification">Identification</a>
         </li>
         <li>
             <a href="/">Inscription</a>

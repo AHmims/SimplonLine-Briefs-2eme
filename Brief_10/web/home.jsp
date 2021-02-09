@@ -9,7 +9,7 @@
   <jsp:include page="layout/navbar_common.jsp" />
   <!--  -->
   <h1>Home</h1>
-  <a href="">Identification</a>
+  <a href="/authentification">Identification</a>
 </body>
 
 </html>
