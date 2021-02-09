@@ -21,7 +21,7 @@ public class login extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             //
-            Connexion.db_connect();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
