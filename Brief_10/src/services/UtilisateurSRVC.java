@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UtilisateurSRVC {
-    private static final String _SQL_LOGIN = "SELECT * FROM Utilisateur WHERE emailUtilisateur = ?";
+    private static final String _SQL_LOGIN = "SELECT * FROM Utilisateur WHERE Utilisateur.\"emailUtilisateur\" = ?";
 
     //
     public Utilisateur login(String email) {
@@ -20,7 +20,7 @@ public class UtilisateurSRVC {
             PreparedStatement statement = Connexion.initialisationRequetePreparee(con, _SQL_LOGIN, false, email);
             ResultSet res = statement.executeQuery();
             if (res.next()) {
-                return new Utilisateur(res.getInt("idUtilisateur"), res.getString("nomUtilisateur"), res.getString("prenomUtilisateur"), res.getString("roleUtilisateur"), res.getString("emailUtilisateur"), res.getString("passUtilisateur"), res.getString("sexeUtilisateur"), res.getString("avatarUtilisateur"));
+                return new Utilisateur(res.getInt("idUtilisateur"), res.getString("nomUtilisateur").trim(), res.getString("prenomUtilisateur").trim(), res.getString("roleUtilisateur").trim(), res.getString("emailUtilisateur").trim(), res.getString("passUtilisateur").trim(), res.getString("sexeUtilisateur").trim(), res.getString("avatarUtilisateur").trim());
             }
             return null;
             //

@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<span>${__user_email}</span>
+<span>${__user_in}</span>
+<h1>ARTICLES</h1>
 </body>
 </html>

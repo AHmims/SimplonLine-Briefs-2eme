@@ -21,9 +21,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/resources" type="java-resource" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.41" level="application_server_libraries" />
-    <orderEntry type="library" exported="" name="org.postgresql:postgresql:42.2.18.jre7" level="project" />
+    <orderEntry type="library" name="org.postgresql:postgresql:42.2.18" level="project" />
   </component>
 </module>
