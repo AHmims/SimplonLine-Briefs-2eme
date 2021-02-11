@@ -28,6 +28,5 @@ public class UtilisateurSRVC {
             e.printStackTrace();
             return null;
         }
-
     }
 }

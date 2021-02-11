@@ -5,7 +5,7 @@ import beans.Vote;
 import java.util.ArrayList;
 
 public interface DaoVote {
-    Vote get(int idVote);
+    Vote get(int idArticle, int idUtilisateur);
 
     ArrayList<Vote> getAll();
 

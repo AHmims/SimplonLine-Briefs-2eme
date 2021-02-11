@@ -1,33 +1,19 @@
 package beans;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Vote {
-    private int idVote;
     private int idArticle;
     private int idUtilisateur;
-    private Calendar dateVote;
+
     //
-    private Vote(int idVote, int idArticle, int idUtilisateur, Calendar dateVote){
-        this.idVote = idVote;
+    public Vote(int idArticle, int idUtilisateur) {
         this.idArticle = idArticle;
         this.idUtilisateur = idUtilisateur;
-        this.dateVote = dateVote;
-    }
-    private Vote(int idArticle, int idUtilisateur, Calendar dateVote){
-        this.idArticle = idArticle;
-        this.idUtilisateur = idUtilisateur;
-        this.dateVote = dateVote;
     }
     //
-
-    public int getIdVote() {
-        return idVote;
-    }
-
-    public void setIdVote(int idVote) {
-        this.idVote = idVote;
-    }
 
     public int getIdArticle() {
         return idArticle;
@@ -43,13 +29,5 @@ public class Vote {
 
     public void setIdUtilisateur(int idUtilisateur) {
         this.idUtilisateur = idUtilisateur;
-    }
-
-    public Calendar getDateVote() {
-        return dateVote;
-    }
-
-    public void setDateVote(Calendar dateVote) {
-        this.dateVote = dateVote;
     }
 }

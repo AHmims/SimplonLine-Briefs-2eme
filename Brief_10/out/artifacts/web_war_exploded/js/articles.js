@@ -1,24 +1,20 @@
-function voteArticle() {
+const articles_btn = document.getElementsByClassName('voteBtn');
+for (let i = 0; i < articles_btn.length; i++) {
+    let article_id = articles_btn[i].parentElement.getAttribute('data-article');
     //
-    axios({
-            method: 'post',
-            url: '/articles',
-            headers: {
-                //'Content-Type': 'application/json'
-                contentType: "application/x-www-form-urlencoded; charset=UTF-8;",
-                dataType: "json"
-            },
-            data: JSON.stringify({
-                action: 'vote',
-                articleId: '12'
-            })
-        })
+    articles_btn[i].addEventListener('click', e => {
+        voteArticle(article_id);
+    });
+}
+
+function voteArticle(idArticle) {
+    axios.post(`/articles?action=vote&article=${idArticle}`)
         .then(function (response) {
             console.log(response);
         })
         .catch(function (error) {
             console.log(error);
         });
-
+    //
 }
 // 

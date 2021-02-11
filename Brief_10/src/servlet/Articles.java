@@ -1,25 +1,51 @@
 package servlet;
 
 import beans.Article;
+import beans.Utilisateur;
+import beans.Vote;
 import dao.ArticleDao;
+import dao.VoteDao;
+import dao.api.DaoVote;
 import org.checkerframework.checker.units.qual.A;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Articles extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getAttribute("action"));
-        System.out.println(request.getParameter("action"));
+        final String _action = request.getParameter("action");
+        String ret_data = "";
+        switch (_action) {
+            case "vote":
+                final int idArticle = Integer.parseInt(request.getParameter("article"));
+                Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data");
+                try {
+                    VoteDao voteDao = new VoteDao();
+                    Vote vote = voteDao.get(idArticle, user.getIdutilisateur());
+                    if (vote == null) {
+                        boolean insertRes = voteDao.insert(new Vote(idArticle, user.getIdutilisateur()));
+                        if(insertRes) ret_data = "{\"status\":\"1\"}";
+                        else ret_data = "{\"status\":\"0\"}";
+                    } else ret_data = "{\"status\":\"-1\"}";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ret_data = "null";
+                }
+                break;
+        }
+        //
+        //
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.print("{\"ff\":123}");
+        out.print(ret_data);
         out.flush();
     }
 

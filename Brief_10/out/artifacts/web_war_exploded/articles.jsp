@@ -5,9 +5,6 @@
 
 <head>
     <title>Title</title>
-    <script src="js/axios.min.js"></script>
-    <script src="./js/articles.js"></script>
-
 </head>
 
 <body>
@@ -18,10 +15,12 @@
         <img src="<%= article.getImageArticle() %>" width="100px">
         <span><%= article.getNomArticle() %></span>
         <span><%= article.getPrixArticle() %>DH</span>
-        <button onclick="voteArticle()">
+        <button class="voteBtn">
             <span>VOTE</span>
         </button>
     </div>
     <%}%>
+    <script src="js/axios.min.js"></script>
+    <script src="js/articles.js"></script>
 </body>
 </html>
