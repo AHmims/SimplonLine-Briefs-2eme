@@ -9,7 +9,7 @@ public interface DaoArticle {
 
     ArrayList<Article> getAll();
 
-    boolean insert(Article article);
+    int insert(Article article);
 
     boolean update(Article article);
 

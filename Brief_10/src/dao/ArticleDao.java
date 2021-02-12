@@ -12,8 +12,9 @@ import java.util.ArrayList;
 public class ArticleDao implements DaoArticle {
     private static final String _SQL_GET_ARTICLE = "SELECT * FROM Article WHERE \"idArticle\" = ?";
     private static final String _SQL_ALL_ARTICLES = "SELECT * FROM Article";
+    private static final String _SQL_ADD_ARTICLE = "INSERT INTO public.article (\"nomArticle\", \"descArticle\", \"prixArticle\", \"nbArticle\", \"imageArticle\") VALUES (?, ?, ?, ?, ?);";
     private static final String _SQL_DLT_ARTICLE = "DELETE FROM public.article WHERE (article.idarticle = ?);";
-    private static final String _SQL_EDIT_ARTICLE = "UPDATE Article SET \"nomArticle\" = ?, \"descArticle\" = ?, \"prixArticle\" = ?, \"nbArticle\" = ?, \"imageArticle\" = ? WHERE \"idArticle\" = ?";
+    private static final String _SQL_EDIT_ARTICLE = "UPDATE public.article SET \"nomArticle\" = ?, \"descArticle\" = ?, \"prixArticle\" = ?, \"nbArticle\" = ?, \"imageArticle\" = ? WHERE \"idarticle\" = ?;";
 
     //
     @Override
@@ -58,8 +59,26 @@ public class ArticleDao implements DaoArticle {
     }
 
     @Override
-    public boolean insert(Article article) {
-        return false;
+    public int insert(Article article) {
+        try {
+            Connection con = Connexion.db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            //
+            PreparedStatement statement = Connexion.initialisationRequetePreparee(con, _SQL_ADD_ARTICLE, true, article.getNomArticle(), article.getDescArticle(), article.getPrixArticle(), article.getNbArticle(), article.getImageArticle());
+            //
+            int res = -1;
+            if(statement.executeUpdate() >= 1){
+                ResultSet genKeys = statement.getGeneratedKeys();
+                if(genKeys.next())
+                    res = genKeys.getInt(1);
+            }
+            con.close();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
     @Override

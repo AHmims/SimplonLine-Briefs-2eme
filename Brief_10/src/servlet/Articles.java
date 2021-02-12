@@ -7,6 +7,7 @@ import dao.ArticleDao;
 import dao.VoteDao;
 import dao.api.DaoVote;
 import helpers.FileSave;
+import helpers.Validator;
 import org.checkerframework.checker.units.qual.A;
 import services.VoteSRVC;
 
@@ -69,10 +70,23 @@ public class Articles extends HttpServlet {
             case "edit":
                 if (user.getRoleUtilisateur().equals("admin")) {
                     try {
-                        String imageSaveRes = FileSave.save(request.getPart("articleImg"), "image");
-                        if (imageSaveRes != null) {
-                            String imagePath = String.format("/images/%s", imageSaveRes);
-                        } else ret_data = "{\"status\":0}";
+                        //Form validation
+                        Article newArticle = validateForm(request);
+                        //
+                        if (newArticle != null) {
+                            String imageSaveRes = FileSave.save(request.getPart("articleImg"), "image");
+                            if (imageSaveRes != null) {
+                                if (!imageSaveRes.equals("EXT_UNKNOWN") && !imageSaveRes.equals("EXT_NOT_SUPPORTED")) {
+                                    String imagePath = String.format("/images/%s", imageSaveRes);
+                                    newArticle.setImageArticle(imagePath);
+                                    //
+                                    ArticleDao articleDao_ = new ArticleDao();
+                                    int insertRes = articleDao_.insert(newArticle);
+                                    if (insertRes == -1) ret_data = "{\"status\":0}";
+                                    else ret_data = String.format("{\"status\":1, \"data\":%d}", insertRes);
+                                } else ret_data = "{\"status\":-2}";
+                            } else ret_data = "{\"status\":0}";
+                        } else ret_data = "{\"status\":-2}";
                         //
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -111,5 +125,26 @@ public class Articles extends HttpServlet {
             }
             //
         }
+    }
+
+    //
+    //
+    private Article validateForm(HttpServletRequest request) throws IOException, ServletException {
+        boolean valid = true;
+        //
+        if (request.getPart("articleImg").getSubmittedFileName() == null)
+            valid = false;
+        if (!Validator.isNumeric(request.getParameter("articlePrice")))
+            valid = false;
+        if (!Validator.isNumeric(request.getParameter("articleNb")))
+            valid = false;
+        if (request.getParameter("articleName").length() == 0)
+            valid = false;
+        if (request.getParameter("articleDesc").length() == 0)
+            valid = false;
+        //
+        if (valid)
+            return new Article(Integer.parseInt(request.getParameter("article")), request.getParameter("articleName"), request.getParameter("articleDesc"), Double.parseDouble(request.getParameter("articlePrice")), Integer.parseInt(request.getParameter("articleNb")), "");
+        else return null;
     }
 }

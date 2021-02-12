@@ -18,8 +18,9 @@ public class test extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("sqdqsd : " + getServletContext().getContextPath());
         System.out.println("qqqqqq : " + getServletContext().getRealPath("/WEB-INF"));
-        String saveRes = FileSave.save(request.getPart("articleImg"));
-        System.out.println(saveRes);
+        //String saveRes = FileSave.save(request.getPart("articleImg"));
+        Part ff = request.getPart("articleImg");
+        System.out.println(ff.getSubmittedFileName());
         //
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
