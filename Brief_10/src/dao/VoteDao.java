@@ -15,6 +15,7 @@ import java.util.Calendar;
 public class VoteDao implements DaoVote {
     private static final String _SQL_GET_VOTE = "SELECT * FROM Vote WHERE \"idArticle\" = ? AND \"idUtilisateur\" = ?";
     private static final String _SQL_ADD_VOTE = "INSERT INTO Vote (\"idArticle\", \"idUtilisateur\") VALUES (?, ?)";
+    private static final String _SQL_DLT_VOTE = "DELETE FROM Vote WHERE \"idArticle\" = ? AND \"idUtilisateur\" = ?";
 
     @Override
     public Vote get(int idArticle, int idUtilisateur) {
@@ -66,6 +67,19 @@ public class VoteDao implements DaoVote {
 
     @Override
     public boolean delete(Vote vote) {
-        return false;
+        try {
+            Connection con = Connexion.db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            //
+            PreparedStatement statement = Connexion.initialisationRequetePreparee(con, _SQL_DLT_VOTE, false, vote.getIdArticle(), vote.getIdUtilisateur());
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -7,6 +7,7 @@ import dao.ArticleDao;
 import dao.VoteDao;
 import dao.api.DaoVote;
 import org.checkerframework.checker.units.qual.A;
+import services.VoteSRVC;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,9 +32,13 @@ public class Articles extends HttpServlet {
                     Vote vote = voteDao.get(idArticle, user.getIdutilisateur());
                     if (vote == null) {
                         boolean insertRes = voteDao.insert(new Vote(idArticle, user.getIdutilisateur()));
-                        if(insertRes) ret_data = "{\"status\":\"1\"}";
-                        else ret_data = "{\"status\":\"0\"}";
-                    } else ret_data = "{\"status\":\"-1\"}";
+                        if (insertRes) ret_data = "{\"status\":1}";
+                        else ret_data = "{\"status\":0}";
+                    } else{
+                        boolean removeRes = voteDao.delete(new Vote(idArticle, user.getIdutilisateur()));
+                        if (removeRes) ret_data = "{\"status\":1}";
+                        else ret_data = "{\"status\":0}";
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     ret_data = "null";
@@ -55,8 +60,13 @@ public class Articles extends HttpServlet {
         else {
             try {
                 ArticleDao articleDao = new ArticleDao();
+                VoteSRVC voteSRVC = new VoteSRVC();
+                Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data");
+                //
                 ArrayList<Article> articles = articleDao.getAll();
+                ArrayList<Vote> votes = voteSRVC.getVotesByUser(user.getIdutilisateur());
                 request.setAttribute("_articles_data", articles);
+                request.setAttribute("_votes_data", votes);
                 //
                 request.getRequestDispatcher("articles.jsp").forward(request, response);
             } catch (Exception e) {
