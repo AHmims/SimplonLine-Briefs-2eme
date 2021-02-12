@@ -36,6 +36,14 @@
             <% } %>
         </div>
     <%}%>
+    <div>
+        <input type="text" id="_article_name" placeholder="nom article">
+        <input type="text" id="_article_price" placeholder="prix article">
+        <input type="text" id="_article_nb" placeholder="nb article">
+        <textarea id="_article_desc" placeholder="desc article"></textarea>
+        <input type="file" id="_article_img" placeholder="image article">
+        <button id="_article_validate">add / edit</button>
+    </div>
     <script src="js/axios.min.js"></script>
     <script src="js/articles_<%= user.getRoleUtilisateur().equals("client") ? "CLIENT" : "ADMIN" %>.js"></script>
 </body>

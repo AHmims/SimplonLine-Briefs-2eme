@@ -10,6 +10,7 @@ import org.checkerframework.checker.units.qual.A;
 import services.VoteSRVC;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+@MultipartConfig
 public class Articles extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final String _action = request.getParameter("action");
@@ -54,6 +56,16 @@ public class Articles extends HttpServlet {
                         boolean deleteRes = articleDao.delete(new Article(idArticle));
                         if (deleteRes) ret_data = "{\"status\":1}";
                         else ret_data = "{\"status\":0}";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        ret_data = "null";
+                    }
+                } else ret_data = "{\"status\":-1}";
+                break;
+            case "edit":
+                if (user.getRoleUtilisateur().equals("admin")) {
+                    try {
+
                     } catch (Exception e) {
                         e.printStackTrace();
                         ret_data = "null";

@@ -5,8 +5,24 @@ for (let i = 0; i < articles_editBtn.length; i++) {
     let article_id = articles_editBtn[i].dataset.article;
     //EDIT
     articles_editBtn[i].addEventListener('click', async e => {
-        // let response = await axios.post(`/articles?action=edit&article=${article_id}&`);
-        // console.log(response);
+        //validate inputs before
+        /*let response = await axios.post(`/articles?action=edit&article=${article_id}&`);
+        console.log(response);*/
+        let formData = new FormData();
+        formData.append("action", "hmmm");
+        formData.append("dafuk", "meh");
+        axios.post('/formData-test',
+                formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            ).then(function () {
+                console.log('SUCCESS!!');
+            })
+            .catch(function () {
+                console.log('FAILURE!!');
+            });
     });
     //DELETE
     articles_deleteBtn[i].addEventListener('click', async e => {
