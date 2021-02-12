@@ -81,9 +81,12 @@ public class Articles extends HttpServlet {
                                     newArticle.setImageArticle(imagePath);
                                     //
                                     ArticleDao articleDao_ = new ArticleDao();
-                                    int insertRes = articleDao_.insert(newArticle);
+                                    boolean updateRes = articleDao_.update(newArticle);
+                                    if (!updateRes) ret_data = "{\"status\":0}";
+                                    else ret_data = "{\"status\":1}";
+                                    /*int insertRes = articleDao_.insert(newArticle);
                                     if (insertRes == -1) ret_data = "{\"status\":0}";
-                                    else ret_data = String.format("{\"status\":1, \"data\":%d}", insertRes);
+                                    else ret_data = String.format("{\"status\":1, \"data\":%d}", insertRes);*/
                                 } else ret_data = "{\"status\":-2}";
                             } else ret_data = "{\"status\":0}";
                         } else ret_data = "{\"status\":-2}";

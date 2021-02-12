@@ -70,8 +70,11 @@ public class ArticleDao implements DaoArticle {
             int res = -1;
             if(statement.executeUpdate() >= 1){
                 ResultSet genKeys = statement.getGeneratedKeys();
-                if(genKeys.next())
+                if(genKeys.next()) {
+                    System.out.println(genKeys.getInt("idArticle"));
+                    System.out.println(genKeys);
                     res = genKeys.getInt(1);
+                }
             }
             con.close();
             return res;
