@@ -1,6 +1,7 @@
 <%@ page import="beans.Article" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="beans.Vote" %>
+<%@ page import="beans.Utilisateur" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -11,6 +12,7 @@
 <body>
     <span>${__user_in}</span>
     <h1>ARTICLES</h1>
+    <% Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data"); %>
     <% for (Article article : (ArrayList<Article>) request.getAttribute("_articles_data")) { %>
         <% boolean voted = false; %>
         <% for (Vote vote : (ArrayList<Vote>) request.getAttribute("_votes_data")){ %>
@@ -22,12 +24,19 @@
             <img src="<%= article.getImageArticle() %>" width="100px">
             <span><%= article.getNomArticle() %></span>
             <span><%= article.getPrixArticle() %>DH</span>
-            <button class="voteBtn" data-toggle="<%=voted %>">
-                <span><%= voted ? "unVOTE" : "VOTE"%></span>
-            </button>
+            <% if(user.getRoleUtilisateur().equals("client")){ %>
+                <button class="voteBtn" data-toggle="<%=voted %>">
+                    <span><%= voted ? "unVOTE" : "VOTE"%></span>
+                </button>
+            <% }else { %>
+                <div>
+                    <button class="editBtn">Edit</button>
+                    <button class="deleteBtn">Delete</button>
+                </div>
+            <% } %>
         </div>
     <%}%>
     <script src="js/axios.min.js"></script>
-    <script src="js/articles.js"></script>
+    <script src="js/articles_<%= user.getRoleUtilisateur().equals("client") ? "CLIENT" : "ADMIN" %>.js"></script>
 </body>
 </html>

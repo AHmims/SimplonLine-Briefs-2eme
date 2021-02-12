@@ -10,12 +10,30 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class ArticleDao implements DaoArticle {
+    private static final String _SQL_GET_ARTICLE = "SELECT * FROM Article WHERE \"idArticle\" = ?";
     private static final String _SQL_ALL_ARTICLES = "SELECT * FROM Article";
+    private static final String _SQL_DLT_ARTICLE = "DELETE FROM Article WHERE \"idArticle\" = ?";
+    private static final String _SQL_EDIT_ARTICLE = "UPDATE Article SET \"nomArticle\" = ?, \"descArticle\" = ?, \"prixArticle\" = ?, \"nbArticle\" = ?, \"imageArticle\" = ? WHERE \"idArticle\" = ?";
 
     //
     @Override
     public Article get(int idArticle) {
-        return null;
+        try {
+            Connection con = Connexion.db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            //
+            PreparedStatement statement = Connexion.initialisationRequetePreparee(con, _SQL_GET_ARTICLE, false, idArticle);
+            ResultSet res = statement.executeQuery();
+            if (res.next()) {
+                return new Article(res.getInt("idArticle"), res.getString("nomArticle").trim(), res.getString("descArticle").trim(), res.getDouble("prixArticle"), res.getInt("nbArticle"), res.getString("imageArticle").trim());
+            }
+            //
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -46,11 +64,37 @@ public class ArticleDao implements DaoArticle {
 
     @Override
     public boolean update(Article article) {
-        return false;
+        try {
+            Connection con = Connexion.db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            //
+            PreparedStatement statement = Connexion.initialisationRequetePreparee(con, _SQL_EDIT_ARTICLE, false, article.getNomArticle(), article.getDescArticle(), article.getPrixArticle(), article.getNbArticle(), article.getImageArticle(), article.getIdarticle());
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean delete(Article article) {
-        return false;
+        try {
+            Connection con = Connexion.db_connect();
+            if (con == null)
+                throw new Exception("Connection error");
+            //
+            PreparedStatement statement = Connexion.initialisationRequetePreparee(con, _SQL_DLT_ARTICLE, false, article.getIdarticle());
+            //
+            boolean res = statement.executeUpdate() >= 1;
+            con.close();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
