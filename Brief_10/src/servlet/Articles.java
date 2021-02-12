@@ -97,6 +97,20 @@ public class Articles extends HttpServlet {
                     }
                 } else ret_data = "{\"status\":-1}";
                 break;
+            case "get":
+                if (user.getRoleUtilisateur().equals("admin")) {
+                    try {
+                        ArticleDao articleDao = new ArticleDao();
+                        Article article_ = articleDao.get(idArticle);
+                        if (article_ != null) {
+                            ret_data = String.format("{\"status\":1, \"article\":{\"articleId\":%d, \"articleName\":\"%s\", \"articleDesc\":\"%s\", \"articlePrice\":%f, \"articleNb\":%d, \"articleImg\":\"%s\"}}", article_.getIdarticle(), article_.getNomArticle(), article_.getDescArticle(), article_.getPrixArticle(), article_.getNbArticle(), article_.getImageArticle());
+                        } else ret_data = "{\"status\":0}";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        ret_data = "null";
+                    }
+                } else ret_data = "{\"status\":-1}";
+                break;
         }
         //
         //

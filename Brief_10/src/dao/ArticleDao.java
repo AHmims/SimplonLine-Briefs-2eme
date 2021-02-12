@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class ArticleDao implements DaoArticle {
-    private static final String _SQL_GET_ARTICLE = "SELECT * FROM Article WHERE \"idArticle\" = ?";
+    private static final String _SQL_GET_ARTICLE = "SELECT * FROM public.article WHERE \"idarticle\" = ?";
     private static final String _SQL_ALL_ARTICLES = "SELECT * FROM Article";
     private static final String _SQL_ADD_ARTICLE = "INSERT INTO public.article (\"nomArticle\", \"descArticle\", \"prixArticle\", \"nbArticle\", \"imageArticle\") VALUES (?, ?, ?, ?, ?);";
     private static final String _SQL_DLT_ARTICLE = "DELETE FROM public.article WHERE (article.idarticle = ?);";
