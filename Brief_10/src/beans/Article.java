@@ -25,6 +25,10 @@ public class Article {
         this.nbArticle = nbArticle;
         this.imageArticle = imageArticle;
     }
+
+    public Article(int idarticle) {
+        this.idarticle = idarticle;
+    }
     //
 
     public int getIdarticle() {

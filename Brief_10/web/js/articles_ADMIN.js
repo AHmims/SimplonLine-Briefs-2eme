@@ -13,13 +13,16 @@ for (let i = 0; i < articles_editBtn.length; i++) {
         //maybe a confirmation prompt here !
         let response = await axios.post(`/articles?action=delete&article=${article_id}`);
         console.log(response);
-        if (response.data.status == 1) {
-            articles_deleteBtn[i].remove();
-        } else if (response.data.status == 0) {
-            console.log("Server error");
-        } else {
-            console.log("you don't have the right to perform this action");
-        }
+        if (response.data != null || response.data != 'null') {
+            if (response.data.status == 1) {
+                articles_deleteBtn[i].remove();
+            } else if (response.data.status == 0) {
+                console.log("Server error");
+            } else {
+                console.log("you don't have the right to perform this action");
+            }
+        } else
+            console.log('Fatal error server side');
     });
 }
 //

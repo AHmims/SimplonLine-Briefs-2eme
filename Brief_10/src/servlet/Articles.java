@@ -28,7 +28,7 @@ public class Articles extends HttpServlet {
         String ret_data = "";
         switch (_action) {
             case "vote":
-                if(user.getRoleUtilisateur().equals("client")) {
+                if (user.getRoleUtilisateur().equals("client")) {
                     try {
                         VoteDao voteDao = new VoteDao();
                         Vote vote = voteDao.get(idArticle, user.getIdutilisateur());
@@ -45,27 +45,20 @@ public class Articles extends HttpServlet {
                         e.printStackTrace();
                         ret_data = "null";
                     }
-                }else ret_data = "{\"status\":-1}";
+                } else ret_data = "{\"status\":-1}";
                 break;
             case "delete":
-                if(user.getRoleUtilisateur().equals("admin")) {
+                if (user.getRoleUtilisateur().equals("admin")) {
                     try {
-                        VoteDao voteDao = new VoteDao();
-                        Vote vote = voteDao.get(idArticle, user.getIdutilisateur());
-                        if (vote == null) {
-                            boolean insertRes = voteDao.insert(new Vote(idArticle, user.getIdutilisateur()));
-                            if (insertRes) ret_data = "{\"status\":1}";
-                            else ret_data = "{\"status\":0}";
-                        } else {
-                            boolean removeRes = voteDao.delete(new Vote(idArticle, user.getIdutilisateur()));
-                            if (removeRes) ret_data = "{\"status\":1}";
-                            else ret_data = "{\"status\":0}";
-                        }
+                        ArticleDao articleDao = new ArticleDao();
+                        boolean deleteRes = articleDao.delete(new Article(idArticle));
+                        if (deleteRes) ret_data = "{\"status\":1}";
+                        else ret_data = "{\"status\":0}";
                     } catch (Exception e) {
                         e.printStackTrace();
                         ret_data = "null";
                     }
-                }else ret_data = "{\"status\":-1}";
+                } else ret_data = "{\"status\":-1}";
                 break;
         }
         //
