@@ -9,20 +9,11 @@ for (let i = 0; i < articles_editBtn.length; i++) {
         /*let response = await axios.post(`/articles?action=edit&article=${article_id}&`);
         console.log(response);*/
         let formData = new FormData();
-        formData.append("action", "hmmm");
-        formData.append("dafuk", "meh");
-        axios.post('/formData-test',
-                formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }
-            ).then(function () {
-                console.log('SUCCESS!!');
-            })
-            .catch(function () {
-                console.log('FAILURE!!');
-            });
+        formData.append("action", "edit");
+        formData.append("article", article_id);
+        let response = await articleFormDataRequest(formData);
+        //
+        console.log(response);
     });
     //DELETE
     articles_deleteBtn[i].addEventListener('click', async e => {
@@ -42,3 +33,17 @@ for (let i = 0; i < articles_editBtn.length; i++) {
     });
 }
 //
+const articleFormDataRequest = async formData => {
+    formData.append("articleName", document.getElementById('_article_name').value);
+    formData.append("articlePrice", document.getElementById('_article_price').value);
+    formData.append("articleNb", document.getElementById('_article_nb').value);
+    formData.append("articleDesc", document.getElementById('_article_desc').value);
+    formData.append("articleDesc", document.getElementById('_article_desc').value);
+    formData.append("articleImg", document.getElementById('_article_img').files[0]);
+    //
+    return await axios.post('/formData-test', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+}

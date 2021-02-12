@@ -1,5 +1,7 @@
 package servlet;
 
+import helpers.FileSave;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +16,10 @@ import java.nio.file.Paths;
 @MultipartConfig
 public class test extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println(request.getParameter("action"));
-        //https://stackoverflow.com/a/2424824/14427192
-        Part filePart = request.getPart("file");
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        InputStream fileContent = filePart.getInputStream();
+        System.out.println("sqdqsd : " + getServletContext().getContextPath());
+        System.out.println("qqqqqq : " + getServletContext().getRealPath("/WEB-INF"));
+        boolean saveRes = FileSave.save(request.getPart("articleImg"));
+        System.out.println(saveRes);
         //
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");

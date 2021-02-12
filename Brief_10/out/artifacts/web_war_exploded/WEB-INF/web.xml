@@ -17,6 +17,10 @@
         <servlet-class>servlet.Articles</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>serve_images</servlet-name>
+        <servlet-class>servlet.ServeImages</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>test</servlet-name>
         <servlet-class>servlet.test</servlet-class>
     </servlet>
@@ -43,5 +47,9 @@
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/formData-test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>serve_images</servlet-name>
+        <url-pattern>/images/*</url-pattern>
     </servlet-mapping>
 </web-app>

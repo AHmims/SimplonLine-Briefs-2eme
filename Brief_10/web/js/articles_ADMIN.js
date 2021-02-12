@@ -11,7 +11,7 @@ for (let i = 0; i < articles_editBtn.length; i++) {
         let formData = new FormData();
         formData.append("action", "edit");
         formData.append("article", article_id);
-        let response = await articleFormData(formData);
+        let response = await articleFormDataRequest(formData);
         //
         console.log(response);
     });
@@ -33,7 +33,7 @@ for (let i = 0; i < articles_editBtn.length; i++) {
     });
 }
 //
-const articleFormDataRequest = (formData) => {
+const articleFormDataRequest = async formData => {
     formData.append("articleName", document.getElementById('_article_name').value);
     formData.append("articlePrice", document.getElementById('_article_price').value);
     formData.append("articleNb", document.getElementById('_article_nb').value);
@@ -41,7 +41,7 @@ const articleFormDataRequest = (formData) => {
     formData.append("articleDesc", document.getElementById('_article_desc').value);
     formData.append("articleImg", document.getElementById('_article_img').files[0]);
     //
-    return await axios.post('/articles', formData, {
+    return await axios.post('/formData-test', formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

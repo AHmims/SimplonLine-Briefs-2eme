@@ -6,6 +6,7 @@ import beans.Vote;
 import dao.ArticleDao;
 import dao.VoteDao;
 import dao.api.DaoVote;
+import helpers.FileSave;
 import org.checkerframework.checker.units.qual.A;
 import services.VoteSRVC;
 
@@ -14,9 +15,12 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -65,7 +69,8 @@ public class Articles extends HttpServlet {
             case "edit":
                 if (user.getRoleUtilisateur().equals("admin")) {
                     try {
-
+                        boolean saveRes = FileSave.save(request.getPart("file"));
+                        //
                     } catch (Exception e) {
                         e.printStackTrace();
                         ret_data = "null";
