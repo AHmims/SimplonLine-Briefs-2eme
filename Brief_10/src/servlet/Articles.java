@@ -28,6 +28,7 @@ import java.util.Calendar;
 @MultipartConfig
 public class Articles extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("hmmm");
         final String _action = request.getParameter("action");
         final int idArticle = Integer.parseInt(request.getParameter("article"));
         Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data");
@@ -71,7 +72,7 @@ public class Articles extends HttpServlet {
                 if (user.getRoleUtilisateur().equals("admin")) {
                     try {
                         //Form validation
-                        Article newArticle = validateForm(request);
+                        Article newArticle = validateForm(request, false);
                         //
                         if (newArticle != null) {
                             String imageSaveRes = FileSave.save(request.getPart("articleImg"), "image");
@@ -115,7 +116,7 @@ public class Articles extends HttpServlet {
                 if (user.getRoleUtilisateur().equals("admin")) {
                     try {
                         //Form validation
-                        Article newArticle = validateForm(request);
+                        Article newArticle = validateForm(request,true);
                         //
                         if (newArticle != null) {
                             String imageSaveRes = FileSave.save(request.getPart("articleImg"), "image");
@@ -176,7 +177,7 @@ public class Articles extends HttpServlet {
 
     //
     //
-    private Article validateForm(HttpServletRequest request) throws IOException, ServletException {
+    private Article validateForm(HttpServletRequest request, boolean isNew) throws IOException, ServletException {
         boolean valid = true;
         //
         if (request.getPart("articleImg").getSubmittedFileName() == null)
@@ -190,8 +191,12 @@ public class Articles extends HttpServlet {
         if (request.getParameter("articleDesc").length() == 0)
             valid = false;
         //
-        if (valid)
-            return new Article(Integer.parseInt(request.getParameter("article")), request.getParameter("articleName"), request.getParameter("articleDesc"), Double.parseDouble(request.getParameter("articlePrice")), Integer.parseInt(request.getParameter("articleNb")), "");
-        else return null;
+        if (valid) {
+            Article article = new Article(request.getParameter("articleName"), request.getParameter("articleDesc"), Double.parseDouble(request.getParameter("articlePrice")), Integer.parseInt(request.getParameter("articleNb")), "");
+            if (!isNew)
+                article.setIdarticle(Integer.parseInt(request.getParameter("article")));
+            //
+            return article;
+        } else return null;
     }
 }

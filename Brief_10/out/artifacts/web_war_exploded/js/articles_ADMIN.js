@@ -55,7 +55,7 @@ async function deleteEvent(article_id, i) {
 //
 //event for form submit
 document.getElementById('_article_validate').addEventListener('click', async e => {
-    if (idArticle == -2) {
+    if (articlePos == -2) {
         let formData = new FormData();
         formData.append("action", "add");
         let response = await articleFormDataRequest(formData);
@@ -108,6 +108,7 @@ const articleFormDataRequest = async formData => {
     formData.append("articleNb", document.getElementById('_article_nb').value);
     formData.append("articleDesc", document.getElementById('_article_desc').value);
     formData.append("articleImg", document.getElementById('_article_img').files[0]);
+    console.log(formData);
     //
     return await axios.post('/articles', formData, {
         headers: {

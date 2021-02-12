@@ -58,6 +58,7 @@ document.getElementById('_article_validate').addEventListener('click', async e =
     if (articlePos == -2) {
         let formData = new FormData();
         formData.append("action", "add");
+        formData.append("article", -999);
         let response = await articleFormDataRequest(formData);
         //
         if (response.data != null || response.data != 'null') {
@@ -72,7 +73,7 @@ document.getElementById('_article_validate').addEventListener('click', async e =
             }
         } else
             console.log('Fatal error server side');
-    } else {
+    } else if (articlePos != -1) {
         idArticle = articles_editBtn[articlePos].dataset.article;
         if (idArticle != -1) {
             //validate inputs before
@@ -99,7 +100,7 @@ document.getElementById('_article_validate').addEventListener('click', async e =
                 console.log('Fatal error server side');
 
         } else console.log('nn');
-    }
+    } else console.log("action can't be performed");
 });
 //
 const articleFormDataRequest = async formData => {
@@ -108,6 +109,7 @@ const articleFormDataRequest = async formData => {
     formData.append("articleNb", document.getElementById('_article_nb').value);
     formData.append("articleDesc", document.getElementById('_article_desc').value);
     formData.append("articleImg", document.getElementById('_article_img').files[0]);
+    console.log(formData);
     //
     return await axios.post('/articles', formData, {
         headers: {
