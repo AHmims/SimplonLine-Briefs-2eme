@@ -21,18 +21,18 @@
             <% } %>
         <% } %>
         <div class="articleCard">
-            <img src="<%= article.getImageArticle() %>" width="100px">
-            <span><%= article.getNomArticle() %></span>
-            <span><%= article.getPrixArticle() %>DH</span>
+            <img src="<%= article.getImageArticle() %>" width="100px" class="articleCard_image">
+            <span class="articleCard_name"><%= article.getNomArticle() %></span>
+            <span class="articleCard_price"><%= article.getPrixArticle() %>DH</span>
             <% if(user.getRoleUtilisateur().equals("client")){ %>
-                <button class="voteBtn" data-article="<%= article.getIdarticle() %>" data-toggle="<%=voted %>">
-                    <span><%= voted ? "unVOTE" : "VOTE"%></span>
-                </button>
+            <button class="voteBtn" data-article="<%= article.getIdarticle() %>" data-toggle="<%=voted %>">
+                <span><%= voted ? "unVOTE" : "VOTE"%></span>
+            </button>
             <% }else { %>
-                <div>
-                    <button class="editBtn" data-article="<%= article.getIdarticle() %>">Edit</button>
-                    <button class="deleteBtn">Delete</button>
-                </div>
+            <div>
+                <button class="editBtn" data-article="<%= article.getIdarticle() %>">Edit</button>
+                <button class="deleteBtn">Delete</button>
+            </div>
             <% } %>
         </div>
     <%}%>
@@ -47,4 +47,5 @@
     <script src="js/axios.min.js"></script>
     <script src="js/articles_<%= user.getRoleUtilisateur().equals("client") ? "CLIENT" : "ADMIN" %>.js"></script>
 </body>
+
 </html>
