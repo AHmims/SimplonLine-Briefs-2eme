@@ -13,6 +13,7 @@
     <span>${__user_in}</span>
     <h1>ARTICLES</h1>
     <% Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data"); %>
+    <div id="articlesContainer">
     <% for (Article article : (ArrayList<Article>) request.getAttribute("_articles_data")) { %>
         <% boolean voted = false; %>
         <% for (Vote vote : (ArrayList<Vote>) request.getAttribute("_votes_data")){ %>
@@ -36,6 +37,10 @@
             <% } %>
         </div>
     <%}%>
+    </div>
+    <div>
+        <button id="addBtn">Add article</button>
+    </div>
     <div>
         <input type="text" id="_article_name" placeholder="nom article">
         <input type="text" id="_article_price" placeholder="prix article">
