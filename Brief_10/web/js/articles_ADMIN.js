@@ -55,7 +55,7 @@ async function deleteEvent(article_id, i) {
 //
 //event for form submit
 document.getElementById('_article_validate').addEventListener('click', async e => {
-    if (idArticle == -2) {
+    if (articlePos == -2) {
         let formData = new FormData();
         formData.append("action", "add");
         let response = await articleFormDataRequest(formData);

@@ -55,7 +55,6 @@ async function deleteEvent(article_id, i) {
 //
 //event for form submit
 document.getElementById('_article_validate').addEventListener('click', async e => {
-    idArticle = articles_editBtn[articlePos].dataset.article;
     if (idArticle == -2) {
         let formData = new FormData();
         formData.append("action", "add");
@@ -73,31 +72,34 @@ document.getElementById('_article_validate').addEventListener('click', async e =
             }
         } else
             console.log('Fatal error server side');
-    } else if (idArticle != -1) {
-        //validate inputs before
-        /*let response = await axios.post(`/articles?action=edit&article=${article_id}&`);
-        console.log(response);*/
-        let formData = new FormData();
-        formData.append("action", "edit");
-        formData.append("article", idArticle);
-        let response = await articleFormDataRequest(formData);
-        //
-        if (response.data != null || response.data != 'null') {
-            if (response.data.status == 1) {
-                document.getElementsByClassName('articleCard_image')[articlePos].setAttribute('src', `/images/${document.getElementById('_article_img').files[0].name}`);
-                document.getElementsByClassName('articleCard_name')[articlePos].innerText = document.getElementById('_article_name').value;
-                document.getElementsByClassName('articleCard_price')[articlePos].innerText = document.getElementById('_article_price').value;
-            } else if (response.data.status == 0) {
-                console.log("Server error, edits not made");
-            } else if (response.data.status == -2) {
-                console.log("Form not valid");
-            } else {
-                console.log("you don't have the right to perform this action");
-            }
-        } else
-            console.log('Fatal error server side');
+    } else {
+        idArticle = articles_editBtn[articlePos].dataset.article;
+        if (idArticle != -1) {
+            //validate inputs before
+            /*let response = await axios.post(`/articles?action=edit&article=${article_id}&`);
+            console.log(response);*/
+            let formData = new FormData();
+            formData.append("action", "edit");
+            formData.append("article", idArticle);
+            let response = await articleFormDataRequest(formData);
+            //
+            if (response.data != null || response.data != 'null') {
+                if (response.data.status == 1) {
+                    document.getElementsByClassName('articleCard_image')[articlePos].setAttribute('src', `/images/${document.getElementById('_article_img').files[0].name}`);
+                    document.getElementsByClassName('articleCard_name')[articlePos].innerText = document.getElementById('_article_name').value;
+                    document.getElementsByClassName('articleCard_price')[articlePos].innerText = document.getElementById('_article_price').value;
+                } else if (response.data.status == 0) {
+                    console.log("Server error, edits not made");
+                } else if (response.data.status == -2) {
+                    console.log("Form not valid");
+                } else {
+                    console.log("you don't have the right to perform this action");
+                }
+            } else
+                console.log('Fatal error server side');
 
-    } else console.log('nn');
+        } else console.log('nn');
+    }
 });
 //
 const articleFormDataRequest = async formData => {
