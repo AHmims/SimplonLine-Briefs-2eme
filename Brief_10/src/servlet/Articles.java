@@ -28,7 +28,6 @@ import java.util.Calendar;
 @MultipartConfig
 public class Articles extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("hmmm");
         final String _action = request.getParameter("action");
         final int idArticle = Integer.parseInt(request.getParameter("article"));
         Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data");
