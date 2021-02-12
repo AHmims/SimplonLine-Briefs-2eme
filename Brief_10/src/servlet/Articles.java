@@ -69,7 +69,10 @@ public class Articles extends HttpServlet {
             case "edit":
                 if (user.getRoleUtilisateur().equals("admin")) {
                     try {
-                        boolean saveRes = FileSave.save(request.getPart("file"));
+                        String imageSaveRes = FileSave.save(request.getPart("articleImg"), "image");
+                        if (imageSaveRes != null) {
+                            String imagePath = String.format("/images/%s", imageSaveRes);
+                        } else ret_data = "{\"status\":0}";
                         //
                     } catch (Exception e) {
                         e.printStackTrace();
