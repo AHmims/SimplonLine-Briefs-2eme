@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ArticleDao implements DaoArticle {
     private static final String _SQL_GET_ARTICLE = "SELECT * FROM Article WHERE \"idArticle\" = ?";
     private static final String _SQL_ALL_ARTICLES = "SELECT * FROM Article";
-    private static final String _SQL_DLT_ARTICLE = "DELETE FROM Article WHERE \"idArticle\" = ?";
+    private static final String _SQL_DLT_ARTICLE = "DELETE FROM public.article WHERE (article.idarticle = ?);";
     private static final String _SQL_EDIT_ARTICLE = "UPDATE Article SET \"nomArticle\" = ?, \"descArticle\" = ?, \"prixArticle\" = ?, \"nbArticle\" = ?, \"imageArticle\" = ? WHERE \"idArticle\" = ?";
 
     //

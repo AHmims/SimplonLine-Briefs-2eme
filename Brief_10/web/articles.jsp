@@ -20,17 +20,17 @@
                 <% voted = true; %>
             <% } %>
         <% } %>
-        <div data-article="<%= article.getIdarticle() %>">
+        <div class="articleCard">
             <img src="<%= article.getImageArticle() %>" width="100px">
             <span><%= article.getNomArticle() %></span>
             <span><%= article.getPrixArticle() %>DH</span>
             <% if(user.getRoleUtilisateur().equals("client")){ %>
-                <button class="voteBtn" data-toggle="<%=voted %>">
+                <button class="voteBtn" data-article="<%= article.getIdarticle() %>" data-toggle="<%=voted %>">
                     <span><%= voted ? "unVOTE" : "VOTE"%></span>
                 </button>
             <% }else { %>
                 <div>
-                    <button class="editBtn">Edit</button>
+                    <button class="editBtn" data-article="<%= article.getIdarticle() %>">Edit</button>
                     <button class="deleteBtn">Delete</button>
                 </div>
             <% } %>

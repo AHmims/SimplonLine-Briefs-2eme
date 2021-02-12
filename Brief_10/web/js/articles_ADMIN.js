@@ -2,7 +2,7 @@ const articles_editBtn = document.getElementsByClassName('editBtn');
 const articles_deleteBtn = document.getElementsByClassName('deleteBtn');
 //
 for (let i = 0; i < articles_editBtn.length; i++) {
-    let article_id = articles_editBtn[i].parentElement.dataset.article;
+    let article_id = articles_editBtn[i].dataset.article;
     //EDIT
     articles_editBtn[i].addEventListener('click', async e => {
         // let response = await axios.post(`/articles?action=edit&article=${article_id}&`);
@@ -15,7 +15,7 @@ for (let i = 0; i < articles_editBtn.length; i++) {
         console.log(response);
         if (response.data != null || response.data != 'null') {
             if (response.data.status == 1) {
-                articles_deleteBtn[i].remove();
+                document.getElementsByClassName('articleCard')[i].remove();
             } else if (response.data.status == 0) {
                 console.log("Server error");
             } else {
