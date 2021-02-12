@@ -111,6 +111,36 @@ public class Articles extends HttpServlet {
                     }
                 } else ret_data = "{\"status\":-1}";
                 break;
+            case "add":
+                if (user.getRoleUtilisateur().equals("admin")) {
+                    try {
+                        //Form validation
+                        Article newArticle = validateForm(request);
+                        //
+                        if (newArticle != null) {
+                            String imageSaveRes = FileSave.save(request.getPart("articleImg"), "image");
+                            if (imageSaveRes != null) {
+                                if (!imageSaveRes.equals("EXT_UNKNOWN") && !imageSaveRes.equals("EXT_NOT_SUPPORTED")) {
+                                    String imagePath = String.format("/images/%s", imageSaveRes);
+                                    newArticle.setImageArticle(imagePath);
+                                    //
+                                    ArticleDao articleDao_ = new ArticleDao();
+                                    int insertRes = articleDao_.insert(newArticle);
+                                    if (insertRes == -1) ret_data = "{\"status\":0}";
+                                    else {
+                                        newArticle.setIdarticle(insertRes);
+                                        ret_data = String.format("{\"status\":1, \"article\":{\"articleId\":%d, \"articleName\":\"%s\", \"articleDesc\":\"%s\", \"articlePrice\":%f, \"articleNb\":%d, \"articleImg\":\"%s\"}}", newArticle.getIdarticle(), newArticle.getNomArticle(), newArticle.getDescArticle(), newArticle.getPrixArticle(), newArticle.getNbArticle(), newArticle.getImageArticle());
+                                    }
+                                } else ret_data = "{\"status\":-2}";
+                            } else ret_data = "{\"status\":0}";
+                        } else ret_data = "{\"status\":-2}";
+                        //
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        ret_data = "null";
+                    }
+                } else ret_data = "{\"status\":-1}";
+                break;
         }
         //
         //
