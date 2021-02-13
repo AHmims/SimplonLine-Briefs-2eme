@@ -11,7 +11,8 @@ module.exports = {
       borderRadius: {
         '20': '20px',
         '34': '34px',
-        '40': '40px'
+        '40': '40px',
+        '50': '50px'
       },
       width: {
         '456': '456px',
@@ -23,6 +24,15 @@ module.exports = {
       },
       borderWidth: {
         '3': '3px'
+      },
+      spacing: {
+        '52_': '52px',
+        '13': '50px',
+        '420': '420px'
+      },
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        'article': 'repeat(auto-fill, 300px)'
       },
       colors: {
         amber: colors.amber,
