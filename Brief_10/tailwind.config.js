@@ -6,6 +6,11 @@ module.exports = {
       fontFamily: {
         'Kollektif': ['Kollektif', 'sans-serif'],
         'Source Sans Pro': ['Source Sans Pro', 'sans-serif']
+      },
+      borderRadius: {
+        '20': '20px',
+        '34': '34px',
+        '40': '40px'
       }
     },
   },
