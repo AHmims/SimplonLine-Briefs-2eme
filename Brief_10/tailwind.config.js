@@ -19,6 +19,9 @@ module.exports = {
         '719': '719px',
         '650': '650px'
       },
+      boxShadow: {
+        'avatar': 'inset 0px 0px 0px 3px #FEF3C7;'
+      },
       zIndex: {
         '-1': '-1'
       },

@@ -1,4 +1,5 @@
 const articles_btn = document.getElementsByClassName('voteBtn');
+// 
 for (let i = 0; i < articles_btn.length; i++) {
     let article_id = articles_btn[i].dataset.article;
     //
