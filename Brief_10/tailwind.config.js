@@ -39,12 +39,16 @@ module.exports = {
         coolGray: colors.coolGray,
         warmGray: colors.warmGray,
         orange: colors.orange,
-        rose: colors.rose
+        rose: colors.rose,
+        violet: colors.violet
       }
     },
   },
   variants: {
     extend: {},
+    scrollbar: ['rounded']
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ]
 }
