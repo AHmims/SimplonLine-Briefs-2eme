@@ -21,6 +21,9 @@ module.exports = {
       zIndex: {
         '-1': '-1'
       },
+      borderWidth: {
+        '3': '3px'
+      },
       colors: {
         amber: colors.amber,
         coolGray: colors.coolGray,
