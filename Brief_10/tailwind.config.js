@@ -6,12 +6,19 @@ module.exports = {
     extend: {
       fontFamily: {
         'Kollektif': ['Kollektif', 'sans-serif'],
-        'Source Sans Pro': ['Source Sans Pro', 'sans-serif']
+        'SourceSansPro': ['"Source Sans Pro"', 'sans-serif']
       },
       borderRadius: {
         '20': '20px',
         '34': '34px',
         '40': '40px'
+      },
+      width: {
+        '456': '456px',
+        '719': '719px'
+      },
+      zIndex: {
+        '-1': '-1'
       },
       colors: {
         amber: colors.amber,

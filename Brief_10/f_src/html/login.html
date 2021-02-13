@@ -12,7 +12,7 @@
 <body class="bg-white p-9 h-screen">
     <div class="w-full h-full flex flex-col">
         <!-- banner -->
-        <div class="w-full h-full flex flex-col space-y-24 rounded-40 px-16 pt-12 bg-amber-100 relative overflow-hidden">
+        <div class="w-full h-full flex flex-col space-y-24 px-16 pt-12 relative">
             <!-- navBar -->
             <div class="w-full flex flex-row items-center justify-between">
                 <svg width="116" height="28" viewBox="0 0 116 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,20 +35,30 @@
                 </div>
             </div>
             <!-- content -->
-            <div class="w-full h-full flex flex-col space-y-12">
-                <h1 class="font-Kollektif font-bold text-warmGray-900 text-8xl max-w-5xl">Les Meilleurs Produits de la Meilleure Origine</h1>
-                <span class="text-warmGray-700 font-SourceSansPro font-normal text-4xl max-w-3xl block">C'est la matière brute, le fait main, la main qui crée, la terre qui cuit, la création unique.</span>
-                <a href="#">
-                    <span class="py-12 px-20 rounded-34 bg-orange-600 flex w-min items-center">
-                        <span class="whitespace-nowrap text-white font-Kollektif text-4xl tracking-wide">Découvrez nos produits</span>
-                        <svg class="ml-5" width="38" height="39" viewBox="0 0 38 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M33.25 19.5H4.75M22.1667 8.41669L33.25 19.5L22.1667 8.41669ZM33.25 19.5L22.1667 30.5834L33.25 19.5Z" stroke="white" stroke-width="4.17" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </span>
-                </a>
+            <div class="w-full h-full flex flex-row justify-end">
+                <!-- form -->
+                <div class="px-36 space-y-10">
+                    <div class="w-456">
+                        <!-- header -->
+                        <div class="text-center">
+                            <h1 class="font-Kollektif text-5xl text-warmGray-900">Bienvenue sur SBahía</h1>
+                            <span class="font-SourceSansPro text-warmGray-700 mt-1 text-2xl">Veuillez fournir votre login et votre mot de passe pour accéder à la plate-forme</span>
+                        </div>
+                        <!-- form -->
+                        <form action="" class="w-full flex flex-col mt-10">
+                            <input type="text" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                            <input type="text" placeholder="Mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                            <button class="mt-10 p-6 bg-amber-200 text-amber-900 rounded-20 font-Kollektif font-normal text-2xl">Authentifier</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             <!-- abs -->
-            <img src="../../images/hand.png" class="absolute right-0 bottom-0" alt="">
+            <div class="h-full w-719 rounded-40 bg-amber-100 absolute top-0 left-0 -z-1" style="margin: 0;">
+                <div class="w-full h-full relative">
+                    <img src="../../images/Saly-1.png" alt="" class="absolute max-w-none -bottom-32 -right-56">
+                </div>
+            </div>
         </div>
         <!-- white space -->
         <div class="h-14 flex-none"></div>
