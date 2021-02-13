@@ -165,14 +165,14 @@ document.getElementById('addBtn').addEventListener('click', e => {
     //show form
     if (sideBar.classList.contains('hidden')) {
         sideBar.classList.remove('hidden');
-        articlePos = -2;
     } else {
         if (articlePos == -1 || articlePos == -2) {
             //articlePos = -1;
             sideBar.classList.add('hidden');
         }
-        articlePos = -2;
     }
+    articlePos = -2;
+    __last_selected_article = articlePos;
     document.getElementById('_article_name').value = "";
     document.getElementById('_article_price').value = "";
     document.getElementById('_article_nb').value = "";
@@ -245,6 +245,9 @@ const createArticleCard = (articleData) => {
     container.appendChild(botCont);
     //
     //
+    container.addEventListener('click', async e => {
+        await displayEvent(e, articleData.articleId, pos);
+    });
     //
     return container;
 }

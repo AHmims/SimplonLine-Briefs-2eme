@@ -153,7 +153,7 @@
                                 <!-- Prix -->
                                 <div class="rounded-3xl py-2 px-5 bg-amber-100 flex flex-col justify-center items-center font-SourceSansPro text-amber-600">
                                     <span class="flex flex-row items-baseline">
-                                        <span id="af_votesNb" class="text-3xl font-semibold">99</span>
+                                        <span id="af_price" class="text-3xl font-semibold">99</span>
                                         <span class="text-lg">DH</span>
                                     </span>
                                 </div>
@@ -165,13 +165,15 @@
                                 <!-- NB likes -->
                                 <!-- TO-DO -->
                                 <!-- Vote btn -->
-                                <button id="af_voteBtn" class="flex-1 rounded-3xl py-2 px-5 bg-rose-100 flex flex-col justify-center font-SourceSansPro text-rose-600 relative cursor-pointer">
-                                    <span class="text-2xl font-semibold ml-8">Annuler</span>
-                                    <img src="./img/Saly-26.png" alt="" class="absolute w-20 bottom-2.5 right-5">
-                                </button>
-                                <!-- <button class="flex-1 rounded-3xl py-2 px-5 bg-coolGray-900 flex flex-col justify-center items-center font-SourceSansPro text-white cursor-pointer">
-                                <span class="text-2xl font-semibold">Voter</span>
-                            </button> -->
+                                <div class="flex-auto flex">
+                                    <button id="af_voteBtn_X" class="flex-1 rounded-3xl py-2 px-5 bg-rose-100 flex flex-col justify-center font-SourceSansPro text-rose-600 relative cursor-pointer">
+                                        <span class="text-2xl font-semibold ml-8">Annuler</span>
+                                        <img src="./img/Saly-26.png" alt="" class="absolute w-20 bottom-2.5 right-5">
+                                    </button>
+                                    <button id="af_voteBtn_Y" class="flex-1 rounded-3xl py-2 px-5 bg-coolGray-900 flex flex-col justify-center items-center font-SourceSansPro text-white cursor-pointer hidden">
+                                        <span class="text-2xl font-semibold">Voter</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <!-- EDIT / ADD -->

@@ -101,9 +101,13 @@ public class Articles extends HttpServlet {
                 if (user.getRoleUtilisateur().equals("admin")) {
                     try {
                         ArticleDao articleDao = new ArticleDao();
+                        VoteDao voteDao = new VoteDao();
+                        //
                         Article article_ = articleDao.get(idArticle);
+                        Vote vote_ = voteDao.get(idArticle, user.getIdutilisateur());
+                        //
                         if (article_ != null) {
-                            ret_data = String.format("{\"status\":1, \"article\":{\"articleId\":%d, \"articleName\":\"%s\", \"articleDesc\":\"%s\", \"articlePrice\":%f, \"articleNb\":%d, \"articleImg\":\"%s\"}}", article_.getIdarticle(), article_.getNomArticle(), article_.getDescArticle(), article_.getPrixArticle(), article_.getNbArticle(), article_.getImageArticle());
+                            ret_data = String.format("{\"status\":1, \"article\":{\"articleId\":%d, \"articleName\":\"%s\", \"articleDesc\":\"%s\", \"articlePrice\":%f, \"articleNb\":%d, \"articleImg\":\"%s\"},\"vote\":%d, \"role\": \"%s\"}", article_.getIdarticle(), article_.getNomArticle(), article_.getDescArticle(), article_.getPrixArticle(), article_.getNbArticle(), article_.getImageArticle(), vote_ != null ? 1 : 0, user.getRoleUtilisateur());
                         } else ret_data = "{\"status\":0}";
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -115,7 +119,7 @@ public class Articles extends HttpServlet {
                 if (user.getRoleUtilisateur().equals("admin")) {
                     try {
                         //Form validation
-                        Article newArticle = validateForm(request,true);
+                        Article newArticle = validateForm(request, true);
                         //
                         if (newArticle != null) {
                             String imageSaveRes = FileSave.save(request.getPart("articleImg"), "image");
