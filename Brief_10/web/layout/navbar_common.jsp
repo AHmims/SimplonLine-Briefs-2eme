@@ -5,7 +5,7 @@
             <a href="/">Acceuil</a>
         </li>
         <li>
-            <a href="/">Articles</a>
+            <a href="/articles">Articles</a>
         </li>
         <li>
             <a href="/authentification">Identification</a>
