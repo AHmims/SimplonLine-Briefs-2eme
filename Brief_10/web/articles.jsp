@@ -91,7 +91,7 @@
                                 <!-- Top -->
                                 <div class="relative w-full h-64">
                                     <img src="<%= article.getImageArticle() %>" alt="" class="articleCard_image rounded-34 select-none object-cover w-full h-full">
-                                    <div id="btnSet" class="flex flex-col absolute bottom-0 right-0 space-y-2.5">
+                                    <div class="flex flex-col absolute bottom-0 right-0 space-y-2.5">
                                         <% if(user.getRoleUtilisateur().equals("client")){ %>
                                         <!-- Client -->
                                         <button data-article="<%= article.getIdarticle() %>" data-toggle="<%=voted %>" data-display="no" class="voteBtn p-3 <%= voted ? "bg-red-50" : "bg-coolGray-100"%> rounded-20">
