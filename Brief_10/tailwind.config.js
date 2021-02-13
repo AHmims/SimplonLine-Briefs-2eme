@@ -38,7 +38,8 @@ module.exports = {
         amber: colors.amber,
         coolGray: colors.coolGray,
         warmGray: colors.warmGray,
-        orange: colors.orange
+        orange: colors.orange,
+        rose: colors.rose
       }
     },
   },
