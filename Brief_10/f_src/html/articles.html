@@ -197,14 +197,14 @@
                         <!-- More -->
                         <div class="flex flex-row h-20 space-x-4" style="margin-top: 35px;">
                             <!-- Prix -->
-                            <div class="rounded-2xl py-2 px-5 bg-amber-100 flex flex-col justify-center items-center font-SourceSansPro text-amber-600">
+                            <div class="rounded-3xl py-2 px-5 bg-amber-100 flex flex-col justify-center items-center font-SourceSansPro text-amber-600">
                                 <span class="flex flex-row items-baseline">
                                     <span id="af_votesNb" class="text-3xl font-semibold">99</span>
                                     <span class="text-lg">DH</span>
                                 </span>
                             </div>
                             <!-- NB produits -->
-                            <div class="rounded-2xl py-2 px-5 bg-violet-100 flex flex-col justify-center items-center font-SourceSansPro text-violet-600">
+                            <div class="rounded-3xl py-2 px-5 bg-violet-100 flex flex-col justify-center items-center font-SourceSansPro text-violet-600">
                                 <span class="text-base">Quantité en stock</span>
                                 <span id="af_nbProduits" class="text-3xl font-semibold">13</span>
                             </div>
@@ -218,6 +218,50 @@
                             <!-- <button class="flex-1 rounded-3xl py-2 px-5 bg-coolGray-900 flex flex-col justify-center items-center font-SourceSansPro text-white cursor-pointer">
                                 <span class="text-2xl font-semibold">Voter</span>
                             </button> -->
+                        </div>
+                    </div>
+                    <!-- EDIT / ADD -->
+                    <div id="state_2" class="w-full h-full flex flex-col space-y-13">
+                        <!-- title EDIT-->
+                        <div class="flex flex-row items-center">
+                            <span class="py-5 px-9 rounded-3xl bg-orange-100 mr-8">
+                                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.0001 6.6001C9.83315 6.6001 8.71399 7.06367 7.88883 7.88883C7.06367 8.71399 6.6001 9.83315 6.6001 11.0001V15.4001C6.6001 16.5671 7.06367 17.6862 7.88883 18.5114C8.71399 19.3365 9.83315 19.8001 11.0001 19.8001H15.4001C16.5671 19.8001 17.6862 19.3365 18.5114 18.5114C19.3365 17.6862 19.8001 16.5671 19.8001 15.4001V11.0001C19.8001 9.83315 19.3365 8.71399 18.5114 7.88883C17.6862 7.06367 16.5671 6.6001 15.4001 6.6001H11.0001ZM11.0001 24.2001C9.83315 24.2001 8.71399 24.6637 7.88883 25.4888C7.06367 26.314 6.6001 27.4331 6.6001 28.6001V33.0001C6.6001 34.1671 7.06367 35.2862 7.88883 36.1114C8.71399 36.9365 9.83315 37.4001 11.0001 37.4001H15.4001C16.5671 37.4001 17.6862 36.9365 18.5114 36.1114C19.3365 35.2862 19.8001 34.1671 19.8001 33.0001V28.6001C19.8001 27.4331 19.3365 26.314 18.5114 25.4888C17.6862 24.6637 16.5671 24.2001 15.4001 24.2001H11.0001ZM24.2001 11.0001C24.2001 9.83315 24.6637 8.71399 25.4888 7.88883C26.314 7.06367 27.4332 6.6001 28.6001 6.6001H33.0001C34.1671 6.6001 35.2862 7.06367 36.1114 7.88883C36.9365 8.71399 37.4001 9.83315 37.4001 11.0001V15.4001C37.4001 16.5671 36.9365 17.6862 36.1114 18.5114C35.2862 19.3365 34.1671 19.8001 33.0001 19.8001H28.6001C27.4332 19.8001 26.314 19.3365 25.4888 18.5114C24.6637 17.6862 24.2001 16.5671 24.2001 15.4001V11.0001Z" fill="#EA580C" />
+                                    <path d="M36.9308 24.069C36.6308 23.7691 36.2239 23.6006 35.7996 23.6006C35.3753 23.6006 34.9685 23.7691 34.6684 24.069L28.5996 30.1378V32.4002H30.862L36.9308 26.3314C37.2308 26.0314 37.3993 25.6245 37.3993 25.2002C37.3993 24.776 37.2308 24.3691 36.9308 24.069Z" fill="#EA580C" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M24.5996 26.8002C24.5996 26.3758 24.7682 25.9689 25.0682 25.6688C25.3683 25.3688 25.7753 25.2002 26.1996 25.2002H29.3996C29.6118 25.2002 29.8153 25.2845 29.9653 25.4345C30.1153 25.5845 30.1996 25.788 30.1996 26.0002C30.1996 26.2124 30.1153 26.4159 29.9653 26.5659C29.8153 26.7159 29.6118 26.8002 29.3996 26.8002H26.1996V34.8002H34.1996V31.6002C34.1996 31.388 34.2839 31.1845 34.4339 31.0345C34.584 30.8845 34.7874 30.8002 34.9996 30.8002C35.2118 30.8002 35.4153 30.8845 35.5653 31.0345C35.7153 31.1845 35.7996 31.388 35.7996 31.6002V34.8002C35.7996 35.2245 35.631 35.6315 35.331 35.9316C35.0309 36.2316 34.624 36.4002 34.1996 36.4002H26.1996C25.7753 36.4002 25.3683 36.2316 25.0682 35.9316C24.7682 35.6315 24.5996 35.2245 24.5996 34.8002V26.8002Z" fill="#EA580C" />
+                                </svg>
+                            </span>
+                            <span class="font-Kollektif font-bold tracking-tight text-coolGray-800 text-5xl">Modifier l’article</span>
+                        </div>
+                        <!-- title ADD-->
+                        <div class="flex flex-row items-center">
+                            <span class="py-5 px-9 rounded-3xl bg-emerald-100 mr-8">
+                                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.0001 6.6001C9.83315 6.6001 8.71399 7.06367 7.88883 7.88883C7.06367 8.71399 6.6001 9.83315 6.6001 11.0001V15.4001C6.6001 16.5671 7.06367 17.6862 7.88883 18.5114C8.71399 19.3365 9.83315 19.8001 11.0001 19.8001H15.4001C16.5671 19.8001 17.6862 19.3365 18.5114 18.5114C19.3365 17.6862 19.8001 16.5671 19.8001 15.4001V11.0001C19.8001 9.83315 19.3365 8.71399 18.5114 7.88883C17.6862 7.06367 16.5671 6.6001 15.4001 6.6001H11.0001ZM11.0001 24.2001C9.83315 24.2001 8.71399 24.6637 7.88883 25.4888C7.06367 26.314 6.6001 27.4331 6.6001 28.6001V33.0001C6.6001 34.1671 7.06367 35.2862 7.88883 36.1114C8.71399 36.9365 9.83315 37.4001 11.0001 37.4001H15.4001C16.5671 37.4001 17.6862 36.9365 18.5114 36.1114C19.3365 35.2862 19.8001 34.1671 19.8001 33.0001V28.6001C19.8001 27.4331 19.3365 26.314 18.5114 25.4888C17.6862 24.6637 16.5671 24.2001 15.4001 24.2001H11.0001ZM24.2001 11.0001C24.2001 9.83315 24.6637 8.71399 25.4888 7.88883C26.314 7.06367 27.4332 6.6001 28.6001 6.6001H33.0001C34.1671 6.6001 35.2862 7.06367 36.1114 7.88883C36.9365 8.71399 37.4001 9.83315 37.4001 11.0001V15.4001C37.4001 16.5671 36.9365 17.6862 36.1114 18.5114C35.2862 19.3365 34.1671 19.8001 33.0001 19.8001H28.6001C27.4332 19.8001 26.314 19.3365 25.4888 18.5114C24.6637 17.6862 24.2001 16.5671 24.2001 15.4001V11.0001ZM30.8001 24.2001C31.3836 24.2001 31.9432 24.4319 32.3557 24.8445C32.7683 25.257 33.0001 25.8166 33.0001 26.4001V28.6001H35.2001C35.7836 28.6001 36.3432 28.8319 36.7557 29.2445C37.1683 29.657 37.4001 30.2166 37.4001 30.8001C37.4001 31.3836 37.1683 31.9432 36.7557 32.3557C36.3432 32.7683 35.7836 33.0001 35.2001 33.0001H33.0001V35.2001C33.0001 35.7836 32.7683 36.3432 32.3557 36.7557C31.9432 37.1683 31.3836 37.4001 30.8001 37.4001C30.2166 37.4001 29.657 37.1683 29.2445 36.7557C28.8319 36.3432 28.6001 35.7836 28.6001 35.2001V33.0001H26.4001C25.8166 33.0001 25.257 32.7683 24.8445 32.3557C24.4319 31.9432 24.2001 31.3836 24.2001 30.8001C24.2001 30.2166 24.4319 29.657 24.8445 29.2445C25.257 28.8319 25.8166 28.6001 26.4001 28.6001H28.6001V26.4001C28.6001 25.8166 28.8319 25.257 29.2445 24.8445C29.657 24.4319 30.2166 24.2001 30.8001 24.2001Z" fill="#059669" />
+                                </svg>
+                            </span>
+                            <span class="font-Kollektif font-bold tracking-tight text-coolGray-800 text-5xl">Ajouter un article</span>
+                        </div>
+                        <!--  -->
+                        <!-- Form -->
+                        <div class="w-full flex flex-col space-y-7">
+                            <input id="_article_name" type="text" placeholder="Nom" class="w-full py-5 px-7 rounded-2xl bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-400">
+                            <!-- Row -->
+                            <div class="w-full flex flex-row space-x-7">
+                                <input id="_article_price" type="text" placeholder="Prix" class="w-full py-5 px-7 rounded-2xl bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-400">
+                                <input id="_article_nb" type="text" placeholder="Quantité en stock" class="w-full py-5 px-7 rounded-2xl bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-400">
+                            </div>
+                            <textarea name="_article_desc" id="_article_desc" placeholder="Déscription" class="w-full h-40 min-h-full max-h-40 py-5 px-7 rounded-2xl bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-400"></textarea>
+                            <!-- image input -->
+                            <label for="_article_img" class="rounded-2xl flex flex-col items-center justify-center w-full cursor-pointer py-6 px-9 border-3 border-dashed border-coolGray-100">
+                                <span class="font-SourceSansPro font-semibold text-coolGray-400 text-xl">Ajouter une photo d’article</span>
+                                <svg class="mt-2.5" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M23 11.5C23.61 11.5 24.195 11.7423 24.6263 12.1737C25.0577 12.605 25.3 13.19 25.3 13.8V20.7H32.2C32.81 20.7 33.395 20.9423 33.8263 21.3737C34.2577 21.805 34.5 22.39 34.5 23C34.5 23.61 34.2577 24.195 33.8263 24.6263C33.395 25.0577 32.81 25.3 32.2 25.3H25.3V32.2C25.3 32.81 25.0577 33.395 24.6263 33.8263C24.195 34.2577 23.61 34.5 23 34.5C22.39 34.5 21.805 34.2577 21.3737 33.8263C20.9423 33.395 20.7 32.81 20.7 32.2V25.3H13.8C13.19 25.3 12.605 25.0577 12.1737 24.6263C11.7423 24.195 11.5 23.61 11.5 23C11.5 22.39 11.7423 21.805 12.1737 21.3737C12.605 20.9423 13.19 20.7 13.8 20.7H20.7V13.8C20.7 13.19 20.9423 12.605 21.3737 12.1737C21.805 11.7423 22.39 11.5 23 11.5Z" fill="#9CA3AF" />
+                                </svg>
+                            </label>
+                            <input type="file" name="_article_img" id="_article_img" class="hidden">
+                            <!-- Btn -->
+                            <button class="w-full p-7 rounded-20 font-Kollektif font-bold text-white text-2xl bg-coolGray-900">Ajouter</button>
                         </div>
                     </div>
                 </div>

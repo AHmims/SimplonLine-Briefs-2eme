@@ -40,7 +40,8 @@ module.exports = {
         warmGray: colors.warmGray,
         orange: colors.orange,
         rose: colors.rose,
-        violet: colors.violet
+        violet: colors.violet,
+        emerald: colors.emerald
       }
     },
   },
