@@ -15,25 +15,51 @@ for (let i = 0; i < articles_editBtn.length; i++) {
 }
 // 
 async function editEvent(article_id, i) {
-    //Display form
-    articlePos = i;
-    //get article data
-    let response = await axios.post(`/articles?action=get&article=${article_id}`);
-    if (response.data != null || response.data != 'null') {
-        if (response.data.status == 1) {
-            let articleData = response.data.article;
-            //
-            document.getElementById('_article_name').value = articleData.articleName;
-            document.getElementById('_article_price').value = articleData.articlePrice;
-            document.getElementById('_article_nb').value = articleData.articleNb;
-            document.getElementById('_article_desc').value = articleData.articleDesc;
-        } else if (response.data.status == 0) {
-            console.log("Server error");
-        } else {
-            console.log("you don't have the right to perform this action");
+    const sideBar = document.getElementById('sideBar');
+    const dispArticle = document.getElementById('state_1');
+    const manipulateArticle = document.getElementById('state_2');
+    const form_edit_title = document.getElementById('_form_edit');
+    const form_add_title = document.getElementById('_form_add');
+    //
+    if (i != articlePos) {
+
+        if (form_edit_title.classList.contains('hidden'))
+            form_edit_title.classList.remove('hidden');
+        if (!form_add_title.classList.contains('hidden'))
+            form_add_title.classList.add('hidden');
+        document.getElementById('_article_validate').innerText = "Modifier";
+        //
+        if (!dispArticle.classList.contains('hidden'))
+            dispArticle.classList.add('hidden');
+        if (manipulateArticle.classList.contains('hidden'))
+            manipulateArticle.classList.remove('hidden');
+        //show form
+        if (sideBar.classList.contains('hidden'))
+            sideBar.classList.remove('hidden');
+        articlePos = i;
+        //get article data
+        let response = await axios.post(`/articles?action=get&article=${article_id}`);
+        if (response.data != null || response.data != 'null') {
+            if (response.data.status == 1) {
+                let articleData = response.data.article;
+                //
+                document.getElementById('_article_name').value = articleData.articleName;
+                document.getElementById('_article_price').value = articleData.articlePrice;
+                document.getElementById('_article_nb').value = articleData.articleNb;
+                document.getElementById('_article_desc').value = articleData.articleDesc;
+            } else if (response.data.status == 0) {
+                console.log("Server error");
+            } else {
+                console.log("you don't have the right to perform this action");
+            }
+        } else
+            console.log('Fatal error server side');
+    } else {
+        if (!sideBar.classList.contains('hidden')) {
+            sideBar.classList.add('hidden');
+            articlePos = -1;
         }
-    } else
-        console.log('Fatal error server side');
+    }
 }
 
 async function deleteEvent(article_id, i) {
@@ -120,8 +146,33 @@ const articleFormDataRequest = async formData => {
 //
 //
 document.getElementById('addBtn').addEventListener('click', e => {
+    const sideBar = document.getElementById('sideBar');
+    const dispArticle = document.getElementById('state_1');
+    const manipulateArticle = document.getElementById('state_2');
+    const form_edit_title = document.getElementById('_form_edit');
+    const form_add_title = document.getElementById('_form_add');
+    //
+    if (!form_edit_title.classList.contains('hidden'))
+        form_edit_title.classList.add('hidden');
+    if (form_add_title.classList.contains('hidden'))
+        form_add_title.classList.remove('hidden');
+    document.getElementById('_article_validate').innerText = "Ajouter";
+    //
+    if (!dispArticle.classList.contains('hidden'))
+        dispArticle.classList.add('hidden');
+    if (manipulateArticle.classList.contains('hidden'))
+        manipulateArticle.classList.remove('hidden');
     //show form
-    articlePos = -2;
+    if (sideBar.classList.contains('hidden')) {
+        sideBar.classList.remove('hidden');
+        articlePos = -2;
+    } else {
+        if (articlePos == -1 || articlePos == -2) {
+            //articlePos = -1;
+            sideBar.classList.add('hidden');
+        }
+        articlePos = -2;
+    }
     document.getElementById('_article_name').value = "";
     document.getElementById('_article_price').value = "";
     document.getElementById('_article_nb').value = "";
