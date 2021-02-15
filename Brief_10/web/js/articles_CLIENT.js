@@ -26,11 +26,10 @@ for (let i = 0; i < articles_btn.length; i++) {
                 }
                 articles_btn[i].dataset.toggle = state == 'true' ? false : true;
             } else if (response.data.status == 0) {
-                console.log("Server error");
+                logServerError();
             } else {
-                console.log("you don't have the right to perform this action");
+                logWarningActive("Vous n'avez pas le droit d'effectuer cette action");
             }
-        } else
-            console.log('Fatal error server side');
+        } else logServerError();
     });
 }
