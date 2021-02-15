@@ -11,7 +11,7 @@
             <a href="/authentification">Identification</a>
         </li>
         <li>
-            <a href="/">Inscription</a>
+            <a href="/register">Inscription</a>
         </li>
     </ul>
 </div>

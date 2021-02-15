@@ -17,6 +17,10 @@
         <servlet-class>servlet.Articles</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>signup</servlet-name>
+        <servlet-class>servlet.Signup</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>serve_images</servlet-name>
         <servlet-class>servlet.ServeImages</servlet-class>
     </servlet>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>articles</servlet-name>
         <url-pattern>/articles</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signup</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
