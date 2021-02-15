@@ -29,9 +29,7 @@ public class Signup extends HttpServlet {
                     //
                     boolean insertRes = utilisateurDao.insert(utilisateur);
                     if (insertRes) {
-                        request.setAttribute("_email_value", email);
-                        request.setAttribute("_signup_status", "1");
-                        response.sendRedirect("/authentification");
+                        response.sendRedirect("/authentification?auth=1");
                     } else setFormAsAttr(request, response);
                 } else {
                     setFormAsAttr(request, response);

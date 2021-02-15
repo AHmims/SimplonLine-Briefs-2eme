@@ -13,10 +13,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/toast.css">
+  <script src="./js/toast.js"></script>
+  <script src="./js/toastsHandler.js"></script>
   <title>S'enregistrer</title>
 </head>
 
 <body class="bg-white p-9 h-screen">
+  <% if(request.getAttribute("_server_error") == "unknown"){ %>
+  <script>
+    logServerError();
+  </script>
+  <% }else{ %>
+  <% if(request.getAttribute("_email_value") != null){ %>
+  <script>
+    logErrorActive("Form invalide");
+  </script>
+  <% } %>
+  <% } %>
   <div class="w-full h-full flex flex-col">
     <!-- banner -->
     <div class="w-full h-full flex flex-col space-y-16 px-16 pt-12 relative">
@@ -55,13 +69,13 @@
             <form method="POST" class="w-full flex flex-col mt-10">
               <!-- row -->
               <div class="w-full flex flex-row space-x-3">
-                <input name="nom" type="text" placeholder="Nom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
-                <input name="prenom" type="text" placeholder="Prénom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                <input value="<%= request.getAttribute("_nom_value") != null ? request.getAttribute("_nom_value") : "" %>" name="nom" type="text" placeholder="Nom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                <input value="<%= request.getAttribute("_prenom_value") != null ? request.getAttribute("_prenom_value") : "" %>" name="prenom" type="text" placeholder="Prénom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
               </div>
               <div class="w-full flex flex-row space-x-3 mt-4 ">
-                <input name="email" type="text" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                <input value="<%= request.getAttribute("_email_value") != null ? request.getAttribute("_email_value") : "" %>" name="email" type="text" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
                 <select name="sexe" id="" class="w-auto py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700">
-                  <option value="" disabled selected>Sexe</option>
+                  <option value="D" disabled selected>Sexe</option>
                   <option value="H">Homme</option>
                   <option value="F">Femme</option>
                   <option value="O">Autre</option>

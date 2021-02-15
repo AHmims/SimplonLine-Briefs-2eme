@@ -6,10 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/toast.css">
+    <script src="./js/toast.js"></script>
+    <script src="./js/toastsHandler.js"></script>
     <title>Authentification</title>
 </head>
 
 <body class="bg-white p-9 h-screen">
+    <% if(request.getParameter("auth") != null){ %>
+    <script>
+        logSuccess("Compte créé avec succès");
+    </script>
+    <% } %>
+    <% if(request.getAttribute("_server_error") == "unknown"){ %>
+    <script>
+        logServerError();
+    </script>
+    <% }else{ %>
+    <% if(request.getAttribute("_error_email") != null){ %>
+    <script>
+        logErrorActive(`<%= request.getAttribute("_error_email") %>`);
+    </script>
+    <% } %>
+    <% if(request.getAttribute("_error_password") != null){ %>
+    <script>
+        logErrorActive(`<%= request.getAttribute("_error_password") %>`);
+    </script>
+    <% } %>
+    <% } %>
     <div class="w-full h-full flex flex-col">
         <!-- banner -->
         <div class="w-full h-full flex flex-col space-y-24 px-16 pt-12 relative">
@@ -46,8 +70,8 @@
                         </div>
                         <!-- form -->
                         <form method="POST" class="w-full flex flex-col mt-10">
-                            <input type="text" name="email" id="email" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
-                            <input type="password" name="password" id="password" placeholder="Mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                            <input value="<%= request.getAttribute("_email_value") != null ? request.getAttribute("_email_value") : "" %>" type="text" name="email" id="email" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                            <input  type="password" name="password" id="password" placeholder="Mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
                             <button class="mt-10 p-6 bg-amber-200 text-amber-900 rounded-20 font-Kollektif font-normal text-2xl">Authentifier</button>
                         </form>
                     </div>
