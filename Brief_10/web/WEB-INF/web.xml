@@ -25,6 +25,10 @@
         <servlet-class>servlet.ServeImages</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>signout</servlet-name>
+        <servlet-class>servlet.Signout</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>test</servlet-name>
         <servlet-class>servlet.test</servlet-class>
     </servlet>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>signup</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signout</servlet-name>
+        <url-pattern>/signout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>

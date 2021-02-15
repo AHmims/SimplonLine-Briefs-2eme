@@ -98,22 +98,20 @@ public class Articles extends HttpServlet {
                 } else ret_data = "{\"status\":-1}";
                 break;
             case "get":
-                if (user.getRoleUtilisateur().equals("admin")) {
-                    try {
-                        ArticleDao articleDao = new ArticleDao();
-                        VoteDao voteDao = new VoteDao();
-                        //
-                        Article article_ = articleDao.get(idArticle);
-                        Vote vote_ = voteDao.get(idArticle, user.getIdutilisateur());
-                        //
-                        if (article_ != null) {
-                            ret_data = String.format("{\"status\":1, \"article\":{\"articleId\":%d, \"articleName\":\"%s\", \"articleDesc\":\"%s\", \"articlePrice\":%f, \"articleNb\":%d, \"articleImg\":\"%s\"},\"vote\":%d, \"role\": \"%s\"}", article_.getIdarticle(), article_.getNomArticle(), article_.getDescArticle(), article_.getPrixArticle(), article_.getNbArticle(), article_.getImageArticle(), vote_ != null ? 1 : 0, user.getRoleUtilisateur());
-                        } else ret_data = "{\"status\":0}";
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        ret_data = "null";
-                    }
-                } else ret_data = "{\"status\":-1}";
+                try {
+                    ArticleDao articleDao = new ArticleDao();
+                    VoteDao voteDao = new VoteDao();
+                    //
+                    Article article_ = articleDao.get(idArticle);
+                    Vote vote_ = voteDao.get(idArticle, user.getIdutilisateur());
+                    //
+                    if (article_ != null) {
+                        ret_data = String.format("{\"status\":1, \"article\":{\"articleId\":%d, \"articleName\":\"%s\", \"articleDesc\":\"%s\", \"articlePrice\":%f, \"articleNb\":%d, \"articleImg\":\"%s\"},\"vote\":%d, \"role\": \"%s\"}", article_.getIdarticle(), article_.getNomArticle(), article_.getDescArticle(), article_.getPrixArticle(), article_.getNbArticle(), article_.getImageArticle(), vote_ != null ? 1 : 0, user.getRoleUtilisateur());
+                    } else ret_data = "{\"status\":0}";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ret_data = "null";
+                }
                 break;
             case "add":
                 if (user.getRoleUtilisateur().equals("admin")) {
@@ -156,25 +154,29 @@ public class Articles extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession(false).getAttribute("__user_data") == null)
-            response.sendRedirect("/authentification");
-        else {
-            try {
-                ArticleDao articleDao = new ArticleDao();
-                VoteSRVC voteSRVC = new VoteSRVC();
-                Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data");
+        try {
+            if (request.getSession(false).getAttribute("__user_data") == null)
+                response.sendRedirect("/authentification");
+            else {
+                try {
+                    ArticleDao articleDao = new ArticleDao();
+                    VoteSRVC voteSRVC = new VoteSRVC();
+                    Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data");
+                    //
+                    ArrayList<Article> articles = articleDao.getAll();
+                    ArrayList<Vote> votes = voteSRVC.getVotesByUser(user.getIdutilisateur());
+                    request.setAttribute("_articles_data", articles);
+                    request.setAttribute("_votes_data", votes);
+                    //
+                    request.getRequestDispatcher("articles.jsp").forward(request, response);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    response.sendRedirect("/");
+                }
                 //
-                ArrayList<Article> articles = articleDao.getAll();
-                ArrayList<Vote> votes = voteSRVC.getVotesByUser(user.getIdutilisateur());
-                request.setAttribute("_articles_data", articles);
-                request.setAttribute("_votes_data", votes);
-                //
-                request.getRequestDispatcher("articles.jsp").forward(request, response);
-            } catch (Exception e) {
-                e.printStackTrace();
-                response.sendRedirect("/");
             }
-            //
+        } catch (Exception e) {
+            response.sendRedirect("/authentification");
         }
     }
 

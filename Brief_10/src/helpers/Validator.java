@@ -25,7 +25,7 @@ public class Validator {
     //
     public static boolean isFormValid(String nom, String prenom, String email, String sexe, String pass, String passCon) {
         try {
-            String[] sexes = new String[]{"Homme","Femme","Autre"};
+            String[] sexes = new String[]{"H","F","O"};
             boolean isValid = true;
             //
             if (!isAlpha(nom) && nom.length() < 2)

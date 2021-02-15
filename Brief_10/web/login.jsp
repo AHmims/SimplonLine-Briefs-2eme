@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Document</title>
+    <title>Authentification</title>
 </head>
 
 <body class="bg-white p-9 h-screen">
@@ -20,16 +20,16 @@
                 </svg>
                 <!-- nav links -->
                 <div class="text-warmGray-700 font-Kollektif font-normal text-2xl flex flex-row space-x-10">
-                    <a href="#">
+                    <a href="/">
                         <span>Accueil</span>
                     </a>
-                    <a href="#">
+                    <a href="/articles">
                         <span>Articles</span>
                     </a>
-                    <a href="#">
+                    <a href="/authentification">
                         <span>Authentification</span>
                     </a>
-                    <a href="#">
+                    <a href="/register">
                         <span class="text-amber-900 px-9 py-5 rounded-3xl bg-amber-200">Enregistrer</span>
                     </a>
                 </div>

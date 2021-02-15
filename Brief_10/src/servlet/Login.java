@@ -57,6 +57,8 @@ public class Login extends HttpServlet {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                request.setAttribute("_server_error", "unknown");
+                returnError(request, response);
             }
         } else response.sendRedirect("/articles");
     }

@@ -19,6 +19,7 @@ const displayEvent = async (e, article_id, i) => {
             //update content
             let response = await axios.post(`/articles?action=get&article=${article_id}`);
             if (response.data != null || response.data != 'null') {
+                console.log(response.data);
                 if (response.data.status == 1) {
                     let articleData = response.data.article;
                     //
@@ -76,7 +77,7 @@ const displayEvent = async (e, article_id, i) => {
             // 
             __last_selected_article = -1;
         }
-        if (articlePos != undefined)
+        if (typeof articlePos != undefined)
             articlePos = __last_selected_article;
     }
 }

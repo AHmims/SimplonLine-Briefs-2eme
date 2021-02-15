@@ -13,7 +13,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/style.css">
-  <title>Document</title>
+  <title>S'enregistrer</title>
 </head>
 
 <body class="bg-white p-9 h-screen">
@@ -27,16 +27,16 @@
         </svg>
         <!-- nav links -->
         <div class="text-warmGray-700 font-Kollektif font-normal text-2xl flex flex-row space-x-10">
-          <a href="#">
+          <a href="/">
             <span>Accueil</span>
           </a>
-          <a href="#">
+          <a href="/articles">
             <span>Articles</span>
           </a>
-          <a href="#">
+          <a href="/authentification">
             <span>Authentification</span>
           </a>
-          <a href="#">
+          <a href="/register">
             <span class="text-amber-900 px-9 py-5 rounded-3xl bg-amber-200">Enregistrer</span>
           </a>
         </div>
@@ -55,20 +55,20 @@
             <form method="POST" class="w-full flex flex-col mt-10">
               <!-- row -->
               <div class="w-full flex flex-row space-x-3">
-                <input type="text" placeholder="Nom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
-                <input type="text" placeholder="Prénom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                <input name="nom" type="text" placeholder="Nom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                <input name="prenom" type="text" placeholder="Prénom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
               </div>
               <div class="w-full flex flex-row space-x-3 mt-4 ">
-                <input type="text" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
-                <select name="" id="" class="w-auto py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700">
+                <input name="email" type="text" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                <select name="sexe" id="" class="w-auto py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700">
                   <option value="" disabled selected>Sexe</option>
                   <option value="H">Homme</option>
                   <option value="F">Femme</option>
                   <option value="O">Autre</option>
                 </select>
               </div>
-              <input type="password" placeholder="Mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
-              <input type="password" placeholder="Confirmation de mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+              <input name="pass" type="password" placeholder="Mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+              <input name="passCon" type="password" placeholder="Confirmation de mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
               <button class="mt-10 p-6 bg-amber-200 text-amber-900 rounded-20 font-Kollektif font-normal text-2xl">Enregistrer</button>
             </form>
           </div>
