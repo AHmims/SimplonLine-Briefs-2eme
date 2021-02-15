@@ -28,7 +28,9 @@ const displayEvent = async (e, article_id, i) => {
                     document.getElementById('af_nbProduits').innerText = articleData.articleNb;
                     document.getElementById('af_desc').innerText = articleData.articleDesc;
                     document.getElementById('af_img').setAttribute('src', articleData.articleImg);
+                    document.getElementById('af_votesNb').innerText = response.data.voteCount;
                     // 
+                    /*
                     let voteBtn_X = document.getElementById('af_voteBtn_X');
                     let voteBtn_Y = document.getElementById('af_voteBtn_Y');
                     // 
@@ -50,6 +52,7 @@ const displayEvent = async (e, article_id, i) => {
                         if (!voteBtn_X.classList.contains('hidden'))
                             voteBtn_X.classList.add('hidden');
                     }
+                    */
                     //
                     // 
                     if (dispArticle.classList.contains('hidden'))

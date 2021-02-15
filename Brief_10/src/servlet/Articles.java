@@ -101,12 +101,14 @@ public class Articles extends HttpServlet {
                 try {
                     ArticleDao articleDao = new ArticleDao();
                     VoteDao voteDao = new VoteDao();
+                    VoteSRVC voteSRVC = new VoteSRVC();
                     //
                     Article article_ = articleDao.get(idArticle);
                     Vote vote_ = voteDao.get(idArticle, user.getIdutilisateur());
+                    int votesNb = voteSRVC.getVotesNb(idArticle);
                     //
                     if (article_ != null) {
-                        ret_data = String.format("{\"status\":1, \"article\":{\"articleId\":%d, \"articleName\":\"%s\", \"articleDesc\":\"%s\", \"articlePrice\":%f, \"articleNb\":%d, \"articleImg\":\"%s\"},\"vote\":%d, \"role\": \"%s\"}", article_.getIdarticle(), article_.getNomArticle(), article_.getDescArticle(), article_.getPrixArticle(), article_.getNbArticle(), article_.getImageArticle(), vote_ != null ? 1 : 0, user.getRoleUtilisateur());
+                        ret_data = String.format("{\"status\":1, \"article\":{\"articleId\":%d, \"articleName\":\"%s\", \"articleDesc\":\"%s\", \"articlePrice\":%f, \"articleNb\":%d, \"articleImg\":\"%s\"},\"vote\":%d, \"role\": \"%s\",\"voteCount\":%d}", article_.getIdarticle(), article_.getNomArticle(), article_.getDescArticle(), article_.getPrixArticle(), article_.getNbArticle(), article_.getImageArticle(), vote_ != null ? 1 : 0, user.getRoleUtilisateur(), votesNb);
                     } else ret_data = "{\"status\":0}";
                 } catch (Exception e) {
                     e.printStackTrace();

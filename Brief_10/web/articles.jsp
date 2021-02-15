@@ -138,7 +138,7 @@
                         <div id="state_1" class="w-full h-full flex flex-col space-y-5 hidden">
                             <!-- image -->
                             <div class="w-4/6 h-auto mx-auto">
-                                <img id="af_img" src="../../images/1358355462-tgj460a.jpg" alt="">
+                                <img id="af_img" src="./img/avatar.png" alt="">
                             </div>
                             <!-- Name -->
                             <div class="flex flex-row items-center">
@@ -163,9 +163,16 @@
                                     <span id="af_nbProduits" class="text-3xl font-semibold">13</span>
                                 </div>
                                 <!-- NB likes -->
-                                <!-- TO-DO -->
+                                <div class="rounded-3xl py-2 px-5 bg-rose-100 flex flex-col justify-center items-center font-SourceSansPro text-rose-600">
+                                    <span class="flex flex-row items-center">
+                                        <span id="af_votesNb" class="text-2xl font-semibold">99</span>
+                                        <svg class="ml-1" width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.6242 6.04229C4.39146 5.27526 5.43196 4.84436 6.51687 4.84436C7.60178 4.84436 8.64228 5.27526 9.40954 6.04229L10.6083 7.24007L11.8071 6.04229C12.1846 5.65151 12.636 5.33982 13.1352 5.12539C13.6344 4.91096 14.1713 4.79809 14.7145 4.79337C15.2578 4.78865 15.7966 4.89217 16.2994 5.09789C16.8022 5.30361 17.259 5.60742 17.6432 5.99158C18.0274 6.37574 18.3312 6.83256 18.5369 7.33538C18.7426 7.83821 18.8461 8.37698 18.8414 8.92024C18.8367 9.4635 18.7238 10.0004 18.5094 10.4996C18.295 10.9987 17.9833 11.4502 17.5925 11.8276L10.6083 18.8128L3.6242 11.8276C2.85716 11.0604 2.42627 10.0199 2.42627 8.93496C2.42627 7.85005 2.85716 6.80956 3.6242 6.04229Z" fill="#E11D48"/>
+                                        </svg>                                            
+                                    </span>
+                                </div>
                                 <!-- Vote btn -->
-                                <div class="flex-auto flex">
+                                <!-- <div class="flex-auto flex">
                                     <button id="af_voteBtn_X" class="flex-1 rounded-3xl py-2 px-5 bg-rose-100 flex flex-col justify-center font-SourceSansPro text-rose-600 relative cursor-pointer">
                                         <span class="text-2xl font-semibold ml-8">Annuler</span>
                                         <img src="./img/Saly-26.png" alt="" class="absolute w-20 bottom-2.5 right-5">
@@ -173,7 +180,7 @@
                                     <button id="af_voteBtn_Y" class="flex-1 rounded-3xl py-2 px-5 bg-coolGray-900 flex flex-col justify-center items-center font-SourceSansPro text-white cursor-pointer hidden">
                                         <span class="text-2xl font-semibold">Voter</span>
                                     </button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- EDIT / ADD -->
