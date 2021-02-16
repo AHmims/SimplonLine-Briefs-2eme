@@ -15,6 +15,9 @@
 </head>
 
 <body class="bg-white p-9 min-h-screen flex flex-col">
+    <script>
+        let _articlesList = [];
+    </script>
     <% Utilisateur user = (Utilisateur) request.getSession(false).getAttribute("__user_data"); %>
     <div class="w-full h-full flex flex-col flex-1 justify-between">
         <div class="w-full h-full flex flex-col space-y-20 flex-1 justify-between">
@@ -57,7 +60,7 @@
                                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12.8 6.39996C11.1026 6.39996 9.47475 7.07424 8.27451 8.27447C7.07428 9.47471 6.4 11.1026 6.4 12.8C6.4 14.4973 7.07428 16.1252 8.27451 17.3254C9.47475 18.5257 11.1026 19.2 12.8 19.2C14.4974 19.2 16.1252 18.5257 17.3255 17.3254C18.5257 16.1252 19.2 14.4973 19.2 12.8C19.2 11.1026 18.5257 9.47471 17.3255 8.27447C16.1252 7.07424 14.4974 6.39996 12.8 6.39996ZM3.2 12.8C3.1998 11.2891 3.55622 9.7995 4.24027 8.45234C4.92432 7.10519 5.91667 5.93851 7.13663 5.0472C8.35659 4.15588 9.7697 3.5651 11.261 3.32289C12.7524 3.08068 14.2798 3.19389 15.7191 3.65332C17.1585 4.11274 18.469 4.9054 19.5443 5.96683C20.6195 7.02826 21.429 8.32849 21.907 9.76177C22.3849 11.195 22.5179 12.7209 22.2949 14.2152C22.072 15.7096 21.4995 17.1302 20.624 18.3616L28.3312 26.0688C28.6227 26.3705 28.7839 26.7747 28.7803 27.1942C28.7766 27.6137 28.6084 28.015 28.3117 28.3117C28.0151 28.6083 27.6138 28.7766 27.1942 28.7802C26.7747 28.7839 26.3706 28.6226 26.0688 28.3312L18.3632 20.6256C16.927 21.6468 15.2374 22.253 13.4795 22.3777C11.7216 22.5025 9.96331 22.1409 8.39728 21.3327C6.83124 20.5245 5.5179 19.3008 4.60115 17.7957C3.68441 16.2906 3.19965 14.5623 3.2 12.8Z" fill="#9CA3AF" />
                                     </svg>
-                                    <input type="text" placeholder="Cherchez un produit ..." class="w-full py-2 ml-5 mr-8 font-SourceSansPro text-2xl text-coolGray-700 placeholder-coolGray-400 bg-transparent">
+                                    <input disabled type="text" placeholder="Cherchez un produit ..." class="w-full py-2 ml-5 mr-8 font-SourceSansPro text-2xl text-coolGray-700 placeholder-coolGray-400 bg-transparent">
                                 </div>
                                 <!-- icon -->
                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +68,7 @@
                                 </svg>
                             </div>
                             <div class="border-3 border-l-0 p-8 rounded-r-34 border-coolGray-100">
-                                <select name="" id="" class="font-SourceSansPro font-normal text-2xl text-coolGray-400 w-48">
+                                <select name="" id="" disabled class="font-SourceSansPro font-normal text-2xl text-coolGray-400 w-48">
                                     <option value="" selected disabled>Trier par</option>
                                     <option value="P">Prix</option>
                                     <option value="S">Stock</option>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="pack.Test2Entity" table="test_2" schema="public" catalog="brief_11">
+        <id name="id">
+            <column name="id" sql-type="integer"/>
+        </id>
+    </class>
+</hibernate-mapping>
