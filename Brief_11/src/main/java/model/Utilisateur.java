@@ -45,8 +45,8 @@ public class Utilisateur {
 
     public Utilisateur() {
     }
-    //
 
+    //getters / setters
     public String getIdUtilisateur() {
         return idUtilisateur;
     }
