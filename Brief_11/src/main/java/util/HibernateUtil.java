@@ -23,6 +23,10 @@ public class HibernateUtil {
         return getSessionFactory().openSession();
     }
 
+    public static void closeSession() {
+        getSessionFactory().close();
+    }
+
     //
     private static Configuration setupClasses(Configuration config) {
         //Classes here

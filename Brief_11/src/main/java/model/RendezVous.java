@@ -23,21 +23,26 @@ public class RendezVous {
     private String descRendezVous;
     @Column(name = "dateRendezVous", nullable = false)
     private Date dateRendezVous;
+    @ManyToOne
+    @JoinColumn(name = "idUtilisateur")
+    private Utilisateur utilisateur;
 
     //Constructors
-    public RendezVous(String idRendezVous, String motifRendezVous, String animalRendezVous, String descRendezVous, Date dateRendezVous) {
+    public RendezVous(String idRendezVous, String motifRendezVous, String animalRendezVous, String descRendezVous, Date dateRendezVous, Utilisateur utilisateur) {
         this.idRendezVous = idRendezVous;
         this.motifRendezVous = motifRendezVous;
         this.animalRendezVous = animalRendezVous;
         this.descRendezVous = descRendezVous;
         this.dateRendezVous = dateRendezVous;
+        this.utilisateur = utilisateur;
     }
 
-    public RendezVous(String motifRendezVous, String animalRendezVous, String descRendezVous, Date dateRendezVous) {
+    public RendezVous(String motifRendezVous, String animalRendezVous, String descRendezVous, Date dateRendezVous, Utilisateur utilisateur) {
         this.motifRendezVous = motifRendezVous;
         this.animalRendezVous = animalRendezVous;
         this.descRendezVous = descRendezVous;
         this.dateRendezVous = dateRendezVous;
+        this.utilisateur = utilisateur;
     }
 
     public RendezVous() {
@@ -82,5 +87,13 @@ public class RendezVous {
 
     public void setDateRendezVous(Date dateRendezVous) {
         this.dateRendezVous = dateRendezVous;
+    }
+
+    public Utilisateur getIdUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setIdUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 }

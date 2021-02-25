@@ -21,19 +21,29 @@ public class Message {
     private String typeMessage;
     @Column(name = "dateMessage", nullable = false)
     private Date dateMessage;
+    @ManyToOne
+    @JoinColumn(name = "idUtilisateur")
+    private Utilisateur utilisateur;
+    @ManyToOne
+    @JoinColumn(name = "idRendezVous")
+    private RendezVous rendezVous;
 
     //Constructors
-    public Message(String idMessage, String contenuMessage, String typeMessage, Date dateMessage) {
+    public Message(String idMessage, String contenuMessage, String typeMessage, Date dateMessage, Utilisateur utilisateur, RendezVous rendezVous) {
         this.idMessage = idMessage;
         this.contenuMessage = contenuMessage;
         this.typeMessage = typeMessage;
         this.dateMessage = dateMessage;
+        this.utilisateur = utilisateur;
+        this.rendezVous = rendezVous;
     }
 
-    public Message(String contenuMessage, String typeMessage, Date dateMessage) {
+    public Message(String contenuMessage, String typeMessage, Date dateMessage, Utilisateur utilisateur, RendezVous rendezVous) {
         this.contenuMessage = contenuMessage;
         this.typeMessage = typeMessage;
         this.dateMessage = dateMessage;
+        this.utilisateur = utilisateur;
+        this.rendezVous = rendezVous;
     }
 
     public Message() {
@@ -70,5 +80,21 @@ public class Message {
 
     public void setDateMessage(Date dateMessage) {
         this.dateMessage = dateMessage;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public RendezVous getRendezVous() {
+        return rendezVous;
+    }
+
+    public void setRendezVous(RendezVous rendezVous) {
+        this.rendezVous = rendezVous;
     }
 }
