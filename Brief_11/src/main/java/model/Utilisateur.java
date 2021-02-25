@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import util.PkGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "utilisateur")
@@ -24,8 +25,24 @@ public class Utilisateur {
     private String passUtilisateur;
     @Column(name = "roleUtilisateur", nullable = false)
     private int roleUtilisateur;
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<Message> messages;
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<RendezVous> rendezVous;
 
     //Constructors
+
+    public Utilisateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, int roleUtilisateur, ArrayList<Message> messages, ArrayList<RendezVous> rendezVous) {
+        this.idUtilisateur = idUtilisateur;
+        this.nomUtilisateur = nomUtilisateur;
+        this.prenomUtilisateur = prenomUtilisateur;
+        this.emailUtilisateur = emailUtilisateur;
+        this.passUtilisateur = passUtilisateur;
+        this.roleUtilisateur = roleUtilisateur;
+        this.messages = messages;
+        this.rendezVous = rendezVous;
+    }
+
     public Utilisateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, int roleUtilisateur) {
         this.idUtilisateur = idUtilisateur;
         this.nomUtilisateur = nomUtilisateur;
@@ -93,5 +110,21 @@ public class Utilisateur {
 
     public void setRoleUtilisateur(int roleUtilisateur) {
         this.roleUtilisateur = roleUtilisateur;
+    }
+
+    public ArrayList<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(ArrayList<Message> messages) {
+        this.messages = messages;
+    }
+
+    public ArrayList<RendezVous> getRendezVous() {
+        return rendezVous;
+    }
+
+    public void setRendezVous(ArrayList<RendezVous> rendezVous) {
+        this.rendezVous = rendezVous;
     }
 }

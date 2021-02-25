@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import util.PkGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -26,8 +27,20 @@ public class RendezVous {
     @ManyToOne
     @JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;
+    @OneToMany(mappedBy = "rendezVous", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<Message> messages;
 
     //Constructors
+    public RendezVous(String idRendezVous, String motifRendezVous, String animalRendezVous, String descRendezVous, Date dateRendezVous, Utilisateur utilisateur, ArrayList<Message> messages) {
+        this.idRendezVous = idRendezVous;
+        this.motifRendezVous = motifRendezVous;
+        this.animalRendezVous = animalRendezVous;
+        this.descRendezVous = descRendezVous;
+        this.dateRendezVous = dateRendezVous;
+        this.utilisateur = utilisateur;
+        this.messages = messages;
+    }
+
     public RendezVous(String idRendezVous, String motifRendezVous, String animalRendezVous, String descRendezVous, Date dateRendezVous, Utilisateur utilisateur) {
         this.idRendezVous = idRendezVous;
         this.motifRendezVous = motifRendezVous;
@@ -95,5 +108,21 @@ public class RendezVous {
 
     public void setIdUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public ArrayList<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(ArrayList<Message> messages) {
+        this.messages = messages;
     }
 }
