@@ -1,12 +1,15 @@
 package util;
 
+import model.*;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
     private static SessionFactory factory;
 
-    private HibernateUtil() {}
+    private HibernateUtil() {
+    }
 
     public static SessionFactory getSessionFactory() {
         if (factory == null) {
@@ -15,10 +18,17 @@ public class HibernateUtil {
         }
         return factory;
     }
+
+    public static Session openSession() {
+        return getSessionFactory().openSession();
+    }
+
     //
-    private static Configuration setupClasses(Configuration config){
+    private static Configuration setupClasses(Configuration config) {
         //Classes here
-        //config.addAnnotatedClass()
+        config.addAnnotatedClass(Utilisateur.class);
+        config.addAnnotatedClass(Message.class);
+        config.addAnnotatedClass(RendezVous.class);
         //
         return config;
     }
