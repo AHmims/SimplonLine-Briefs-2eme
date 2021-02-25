@@ -6,6 +6,7 @@ import util.PkGenerator;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "rendezVous")
@@ -28,10 +29,10 @@ public class RendezVous {
     @JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;
     @OneToMany(mappedBy = "rendezVous", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Message> messages;
+    private List<Message> messages;
 
     //Constructors
-    public RendezVous(String idRendezVous, String motifRendezVous, String animalRendezVous, String descRendezVous, Date dateRendezVous, Utilisateur utilisateur, ArrayList<Message> messages) {
+    public RendezVous(String idRendezVous, String motifRendezVous, String animalRendezVous, String descRendezVous, Date dateRendezVous, Utilisateur utilisateur, List<Message> messages) {
         this.idRendezVous = idRendezVous;
         this.motifRendezVous = motifRendezVous;
         this.animalRendezVous = animalRendezVous;
@@ -118,11 +119,11 @@ public class RendezVous {
         this.utilisateur = utilisateur;
     }
 
-    public ArrayList<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(ArrayList<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 }

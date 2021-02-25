@@ -5,6 +5,7 @@ import util.PkGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "utilisateur")
@@ -26,13 +27,13 @@ public class Utilisateur {
     @Column(name = "roleUtilisateur", nullable = false)
     private int roleUtilisateur;
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Message> messages;
+    private List<Message> messages;
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<RendezVous> rendezVous;
+    private List<RendezVous> rendezVous;
 
     //Constructors
 
-    public Utilisateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, int roleUtilisateur, ArrayList<Message> messages, ArrayList<RendezVous> rendezVous) {
+    public Utilisateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, int roleUtilisateur, List<Message> messages, List<RendezVous> rendezVous) {
         this.idUtilisateur = idUtilisateur;
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
@@ -112,19 +113,19 @@ public class Utilisateur {
         this.roleUtilisateur = roleUtilisateur;
     }
 
-    public ArrayList<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(ArrayList<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 
-    public ArrayList<RendezVous> getRendezVous() {
+    public List<RendezVous> getRendezVous() {
         return rendezVous;
     }
 
-    public void setRendezVous(ArrayList<RendezVous> rendezVous) {
+    public void setRendezVous(List<RendezVous> rendezVous) {
         this.rendezVous = rendezVous;
     }
 }
