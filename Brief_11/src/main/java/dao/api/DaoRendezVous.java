@@ -10,7 +10,7 @@ public interface DaoRendezVous {
 
     ArrayList<RendezVous> getAll();
 
-    int insert(RendezVous rendezVous);
+    boolean insert(RendezVous rendezVous);
 
     boolean update(RendezVous rendezVous);
 

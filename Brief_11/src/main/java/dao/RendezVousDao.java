@@ -17,8 +17,8 @@ public class RendezVousDao implements DaoRendezVous {
     }
 
     @Override
-    public int insert(RendezVous rendezVous) {
-        return 0;
+    public boolean insert(RendezVous rendezVous) {
+        return false;
     }
 
     @Override

@@ -9,7 +9,7 @@ public interface DaoUtilisateur {
 
     ArrayList<Utilisateur> getAll();
 
-    int insert(Utilisateur utilisateur);
+    boolean insert(Utilisateur utilisateur);
 
     boolean update(Utilisateur utilisateur);
 

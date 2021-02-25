@@ -17,8 +17,8 @@ public class MessageDao implements DaoMessage {
     }
 
     @Override
-    public int insert(Message message) {
-        return 0;
+    public boolean insert(Message message) {
+        return false;
     }
 
     @Override

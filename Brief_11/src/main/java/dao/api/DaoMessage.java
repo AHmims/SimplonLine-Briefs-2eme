@@ -9,7 +9,7 @@ public interface DaoMessage {
 
     ArrayList<Message> getAll();
 
-    int insert(Message message);
+    boolean insert(Message message);
 
     boolean update(Message message);
 
