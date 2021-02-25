@@ -19,7 +19,6 @@ public class UtilisateurDao implements DaoUtilisateur {
             //
             Utilisateur utilisateur = session.get(Utilisateur.class, idUtilisateur);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return utilisateur;
         } catch (Exception e) {
@@ -39,7 +38,6 @@ public class UtilisateurDao implements DaoUtilisateur {
             //
             ArrayList<Utilisateur> utilisateurs = new ArrayList<>((List<Utilisateur>) session.createQuery("from Utilisateur").list());
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return utilisateurs;
         } catch (Exception e) {
@@ -59,7 +57,6 @@ public class UtilisateurDao implements DaoUtilisateur {
             //
             String autoGenId = (String) session.save(utilisateur);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return autoGenId != null && !autoGenId.equals("");
         } catch (Exception e) {
@@ -79,7 +76,6 @@ public class UtilisateurDao implements DaoUtilisateur {
             //
             session.update(utilisateur);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return true;
         } catch (Exception e) {
@@ -99,7 +95,6 @@ public class UtilisateurDao implements DaoUtilisateur {
             //
             session.delete(utilisateur);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return true;
         } catch (Exception e) {

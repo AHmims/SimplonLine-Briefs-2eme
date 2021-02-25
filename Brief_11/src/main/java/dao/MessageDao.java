@@ -20,7 +20,6 @@ public class MessageDao implements DaoMessage {
             //
             Message message = session.get(Message.class, idMessage);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return message;
         } catch (Exception e) {
@@ -40,7 +39,6 @@ public class MessageDao implements DaoMessage {
             //
             ArrayList<Message> messages = new ArrayList<>((List<Message>) session.createQuery("from Message").list());
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return messages;
         } catch (Exception e) {
@@ -60,7 +58,6 @@ public class MessageDao implements DaoMessage {
             //
             String autoGenId = (String) session.save(message);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return autoGenId != null && !autoGenId.equals("");
         } catch (Exception e) {
@@ -80,7 +77,6 @@ public class MessageDao implements DaoMessage {
             //
             session.update(message);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return true;
         } catch (Exception e) {
@@ -100,7 +96,6 @@ public class MessageDao implements DaoMessage {
             //
             session.delete(message);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return true;
         } catch (Exception e) {

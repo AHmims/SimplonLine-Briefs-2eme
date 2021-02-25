@@ -20,7 +20,6 @@ public class RendezVousDao implements DaoRendezVous {
             //
             RendezVous rendezVous = session.get(RendezVous.class, idRendezVous);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return rendezVous;
         } catch (Exception e) {
@@ -40,7 +39,6 @@ public class RendezVousDao implements DaoRendezVous {
             //
             ArrayList<RendezVous> rendezVous = new ArrayList<>((List<RendezVous>) session.createQuery("from RendezVous").list());
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return rendezVous;
         } catch (Exception e) {
@@ -60,7 +58,6 @@ public class RendezVousDao implements DaoRendezVous {
             //
             String autoGenId = (String) session.save(rendezVous);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return autoGenId != null && !autoGenId.equals("");
         } catch (Exception e) {
@@ -80,7 +77,6 @@ public class RendezVousDao implements DaoRendezVous {
             //
             session.update(rendezVous);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return true;
         } catch (Exception e) {
@@ -100,7 +96,6 @@ public class RendezVousDao implements DaoRendezVous {
             //
             session.delete(rendezVous);
             transaction.commit();
-            HibernateUtil.closeSession();
             //
             return true;
         } catch (Exception e) {
