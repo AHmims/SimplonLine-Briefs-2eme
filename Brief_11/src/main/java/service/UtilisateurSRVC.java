@@ -13,9 +13,12 @@ public class UtilisateurSRVC {
             Session session = HibernateUtil.openSession();
             transaction = session.beginTransaction();
             //
-            Query query = session.createQuery("from utilisateur u where u.emailUtilisateur = :email ");
+            Query query = session.createQuery("from Utilisateur where emailUtilisateur = :email ");
             query.setParameter("email", email);
             query.setMaxResults(1);
+            //
+            if (query.list().size() == 0)
+                return null;
             Utilisateur utilisateur = (Utilisateur) query.list().get(0);
             transaction.commit();
             //

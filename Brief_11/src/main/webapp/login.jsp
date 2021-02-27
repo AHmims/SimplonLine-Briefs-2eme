@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -18,27 +19,31 @@
     <title>Document</title>
 </head>
 <body class="bg-white min-h-screen flex flex-col">
-<% if(request.getParameter("auth") != null){ %>
-<script>
-    logSuccess("Compte créé avec succès");
-</script>
-<% } %>
-<% if(request.getAttribute("_server_error") == "unknown"){ %>
-<script>
-    logServerError();
-</script>
-<% }else{ %>
-<% if(request.getAttribute("_error_email") != null){ %>
-<script>
-    logErrorActive(`<%= request.getAttribute("_error_email") %>`);
-</script>
-<% } %>
-<% if(request.getAttribute("_error_password") != null){ %>
-<script>
-    logErrorActive(`<%= request.getAttribute("_error_password") %>`);
-</script>
-<% } %>
-<% } %>
+<c:if test="${param.auth != null}">
+    <script>
+        logSuccess("Compte créé avec succès");
+    </script>
+</c:if>
+<%----%>
+<c:choose>
+    <c:when test="${requestScope._server_error == 'unknown'}">
+        <script>
+            logServerError();
+        </script>
+    </c:when>
+    <c:otherwise>
+        <c:if test="${not empty requestScope._error_email}">
+            <script>
+                logErrorActive(`<c:out value="${requestScope._error_email}"/>`);
+            </script>
+        </c:if>
+        <c:if test="${not empty requestScope._error_password}">
+            <script>
+                logErrorActive(`<c:out value="${requestScope._error_password}"/>`);
+            </script>
+        </c:if>
+    </c:otherwise>
+</c:choose>
 <div class="w-full h-full flex flex-col flex-1 justify-between">
     <div class="container px-20 mx-auto h-full flex flex-col space-y-20 flex-1">
         <!-- navBar -->
