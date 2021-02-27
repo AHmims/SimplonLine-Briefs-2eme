@@ -23,9 +23,8 @@ public class Validator {
     }
 
     //
-    public static boolean isFormValid(String nom, String prenom, String email, String sexe, String pass, String passCon) {
+    public static boolean isFormValid(String nom, String prenom, String email, String pass, String passCon) {
         try {
-            String[] sexes = new String[]{"H", "F", "O"};
             boolean isValid = true;
             //
             if (!isAlpha(nom) && nom.length() < 2)
@@ -33,18 +32,6 @@ public class Validator {
             if (!isAlpha(prenom) && prenom.length() < 2)
                 isValid = false;
             if (!isMatch(email, "[^@]+@[^\\.]+\\..+"))
-                isValid = false;
-            //
-            boolean notFound = true;
-            if (sexe != null && !sexe.equals("")) {
-                for (String aSexe : sexes) {
-                    if (aSexe.toLowerCase().equals(sexe.toLowerCase())) {
-                        notFound = false;
-                        break;
-                    }
-                }
-            }
-            if (notFound)
                 isValid = false;
             //
             if (pass.length() < 8)

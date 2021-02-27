@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -18,6 +19,21 @@
     <title>Document</title>
 </head>
 <body class="bg-white min-h-screen flex flex-col">
+<c:choose>
+    <c:when test="${requestScope._server_error == 'unknown'}">
+        <script>
+            logServerError();
+        </script>
+    </c:when>
+    <c:otherwise>
+        <c:if test="${not empty requestScope._email_value}">
+            <script>
+                logErrorActive("Form invalide");
+            </script>
+        </c:if>
+    </c:otherwise>
+</c:choose>
+
 <div class="w-full h-full flex flex-col flex-1 justify-between">
     <div class="container px-20 mx-auto h-full flex flex-col space-y-20 flex-1">
         <!-- navBar -->
@@ -58,17 +74,17 @@
                     <span class="font-SourceSansPro text-coolGray-700 mt-1 text-2xl w-456 block mx-auto">Créez votre compte, et commencez à explorer nos produits dès maintenant !</span>
                 </div>
                 <!-- form -->
-                <form action="" class="flex flex-col mt-10 w-456 mx-auto">
+                <form method="POST" class="flex flex-col mt-10 w-456 mx-auto">
                     <!-- row -->
                     <div class="w-full flex flex-row space-x-3">
-                        <input type="text" placeholder="Nom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
-                        <input type="text" placeholder="Prénom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                        <input type="text" name="nom" value="<%= request.getAttribute("_nom_value") != null ? request.getAttribute("_nom_value") : "" %>" placeholder="Nom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                        <input type="text" name="prenom" value="<%= request.getAttribute("_prenom_value") != null ? request.getAttribute("_prenom_value") : "" %>" placeholder="Prénom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
                     </div>
                     <div class="w-full flex flex-row space-x-3 mt-4 ">
-                        <input type="text" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                        <input type="text" name="email" value="<%= request.getAttribute("_email_value") != null ? request.getAttribute("_email_value") : "" %>" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
                     </div>
-                    <input type="password" placeholder="Mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
-                    <input type="password" placeholder="Confirmation de mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                    <input type="password" name="pass" placeholder="Mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                    <input type="password" name="passCon" placeholder="Confirmation de mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
                     <button class="mt-10 p-6 bg-teal-200 text-teal-900 rounded-20 font-Kollektif font-normal text-2xl">Enregistrer</button>
                 </form>
             </div>

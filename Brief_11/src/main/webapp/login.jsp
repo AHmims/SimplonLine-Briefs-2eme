@@ -86,7 +86,7 @@
                 </div>
                 <!-- form -->
                 <form method="POST" class="flex flex-col mt-10 w-456 mx-auto">
-                    <input type="text" name="email" id="email" placeholder="Email"
+                    <input type="text" name="email" id="email" placeholder="Email" value="<%= request.getAttribute("_email_value") != null ? request.getAttribute("_email_value") : "" %>"
                            class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
                     <input type="password" name="password" id="password" placeholder="Mot de passe"
                            class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
