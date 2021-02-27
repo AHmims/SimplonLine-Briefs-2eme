@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{19561B22-DE11-442A-A8A3-142D86821EF5}" Label="" LastModificationDate="1613581695" Name="Diagramme de classes_1" Objects="28" Symbols="8" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{19561B22-DE11-442A-A8A3-142D86821EF5}" Label="" LastModificationDate="1614346685" Name="Diagramme de classes_1" Objects="27" Symbols="6" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -12,7 +12,7 @@
 <a:Code>Diagramme_de_classes_1</a:Code>
 <a:CreationDate>1613579819</a:CreationDate>
 <a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613581299</a:ModificationDate>
+<a:ModificationDate>1614346429</a:ModificationDate>
 <a:Modifier>Ali HMIMS</a:Modifier>
 <a:PackageOptionsText>[FolderOptions]
 
@@ -982,7 +982,7 @@ NameToCode=No</a:ModelOptionsText>
 <a:Code>DiagrammeClasses_1</a:Code>
 <a:CreationDate>1613579819</a:CreationDate>
 <a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613581299</a:ModificationDate>
+<a:ModificationDate>1614346429</a:ModificationDate>
 <a:Modifier>Ali HMIMS</a:Modifier>
 <a:DisplayPreferences>[DisplayPreferences]
 
@@ -1416,9 +1416,9 @@ MULA 0 Arial,8,N</a:FontList>
 </o:AssociationSymbol>
 <o:AssociationSymbol Id="o10">
 <a:CreationDate>1613581299</a:CreationDate>
-<a:ModificationDate>1613581299</a:ModificationDate>
-<a:Rect>((-19042,1114), (-5492,10589))</a:Rect>
-<a:ListOfPoints>((-19042,10589),(-19042,2288),(-5492,2288))</a:ListOfPoints>
+<a:ModificationDate>1614346431</a:ModificationDate>
+<a:Rect>((-19042,-868), (-5564,10589))</a:Rect>
+<a:ListOfPoints>((-19042,10589),(-19042,306),(-5564,306))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>16744448</a:LineColor>
@@ -1433,6 +1433,27 @@ MULA 0 Arial,8,N</a:FontList>
 </c:DestinationSymbol>
 <c:Object>
 <o:Association Ref="o12"/>
+</c:Object>
+</o:AssociationSymbol>
+<o:AssociationSymbol Id="o13">
+<a:CreationDate>1614346429</a:CreationDate>
+<a:ModificationDate>1614346431</a:ModificationDate>
+<a:Rect>((-1932,4829), (1966,12124))</a:Rect>
+<a:ListOfPoints>((92,4829),(92,12124))</a:ListOfPoints>
+<a:CornerStyle>1</a:CornerStyle>
+<a:ArrowStyle>8</a:ArrowStyle>
+<a:LineColor>16744448</a:LineColor>
+<a:ShadowColor>12632256</a:ShadowColor>
+<a:FontList>DISPNAME 0 Arial,8,N
+MULA 0 Arial,8,N</a:FontList>
+<c:SourceSymbol>
+<o:ClassSymbol Ref="o11"/>
+</c:SourceSymbol>
+<c:DestinationSymbol>
+<o:ClassSymbol Ref="o8"/>
+</c:DestinationSymbol>
+<c:Object>
+<o:Association Ref="o14"/>
 </c:Object>
 </o:AssociationSymbol>
 <o:ClassSymbol Id="o7">
@@ -1455,7 +1476,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:GradientFillMode>65</a:GradientFillMode>
 <a:GradientEndColor>16777215</a:GradientEndColor>
 <c:Object>
-<o:Class Ref="o13"/>
+<o:Class Ref="o15"/>
 </c:Object>
 </o:ClassSymbol>
 <o:ClassSymbol Id="o8">
@@ -1478,14 +1499,14 @@ LABL 0 Arial,8,N</a:FontList>
 <a:GradientFillMode>65</a:GradientFillMode>
 <a:GradientEndColor>16777215</a:GradientEndColor>
 <c:Object>
-<o:Class Ref="o14"/>
+<o:Class Ref="o16"/>
 </c:Object>
 </o:ClassSymbol>
 <o:ClassSymbol Id="o11">
 <a:CreationDate>1613580781</a:CreationDate>
-<a:ModificationDate>1613581221</a:ModificationDate>
+<a:ModificationDate>1614346431</a:ModificationDate>
 <a:IconMode>-1</a:IconMode>
-<a:Rect>((-5659,-131), (5745,6611))</a:Rect>
+<a:Rect>((-5739,-2462), (6207,5254))</a:Rect>
 <a:LineColor>16744448</a:LineColor>
 <a:FillColor>16770222</a:FillColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -1501,7 +1522,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:GradientFillMode>65</a:GradientFillMode>
 <a:GradientEndColor>16777215</a:GradientEndColor>
 <c:Object>
-<o:Class Ref="o15"/>
+<o:Class Ref="o17"/>
 </c:Object>
 </o:ClassSymbol>
 </c:Symbols>
@@ -1511,7 +1532,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:ClassDiagram Ref="o5"/>
 </c:DefaultDiagram>
 <c:Classes>
-<o:Class Id="o13">
+<o:Class Id="o15">
 <a:ObjectID>25848796-2BF0-4850-818F-9B1B136FF19F</a:ObjectID>
 <a:Name>Utilisateur</a:Name>
 <a:Code>Utilisateur</a:Code>
@@ -1521,18 +1542,18 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Modifier>Ali HMIMS</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
-<o:Attribute Id="o16">
+<o:Attribute Id="o18">
 <a:ObjectID>88CD9545-0DFA-4F11-A3E7-7B6C52B8B9A2</a:ObjectID>
 <a:Name>idUtilisateur</a:Name>
 <a:Code>idUtilisateur</a:Code>
 <a:CreationDate>1613579911</a:CreationDate>
 <a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613580411</a:ModificationDate>
+<a:ModificationDate>1614346495</a:ModificationDate>
 <a:Modifier>Ali HMIMS</a:Modifier>
-<a:DataType>int</a:DataType>
+<a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o17">
+<o:Attribute Id="o19">
 <a:ObjectID>DC5F9B8A-216E-40FC-B618-21743B845F16</a:ObjectID>
 <a:Name>nomUtilisateur</a:Name>
 <a:Code>nomUtilisateur</a:Code>
@@ -1543,7 +1564,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o18">
+<o:Attribute Id="o20">
 <a:ObjectID>B89A2ED5-61FB-4812-864A-B30E9E5A8F1C</a:ObjectID>
 <a:Name>prenomUtilisateur</a:Name>
 <a:Code>prenomUtilisateur</a:Code>
@@ -1554,7 +1575,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o19">
+<o:Attribute Id="o21">
 <a:ObjectID>5E26D666-BE1A-4005-8E84-9FDCE785161B</a:ObjectID>
 <a:Name>emailUtilisateur</a:Name>
 <a:Code>emailUtilisateur</a:Code>
@@ -1565,7 +1586,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o20">
+<o:Attribute Id="o22">
 <a:ObjectID>82A51682-6EDC-4D01-B4BB-FEFC29123D0C</a:ObjectID>
 <a:Name>passUtilisateur</a:Name>
 <a:Code>passUtilisateur</a:Code>
@@ -1576,7 +1597,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o21">
+<o:Attribute Id="o23">
 <a:ObjectID>1C3B4C7A-DEF4-4304-9EFC-FD931DEC88D1</a:ObjectID>
 <a:Name>roleUtilisateur</a:Name>
 <a:Code>roleUtilisateur</a:Code>
@@ -1589,28 +1610,28 @@ LABL 0 Arial,8,N</a:FontList>
 </o:Attribute>
 </c:Attributes>
 </o:Class>
-<o:Class Id="o14">
+<o:Class Id="o16">
 <a:ObjectID>9DAF1A02-7F99-4224-B3EC-BD246A2D246A</a:ObjectID>
 <a:Name>Message</a:Name>
 <a:Code>Message</a:Code>
 <a:CreationDate>1613579878</a:CreationDate>
 <a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613581695</a:ModificationDate>
+<a:ModificationDate>1614346446</a:ModificationDate>
 <a:Modifier>Ali HMIMS</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
-<o:Attribute Id="o22">
+<o:Attribute Id="o24">
 <a:ObjectID>19AFC264-AC86-4247-9EB8-328C1C0CF625</a:ObjectID>
 <a:Name>idMessage</a:Name>
 <a:Code>idMessage</a:Code>
 <a:CreationDate>1613580425</a:CreationDate>
 <a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613580685</a:ModificationDate>
+<a:ModificationDate>1614346487</a:ModificationDate>
 <a:Modifier>Ali HMIMS</a:Modifier>
-<a:DataType>int</a:DataType>
+<a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o23">
+<o:Attribute Id="o25">
 <a:ObjectID>F22AC5C0-67F5-4A7A-AFD9-28583CFD0AAB</a:ObjectID>
 <a:Name>contenueMessage</a:Name>
 <a:Code>contenueMessage</a:Code>
@@ -1621,7 +1642,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o24">
+<o:Attribute Id="o26">
 <a:ObjectID>ACDE62C1-E4CB-4971-BAF6-23C34E18D77D</a:ObjectID>
 <a:Name>typeMessage</a:Name>
 <a:Code>typeMessage</a:Code>
@@ -1632,7 +1653,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
-<o:Attribute Id="o25">
+<o:Attribute Id="o27">
 <a:ObjectID>6B624431-CF25-4580-AB41-105957DC5384</a:ObjectID>
 <a:Name>dateMessage</a:Name>
 <a:Code>dateMessage</a:Code>
@@ -1645,56 +1666,67 @@ LABL 0 Arial,8,N</a:FontList>
 </o:Attribute>
 </c:Attributes>
 </o:Class>
-<o:Class Id="o15">
+<o:Class Id="o17">
 <a:ObjectID>57FBBFB6-E030-4609-96D8-A692B0DF8518</a:ObjectID>
-<a:Name>Rendez_vous</a:Name>
+<a:Name>RendezVous</a:Name>
 <a:Code>RendezVous</a:Code>
 <a:CreationDate>1613580781</a:CreationDate>
 <a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613581655</a:ModificationDate>
+<a:ModificationDate>1614346685</a:ModificationDate>
 <a:Modifier>Ali HMIMS</a:Modifier>
 <a:UseParentNamespace>0</a:UseParentNamespace>
 <c:Attributes>
-<o:Attribute Id="o26">
+<o:Attribute Id="o28">
 <a:ObjectID>C5EFFE32-62A8-4858-81C6-1354EA289F8B</a:ObjectID>
-<a:Name>idRendez_vous</a:Name>
+<a:Name>idRendezVous</a:Name>
 <a:Code>idRendezVous</a:Code>
 <a:CreationDate>1613581150</a:CreationDate>
 <a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613581219</a:ModificationDate>
-<a:Modifier>Ali HMIMS</a:Modifier>
-<a:DataType>int</a:DataType>
-<a:Attribute.Visibility>-</a:Attribute.Visibility>
-</o:Attribute>
-<o:Attribute Id="o27">
-<a:ObjectID>E59D5F30-53AB-4447-A46F-C5215787A7A7</a:ObjectID>
-<a:Name>titreRendez_vous</a:Name>
-<a:Code>titreRendezVous</a:Code>
-<a:CreationDate>1613581150</a:CreationDate>
-<a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613581219</a:ModificationDate>
-<a:Modifier>Ali HMIMS</a:Modifier>
-<a:DataType>String</a:DataType>
-<a:Attribute.Visibility>-</a:Attribute.Visibility>
-</o:Attribute>
-<o:Attribute Id="o28">
-<a:ObjectID>F72D7CEC-2393-49E0-965D-49F19A28A3B9</a:ObjectID>
-<a:Name>descRendez_vous</a:Name>
-<a:Code>descRendezVous</a:Code>
-<a:CreationDate>1613581150</a:CreationDate>
-<a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613581219</a:ModificationDate>
+<a:ModificationDate>1614346685</a:ModificationDate>
 <a:Modifier>Ali HMIMS</a:Modifier>
 <a:DataType>String</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
 </o:Attribute>
 <o:Attribute Id="o29">
+<a:ObjectID>E59D5F30-53AB-4447-A46F-C5215787A7A7</a:ObjectID>
+<a:Name>motifRendezVous</a:Name>
+<a:Code>motifRendezVous</a:Code>
+<a:CreationDate>1613581150</a:CreationDate>
+<a:Creator>Ali HMIMS</a:Creator>
+<a:ModificationDate>1614346685</a:ModificationDate>
+<a:Modifier>Ali HMIMS</a:Modifier>
+<a:DataType>String</a:DataType>
+<a:Attribute.Visibility>-</a:Attribute.Visibility>
+</o:Attribute>
+<o:Attribute Id="o30">
+<a:ObjectID>F72D7CEC-2393-49E0-965D-49F19A28A3B9</a:ObjectID>
+<a:Name>animalRendezVous</a:Name>
+<a:Code>animalRendezVous</a:Code>
+<a:CreationDate>1613581150</a:CreationDate>
+<a:Creator>Ali HMIMS</a:Creator>
+<a:ModificationDate>1614346685</a:ModificationDate>
+<a:Modifier>Ali HMIMS</a:Modifier>
+<a:DataType>String</a:DataType>
+<a:Attribute.Visibility>-</a:Attribute.Visibility>
+</o:Attribute>
+<o:Attribute Id="o31">
+<a:ObjectID>668B90D7-AE86-4849-9C57-C2BB25786838</a:ObjectID>
+<a:Name>descRendezVous</a:Name>
+<a:Code>descRendezVous</a:Code>
+<a:CreationDate>1614346495</a:CreationDate>
+<a:Creator>Ali HMIMS</a:Creator>
+<a:ModificationDate>1614346685</a:ModificationDate>
+<a:Modifier>Ali HMIMS</a:Modifier>
+<a:DataType>String</a:DataType>
+<a:Attribute.Visibility>-</a:Attribute.Visibility>
+</o:Attribute>
+<o:Attribute Id="o32">
 <a:ObjectID>B4B41381-3090-4529-8244-B0D41086F0F1</a:ObjectID>
-<a:Name>dateRendez_vous</a:Name>
+<a:Name>dateRendezVous</a:Name>
 <a:Code>dateRendezVous</a:Code>
 <a:CreationDate>1613581150</a:CreationDate>
 <a:Creator>Ali HMIMS</a:Creator>
-<a:ModificationDate>1613581219</a:ModificationDate>
+<a:ModificationDate>1614346685</a:ModificationDate>
 <a:Modifier>Ali HMIMS</a:Modifier>
 <a:DataType>Date</a:DataType>
 <a:Attribute.Visibility>-</a:Attribute.Visibility>
@@ -1719,10 +1751,10 @@ LABL 0 Arial,8,N</a:FontList>
 
 </a:ExtendedAttributesText>
 <c:Object1>
-<o:Class Ref="o14"/>
+<o:Class Ref="o16"/>
 </c:Object1>
 <c:Object2>
-<o:Class Ref="o13"/>
+<o:Class Ref="o15"/>
 </c:Object2>
 </o:Association>
 <o:Association Id="o12">
@@ -1741,15 +1773,37 @@ LABL 0 Arial,8,N</a:FontList>
 
 </a:ExtendedAttributesText>
 <c:Object1>
-<o:Class Ref="o15"/>
+<o:Class Ref="o17"/>
 </c:Object1>
 <c:Object2>
-<o:Class Ref="o13"/>
+<o:Class Ref="o15"/>
+</c:Object2>
+</o:Association>
+<o:Association Id="o14">
+<a:ObjectID>8F3A628A-D319-4FD5-8CAC-81F92D4CA8FF</a:ObjectID>
+<a:Name>Association_3</a:Name>
+<a:Code>association3</a:Code>
+<a:CreationDate>1614346429</a:CreationDate>
+<a:Creator>Ali HMIMS</a:Creator>
+<a:ModificationDate>1614346446</a:ModificationDate>
+<a:Modifier>Ali HMIMS</a:Modifier>
+<a:RoleAMultiplicity>1..1</a:RoleAMultiplicity>
+<a:RoleBMultiplicity>0..*</a:RoleBMultiplicity>
+<a:ExtendedAttributesText>{0DEDDB90-46E2-45A0-886E-411709DA0DC9},Java,224={72FA5C48-5524-4DF7-8187-ABB19AB5AF9E},roleAContainer,6=&lt;None&gt;
+{F6FFC71C-C472-4261-A710-B0BCC0BF4D58},roleAImplementationClass,6=&lt;None&gt;
+{C11C9F66-6453-43A2-8824-6654518CF65A},roleBImplementationClass,17=java.util.HashSet
+
+</a:ExtendedAttributesText>
+<c:Object1>
+<o:Class Ref="o16"/>
+</c:Object1>
+<c:Object2>
+<o:Class Ref="o17"/>
 </c:Object2>
 </o:Association>
 </c:Associations>
 <c:TargetModels>
-<o:TargetModel Id="o30">
+<o:TargetModel Id="o33">
 <a:ObjectID>722A0231-6868-4D67-A11A-C0257394E844</a:ObjectID>
 <a:Name>Java</a:Name>
 <a:Code>Java</a:Code>
@@ -1764,7 +1818,7 @@ LABL 0 Arial,8,N</a:FontList>
 <o:Shortcut Ref="o3"/>
 </c:SessionShortcuts>
 </o:TargetModel>
-<o:TargetModel Id="o31">
+<o:TargetModel Id="o34">
 <a:ObjectID>BAB5D7A4-8C48-4230-8AFA-FBA42556B778</a:ObjectID>
 <a:Name>WSDL for Java</a:Name>
 <a:Code>WSDLJava</a:Code>

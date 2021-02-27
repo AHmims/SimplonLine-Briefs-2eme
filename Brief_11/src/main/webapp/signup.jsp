@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Ali HMIMS
   Date: 2/26/2021
-  Time: 4:19 PM
+  Time: 4:27 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,7 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Acceuil</title>
+    <link rel="stylesheet" href="./css/toast.css">
+    <script src="./js/toast.js"></script>
+    <script src="./js/toastsHandler.js"></script>
+    <title>Document</title>
 </head>
 <body class="bg-white min-h-screen flex flex-col">
 <div class="w-full h-full flex flex-col flex-1 justify-between">
@@ -46,31 +49,28 @@
                 </a>
             </div>
         </div>
-        <!-- content -->
-        <div class="w-full h-full flex flex-col space-y-12 relative">
-            <h1 class="font-Kollektif font-bold text-coolGray-900 text-7xl max-w-4xl capitalize">Un animal en bonne santé est un animal heureux</h1>
-            <span class="text-warmGray-700 font-SourceSansPro font-normal text-4xl max-w-3xl block">Notre priorité une longue et heureuse vie pour votre animal</span>
-            <a href="/authentification">
-                    <span class="py-10 px-14 rounded-40 bg-teal-600 flex w-min items-center">
-                        <span class="whitespace-nowrap text-white font-Kollektif text-4xl tracking-wide capitalize">Demander un rendez-vous</span>
-                        <svg class="ml-5" width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.7 3.9C11.1828 3.9 10.6868 4.10545 10.3211 4.47114C9.95545 4.83684 9.75 5.33283 9.75 5.85V7.8H7.8C6.76566 7.8 5.77368 8.21089 5.04228 8.94229C4.31089 9.67368 3.9 10.6657 3.9 11.7V31.2C3.9 32.2343 4.31089 33.2263 5.04228 33.9577C5.77368 34.6891 6.76566 35.1 7.8 35.1H31.2C32.2343 35.1 33.2263 34.6891 33.9577 33.9577C34.6891 33.2263 35.1 32.2343 35.1 31.2V11.7C35.1 10.6657 34.6891 9.67368 33.9577 8.94229C33.2263 8.21089 32.2343 7.8 31.2 7.8H29.25V5.85C29.25 5.33283 29.0446 4.83684 28.6789 4.47114C28.3132 4.10545 27.8172 3.9 27.3 3.9C26.7828 3.9 26.2868 4.10545 25.9211 4.47114C25.5554 4.83684 25.35 5.33283 25.35 5.85V7.8H13.65V5.85C13.65 5.33283 13.4446 4.83684 13.0789 4.47114C12.7132 4.10545 12.2172 3.9 11.7 3.9ZM11.7 13.65C11.1828 13.65 10.6868 13.8554 10.3211 14.2211C9.95545 14.5868 9.75 15.0828 9.75 15.6C9.75 16.1172 9.95545 16.6132 10.3211 16.9789C10.6868 17.3446 11.1828 17.55 11.7 17.55H27.3C27.8172 17.55 28.3132 17.3446 28.6789 16.9789C29.0446 16.6132 29.25 16.1172 29.25 15.6C29.25 15.0828 29.0446 14.5868 28.6789 14.2211C28.3132 13.8554 27.8172 13.65 27.3 13.65H11.7Z" fill="white" />
-                        </svg>
-                    </span>
-            </a>
-            <!-- abs -->
-            <img src="./img/Saly-18.png" class="absolute -right-60 -top-48 pointer-events-none" alt="">
-        </div>
-        <!-- Banner -->
-        <div class="w-full p-8 flex flex-col items-start space-y-2.5 bg-coolGray-800 rounded-20 shadow-lg">
-            <svg width="104" height="27" viewBox="0 0 104 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22.32 0.475998H28.26L17.496 26H11.484L0.756 0.475998H6.696L14.508 19.556L22.32 0.475998ZM30.7319 0.475998H46.6799V5.444H36.2039V10.052H45.4199V15.02H36.2039V21.068H46.6799V26H30.7319V0.475998ZM49.2382 0.475998H67.7062V5.444H61.1902V26H55.7542V5.444H49.2382V0.475998ZM74.6395 19.76C75.5195 20.384 75.9595 21.272 75.9595 22.424C75.9595 22.952 75.8315 23.448 75.5755 23.912C75.3355 24.376 74.9995 24.784 74.5675 25.136C74.1355 25.488 73.6315 25.768 73.0555 25.976C72.4795 26.168 71.8635 26.264 71.2075 26.264C70.7115 26.264 70.2235 26.2 69.7435 26.072C69.2795 25.944 68.8475 25.768 68.4475 25.544C68.0475 25.32 67.6955 25.056 67.3915 24.752C67.1035 24.432 66.8875 24.08 66.7435 23.696C67.1115 23.52 67.5195 23.328 67.9675 23.12C68.4155 22.896 68.8075 22.696 69.1435 22.52C69.2875 22.76 69.5115 22.984 69.8155 23.192C70.1195 23.384 70.5355 23.48 71.0635 23.48C71.6075 23.48 72.0075 23.352 72.2635 23.096C72.5195 22.84 72.6475 22.6 72.6475 22.376C72.6475 22.216 72.5595 22.072 72.3835 21.944C72.2075 21.8 72.0075 21.688 71.7835 21.608C71.4635 21.48 71.1995 21.416 70.9915 21.416C70.7835 21.4 70.5435 21.352 70.2715 21.272C69.4075 21.064 68.7435 20.792 68.2795 20.456C67.8315 20.104 67.5035 19.752 67.2955 19.4C67.0875 19.048 66.9675 18.712 66.9355 18.392C66.9195 18.072 66.9115 17.816 66.9115 17.624C66.9115 17.112 67.0235 16.624 67.2475 16.16C67.4715 15.696 67.7755 15.296 68.1595 14.96C68.5595 14.608 69.0155 14.328 69.5275 14.12C70.0555 13.912 70.6155 13.808 71.2075 13.808C71.7035 13.808 72.1755 13.88 72.6235 14.024C73.0715 14.168 73.4795 14.368 73.8475 14.624C74.2155 14.88 74.5275 15.184 74.7835 15.536C75.0555 15.888 75.2555 16.28 75.3835 16.712L72.8155 17.576C72.7195 17.288 72.5195 17.056 72.2155 16.88C71.9275 16.704 71.6155 16.616 71.2795 16.616C70.9435 16.616 70.6715 16.728 70.4635 16.952C70.2555 17.176 70.1515 17.4 70.1515 17.624C70.1515 17.896 70.2475 18.112 70.4395 18.272C70.6475 18.416 70.8715 18.52 71.1115 18.584C71.2875 18.616 71.4555 18.648 71.6155 18.68C71.7915 18.696 71.9595 18.72 72.1195 18.752C72.6795 18.88 73.1595 19.024 73.5595 19.184C73.9755 19.344 74.3355 19.536 74.6395 19.76ZM80.4322 21.728C80.4322 22.288 80.6002 22.72 80.9362 23.024C81.2882 23.328 81.7442 23.48 82.3042 23.48C82.7522 23.48 83.2002 23.392 83.6482 23.216V26C83.2482 26.128 82.8242 26.232 82.3762 26.312C81.9282 26.408 81.4802 26.456 81.0322 26.456C80.5202 26.456 80.0322 26.392 79.5682 26.264C79.1042 26.136 78.6882 25.92 78.3202 25.616C77.9522 25.296 77.6562 24.88 77.4322 24.368C77.2242 23.84 77.1202 23.192 77.1202 22.424V17.048H75.4162V14.816L77.1202 14.096V11.432H80.4322V14.096H83.6482V17.048H80.4322V21.728ZM96.0037 14.096V26H93.1477L92.8117 24.728C92.3477 25.352 91.7877 25.768 91.1317 25.976C90.4917 26.184 89.8197 26.288 89.1157 26.288C88.2677 26.288 87.4837 26.128 86.7637 25.808C86.0597 25.472 85.4437 25.024 84.9157 24.464C84.3877 23.888 83.9717 23.224 83.6677 22.472C83.3797 21.704 83.2357 20.888 83.2357 20.024C83.2357 19.16 83.3797 18.352 83.6677 17.6C83.9717 16.832 84.3877 16.168 84.9157 15.608C85.4437 15.032 86.0597 14.584 86.7637 14.264C87.4837 13.928 88.2677 13.76 89.1157 13.76C89.8837 13.76 90.5877 13.88 91.2277 14.12C91.8677 14.36 92.3957 14.744 92.8117 15.272L93.1477 14.096H96.0037ZM92.6917 20.072C92.6917 19.448 92.6037 18.928 92.4277 18.512C92.2677 18.08 92.0437 17.736 91.7557 17.48C91.4837 17.208 91.1557 17.016 90.7717 16.904C90.4037 16.776 90.0037 16.712 89.5717 16.712C89.1397 16.712 88.7317 16.8 88.3477 16.976C87.9797 17.152 87.6517 17.392 87.3637 17.696C87.0757 17.984 86.8517 18.336 86.6917 18.752C86.5317 19.152 86.4517 19.576 86.4517 20.024C86.4517 20.488 86.5317 20.92 86.6917 21.32C86.8517 21.72 87.0757 22.072 87.3637 22.376C87.6517 22.664 87.9797 22.896 88.3477 23.072C88.7317 23.248 89.1397 23.336 89.5717 23.336C90.4357 23.336 91.1637 23.072 91.7557 22.544C92.3637 22 92.6757 21.176 92.6917 20.072ZM100.627 21.728C100.627 22.288 100.795 22.72 101.131 23.024C101.483 23.328 101.939 23.48 102.499 23.48C102.947 23.48 103.395 23.392 103.843 23.216V26C103.443 26.128 103.019 26.232 102.571 26.312C102.123 26.408 101.675 26.456 101.227 26.456C100.715 26.456 100.227 26.392 99.7628 26.264C99.2988 26.136 98.8828 25.92 98.5148 25.616C98.1468 25.296 97.8508 24.88 97.6268 24.368C97.4188 23.84 97.3148 23.192 97.3148 22.424V17.048H95.6108V14.816L97.3148 14.096V11.432H100.627V14.096H103.843V17.048H100.627V21.728Z" fill="white" />
-            </svg>
-            <div class="w-full justify-between flex flex-row items-center font-SourceSansPro  font-semibold text-xl">
-                <span class="text-white">Nous nous efforçons de pratiquer une médecine vétérinaire de la plus haute qualité des services.</span>
-                <a href="#" class="py-4 px-6 bg-white rounded-xl">
-                    <span class="text-coolGray-800">S’inscrire</span>
-                </a>
+        <!-- form -->
+        <div class="px-36 space-y-10 h-full flex-1 flex items-center justify-center">
+            <div>
+                <!-- header -->
+                <div class="text-center">
+                    <h1 class="font-Kollektif text-5xl text-coolGray-900">Bienvenue sur VETstat</h1>
+                    <span class="font-SourceSansPro text-coolGray-700 mt-1 text-2xl w-456 block mx-auto">Créez votre compte, et commencez à explorer nos produits dès maintenant !</span>
+                </div>
+                <!-- form -->
+                <form action="" class="flex flex-col mt-10 w-456 mx-auto">
+                    <!-- row -->
+                    <div class="w-full flex flex-row space-x-3">
+                        <input type="text" placeholder="Nom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                        <input type="text" placeholder="Prénom" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                    </div>
+                    <div class="w-full flex flex-row space-x-3 mt-4 ">
+                        <input type="text" placeholder="Email" class="w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                    </div>
+                    <input type="password" placeholder="Mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                    <input type="password" placeholder="Confirmation de mot de passe" class="mt-4 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500">
+                    <button class="mt-10 p-6 bg-teal-200 text-teal-900 rounded-20 font-Kollektif font-normal text-2xl">Enregistrer</button>
+                </form>
             </div>
         </div>
     </div>
@@ -84,5 +84,4 @@
     </div>
 </div>
 </body>
-
 </html>

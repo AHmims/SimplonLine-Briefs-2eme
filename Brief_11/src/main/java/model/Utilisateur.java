@@ -27,6 +27,7 @@ public class Utilisateur {
     private String passUtilisateur;
     @Column(name = "roleUtilisateur", nullable = false)
     private int roleUtilisateur;
+
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)

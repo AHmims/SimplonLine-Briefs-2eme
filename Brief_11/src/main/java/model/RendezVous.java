@@ -25,9 +25,11 @@ public class RendezVous {
     private String descRendezVous;
     @Column(name = "dateRendezVous", nullable = false)
     private Date dateRendezVous;
+
     @ManyToOne
     @JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;
+
     @OneToMany(mappedBy = "rendezVous", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> messages;
 
