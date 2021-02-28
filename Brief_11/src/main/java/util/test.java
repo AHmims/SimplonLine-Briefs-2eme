@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class test {
     public static void main(String[] args) throws MalformedURLException {
-        Utilisateur utilisateur = new Utilisateur("XXX", "XXX", "XXX", "XXX", 1);
+        /*Utilisateur utilisateur = new Utilisateur("XXX", "XXX", "XXX", "XXX", 1);
         UtilisateurDao utilisateurDao = new UtilisateurDao();
         //boolean res = utilisateurDao.insert(utilisateur);
         ArrayList<Utilisateur> list = utilisateurDao.getAll();
@@ -22,9 +22,13 @@ public class test {
         System.out.println(list.get(0).getRendezVous().get(0).getIdRendezVous());
         //
         RendezVous rendezVous = new RendezVous("XXX", "XXX", "XXX", new Date(), list.get(0));
-        RendezVousDao rendezVousDao = new RendezVousDao();
+        RendezVousDao rendezVousDao = new RendezVousDao();*/
         //boolean r_res = rendezVousDao.insert(rendezVous);
         //ArrayList<RendezVous> list_r = rendezVousDao.getAll();
         //System.out.println(Arrays.deepToString(list_r.get(0).getUtilisateur().getNomUtilisateur()));
+        //
+        //
+        Date x = Validator.toDate("2021-02-28T21:04");
+        System.out.println(x);
     }
 }

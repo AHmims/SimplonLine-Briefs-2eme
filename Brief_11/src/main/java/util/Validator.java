@@ -23,7 +23,7 @@ public class Validator {
     public static Date toDate(String str){
         if(!str.equals("") && str != null){
             try {
-                return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse(str);
+                return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(str);
             }catch (Exception e){
                 e.printStackTrace();
                 return null;
