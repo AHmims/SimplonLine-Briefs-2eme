@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>rv</servlet-name>
-        <servlet-class>servlet.RendezVous</servlet-class>
+        <servlet-class>servlet.RV</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>signout</servlet-name>
