@@ -13,9 +13,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/toast.css">
+    <script src="./js/toast.js"></script>
+    <script src="./js/toastsHandler.js"></script>
     <title>Document</title>
 </head>
 <body class="bg-white min-h-screen flex flex-col">
+<script>
+    <c:if test="${requestScope._error != null}">
+        <c:choose>
+            <c:when test="${requestScope._error == '0'}">
+                logErrorActive("Rendez-vous n'a pas été pris, réessayez plus tard");
+            </c:when>
+            <c:when test="${requestScope._error == '-1'}">
+                logErrorActive("Vous n'êtes pas authentifié");
+            </c:when>
+            <c:when test="${requestScope._error == '-2'}">
+                logErrorActive("Erreur inconnue");
+            </c:when>
+            <c:otherwise>
+                logErrorActive("Formulaire non valide");
+            </c:otherwise>
+        </c:choose>
+    </c:if>
+</script>
 <div class="w-full h-full flex flex-col flex-1 justify-between">
     <div class="container px-20 mx-auto h-full flex flex-col space-y-20 flex-1">
         <!-- navBar -->
@@ -93,7 +114,9 @@
                         <textarea name="desc" placeholder="Déscription"
                                   class="h-40 min-h-full max-h-40 w-full py-5 px-7 rounded-20 bg-coolGray-100 font-SourceSansPro font-normal text-lg text-coolGray-700 placeholder-coolGray-500"></textarea>
                     </div>
-                    <button class="mt-10 p-6 bg-teal-200 text-teal-900 rounded-20 font-Kollektif font-bold text-2xl">Demander</button>
+                    <button class="mt-10 p-6 bg-teal-200 text-teal-900 rounded-20 font-Kollektif font-bold text-2xl">
+                        Demander
+                    </button>
                 </form>
             </div>
             <img src="./img/rv.png" alt="" class="absolute right-0 -bottom-32 pointer-events-none">

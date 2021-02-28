@@ -14,10 +14,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
-
+    <link rel="stylesheet" href="./css/toast.css">
+    <script src="./js/toast.js"></script>
+    <script src="./js/toastsHandler.js"></script>
 </head>
 <body>
 <body class="bg-white min-h-screen flex flex-col">
+<c:if test="${param.status != null}">
+    <script>
+        logSuccess("Rendez-vous pris avec succès");
+    </script>
+</c:if>
 <div class="w-full h-full flex flex-col flex-1 justify-between">
     <div class="container px-20 mx-auto h-full flex flex-col space-y-20 flex-1">
         <!-- navBar -->

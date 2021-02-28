@@ -67,6 +67,11 @@ public class RV extends HttpServlet {
         Date rv_date = Validator.toDate(str_date);
         if (rv_date == null)
             valid = false;
+        else {
+            Date currDate = new Date();
+            if (currDate.getTime() > rv_date.getTime())
+                valid = false;
+        }
         //
         if (valid) {
             return new RendezVous(str_motif, str_animal, str_desc, rv_date, user);
