@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+        PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/j2ee/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>Custom tags ~Ali HMIMS</short-name>
+    <uri>http://www.hmims.dev/customTags</uri>
+
+    <tag>
+        <name>date</name>
+        <tag-class>tag.DateHandler</tag-class>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>display</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+</taglib>
