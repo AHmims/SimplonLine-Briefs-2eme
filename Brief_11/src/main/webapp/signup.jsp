@@ -51,9 +51,14 @@
                 <a href="/rendez_vous">
                     <span>Rendez-vous</span>
                 </a>
-                <a href="/chat">
-                    <span>Contact</span>
-                </a>
+                <c:if test="${sessionScope.__user_data != null}">
+                    <a href="/chat">
+                        <span>Contact</span>
+                    </a>
+                    <a href="/historique">
+                        <span>Historique</span>
+                    </a>
+                </c:if>
             </div>
             <!-- Btns -->
             <div class="w-1/3 flex flex-row justify-end space-x-4 text-lg font-Kollektif font-normal">
