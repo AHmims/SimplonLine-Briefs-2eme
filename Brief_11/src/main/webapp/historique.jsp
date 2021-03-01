@@ -78,9 +78,11 @@
                             <!-- top -->
                             <div class="flex flex-col">
                                 <span class="font-semibold text-2xl text-coolGray-900">
-                                    <xyz:date value="${rendez_vous.dateRendezVous.time}" display="date" />
+                                    <xyz:date value="${rendez_vous.dateRendezVous}" display="date" />
                                 </span>
-                                <span class="font-normal text-lg text-coolGray-600">hmm</span>
+                                <span class="font-normal text-lg text-coolGray-600">
+                                    <xyz:date value="${rendez_vous.dateRendezVous}" display="time" />
+                                </span>
                             </div>
                             <!-- bot -->
                             <div class="flex flex-row items-center space-x-14 mt-2.5">
