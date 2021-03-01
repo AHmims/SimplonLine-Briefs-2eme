@@ -65,6 +65,7 @@ public class RendezVous {
     }
 
     //getters / setters
+
     public String getIdRendezVous() {
         return idRendezVous;
     }
@@ -103,14 +104,6 @@ public class RendezVous {
 
     public void setDateRendezVous(Date dateRendezVous) {
         this.dateRendezVous = dateRendezVous;
-    }
-
-    public Utilisateur getIdUtilisateur() {
-        return utilisateur;
-    }
-
-    public void setIdUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
     }
 
     public Utilisateur getUtilisateur() {

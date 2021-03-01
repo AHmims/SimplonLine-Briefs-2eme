@@ -64,7 +64,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>chat</servlet-name>
-        <url-pattern>/chat</url-pattern>
+        <url-pattern>/chat/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>rv</servlet-name>
