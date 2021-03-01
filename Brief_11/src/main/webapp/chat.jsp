@@ -17,7 +17,8 @@
     <script src="/js/toast.js"></script>
     <script src="/js/toastsHandler.js"></script>
     <script src="/js/axios.min.js"></script>
-    <script src="/js/chat.js"></script>
+    <%--    --%>
+    <script src="/js/chat/chatSocket.js"></script>
     <title>Document</title>
 </head>
 <body class="bg-white min-h-screen flex flex-col">
@@ -86,13 +87,15 @@
                         <c:when test="${message.utilisateur.idUtilisateur == sessionScope.__user_data.idUtilisateur}">
                             <!-- host -->
                             <div class="w-full flex items-end justify-end">
-                            <span class="max-w-3xl py-4 px-7 text-coolGray-600 bg-coolGray-50 rounded-20"><c:out value="${message.contenuMessage}"/></span>
+                                <span class="max-w-3xl py-4 px-7 text-coolGray-600 bg-coolGray-50 rounded-20"><c:out
+                                        value="${message.contenuMessage}"/></span>
                             </div>
                         </c:when>
                         <c:otherwise>
                             <!-- remote -->
                             <div class="w-full flex items-start justify-start">
-                            <span class="max-w-3xl py-4 px-7 text-coolGray-600 bg-white border border-coolGray-100 rounded-20"><c:out value="${message.contenuMessage}"/></span>
+                                <span class="max-w-3xl py-4 px-7 text-coolGray-600 bg-white border border-coolGray-100 rounded-20"><c:out
+                                        value="${message.contenuMessage}"/></span>
                             </div>
                         </c:otherwise>
                     </c:choose>
