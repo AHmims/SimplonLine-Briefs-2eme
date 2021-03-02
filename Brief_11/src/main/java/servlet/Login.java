@@ -30,7 +30,6 @@ public class Login extends HttpServlet {
                         if (is_valid) {
                             HttpSession session = request.getSession();
                             session.setAttribute("__user_data", utilisateur);
-                            session.setAttribute("__user_in", "ININININININ");
                             //
                             response.sendRedirect(utilisateur.getRoleUtilisateur() == 1 ? "/historique" : "/rendez_vous");
                         } else {
