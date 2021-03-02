@@ -20,7 +20,7 @@ public class Login extends HttpServlet {
                 if (!email.isEmpty() && !password.isEmpty() && password.length() >= 8) {
                     //
                     UtilisateurSRVC utilisateurSRVC = new UtilisateurSRVC();
-                    Utilisateur utilisateur = utilisateurSRVC.login(email);
+                    Utilisateur utilisateur = utilisateurSRVC.getByEmail(email);
                     //test if users exists or not
                     if (utilisateur != null) {
                         System.out.println(utilisateur.getPassUtilisateur());

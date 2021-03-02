@@ -7,7 +7,7 @@ import org.hibernate.query.Query;
 import util.HibernateUtil;
 
 public class UtilisateurSRVC {
-    public Utilisateur login(String email) {
+    public Utilisateur getByEmail(String email) {
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.openSession();
