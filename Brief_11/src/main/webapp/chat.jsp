@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="/css/toast.css">
     <script src="/js/toast.js"></script>
     <script src="/js/toastsHandler.js"></script>
-    <script src="/js/axios.min.js"></script>
     <%--    --%>
     <script src="/js/chat/chatSocket.js"></script>
     <title>Document</title>
