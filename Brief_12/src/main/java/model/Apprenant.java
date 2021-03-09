@@ -1,8 +1,6 @@
 package model;
 
-import javafx.scene.Group;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.context.ApplicationContext;
 
 import javax.persistence.*;
 import java.util.Date;

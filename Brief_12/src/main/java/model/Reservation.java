@@ -6,6 +6,7 @@ import util.PkGenerator;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @Table(name = "reservation")
@@ -16,9 +17,9 @@ public class Reservation {
     @Column(name = "idReservation")
     private String idReservation;
     @Column(name = "dateCreation")
-    private String dateCreation;
+    private Date dateCreation;
     @Column(name = "dateReservation")
-    private String dateReservation;
+    private Date dateReservation;
     @ColumnDefault("false")
     @Column(name = "valideReservation")
     private boolean valideReservation;
@@ -38,7 +39,7 @@ public class Reservation {
     //
     //
 
-    public Reservation(String idReservation, String dateCreation, String dateReservation, boolean valideReservation, Apprenant apprenant, Administrateur administrateur, Calendrier calendrier, Emplacement emplacement) {
+    public Reservation(String idReservation, Date dateCreation, Date dateReservation, boolean valideReservation, Apprenant apprenant, Administrateur administrateur, Calendrier calendrier, Emplacement emplacement) {
         this.idReservation = idReservation;
         this.dateCreation = dateCreation;
         this.dateReservation = dateReservation;
@@ -49,7 +50,7 @@ public class Reservation {
         this.emplacement = emplacement;
     }
 
-    public Reservation(String dateCreation, String dateReservation, Apprenant apprenant, Calendrier calendrier, Emplacement emplacement) {
+    public Reservation(Date dateCreation, Date dateReservation, Apprenant apprenant, Calendrier calendrier, Emplacement emplacement) {
         this.dateCreation = dateCreation;
         this.dateReservation = dateReservation;
         this.apprenant = apprenant;
@@ -69,19 +70,19 @@ public class Reservation {
         this.idReservation = idReservation;
     }
 
-    public String getDateCreation() {
+    public Date getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation(String dateCreation) {
+    public void setDateCreation(Date dateCreation) {
         this.dateCreation = dateCreation;
     }
 
-    public String getDateReservation() {
+    public Date getDateReservation() {
         return dateReservation;
     }
 
-    public void setDateReservation(String dateReservation) {
+    public void setDateReservation(Date dateReservation) {
         this.dateReservation = dateReservation;
     }
 
