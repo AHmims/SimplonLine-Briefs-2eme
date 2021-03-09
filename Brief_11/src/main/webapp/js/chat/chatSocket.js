@@ -48,7 +48,7 @@ window.onload = () => {
             }
         },
         send: msg => {
-            //msg format => channel:|:idrendezVous:|:content:|:type
+            //msg format => channel:#:idrendezVous:|:content:|:type
             msg = Object.values(msg).join(__SEPARATOR);
             chatNode.socket.send(msg);
         }
