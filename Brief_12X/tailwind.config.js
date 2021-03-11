@@ -4,33 +4,41 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'Kollektif': ['Inter', 'sans-serif']
+        'Inter': ['Inter', 'sans-serif']
       },
       borderRadius: {
+        'lg.5': '10px'
       },
       width: {
       },
       height: {
       },
       boxShadow: {
+        'navBarHome': '0px 0px 0px 6px rgba(255, 255, 255, 0.2), 0px 10px 15px 2px rgba(15, 23, 42, 0.03)',
       },
       zIndex: {
       },
       borderWidth: {
       },
       spacing: {
+        '4.5': '18px'
       },
       gridTemplateColumns: {
       },
       colors: {
         amber: colors.amber,
         coolGray: colors.coolGray,
+        blueGray: colors.blueGray,
+        trueGray: colors.trueGray,
         warmGray: colors.warmGray,
         orange: colors.orange,
         rose: colors.rose,
         violet: colors.violet,
         emerald: colors.emerald,
-        teal: colors.teal
+        teal: colors.teal,
+        customClr: {
+          trans: 'rgba(15, 23, 42, 0.2)'
+        }
       }
     },
   },
@@ -41,8 +49,8 @@ module.exports = {
   plugins: [
     require('tailwind-scrollbar')
   ],
-  purge: {
-    enabled: true,
-    content: ['./f_src/html/*.html']
-  }
+  // purge: {
+  //   enabled: true,
+  //   content: ['./f_src/html/*.html']
+  // }
 }

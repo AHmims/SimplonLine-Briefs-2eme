@@ -1,24 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
 @layer components {
-    .msg-host-container {
-        @apply w-full flex items-end justify-end;
+    .navLink {
+        @apply block py-2 px-4.5 rounded-md transition-colors duration-300 ease-in-out;
     }
 
-    .msg-remote-container {
-        @apply w-full flex items-start justify-start;
+    .navLink:hover {
+        @apply bg-coolGray-100;
     }
 
-    .msg-host-text {
-        @apply max-w-3xl py-4 px-7 text-coolGray-600 bg-coolGray-50 rounded-20;
+    .buttonMain {
+        @apply font-Inter text-sm font-medium py-2 px-7 bg-blueGray-900 rounded-md text-white;
     }
 
-    .msg-remote-text {
-        @apply max-w-3xl py-4 px-7 text-coolGray-600 bg-white border border-coolGray-100 rounded-20;
+    .buttonSec {
+        @apply font-Inter text-sm font-medium py-2 px-7 bg-coolGray-200 rounded-md text-blueGray-900;
+    }
+
+    .buttonAlt {
+        @apply font-Inter text-lg font-medium py-3 px-7 bg-customClr-trans rounded-md text-white;
     }
 }
 
