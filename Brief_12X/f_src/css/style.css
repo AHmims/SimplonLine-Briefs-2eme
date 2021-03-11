@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer components {
+    .msg-host-container {
+        @apply w-full flex items-end justify-end;
+    }
+
+    .msg-remote-container {
+        @apply w-full flex items-start justify-start;
+    }
+
+    .msg-host-text {
+        @apply max-w-3xl py-4 px-7 text-coolGray-600 bg-coolGray-50 rounded-20;
+    }
+
+    .msg-remote-text {
+        @apply max-w-3xl py-4 px-7 text-coolGray-600 bg-white border border-coolGray-100 rounded-20;
+    }
+}
+
+@tailwind utilities;
