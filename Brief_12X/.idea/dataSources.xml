@@ -7,9 +7,9 @@
       <imported>true</imported>
       <remarks>Hibernate
 
-C:/Users/qas14/Desktop/TO-DO/SimplonLine-Briefs-2eme/Brief_11/src/main/resources/hibernate.cfg.xml</remarks>
+C:/Users/qas14/Desktop/TO-DO/SimplonLine-Briefs-2eme/Brief_12X/src/main/resources/hibernate.cfg.xml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/brief_11</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/brief_12</jdbc-url>
     </data-source>
   </component>
 </project>

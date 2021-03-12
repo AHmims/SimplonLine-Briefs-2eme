@@ -10,18 +10,24 @@ module.exports = {
         'lg.5': '10px'
       },
       width: {
+        '122.5': '490px'
       },
       height: {
+        '0.25': '1px'
       },
       boxShadow: {
         'navBarHome': '0px 0px 0px 6px rgba(255, 255, 255, 0.2), 0px 10px 15px 2px rgba(15, 23, 42, 0.03)',
+        'navBarOther': '0px 0px 0px 3px #F3F4F6, 0px 10px 15px 2px rgba(15, 23, 42, 0.03)'
       },
       zIndex: {
       },
       borderWidth: {
+        '3': '3px'
       },
       spacing: {
-        '4.5': '18px'
+        '4.5': '18px',
+        '7.5': '30px',
+        'offCenter': '47%'
       },
       gridTemplateColumns: {
       },

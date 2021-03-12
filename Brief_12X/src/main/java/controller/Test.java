@@ -11,9 +11,9 @@ public class Test {
     //@ResponseBody
     @GetMapping("/hmm")
     public String funcTest(){
-        System.out.println("Returning test.jsp");
-        return "/templates/test.jsp";
-//        WEB-INF/view/test.jsp
+        System.out.println("Returning hmm.jsp");
+        return "hmm";
+//        WEB-INF/view/hmm.jsp
     }
     @PostMapping("/hmm")
     @ResponseBody

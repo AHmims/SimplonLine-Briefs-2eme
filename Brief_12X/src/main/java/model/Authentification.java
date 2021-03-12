@@ -5,7 +5,7 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "authentification")
+@Table(name = "authentification", schema = "brief_12")
 public class Authentification {
     @Id
     @Column(name = "EXTERNAL_ID")
@@ -16,17 +16,12 @@ public class Authentification {
     @Column(name = "emailAuthentification")
     private String emailAuthentification;
     //
-    @OneToOne
-    @JoinColumn(name = "idUtilisateur")
-    private Apprenant apprenant;
-    //
     //
 
-    public Authentification(String EXTERNAL_ID, String EXTERNAL_TYPE, String emailAuthentification, Apprenant apprenant) {
+    public Authentification(String EXTERNAL_ID, String EXTERNAL_TYPE, String emailAuthentification) {
         this.EXTERNAL_ID = EXTERNAL_ID;
         this.EXTERNAL_TYPE = EXTERNAL_TYPE;
         this.emailAuthentification = emailAuthentification;
-        this.apprenant = apprenant;
     }
 
     public Authentification(String EXTERNAL_ID, String emailAuthentification) {
@@ -60,13 +55,5 @@ public class Authentification {
 
     public void setEmailAuthentification(String emailAuthentification) {
         this.emailAuthentification = emailAuthentification;
-    }
-
-    public Apprenant getApprenant() {
-        return apprenant;
-    }
-
-    public void setApprenant(Apprenant apprenant) {
-        this.apprenant = apprenant;
     }
 }

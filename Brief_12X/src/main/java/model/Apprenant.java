@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("1")
 @Table(name = "apprenant")
+@PrimaryKeyJoinColumn(name="idUtilisateur")
 public class Apprenant extends Utilisateur {
     @ColumnDefault("false")
     @Column(name = "actif")
@@ -16,7 +17,8 @@ public class Apprenant extends Utilisateur {
     @Column(name = "imgApprenant")
     private String imgApprenant;
     //
-    @OneToOne(mappedBy = "apprenant", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
+    @JoinColumn(name = "EXTERNAL_ID")
     private Authentification authentification;
     @OneToMany(mappedBy = "apprenant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;

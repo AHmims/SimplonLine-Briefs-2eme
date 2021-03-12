@@ -30,9 +30,15 @@ public class Hibernate {
     //
     private static Configuration setupClasses(Configuration config) {
         //Classes here
-        //config.addAnnotatedClass(Utilisateur.class);
-        //config.addAnnotatedClass(Message.class);
-        //config.addAnnotatedClass(RendezVous.class);
+        config.addAnnotatedClass(Apprenant.class);
+        config.addAnnotatedClass(Administrateur.class);
+        config.addAnnotatedClass(Authentification.class);
+        config.addAnnotatedClass(Calendrier.class);
+        config.addAnnotatedClass(Emplacement.class);
+        config.addAnnotatedClass(Groupe.class);
+        config.addAnnotatedClass(Local.class);
+        config.addAnnotatedClass(Promotion.class);
+        config.addAnnotatedClass(Reservation.class);
         //
         return config;
     }

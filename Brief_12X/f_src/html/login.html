@@ -14,10 +14,10 @@
         <!-- main -->
         <div class="w-full h-auto space-y-4">
             <!-- Hero -->
-            <div class="w-full p-10 space-y-20 bg-gradient-to-r from-warmGray-200 to-coolGray-200 rounded-lg.5">
+            <div class="w-full p-10 space-y-20 bg-white rounded-lg.5">
                 <!-- navbar -->
                 <div class="w-full h-auto">
-                    <div class="container mx-auto bg-white py-4 px-5 flex flex-row items-center justify-between rounded-lg.5 shadow-navBarHome">
+                    <div class="container mx-auto bg-white py-4 px-5 flex flex-row items-center justify-between rounded-lg.5 shadow-navBarOther">
                         <!-- logo -->
                         <div class="w-3/12">
                             <svg width="33" height="23" viewBox="0 0 33 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -43,34 +43,61 @@
                         </div>
                     </div>
                 </div>
-                <!-- section -->
-                <div class="mx-auto space-y-10 font-Inter">
-                    <!-- top -->
-                    <div class="flex flex-col items-center space-y-5 text-center">
-                        <span class="font-light text-base text-trueGray-700">Bienvenue à Youbook</span>
-                        <img src="../../src/main/webapp/img/logo-fondblanc 1.png" alt="Youcode logo">
-                        <h1 class="block font-bold text-trueGray-900 text-5xl max-w-xl">
-                            <span>Réservez en ligne en un simple clic</span>
-                            <svg class="inline-block" width="29" height="27" viewBox="0 0 29 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M24.7784 14.88C25.8984 15.104 26.7944 15.632 27.4664 16.464C28.1384 17.264 28.4584 18.208 28.4264 19.296C28.3944 20.352 27.9944 21.312 27.2264 22.176C25.2424 24.48 22.4744 25.936 18.9224 26.544C18.7944 26.576 17.7864 26.688 15.8984 26.88C11.0344 26.688 6.93838 25.328 3.61038 22.8C2.68238 22.096 1.91438 21.312 1.30638 20.448C0.762375 19.68 0.538375 18.848 0.634375 17.952C0.762375 17.024 1.16238 16.24 1.83438 15.6C2.47438 14.96 3.21038 14.592 4.04238 14.496C4.90638 14.4 5.73838 14.592 6.53838 15.072C6.76238 15.2 7.01838 15.376 7.30638 15.6C10.3464 18.128 13.9304 18.832 18.0584 17.712C18.7944 17.488 19.7384 16.944 20.8904 16.08C22.2664 15.056 23.5624 14.656 24.7784 14.88ZM22.5224 9.216C21.7224 9.216 20.9864 9.04 20.3144 8.688C19.6424 8.304 19.0984 7.792 18.6824 7.152C18.2984 6.48 18.1064 5.76 18.1064 4.992C18.0744 3.776 18.4904 2.72 19.3544 1.824C20.2184 0.927999 21.2584 0.48 22.4744 0.48C23.2424 0.48 23.9464 0.687999 24.5864 1.104C25.2584 1.488 25.7864 2.016 26.1704 2.688C26.5864 3.36 26.7944 4.08 26.7944 4.848C26.8264 6.032 26.4104 7.056 25.5464 7.92C24.7144 8.752 23.7064 9.184 22.5224 9.216ZM5.53038 8.928C4.73038 8.928 3.99438 8.736 3.32238 8.352C2.68238 7.968 2.15438 7.456 1.73838 6.816C1.35438 6.176 1.16238 5.456 1.16238 4.656C1.13038 3.44 1.54638 2.4 2.41038 1.536C3.27438 0.671999 4.33038 0.256 5.57838 0.287999C6.79438 0.287999 7.81838 0.719999 8.65038 1.584C9.48238 2.416 9.89838 3.44 9.89838 4.656C9.89838 5.84 9.46638 6.848 8.60238 7.68C7.77038 8.512 6.74638 8.928 5.53038 8.928Z" fill="#171717" />
+                <!-- form -->
+                <div class="mx-auto space-y-10 font-Inter w-122.5 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
+                    <!-- top text -->
+                    <div class="space-y-1.5">
+                        <h1 class="text-2xl font-medium text-coolGray-900">Authentfier vous</h1>
+                        <h2 class="text-sm font-normal text-coolGray-700">
+                            Veuillez fournir votre login et votre mot de passe pour accéder à la plate-forme ou bien utiliser votre compte <span class="underline">Google</span>
+                        </h2>
+                    </div>
+                    <!-- inputs -->
+                    <div class="w-full space-y-5">
+                        <!-- row -->
+                        <div class="formInputCombo">
+                            <span>Identifiant</span>
+                            <input type="text">
+                        </div>
+                        <!-- row -->
+                        <div class="formInputCombo">
+                            <span>Mot de passe</span>
+                            <input type="password">
+                        </div>
+                    </div>
+                    <!-- btns -->
+                    <div class="space-y-3.5 w-full">
+                        <!-- main btn -->
+                        <button class="buttonMain py-3 w-full">Authentifier</button>
+                        <!-- sep -->
+                        <div class="seperator">
+                            <div>
+                                <span>Ou</span>
+                            </div>
+                        </div>
+                        <!-- google auth btn -->
+                        <button class="buttonBorder py-3 flex flex-row items-center justify-center space-x-2.5 w-full">
+                            <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0)">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M18.14 9.19999C18.14 8.56298 18.083 7.94899 17.976 7.35999H9.5V10.841H14.344C14.135 11.966 13.501 12.919 12.548 13.558V15.816H15.456C17.158 14.249 18.14 11.942 18.14 9.20099V9.19999Z" fill="#4285F4" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.50301 18C11.933 18 13.97 17.194 15.459 15.82L12.55 13.56C11.744 14.1 10.714 14.42 9.50301 14.42C7.15901 14.42 5.17501 12.836 4.46701 10.709H1.46001V13.041C2.94001 15.983 5.98501 18 9.50301 18Z" fill="#34A853" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.464 10.712C4.284 10.172 4.182 9.59496 4.182 9.00196C4.182 8.40896 4.284 7.83196 4.464 7.29196V4.95996H1.457C0.847 6.17496 0.5 7.54996 0.5 9.00196C0.5 10.454 0.848 11.829 1.457 13.044L4.464 10.712Z" fill="#FBBC05" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.50301 3.58C10.824 3.58 12.011 4.034 12.943 4.925L15.525 2.345C13.964 0.891 11.928 0 9.50201 0C5.98501 0 2.94001 2.017 1.46001 4.958L4.46701 7.29C5.17501 5.163 7.15901 3.58 9.50301 3.58Z" fill="#EA4335" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0">
+                                        <rect width="18" height="18" fill="white" transform="translate(0.5)" />
+                                    </clipPath>
+                                </defs>
                             </svg>
-                        </h1>
-                        <h3 class="max-w-3xl text-2xl font-normal text-trueGray-900">
-                            Plateforme par et pour les apprenants Youcode pour faciliter la tâche de demander l'accès à l'école en dehors des heures de formation et pendant les week-ends.
-                        </h3>
+                            <span>Authentifier avec Google</span>
+                        </button>
                     </div>
                     <!-- bot -->
-                    <div class="flex flex-col justify-center space-y-5 mx-auto w-max">
-                        <a href="#">
-                            <span class="buttonAlt capitalize">réserver maintenant</span>
-                        </a>
-                        <a href="#">
-                            <div class="">
-                                <span class="w-full block text-center text-trueGray-900 font-medium text-base tracking-wide">Savoir plus</span>
-                                <svg class="mx-auto" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.53124 11.9074L11.4577 9.98102C11.6651 9.77355 12.0015 9.77355 12.209 9.98102C12.4164 10.1885 12.4164 10.5249 12.209 10.7323L9.37564 13.5656C9.16817 13.7731 8.83181 13.7731 8.62434 13.5656L5.79101 10.7323C5.58354 10.5249 5.58354 10.1885 5.79101 9.98102C5.99847 9.77355 6.33484 9.77355 6.54231 9.98102L8.46874 11.9074L8.46874 5.04417C8.46874 4.75077 8.70659 4.51292 8.99999 4.51292C9.29339 4.51292 9.53124 4.75077 9.53124 5.04417L9.53124 11.9074Z" fill="#404040" />
-                                </svg>
-                            </div>
+                    <div class="w-full space-y-1.5">
+                        <span class="block w-full text-center text-xs text-coolGray-500 font-normal">Vous n'avez pas un compte ?</span>
+                        <a href="#" class="block text-center w-full buttonSec py-3">
+                            <span>Créer un compte</span>
                         </a>
                     </div>
                 </div>
