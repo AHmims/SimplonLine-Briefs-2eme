@@ -10,11 +10,14 @@ module.exports = {
         'lg.5': '10px'
       },
       width: {
+        '10.5': '42px',
+        '68': '270px',
         '122.5': '490px'
       },
       height: {
         '0.25': '1px',
-        '12.5': '51px'
+        '10.5': '42px',
+        '12.5': '51px',
       },
       boxShadow: {
         'navBarHome': '0px 0px 0px 6px rgba(255, 255, 255, 0.2), 0px 10px 15px 2px rgba(15, 23, 42, 0.03)',
@@ -34,7 +37,8 @@ module.exports = {
         'offCenter': '47%'
       },
       gridTemplateColumns: {
-        'home': 'minmax(500px,650px) 320px repeat(3,minmax(0, 1fr))'
+        'home': 'minmax(500px,650px) 320px repeat(3,minmax(0, 1fr))',
+        'learners': 'minmax(500px,650px) repeat(3,minmax(0, 1fr))'
       },
       colors: {
         amber: colors.amber,
