@@ -59,6 +59,97 @@
     .seperator span {
         @apply absolute bg-white px-1.5 left-offCenter -top-2;
     }
+
+    /*  */
+    /*  */
+    .card-home {
+        @apply flex-none overflow-hidden font-Inter w-56 h-32 rounded-md border border-coolGray-100 flex flex-col shadow;
+    }
+
+    /*  */
+
+    .card-home .top {
+        @apply flex-1 space-x-3.5 px-3.5 flex flex-row items-center;
+    }
+
+    .card-home .top .left {
+        @apply flex-1 flex flex-col space-y-1;
+    }
+
+    .card-home .top .left .main {
+        @apply text-lg font-medium text-coolGray-900;
+    }
+
+    .card-home .top .left .desc {
+        @apply text-sm font-normal text-coolGray-500;
+    }
+
+    /*  */
+    .card-home .bot {
+        @apply w-full py-2.5 px-3.5 bg-coolGray-100;
+    }
+
+    .card-home .bot a {
+        @apply w-max space-x-0.5 flex flex-row items-center font-medium text-xs text-coolGray-700;
+    }
+
+    /*  */
+    /*  */
+    .tableColumn {
+        @apply font-Inter;
+    }
+
+    .tableColumn .row {
+        @apply flex flex-row items-center w-full px-8.5;
+    }
+
+    .tableColumn .head {
+        @apply sticky -top-12.2 h-12.5 bg-coolGray-50 border-b border-t border-coolGray-200;
+    }
+
+    .tableColumn .head span {
+        @apply flex-1 uppercase text-coolGray-500 text-base font-medium;
+    }
+
+    .tableColumn .data {
+        @apply h-14 border-b border-coolGray-200 flex flex-row items-center w-full;
+    }
+
+    .tableColumn .data .imgCont {
+        @apply h-9 w-9 rounded-full overflow-hidden mr-2.5;
+    }
+
+    .tableColumn .data .imgCont .img {
+        @apply h-full w-full object-cover;
+    }
+
+    .tableColumn .data .infos {
+        @apply font-normal text-base text-coolGray-700;
+    }
+
+    .tableColumn .data .infos .name {
+        @apply block font-normal text-base text-coolGray-700;
+    }
+
+    .tableColumn .data .infos .email {
+        @apply block font-normal text-xs text-coolGray-500;
+    }
+
+    .tableColumn .data .badge {
+        @apply py-1.5 px-3 rounded-2xl space-x-1.5 font-medium text-base flex flex-row items-center;
+    }
+
+    .tableColumn .data .badge-1-A {
+        @apply bg-warmGray-100 text-warmGray-600;
+    }
+
+    .tableColumn .data .badge-1-B {
+        @apply bg-blueGray-100 text-blueGray-600;
+    }
+
+    .tableColumn .option {
+        @apply justify-between;
+    }
 }
 
 @tailwind utilities;

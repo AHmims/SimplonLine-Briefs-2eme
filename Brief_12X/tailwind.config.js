@@ -13,7 +13,8 @@ module.exports = {
         '122.5': '490px'
       },
       height: {
-        '0.25': '1px'
+        '0.25': '1px',
+        '12.5': '51px'
       },
       boxShadow: {
         'navBarHome': '0px 0px 0px 6px rgba(255, 255, 255, 0.2), 0px 10px 15px 2px rgba(15, 23, 42, 0.03)',
@@ -26,10 +27,14 @@ module.exports = {
       },
       spacing: {
         '4.5': '18px',
+        '5.5': '16px',
         '7.5': '30px',
+        '8.5': '34px',
+        '12.2': '49px',
         'offCenter': '47%'
       },
       gridTemplateColumns: {
+        'home': 'minmax(500px,650px) 320px repeat(3,minmax(0, 1fr))'
       },
       colors: {
         amber: colors.amber,
