@@ -38,7 +38,8 @@ module.exports = {
       },
       gridTemplateColumns: {
         'home': 'minmax(500px,650px) 320px repeat(3,minmax(0, 1fr))',
-        'learners': 'minmax(500px,650px) repeat(3,minmax(0, 1fr))'
+        'learners': 'minmax(500px,650px) repeat(3,minmax(0, 1fr))',
+        'reservations': '350px repeat(6,minmax(0, 1fr))'
       },
       colors: {
         amber: colors.amber,

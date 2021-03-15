@@ -85,11 +85,13 @@
     }
 
     /*  */
-    .card-home>.bot {
+    .card-home>.bot,
+    .c-bot {
         @apply w-full py-2.5 px-3.5 bg-coolGray-100;
     }
 
-    .card-home>.bot a {
+    .card-home>.bot a,
+    .c-bot a {
         @apply w-max space-x-0.5 flex flex-row items-center font-medium text-xs text-coolGray-700;
     }
 
@@ -159,6 +161,86 @@
 
     /*  */
     /*  */
+
+    .card-reservation {
+        @apply card-home w-72 h-44 justify-between;
+    }
+
+    .card-reservation span {
+        @apply block truncate;
+    }
+
+    .card-reservation .c-top {
+        @apply items-start py-2.5 px-3.5 space-y-2.5 flex flex-col;
+    }
+
+    .card-reservation .c-top>.top {
+        @apply flex flex-row space-x-3.5 items-center w-full;
+    }
+
+    .card-reservation .c-top>.top .user {
+        @apply flex flex-col space-y-0.5 w-full;
+    }
+
+    .card-reservation .c-top>.top .user .name {
+        @apply flex flex-row items-center space-x-1 text-lg font-medium text-coolGray-900;
+    }
+
+    .card-reservation .c-top>.top .user .email {
+        @apply text-xs font-normal text-coolGray-500;
+    }
+
+    .card-reservation .c-top>.top .imgCont {
+        @apply w-10.5 h-10.5 bg-coolGray-200 rounded-full overflow-hidden flex-none;
+    }
+
+    .card-reservation .c-top>.top .imgCont .img {
+        @apply w-full h-full object-cover;
+    }
+
+    .card-reservation .c-top>.bot {
+        @apply flex flex-col space-y-1.5;
+    }
+
+    .card-reservation .c-top>.bot>.top {
+        @apply flex flex-row space-x-3.5 items-center;
+    }
+
+    .card-reservation .c-top>.bot>.top * {
+        @apply text-xs text-coolGray-600 font-medium;
+    }
+
+    .card-reservation .c-top>.bot>.top .date input::-webkit-calendar-picker-indicator {
+        margin-left: -15px;
+    }
+
+    .card-reservation .c-top>.bot>.top .loc,
+    .empla {
+        @apply flex flex-row items-center space-x-1;
+    }
+
+    .card-reservation .c-top>.bot>.bot {
+        @apply flex flex-row space-x-2.5 items-center;
+    }
+
+    .card-reservation .c-top>.bot>.bot .badge-X {
+        @apply bg-blue-50 text-blue-500;
+    }
+
+    .card-reservation .c-bot {
+        @apply flex flex-row px-3.5 justify-end p-0 flex-1 max-h-12;
+    }
+
+    .card-reservation .c-bot .btnsCont {
+        @apply space-x-2.5 flex flex-row items-center;
+    }
+
+    .card-reservation .c-bot .btnsCont button {
+        @apply px-4.5 text-xs capitalize;
+    }
+
+    /*  */
+    /*  */
     .tableColumn {
         @apply font-Inter;
     }
@@ -188,11 +270,11 @@
     }
 
     .tableColumn .data .infos {
-        @apply font-normal text-base text-coolGray-700;
+        @apply font-normal text-sm text-coolGray-700;
     }
 
     .tableColumn .data .infos .name {
-        @apply block font-normal text-base text-coolGray-700;
+        @apply block font-normal text-sm text-coolGray-700;
     }
 
     .tableColumn .data .infos .email {
@@ -200,7 +282,7 @@
     }
 
     .tableColumn .data .badge {
-        @apply py-1.5 px-3 rounded-2xl space-x-1.5 font-medium text-base flex flex-row items-center;
+        @apply py-1.5 px-3 rounded-2xl space-x-1.5 font-medium text-sm flex flex-row items-center;
     }
 
     .tableColumn .data .badge-1-A {
@@ -213,6 +295,18 @@
 
     .tableColumn .option {
         @apply justify-between;
+    }
+
+    .badge-2 {
+        @apply px-2.5 py-1 whitespace-nowrap rounded-2xl space-x-1.5 font-medium text-sm flex flex-row items-center;
+    }
+
+    .badge-2-A {
+        @apply bg-warmGray-100 text-warmGray-600;
+    }
+
+    .badge-2-B {
+        @apply bg-blueGray-100 text-blueGray-600;
     }
 }
 
