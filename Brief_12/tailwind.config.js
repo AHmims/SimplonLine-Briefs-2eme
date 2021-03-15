@@ -34,13 +34,15 @@ module.exports = {
         '5.5': '16px',
         '7.5': '30px',
         '8.5': '34px',
+        '8.6': '35px',
         '12.2': '49px',
         'offCenter': '47%'
       },
       gridTemplateColumns: {
         'home': 'minmax(500px,650px) 320px repeat(3,minmax(0, 1fr))',
         'learners': 'minmax(500px,650px) repeat(3,minmax(0, 1fr))',
-        'reservations': '350px repeat(6,minmax(0, 1fr))'
+        'reservations': '350px repeat(6,minmax(0, 1fr))',
+        'items': 'repeat(auto-fill, 228px)'
       },
       colors: {
         amber: colors.amber,

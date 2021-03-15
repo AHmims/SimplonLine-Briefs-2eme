@@ -34,7 +34,7 @@
         @apply font-Inter space-y-1.5;
     }
 
-    .formInputCombo span {
+    .formInputCombo>span {
         @apply font-medium text-sm text-coolGray-800;
     }
 
