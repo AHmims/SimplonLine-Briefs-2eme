@@ -3,19 +3,18 @@ package model;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "authentification", schema = "brief_12")
+@Table(name = "authentification")
 public class Authentification {
     @Id
     @Column(name = "EXTERNAL_ID")
     private String EXTERNAL_ID;
-    @ColumnDefault("GOOGLE")
     @Column(name = "EXTERNAL_TYPE")
     private String EXTERNAL_TYPE;
     @Column(name = "emailAuthentification")
     private String emailAuthentification;
-    //
     //
 
     public Authentification(String EXTERNAL_ID, String EXTERNAL_TYPE, String emailAuthentification) {
@@ -27,6 +26,7 @@ public class Authentification {
     public Authentification(String EXTERNAL_ID, String emailAuthentification) {
         this.EXTERNAL_ID = EXTERNAL_ID;
         this.emailAuthentification = emailAuthentification;
+        this.EXTERNAL_TYPE = "GOOGLE";
     }
 
     public Authentification() {

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("2")
+//@DiscriminatorValue("2")
 @Table(name = "administrateur")
 public class Administrateur extends Utilisateur {
     @Column(name = "emailAdministrateur")

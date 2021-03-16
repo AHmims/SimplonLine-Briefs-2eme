@@ -3,6 +3,7 @@ package config;
 import java.util.Properties;
 
 import model.*;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -34,6 +35,10 @@ public class Hibernate {
             }
         }
         return sessionFactory;
+    }
+    //
+    public static Session openSession() {
+        return getSessionFactory().openSession();
     }
     //
     private static Configuration setupClasses(Configuration config) {

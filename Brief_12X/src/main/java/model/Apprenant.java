@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("1")
+//@DiscriminatorValue("1")
 @Table(name = "apprenant")
-@PrimaryKeyJoinColumn(name="idUtilisateur")
+//@PrimaryKeyJoinColumn(name="idUtilisateur")
 public class Apprenant extends Utilisateur {
     @ColumnDefault("false")
     @Column(name = "actif")
@@ -17,8 +17,8 @@ public class Apprenant extends Utilisateur {
     @Column(name = "imgApprenant")
     private String imgApprenant;
     //
-    @OneToOne
-    @JoinColumn(name = "EXTERNAL_ID")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "authentificationId", referencedColumnName = "EXTERNAL_ID")
     private Authentification authentification;
     @OneToMany(mappedBy = "apprenant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;

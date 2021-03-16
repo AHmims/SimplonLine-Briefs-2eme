@@ -11,7 +11,7 @@
 
     <mvc:annotation-driven />
     <context:component-scan base-package="controller"/>
-
+	<mvc:resources mapping="/**" location="/WEB-INF/resources/" />
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>
 		<property name="suffix" value=".jsp"/>
