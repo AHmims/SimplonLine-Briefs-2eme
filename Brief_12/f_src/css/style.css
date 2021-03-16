@@ -316,6 +316,38 @@
     .badge-2-B {
         @apply bg-blueGray-100 text-blueGray-600;
     }
+
+    /*  */
+    /*  */
+    .reserv-card {
+        @apply bg-white shadow rounded-md border border-coolGray-100 p-3.5 flex flex-col space-y-2.5;
+    }
+
+    .reserv-card>.top .date {
+        @apply text-lg font-medium text-coolGray-600;
+    }
+
+    .reserv-card>.top .date::-webkit-calendar-picker-indicator {
+        margin-left: -15px;
+        @apply text-coolGray-600;
+    }
+
+    .reserv-card>.bot {
+        @apply space-y-1.5;
+    }
+
+    .reserv-card>.bot .top {
+        @apply flex flex-row space-x-3.5 items-center;
+    }
+
+    .reserv-card>.bot .top .loc,
+    .empla {
+        @apply flex flex-row items-center space-x-1 text-xs text-coolGray-600 font-medium;
+    }
+
+    .reserv-card>.bot .bot {
+        @apply w-max;
+    }
 }
 
 @tailwind utilities;
