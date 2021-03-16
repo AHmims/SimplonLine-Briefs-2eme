@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+    <script src="/js/axios.min.js"></script>
     <title>Acceuil</title>
 </head>
 
@@ -56,7 +58,7 @@
                     <!-- btns -->
                     <div class="space-y-3.5 w-full">
                         <!-- google auth btn -->
-                        <button class="buttonBorder py-3 flex flex-row items-center justify-center space-x-2.5 w-full">
+                        <button id="gBtn" class="buttonBorder py-3 flex flex-row items-center justify-center space-x-2.5 w-full">
                             <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0)">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M18.14 9.19999C18.14 8.56298 18.083 7.94899 17.976 7.35999H9.5V10.841H14.344C14.135 11.966 13.501 12.919 12.548 13.558V15.816H15.456C17.158 14.249 18.14 11.942 18.14 9.20099V9.19999Z" fill="#4285F4" />
@@ -96,6 +98,7 @@
             </div>
         </div>
     </div>
+    <script src="/js/auth.signup.js"></script>
 </body>
 
 </html>
