@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class Test {
+public class KmsFR {
     //@ResponseBody
     @GetMapping("/hmm")
-    public String funcTest(){
+    public String hmmTestGet(){
         System.out.println("Returning hmm.jsp");
         return "hmm";
 //        WEB-INF/view/hmm.jsp
     }
     @PostMapping("/hmm")
     @ResponseBody
-    public String funcTest2(){
+    public String hmmTestPost(){
         return "I wanna kms";
     }
 }
