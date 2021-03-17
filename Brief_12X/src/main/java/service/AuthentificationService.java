@@ -25,7 +25,7 @@ public class AuthentificationService implements ServiceAuthentification {
                     GoogleAuthData googleAuthData = new GoogleAuthData(payload);
                     //DB AND STUFF
                     //Check if user is a youcode learner
-                    
+
                 }else return 101;
             }else{
                 System.out.println(tokenParser.problem());
