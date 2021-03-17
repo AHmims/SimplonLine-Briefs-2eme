@@ -9,7 +9,7 @@ public interface DaoAdministrateur {
 
     ArrayList<Administrateur> getAll();
 
-    boolean insert(Administrateur administrateur);
+    String insert(Administrateur administrateur);
 
     boolean update(Administrateur administrateur);
 

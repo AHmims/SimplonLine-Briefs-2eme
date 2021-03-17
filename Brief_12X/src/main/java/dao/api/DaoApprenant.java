@@ -9,7 +9,7 @@ public interface DaoApprenant {
 
     ArrayList<Apprenant> getAll();
 
-    boolean insert(Apprenant apprenant);
+    String insert(Apprenant apprenant);
 
     boolean update(Apprenant apprenant);
 

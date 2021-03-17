@@ -9,7 +9,7 @@ public interface DaoCalendrier {
 
     ArrayList<Calendrier> getAll();
 
-    boolean insert(Calendrier calendrier);
+    String insert(Calendrier calendrier);
 
     boolean update(Calendrier calendrier);
 

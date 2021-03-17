@@ -9,7 +9,7 @@ public interface DaoEmplacement {
 
     ArrayList<Emplacement> getAll();
 
-    boolean insert(Emplacement emplacement);
+    String insert(Emplacement emplacement);
 
     boolean update(Emplacement emplacement);
 

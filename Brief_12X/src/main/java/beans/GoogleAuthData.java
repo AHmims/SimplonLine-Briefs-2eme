@@ -13,13 +13,13 @@ public class GoogleAuthData {
 
     //
     public GoogleAuthData(Payload payload) {
-        this.userId = payload.getSubject();
-        this.userEmail = payload.getEmail();
-        this.userName = payload.get("name").toString();
-        this.userPicture = payload.get("picture").toString();
-        this.userLocale = payload.get("locale").toString();
-        this.userFamilyName = payload.get("family_name").toString();
-        this.userGivenName = payload.get("given_name").toString();
+        this.userId = payload.getSubject().trim();
+        this.userEmail = payload.getEmail().trim();
+        this.userName = payload.get("name").toString().trim();
+        this.userPicture = payload.get("picture").toString().trim();
+        this.userLocale = payload.get("locale").toString().trim();
+        this.userFamilyName = payload.get("family_name").toString().trim();
+        this.userGivenName = payload.get("given_name").toString().trim();
     }
 
     public String getUserId() {

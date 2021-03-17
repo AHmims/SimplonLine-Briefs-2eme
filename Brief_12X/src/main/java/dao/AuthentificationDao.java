@@ -49,7 +49,7 @@ public class AuthentificationDao implements DaoAuthentification {
     }
 
     @Override
-    public boolean insert(Authentification authentification) {
+    public String insert(Authentification authentification) {
         Transaction transaction = null;
         try {
             Session session = Hibernate.openSession();
@@ -58,12 +58,12 @@ public class AuthentificationDao implements DaoAuthentification {
             String autoGenId = (String) session.save(authentification);
             transaction.commit();
             //
-            return autoGenId != null && !autoGenId.equals("");
+            return autoGenId;
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

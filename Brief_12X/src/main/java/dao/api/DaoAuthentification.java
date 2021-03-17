@@ -9,7 +9,7 @@ public interface DaoAuthentification {
 
     ArrayList<Authentification> getAll();
 
-    boolean insert(Authentification authentification);
+    String insert(Authentification authentification);
 
     boolean update(Authentification authentification);
 

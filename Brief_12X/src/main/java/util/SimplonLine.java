@@ -14,6 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class SimplonLine {
+    /*private final String USER_EMAIL = "SIMPLONLINE EMAIL";
+    private final String USER_PASS = "SIMPLONLINE PASSWORD";*/
     private final String USER_EMAIL = "SIMPLONLINE EMAIL";
     private final String USER_PASS = "SIMPLONLINE PASSWORD";
     //

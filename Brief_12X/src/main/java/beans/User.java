@@ -13,12 +13,12 @@ public class User {
     }
 
     public User(String idUser, String nomUser, String prenomUser, String emailUser, String roleUser, String avatarUrl) {
-        this.idUser = idUser;
-        this.nomUser = nomUser;
-        this.prenomUser = prenomUser;
-        this.emailUser = emailUser;
-        this.roleUser = roleUser;
-        this.avatarUrl = avatarUrl;
+        this.idUser = idUser.trim();
+        this.nomUser = nomUser.trim();
+        this.prenomUser = prenomUser.trim();
+        this.emailUser = emailUser.trim();
+        this.roleUser = roleUser.trim();
+        this.avatarUrl = avatarUrl.trim();
     }
     //
 

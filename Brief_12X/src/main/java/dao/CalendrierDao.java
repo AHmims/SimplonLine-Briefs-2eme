@@ -49,7 +49,7 @@ public class CalendrierDao implements DaoCalendrier {
     }
 
     @Override
-    public boolean insert(Calendrier calendrier) {
+    public String insert(Calendrier calendrier) {
         Transaction transaction = null;
         try {
             Session session = Hibernate.openSession();
@@ -58,12 +58,12 @@ public class CalendrierDao implements DaoCalendrier {
             String autoGenId = (String) session.save(calendrier);
             transaction.commit();
             //
-            return autoGenId != null && !autoGenId.equals("");
+            return autoGenId;
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

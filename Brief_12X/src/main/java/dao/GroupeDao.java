@@ -49,7 +49,7 @@ public class GroupeDao implements DaoGroupe {
     }
 
     @Override
-    public boolean insert(Groupe groupe) {
+    public String insert(Groupe groupe) {
         Transaction transaction = null;
         try {
             Session session = Hibernate.openSession();
@@ -58,12 +58,12 @@ public class GroupeDao implements DaoGroupe {
             String autoGenId = (String) session.save(groupe);
             transaction.commit();
             //
-            return autoGenId != null && !autoGenId.equals("");
+            return autoGenId;
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

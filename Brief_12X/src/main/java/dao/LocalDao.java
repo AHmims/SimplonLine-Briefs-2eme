@@ -49,7 +49,7 @@ public class LocalDao implements DaoLocal {
     }
 
     @Override
-    public boolean insert(Local local) {
+    public String insert(Local local) {
         Transaction transaction = null;
         try {
             Session session = Hibernate.openSession();
@@ -58,12 +58,12 @@ public class LocalDao implements DaoLocal {
             String autoGenId = (String) session.save(local);
             transaction.commit();
             //
-            return autoGenId != null && !autoGenId.equals("");
+            return autoGenId;
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

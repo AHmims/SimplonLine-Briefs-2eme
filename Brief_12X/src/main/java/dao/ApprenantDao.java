@@ -49,7 +49,7 @@ public class ApprenantDao implements DaoApprenant {
     }
 
     @Override
-    public boolean insert(Apprenant apprenant) {
+    public String insert(Apprenant apprenant) {
         Transaction transaction = null;
         try {
             Session session = Hibernate.openSession();
@@ -58,12 +58,12 @@ public class ApprenantDao implements DaoApprenant {
             String autoGenId = (String) session.save(apprenant);
             transaction.commit();
             //
-            return autoGenId != null && !autoGenId.equals("");
+            return autoGenId;
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

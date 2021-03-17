@@ -9,7 +9,7 @@ public interface DaoPromotion {
 
     ArrayList<Promotion> getAll();
 
-    boolean insert(Promotion promotion);
+    String insert(Promotion promotion);
 
     boolean update(Promotion promotion);
 

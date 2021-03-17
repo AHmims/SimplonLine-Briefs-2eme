@@ -9,7 +9,7 @@ public interface DaoReservation {
 
     ArrayList<Reservation> getAll();
 
-    boolean insert(Reservation reservation);
+    String insert(Reservation reservation);
 
     boolean update(Reservation reservation);
 

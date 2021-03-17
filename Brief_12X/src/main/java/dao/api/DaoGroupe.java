@@ -9,7 +9,7 @@ public interface DaoGroupe {
 
     ArrayList<Groupe> getAll();
 
-    boolean insert(Groupe groupe);
+    String insert(Groupe groupe);
 
     boolean update(Groupe groupe);
 

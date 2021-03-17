@@ -48,7 +48,7 @@ public class AdministrateurDao implements dao.api.DaoAdministrateur {
     }
 
     @Override
-    public boolean insert(Administrateur administrateur) {
+    public String insert(Administrateur administrateur) {
         Transaction transaction = null;
         try {
             Session session = Hibernate.openSession();
@@ -57,12 +57,12 @@ public class AdministrateurDao implements dao.api.DaoAdministrateur {
             String autoGenId = (String) session.save(administrateur);
             transaction.commit();
             //
-            return autoGenId != null && !autoGenId.equals("");
+            return autoGenId;
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 

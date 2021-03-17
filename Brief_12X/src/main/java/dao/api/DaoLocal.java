@@ -9,7 +9,7 @@ public interface DaoLocal {
 
     ArrayList<Local> getAll();
 
-    boolean insert(Local local);
+    String insert(Local local);
 
     boolean update(Local local);
 

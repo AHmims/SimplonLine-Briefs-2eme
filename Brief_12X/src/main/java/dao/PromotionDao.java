@@ -50,7 +50,7 @@ public class PromotionDao implements DaoPromotion {
     }
 
     @Override
-    public boolean insert(Promotion promotion) {
+    public String insert(Promotion promotion) {
         Transaction transaction = null;
         try {
             Session session = Hibernate.openSession();
@@ -59,12 +59,12 @@ public class PromotionDao implements DaoPromotion {
             String autoGenId = (String) session.save(promotion);
             transaction.commit();
             //
-            return autoGenId != null && !autoGenId.equals("");
+            return autoGenId;
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
