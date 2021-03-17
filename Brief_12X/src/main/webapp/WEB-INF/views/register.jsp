@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
     <script src="/js/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/toast.css">
+    <script src="/js/toast.js"></script>
+    <script src="/js/toastsHandler.js"></script>
     <title>Acceuil</title>
 </head>
 
@@ -72,7 +75,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span>Authentifier avec Google</span>
+                            <span>S'inscrire avec Google</span>
                         </button>
                     </div>
                     <!-- bot -->

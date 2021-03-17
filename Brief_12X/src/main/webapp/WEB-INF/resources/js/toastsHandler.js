@@ -5,17 +5,17 @@ async function logServerError() {
         behavior: {
             type: "advanced",
             controls: [{
-                    type: "button",
-                    appearance: "main",
-                    text: "Continuer",
-                    callback: "cancel"
-                },
-                {
-                    type: "link",
-                    appearance: "link",
-                    text: "actualiser la page.",
-                    callback: window.location.href
-                }
+                type: "button",
+                appearance: "main",
+                text: "Continuer",
+                callback: "cancel"
+            },
+            {
+                type: "link",
+                appearance: "link",
+                text: "actualiser la page.",
+                callback: window.location.href
+            }
             ]
         },
         duration: "active"
@@ -54,17 +54,17 @@ async function toastConfirm(text) {
         behavior: {
             type: "advanced",
             controls: [{
-                    type: "button",
-                    appearance: "main",
-                    text: "Accepter",
-                    callback: "true"
-                },
-                {
-                    type: "button",
-                    appearance: "sec",
-                    text: "Refuser",
-                    callback: "cancel"
-                }
+                type: "button",
+                appearance: "main",
+                text: "Accepter",
+                callback: "true"
+            },
+            {
+                type: "button",
+                appearance: "sec",
+                text: "Refuser",
+                callback: "cancel"
+            }
             ]
         },
         duration: "active"
@@ -79,17 +79,17 @@ async function toastConfirmWarning() {
         behavior: {
             type: "advanced",
             controls: [{
-                    type: "button",
-                    appearance: "main",
-                    text: "Accepter",
-                    callback: "true"
-                },
-                {
-                    type: "button",
-                    appearance: "sec",
-                    text: "Refuser",
-                    callback: "cancel"
-                }
+                type: "button",
+                appearance: "main",
+                text: "Accepter",
+                callback: "true"
+            },
+            {
+                type: "button",
+                appearance: "sec",
+                text: "Refuser",
+                callback: "cancel"
+            }
             ]
         },
         duration: "active"
@@ -143,3 +143,24 @@ async function logWarningActive(text) {
     }
     return await toast(params);
 }
+// 
+// 
+//
+async function toastRedirectNormal(link) {
+    var params = {
+        content: "Vous êtes déjà inscrit",
+        type: "normal",
+        behavior: {
+            type: "advanced",
+            controls: [{
+                type: "link",
+                appearance: "main",
+                text: "S'authentifier",
+                callback: link
+            }]
+        },
+        duration: "active"
+    }
+    return await toast(params);
+}
+//

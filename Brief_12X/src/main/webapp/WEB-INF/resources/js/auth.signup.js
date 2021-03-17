@@ -17,14 +17,25 @@ function attachBtn(element) {
             var profile = googleUser.getBasicProfile();
             console.log(profile);
             let response = await axios.post(`/register?idToken=${googleUser.getAuthResponse().id_token}`);
-            // console.log(googleUser);
-            console.log(response);
-            // var id_token = ;
-            // console.log(id_token);
-            // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            // console.log('Name: ' + profile.getName());
-            // console.log('Image URL: ' + profile.getImageUrl());
-            // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+            /*
+            ERROR CODES:
+            -1: unknown
+            0: learner not saved
+            1: learner saved
+            100: token invalid
+            101: no email address
+            102: already registered
+            103: email is not registered to simplonline
+            */
+            const loginLink = window.location.origin + "/login";
+            switch (response.data) {
+                case 102:
+                    await toastRedirectNormal(loginLink);
+                    break;
+                case 103: logError("Veuillez vous inscrire avec votre email Simplonline."); break;
+                case 1: await logSuccess("Compte créé avec succès"); window.location.href = loginLink; break;
+                case -1: case 0: case 100: case 101: default: await logServerError();
+            }
         },
         error => {
             console.log(JSON.stringify(error, undefined, 2));
