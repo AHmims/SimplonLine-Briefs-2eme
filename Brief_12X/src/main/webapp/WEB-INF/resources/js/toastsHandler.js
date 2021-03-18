@@ -146,16 +146,16 @@ async function logWarningActive(text) {
 // 
 // 
 //
-async function toastRedirectNormal(link) {
+async function toastRedirectNormal(link, text, linkText) {
     var params = {
-        content: "Vous êtes déjà inscrit",
+        content: text,
         type: "normal",
         behavior: {
             type: "advanced",
             controls: [{
                 type: "link",
                 appearance: "main",
-                text: "S'authentifier",
+                text: linkText,
                 callback: link
             }]
         },

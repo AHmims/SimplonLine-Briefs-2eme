@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="fr">
 
 <head>
@@ -7,11 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="/js/axios.min.js"></script>
     <link rel="stylesheet" href="/css/toast.css">
     <script src="/js/toast.js"></script>
     <script src="/js/toastsHandler.js"></script>
+    <script src="/js/request.errors.js"></script>
     <title>Acceuil</title>
 </head>
 
@@ -40,10 +41,10 @@
                         </div>
                         <!-- btns -->
                         <div class="w-3/12 flex flex-row items-center justify-end space-x-3.5">
-                            <a href="/login" class="buttonSec">
+                            <a href="/auth/login" class="buttonSec">
                                 <span>Authentifier</span>
                             </a>
-                            <a href="/register" class="buttonMain">
+                            <a href="/auth/register" class="buttonMain">
                                 <span>Enregistrer</span>
                             </a>
                         </div>
@@ -81,7 +82,7 @@
                     <!-- bot -->
                     <div class="w-full space-y-1.5">
                         <span class="block w-full text-center text-xs text-coolGray-500 font-normal">Avez vous déja un compte ?</span>
-                        <a href="/login" class="block text-center w-full buttonSec py-3">
+                        <a href="/auth/login" class="block text-center w-full buttonSec py-3">
                             <span>S’authentifier</span>
                         </a>
                     </div>

@@ -16,8 +16,9 @@ import java.net.URL;
 public class SimplonLine {
     /*private final String USER_EMAIL = "SIMPLONLINE EMAIL";
     private final String USER_PASS = "SIMPLONLINE PASSWORD";*/
-    private final String USER_EMAIL = "SIMPLONLINE EMAIL";
-    private final String USER_PASS = "SIMPLONLINE PASSWORD";
+    private final String USER_EMAIL = "ali.hmims99@gmail.com";
+    private final String USER_PASS = "136246180nioce";
+
     //
     private static String refresh_token = "";
     private static String token = "";
@@ -33,7 +34,7 @@ public class SimplonLine {
         if (refresh_token.equals("")) {
             HttpURLConnection con = null;
             try {
-                con = setupHTTPRequest("https://api.simplonline.co/login", "POST");
+                con = setupHTTPRequest("https://api.simplonline.co/auth/login", "POST");
                 if (con == null)
                     throw new Exception("Error initializing request");
                 //

@@ -1,10 +1,7 @@
 package util;
 
 import config.Hibernate;
-import model.Apprenant;
-import model.Authentification;
-import model.Groupe;
-import model.Promotion;
+import model.*;
 import org.apache.logging.log4j.simple.SimpleLogger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,9 +15,8 @@ public class LeBonMain {
             Session session = Hibernate.openSession();
             transaction = session.beginTransaction();
             //
-            Authentification auth = new Authentification("SJDQSHDslkdjlqskdjlqsKQSHGK", "sqdqsd","XlklqjdqsXX");
-            Apprenant apprenant = new Apprenant("XXUYUYUUX","XXX",new Date(),"XXX",auth,null);
-            session.save(apprenant);
+            Administrateur administrateur = new Administrateur("XXUYUYUUX","XXX",new Date(),"XXX","123456789");
+            session.save(administrateur);
             //
             transaction.commit();
             //

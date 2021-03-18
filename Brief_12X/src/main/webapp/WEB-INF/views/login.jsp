@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="fr">
 
 <head>
@@ -7,6 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="/js/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/toast.css">
+    <script src="/js/toast.js"></script>
+    <script src="/js/toastsHandler.js"></script>
+    <script src="/js/request.errors.js"></script>
     <title>Acceuil</title>
 </head>
 
@@ -35,17 +41,17 @@
                         </div>
                         <!-- btns -->
                         <div class="w-3/12 flex flex-row items-center justify-end space-x-3.5">
-                            <a href="/login" class="buttonSec">
+                            <a href="/auth/login" class="buttonSec">
                                 <span>Authentifier</span>
                             </a>
-                            <a href="/register" class="buttonMain">
+                            <a href="/auth/register" class="buttonMain">
                                 <span>Enregistrer</span>
                             </a>
                         </div>
                     </div>
                 </div>
                 <!-- form -->
-                <div class="mx-auto space-y-10 font-Inter w-122.5 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
+                <form method="POST" action="/auth/login/admin" class="mx-auto space-y-10 font-Inter w-122.5 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
                     <!-- top text -->
                     <div class="space-y-1.5">
                         <h1 class="text-2xl font-medium text-coolGray-900">Authentfier vous</h1>
@@ -57,13 +63,13 @@
                     <div class="w-full space-y-5">
                         <!-- row -->
                         <div class="formInputCombo">
-                            <span>Identifiant</span>
-                            <input type="text">
+                            <span>Email</span>
+                            <input type="text" name="userEmail">
                         </div>
                         <!-- row -->
                         <div class="formInputCombo">
                             <span>Mot de passe</span>
-                            <input type="password">
+                            <input type="password" name="userPass">
                         </div>
                     </div>
                     <!-- btns -->
@@ -77,7 +83,7 @@
                             </div>
                         </div>
                         <!-- google auth btn -->
-                        <button class="buttonBorder py-3 flex flex-row items-center justify-center space-x-2.5 w-full">
+                        <button type="button" id="gBtn" class="buttonBorder py-3 flex flex-row items-center justify-center space-x-2.5 w-full">
                             <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0)">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M18.14 9.19999C18.14 8.56298 18.083 7.94899 17.976 7.35999H9.5V10.841H14.344C14.135 11.966 13.501 12.919 12.548 13.558V15.816H15.456C17.158 14.249 18.14 11.942 18.14 9.20099V9.19999Z" fill="#4285F4" />
@@ -97,11 +103,11 @@
                     <!-- bot -->
                     <div class="w-full space-y-1.5">
                         <span class="block w-full text-center text-xs text-coolGray-500 font-normal">Vous n'avez pas un compte ?</span>
-                        <a href="/register" class="block text-center w-full buttonSec py-3">
+                        <a href="/auth/register" class="block text-center w-full buttonSec py-3">
                             <span>Créer un compte</span>
                         </a>
                     </div>
-                </div>
+                </form>
             </div>
             <!-- footer -->
             <div class="w-full bg-coolGray-900 p-10 space-x-10 flex flex-row justify-center items-center rounded-lg.5">
@@ -117,6 +123,12 @@
             </div>
         </div>
     </div>
+    <script src="/js/auth.signin.js"></script>
+    <c:if test="${not empty param.ret_code}">
+        <script>
+            errorHandler(`<c:out value="${param.ret_code}"/>`);
+        </script>
+    </c:if>
 </body>
 
 </html>

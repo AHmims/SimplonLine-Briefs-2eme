@@ -27,15 +27,15 @@ import java.util.List;
 
 @Controller
 public class Signup {
-    @GetMapping("/register")
-    public String getHome(ModelMap model) {
+    @GetMapping("/auth/register")
+    public String getSignup(ModelMap model) {
         //model.addAttribute("message", "welcome spring");
         return "register";
     }
 
     @ResponseBody
-    @PostMapping("/register")
-    public String postHome(@RequestParam String idToken, ModelMap map, HttpSession session) {
+    @PostMapping("/auth/register")
+    public String postSignup(@RequestParam String idToken, ModelMap model, HttpSession session) {
         AuthentificationService authentificationService = new AuthentificationService();
         int res = authentificationService.signUp(idToken);
         return res + "";

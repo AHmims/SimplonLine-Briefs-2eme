@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="fr">
 
 <head>
@@ -35,10 +35,10 @@
                         </div>
                         <!-- btns -->
                         <div class="w-3/12 flex flex-row items-center justify-end space-x-3.5">
-                            <a href="/login" class="buttonSec">
+                            <a href="/auth/login" class="buttonSec">
                                 <span>Authentifier</span>
                             </a>
-                            <a href="/register" class="buttonMain">
+                            <a href="/auth/register" class="buttonMain">
                                 <span>Enregistrer</span>
                             </a>
                         </div>
