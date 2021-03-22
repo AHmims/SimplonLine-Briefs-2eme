@@ -1,6 +1,7 @@
 package service;
 
 import config.Hibernate;
+import dao.CalendrierDao;
 import dao.JourDao;
 import model.Administrateur;
 import model.Calendrier;
@@ -22,14 +23,15 @@ public class CalendrierService implements ServiceCalendrier {
         /*
         ERROR CODES:
         -1: unknown
-        20: "Calendrier" entered successfully
+        20: "Calendrier" and "Jour" objects inserted successfully
         200: form inputs can't be empty
         201: inputs can't have alphabets, use numbers instead
         202: numbers can't be negative && can't be double
         203: date is not valid
-        204: date interval does not match 7 days
-        205: interval already exists in DB
-        206: error saving "Jour" record or "Calendrier"
+        204: start date isn't sunday || end date isn't saturday
+        205: date interval does not match 7 days
+        206: interval already exists in DB
+        207: error saving "Jour" record or "Calendrier"
         ---
          */
         try {
@@ -57,7 +59,7 @@ public class CalendrierService implements ServiceCalendrier {
                     for (Map.Entry<String, String> entry : requestParams.entrySet()) {
                         if (!entry.getKey().equals("d-debut") && !entry.getKey().equals("d-fin")) {
                             double entrey_nb = Double.parseDouble(entry.getValue());
-                            if (entrey_nb < 0 || entrey_nb % 1 == 0) {
+                            if (entrey_nb < 0 || entrey_nb % 1 != 0) {
                                 valid = false;
                                 break;
                             }
@@ -71,6 +73,15 @@ public class CalendrierService implements ServiceCalendrier {
                         else {
                             LocalDate ld_DD = dateDebut.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                             LocalDate ld_DF = dateFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                            //
+                            Calendar cal_DD = Calendar.getInstance();
+                            cal_DD.setTime(Date.from(ld_DD.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+                            Calendar cal_DF = Calendar.getInstance();
+                            cal_DF.setTime(Date.from(ld_DF.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+                            //
+                            if(cal_DD.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY || cal_DF.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)
+                                return 204;
+                            //
                             long daysInBetween = ChronoUnit.DAYS.between(ld_DD, ld_DF) + 1;
                             if (daysInBetween == 7) {
                                 //Check if there is an existing date in DB
@@ -78,17 +89,16 @@ public class CalendrierService implements ServiceCalendrier {
                                 if (valid) {
                                     //Crate Calendrier object
                                     Calendrier calendrier = new Calendrier(dateDebut, dateFin, administrateur);
+                                    CalendrierDao calendrierDao = new CalendrierDao();
+                                    String calendrierId = calendrierDao.insert(calendrier);
+                                    calendrier.setIdCalendrier(calendrierId);
+                                    //
                                     JourDao jourDao = new JourDao();
                                     for (int i = 0; i < daysInBetween; i++) {
-                                    /*
-                                    1: sunday
-                                    ...
-                                    7: saturday
-                                     */
                                         Object key = requestParams.keySet().toArray()[i];
                                         int nbMax = Integer.parseInt(requestParams.get(key));
                                         //
-                                        LocalDate DD_clone = ld_DD.plusDays(i + 1);
+                                        LocalDate DD_clone = ld_DD.plusDays(i);
                                         Calendar cal = Calendar.getInstance();
                                         cal.setTime(Date.from(DD_clone.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
                                         //
@@ -101,9 +111,9 @@ public class CalendrierService implements ServiceCalendrier {
                                     //
                                     if (valid) {
                                         return 20;
-                                    } else return 206;
-                                } else return 205;
-                            } else return 204;
+                                    } else return 207;
+                                } else return 206;
+                            } else return 205;
                         }
                     } else return 202;
                 } else return 201;
