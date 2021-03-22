@@ -3,7 +3,7 @@ package util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Validator {
+public class Parser {
     public static boolean isNumeric(String str) {
         if (str == null || str.length() == 0)
             return false;
@@ -33,4 +33,12 @@ public class Validator {
     }
 
     //
+    public static String toString(Date date) {
+        try {
+            return new SimpleDateFormat("dd-MM-yyyy").format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import service.CalendrierService;
+import service.ReservationService;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -16,6 +17,10 @@ public class AdminCalendrier {
     @GetMapping("/admin/calendrier")
     public String getCalendar(ModelMap model) {
         //model.addAttribute("message", "welcome spring");
+        CalendrierService calendrierService = new CalendrierService();
+        ReservationService reservationService = new ReservationService();
+        model.addAttribute("_dates", calendrierService.getDates());
+        //model.addAttribute("_dates", calendrierService.getDates());
         return "admin-calendrier";
     }
 

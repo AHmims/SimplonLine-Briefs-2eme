@@ -9,9 +9,8 @@ import model.Jour;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import service.api.ServiceCalendrier;
-import util.Validator;
+import util.Parser;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -48,7 +47,7 @@ public class CalendrierService implements ServiceCalendrier {
                 //check if days have numbers
                 for (Map.Entry<String, String> entry : requestParams.entrySet()) {
                     if (!entry.getKey().equals("d-debut") && !entry.getKey().equals("d-fin")) {
-                        if (!Validator.isNumeric(entry.getValue())) {
+                        if (!Parser.isNumeric(entry.getValue())) {
                             valid = false;
                             break;
                         }
@@ -66,8 +65,8 @@ public class CalendrierService implements ServiceCalendrier {
                         }
                     }
                     if (valid) {
-                        Date dateDebut = Validator.toDate(requestParams.get("d-debut"));
-                        Date dateFin = Validator.toDate(requestParams.get("d-fin"));
+                        Date dateDebut = Parser.toDate(requestParams.get("d-debut"));
+                        Date dateFin = Parser.toDate(requestParams.get("d-fin"));
                         if (dateDebut == null || dateFin == null)
                             return 203;
                         else {
@@ -79,7 +78,7 @@ public class CalendrierService implements ServiceCalendrier {
                             Calendar cal_DF = Calendar.getInstance();
                             cal_DF.setTime(Date.from(ld_DF.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
                             //
-                            if(cal_DD.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY || cal_DF.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)
+                            if (cal_DD.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY || cal_DF.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)
                                 return 204;
                             //
                             long daysInBetween = ChronoUnit.DAYS.between(ld_DD, ld_DF) + 1;
@@ -142,4 +141,22 @@ public class CalendrierService implements ServiceCalendrier {
             return true;
         }
     }
+
+    @Override
+    public List<String> getDates() {
+        try {
+            CalendrierDao calendrierDao = new CalendrierDao();
+            ArrayList<Calendrier> calendriers = calendrierDao.getAll();
+            //
+            List<String> dates = new ArrayList<>();
+            for (Calendrier calendrier : calendriers) {
+                dates.add(String.format("%s -> %s", Parser.toString(calendrier.getDateDebut()), Parser.toString(calendrier.getDateFin())));
+            }
+            return dates;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

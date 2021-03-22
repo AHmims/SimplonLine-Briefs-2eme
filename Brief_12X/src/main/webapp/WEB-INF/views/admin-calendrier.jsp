@@ -178,9 +178,9 @@
                     <!-- filter -->
                     <div class="w-max formInputCombo user-reserv mb-4 mr-1">
                         <select name="" id="" class="rounded-lg">
-                            <option value="">Tous</option>
-                            <option value="">Week-End</option>
-                            <option value="">En-Semaine</option>
+                            <c:forEach items="${requestScope._dates}" var="date">
+                                <option><c:out value="${date}"/></option>
+                            </c:forEach>
                         </select>
                     </div>
                     <!-- table -->

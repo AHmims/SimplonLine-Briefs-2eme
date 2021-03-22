@@ -13,7 +13,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class SimplonLine {
+public class SimplonLineHelper {
     private final String USER_EMAIL = "SIMPLONLINE EMAIL";
     private final String USER_PASS = "SIMPLONLINE PASSWORD";
     //
@@ -23,7 +23,7 @@ public class SimplonLine {
     private static int retry_count = 0;
 
     //
-    public SimplonLine() {
+    public SimplonLineHelper() {
     }
 
     //Function to Login and get AUTH token

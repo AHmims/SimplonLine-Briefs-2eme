@@ -2,10 +2,8 @@ package service;
 
 import beans.GoogleAuthData;
 import beans.User;
-import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
 import config.Hibernate;
-import dao.AdministrateurDao;
 import dao.ApprenantDao;
 import dao.AuthentificationDao;
 import model.Administrateur;
@@ -16,7 +14,7 @@ import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import service.api.ServiceAuthentification;
-import util.SimplonLine;
+import util.SimplonLineHelper;
 import util.TokenParser;
 
 import javax.servlet.http.HttpSession;
@@ -51,8 +49,8 @@ public class AuthentificationService implements ServiceAuthentification {
                     Authentification authentification = authentificationDao.get(googleAuthData.getUserId());
                     if (authentification == null) {
                         //Check if user is a youcode learner
-                        SimplonLine simplonLine = new SimplonLine();
-                        User SL_user = simplonLine.getUserData(googleAuthData.getUserEmail());
+                        SimplonLineHelper simplonLineHelper = new SimplonLineHelper();
+                        User SL_user = simplonLineHelper.getUserData(googleAuthData.getUserEmail());
                         if (SL_user != null) {
                             Groupe groupe = null;
                             //add learner to DB
