@@ -14,11 +14,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class SimplonLine {
-    /*private final String USER_EMAIL = "SIMPLONLINE EMAIL";
-    private final String USER_PASS = "SIMPLONLINE PASSWORD";*/
-    private final String USER_EMAIL = "ali.hmims99@gmail.com";
-    private final String USER_PASS = "136246180nioce";
-
+    private final String USER_EMAIL = "SIMPLONLINE EMAIL";
+    private final String USER_PASS = "SIMPLONLINE PASSWORD";
     //
     private static String refresh_token = "";
     private static String token = "";
