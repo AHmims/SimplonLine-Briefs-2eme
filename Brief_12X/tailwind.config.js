@@ -70,6 +70,6 @@ module.exports = {
   ],
   purge: {
     enabled: true,
-    content: ['./f_src/html/*.html']
+    content: ['./f_src/html/*.html', './src/main/webapp/WEB-INF/views/*.jsp']
   }
 }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "live-server --port=6969",
-    "build": "npx tailwindcss build ./f_src/css/style.css -o ./src/main/webapp/css/style.css"
+    "build": "npx tailwindcss build ./f_src/css/style.css -o ./src/main/webapp/WEB-INF/resources/css/style.css"
   },
   "author": "",
   "license": "ISC",

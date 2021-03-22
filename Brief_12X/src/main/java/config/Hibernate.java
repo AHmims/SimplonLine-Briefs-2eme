@@ -49,6 +49,7 @@ public class Hibernate {
         config.addAnnotatedClass(Calendrier.class);
         config.addAnnotatedClass(Emplacement.class);
         config.addAnnotatedClass(Groupe.class);
+        config.addAnnotatedClass(Jour.class);
         config.addAnnotatedClass(Local.class);
         config.addAnnotatedClass(Promotion.class);
         config.addAnnotatedClass(Reservation.class);

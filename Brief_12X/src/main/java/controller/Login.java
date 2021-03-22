@@ -1,5 +1,6 @@
 package controller;
 
+import model.Administrateur;
 import model.Apprenant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

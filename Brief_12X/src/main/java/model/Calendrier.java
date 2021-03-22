@@ -19,34 +19,29 @@ public class Calendrier {
     private Date dateDebut;
     @Column(name = "dateFin")
     private Date dateFin;
-    @Column(name = "nbMax_S")
-    private int nbMax_S;
-    @Column(name = "nbMax_W")
-    private int nbMax_W;
     //
     @ManyToOne
     @JoinColumn(name = "idAdministrateur")
     private Administrateur administrateur;
     @OneToMany(mappedBy = "calendrier", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations;
+    @OneToMany(mappedBy = "calendrier", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Jour> jours;
     //
     //
 
-    public Calendrier(String idCalendrier, Date dateDebut, Date dateFin, int nbMax_S, int nbMax_W, Administrateur administrateur, List<Reservation> reservations) {
+    public Calendrier(String idCalendrier, Date dateDebut, Date dateFin, Administrateur administrateur, List<Reservation> reservations, List<Jour> jours) {
         this.idCalendrier = idCalendrier;
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.nbMax_S = nbMax_S;
-        this.nbMax_W = nbMax_W;
         this.administrateur = administrateur;
         this.reservations = reservations;
+        this.jours = jours;
     }
 
-    public Calendrier(Date dateDebut, Date dateFin, int nbMax_S, int nbMax_W, Administrateur administrateur) {
+    public Calendrier(Date dateDebut, Date dateFin, Administrateur administrateur) {
         this.dateDebut = dateDebut;
         this.dateFin = dateFin;
-        this.nbMax_S = nbMax_S;
-        this.nbMax_W = nbMax_W;
         this.administrateur = administrateur;
     }
 
@@ -78,22 +73,6 @@ public class Calendrier {
         this.dateFin = dateFin;
     }
 
-    public int getNbMax_S() {
-        return nbMax_S;
-    }
-
-    public void setNbMax_S(int nbMax_S) {
-        this.nbMax_S = nbMax_S;
-    }
-
-    public int getNbMax_W() {
-        return nbMax_W;
-    }
-
-    public void setNbMax_W(int nbMax_W) {
-        this.nbMax_W = nbMax_W;
-    }
-
     public Administrateur getAdministrateur() {
         return administrateur;
     }
@@ -108,5 +87,13 @@ public class Calendrier {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public List<Jour> getJours() {
+        return jours;
+    }
+
+    public void setJours(List<Jour> jours) {
+        this.jours = jours;
     }
 }
