@@ -31,7 +31,7 @@ public class SimplonLineHelper {
         if (refresh_token.equals("")) {
             HttpURLConnection con = null;
             try {
-                con = setupHTTPRequest("https://api.simplonline.co/auth/login", "POST");
+                con = setupHTTPRequest("https://api.simplonline.co/login", "POST");
                 if (con == null)
                     throw new Exception("Error initializing request");
                 //
@@ -54,6 +54,7 @@ public class SimplonLineHelper {
                 return 1;
             } catch (Exception e) {
                 if (con != null) {
+                    e.printStackTrace();
                     try {
                         if (con.getResponseCode() != 200)
                             return 0;
@@ -142,6 +143,7 @@ public class SimplonLineHelper {
             //
             return response;
         } catch (Exception e) {
+            e.printStackTrace();
             if (retry_count == 0) {
                 retry_count++;
                 resetToken();

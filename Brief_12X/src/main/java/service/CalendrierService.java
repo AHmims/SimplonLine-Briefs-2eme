@@ -159,4 +159,23 @@ public class CalendrierService implements ServiceCalendrier {
         }
     }
 
+    @Override
+    public Calendrier getByDate(Date date) {
+        Transaction transaction = null;
+        try {
+            Session session = Hibernate.openSession();
+            transaction = session.beginTransaction();
+            //
+            ArrayList<Calendrier> calendriers = new ArrayList<>((List<Calendrier>) session.createQuery("FROM Calendrier WHERE :date BETWEEN dateDebut AND dateFin").setParameter("date", date).list());
+            transaction.commit();
+            //
+            return calendriers.size() > 0 ? calendriers.get(0) : null;
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

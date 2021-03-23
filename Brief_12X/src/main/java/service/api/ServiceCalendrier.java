@@ -1,6 +1,7 @@
 package service.api;
 
 import model.Administrateur;
+import model.Calendrier;
 
 import java.util.Date;
 import java.util.List;
@@ -10,4 +11,5 @@ public interface ServiceCalendrier {
     int insert(Map<String, String> requestParams, Administrateur administrateur);
     boolean exists(Date date);
     List<String[]> getDates();
+    Calendrier getByDate(Date date);
 }

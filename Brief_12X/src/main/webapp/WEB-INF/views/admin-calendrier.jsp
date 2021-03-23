@@ -221,7 +221,7 @@
                         </c:forEach>
                     </select>
                 </form>
-            <!-- table -->
+                <!-- table -->
                 <div class="flex-1 w-full bg-white grid grid-cols-reservations relative">
                     <!-- column -->
                     <div class="tableColumn">

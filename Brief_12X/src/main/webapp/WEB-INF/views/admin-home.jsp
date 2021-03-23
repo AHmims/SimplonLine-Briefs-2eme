@@ -76,7 +76,7 @@
                             <div class="top">
                                 <!-- left -->
                                 <div class="left">
-                                    <span class="main">42</span>
+                                    <span class="main"><c:out value="${requestScope._app_count_active}"/></span>
                                     <span class="desc">Apprenants inscrits</span>
                                 </div>
                                 <!-- right -->
@@ -103,7 +103,7 @@
                             <div class="top">
                                 <!-- left -->
                                 <div class="left">
-                                    <span class="main">13</span>
+                                    <span class="main"><c:out value="${requestScope._app_count_inactive}"/></span>
                                     <span class="desc">Apprenants en attente de vérification</span>
                                 </div>
                                 <!-- right -->
@@ -132,7 +132,7 @@
                             <div class="top">
                                 <!-- left -->
                                 <div class="left">
-                                    <span class="main">152</span>
+                                    <span class="main"><c:out value="${requestScope._res_count_all}"/></span>
                                     <span class="desc">Réservations cette semaine</span>
                                 </div>
                                 <!-- right -->
@@ -161,7 +161,7 @@
                             <div class="top">
                                 <!-- left -->
                                 <div class="left">
-                                    <span class="main">09</span>
+                                    <span class="main"><c:out value="${requestScope._res_count_onhold}"/></span>
                                     <span class="desc">Réservations en attente de vérification</span>
                                 </div>
                                 <!-- right -->

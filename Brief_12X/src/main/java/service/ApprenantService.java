@@ -32,4 +32,23 @@ public class ApprenantService implements ServiceApprenant {
             return null;
         }
     }
+
+    @Override
+    public List<Apprenant> getAll(boolean status) {
+        Transaction transaction = null;
+        try {
+            Session session = Hibernate.openSession();
+            transaction = session.beginTransaction();
+            //
+            ArrayList<Apprenant> apprenants = new ArrayList<>((List<Apprenant>) session.createQuery("FROM Apprenant WHERE actif = :status").setParameter("status", status).list());
+            transaction.commit();
+            //
+            return apprenants;
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
