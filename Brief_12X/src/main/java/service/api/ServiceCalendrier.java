@@ -9,5 +9,5 @@ import java.util.Map;
 public interface ServiceCalendrier {
     int insert(Map<String, String> requestParams, Administrateur administrateur);
     boolean exists(Date date);
-    List<String> getDates();
+    List<String[]> getDates();
 }

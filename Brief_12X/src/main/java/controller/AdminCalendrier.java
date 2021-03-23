@@ -15,12 +15,13 @@ import java.util.Map;
 @Controller
 public class AdminCalendrier {
     @GetMapping("/admin/calendrier")
-    public String getCalendar(ModelMap model) {
-        //model.addAttribute("message", "welcome spring");
+    public String getCalendar(@RequestParam(required = false) String idCalendrier, ModelMap model) {
         CalendrierService calendrierService = new CalendrierService();
-        ReservationService reservationService = new ReservationService();
         model.addAttribute("_dates", calendrierService.getDates());
-        //model.addAttribute("_dates", calendrierService.getDates());
+        if (idCalendrier != null) {
+            ReservationService reservationService = new ReservationService();
+            model.addAttribute("_reservations", reservationService.getByCalendrier(idCalendrier));
+        }
         return "admin-calendrier";
     }
 

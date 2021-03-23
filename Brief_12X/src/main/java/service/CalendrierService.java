@@ -143,14 +143,14 @@ public class CalendrierService implements ServiceCalendrier {
     }
 
     @Override
-    public List<String> getDates() {
+    public List<String[]> getDates() {
         try {
             CalendrierDao calendrierDao = new CalendrierDao();
             ArrayList<Calendrier> calendriers = calendrierDao.getAll();
             //
-            List<String> dates = new ArrayList<>();
+            List<String[]> dates = new ArrayList<>();
             for (Calendrier calendrier : calendriers) {
-                dates.add(String.format("%s -> %s", Parser.toString(calendrier.getDateDebut()), Parser.toString(calendrier.getDateFin())));
+                dates.add(new String[]{String.format("%s -> %s", Parser.toString(calendrier.getDateDebut()), Parser.toString(calendrier.getDateFin())), calendrier.getIdCalendrier()});
             }
             return dates;
         } catch (Exception e) {
