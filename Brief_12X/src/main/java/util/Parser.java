@@ -33,9 +33,18 @@ public class Parser {
     }
 
     //
-    public static String toString(Date date) {
+    public static String toDateString(Date date) {
         try {
             return new SimpleDateFormat("dd-MM-yyyy").format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    //
+    public static String toDateTimeString(Date date) {
+        try {
+            return new SimpleDateFormat("dd/MM/yyyy hh:mm").format(date);
         } catch (Exception e) {
             e.printStackTrace();
             return "";

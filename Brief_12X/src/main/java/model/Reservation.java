@@ -17,6 +17,7 @@ public class Reservation {
     @Column(name = "idReservation")
     private String idReservation;
     @Column(name = "dateCreation")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
     @Column(name = "dateReservation")
     private Date dateReservation;

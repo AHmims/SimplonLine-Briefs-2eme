@@ -6,7 +6,7 @@ import model.Reservation;
 import java.util.List;
 
 public interface ServiceReservation {
-
+    List<Reservation> getAll(boolean status);
     //
     List<Reservation> getByCalendrier(String idCalendrier);
 

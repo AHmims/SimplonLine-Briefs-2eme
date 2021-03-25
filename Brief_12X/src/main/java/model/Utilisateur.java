@@ -21,6 +21,7 @@ abstract class Utilisateur {
     @Column(name = "prenomUtilisateur", nullable = false)
     private String prenomUtilisateur;
     @Column(name = "dateCreation", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
 
     //
