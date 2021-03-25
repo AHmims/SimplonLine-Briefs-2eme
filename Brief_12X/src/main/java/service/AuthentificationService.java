@@ -60,7 +60,7 @@ public class AuthentificationService implements ServiceAuthentification {
                             ApprenantDao apprenantDao = new ApprenantDao();
                             String apprenantId = apprenantDao.insert(apprenant);
                             //
-                            return apprenantId != null ? 1 : 0;
+                            return apprenantId != null ? 11 : 10;
                         } else return 103;
                     } else return 102;
                 } else return 101;
