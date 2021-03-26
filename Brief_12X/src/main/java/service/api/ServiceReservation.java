@@ -12,6 +12,8 @@ public interface ServiceReservation {
 
     List<DemandeReservation> getRequests();
 
+    int validate(String idReservation, String action);
+
     //
     List<Reservation> getByCalendrier(String idCalendrier);
 
@@ -20,4 +22,6 @@ public interface ServiceReservation {
     List<Reservation> getByCalendrier(Calendrier calendrier, boolean status);
 
     List<Reservation> getByCalendrierForLearner(Apprenant apprenant, Calendrier calendrier, boolean status);
+
+    List<Reservation> getByLastCalendrier();
 }

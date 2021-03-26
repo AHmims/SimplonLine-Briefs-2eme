@@ -3,6 +3,7 @@ package service;
 import beans.DemandeReservation;
 import config.Hibernate;
 import dao.CalendrierDao;
+import dao.ReservationDao;
 import model.Apprenant;
 import model.Calendrier;
 import model.Reservation;
@@ -60,6 +61,39 @@ public class ReservationService implements ServiceReservation {
         }
     }
 
+    @Override
+    public int validate(String idReservation, String action) {
+        try {
+             /*
+            ERROR CODES:
+            -1: unknown
+            40: learner deleted
+            41: learner not deleted
+            42: learner updated / validated
+            43: learner not updated / validated
+            400: learner not found
+             */
+            ReservationDao reservationDao = new ReservationDao();
+            Reservation reservation = reservationDao.get(idReservation);
+            if (reservation == null)
+                return 400;
+            //
+            if (action.equals("ok")) {
+                //update / validate
+                reservation.setValideReservation(true);
+                boolean updateRes = reservationDao.update(reservation);
+                return updateRes ? 42 : 43;
+            } else {
+                //delete
+                boolean deleteRes = reservationDao.delete(reservation);
+                return deleteRes ? 40 : 41;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     //
     @Override
     public List<Reservation> getByCalendrier(String idCalendrier) {
@@ -70,7 +104,7 @@ public class ReservationService implements ServiceReservation {
             //
             CalendrierDao calendrierDao = new CalendrierDao();
             //
-            ArrayList<Reservation> reservations = new ArrayList<>((List<Reservation>) session.createQuery("FROM Reservation WHERE calendrier = :cal").setParameter("cal", calendrierDao.get(idCalendrier)).list());
+            ArrayList<Reservation> reservations = new ArrayList<>((List<Reservation>) session.createQuery("FROM Reservation WHERE calendrier = :cal AND valideReservation = true").setParameter("cal", calendrierDao.get(idCalendrier)).list());
             transaction.commit();
             //
             return reservations;
@@ -147,6 +181,22 @@ public class ReservationService implements ServiceReservation {
         } catch (Exception e) {
             if (transaction != null)
                 transaction.rollback();
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Reservation> getByLastCalendrier() {
+        try {
+            CalendrierDao calendrierDao = new CalendrierDao();
+            ArrayList<Calendrier> calendriers = calendrierDao.getAll();
+            if (calendriers.size() == 0 || calendriers == null)
+                return null;
+            Calendrier calendrier = calendriers.get(calendriers.size() - 1);
+            //
+            return getByCalendrier(calendrier, true);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

@@ -5,6 +5,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import service.ApprenantService;
 import service.ReservationService;
 
@@ -20,9 +21,9 @@ public class AdminReservations {
     }
 
     @PostMapping("/admin/reservations/validator")
-    public String postAdminReservationsValidator(@RequestParam String _id, ModelMap model) {
-        //model.addAttribute("message", "welcome welcome");
-        System.out.println(_id);
-        return "admin-reservations";
+    public ModelAndView postAdminReservationsValidator(@RequestParam String _action, @RequestParam String _id, ModelMap model) {
+        ReservationService reservationService = new ReservationService();
+        model.addAttribute("_validation_res", reservationService.validate(_id, _action));
+        return new ModelAndView("redirect:/admin/reservations", model);
     }
 }

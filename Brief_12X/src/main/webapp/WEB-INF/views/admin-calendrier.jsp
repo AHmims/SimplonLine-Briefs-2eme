@@ -1,3 +1,6 @@
+<%@ page import="model.Reservation" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Calendar" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="fr">
@@ -222,7 +225,7 @@
                     </select>
                 </form>
                 <!-- table -->
-                <div class="flex-1 w-full bg-white grid grid-cols-reservations relative">
+                <div class="flex-1 bg-white grid grid-cols-reservations relative">
                     <!-- column -->
                     <div class="tableColumn">
                         <!-- table head -->
@@ -230,32 +233,19 @@
                             <span class="">Apprenant</span>
                         </div>
                         <!-- rows -->
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg"
-                                     alt="" class="img">
+                        <c:forEach items="${requestScope._reservations}" var="reservation">
+                            <div class="row data">
+                                <!-- img -->
+                                <div class="imgCont">
+                                    <img src="<c:out value="${reservation.apprenant.imgApprenant}"/>" alt="" class="img">
+                                </div>
+                                <!-- info -->
+                                <div class="infos">
+                                    <span class="name"><c:out value="${reservation.apprenant.nomUtilisateur} ${reservation.apprenant.prenomUtilisateur}"/></span>
+                                    <span class="email"><c:out value="${reservation.apprenant.authentification.emailAuthentification}"/></span>
+                                </div>
                             </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg"
-                                     alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -264,28 +254,32 @@
                             <span class="">nature</span>
                         </div>
                         <!-- rows -->
-                        <!-- row -->
+                        <% for (Reservation reservation: (ArrayList<Reservation>) request.getAttribute("_reservations")) { %>
+                        <%
+                            Calendar cal_res = Calendar.getInstance();
+                            cal_res.setTime(reservation.getDateReservation());
+                            int day = cal_res.get(Calendar.DAY_OF_WEEK);
+                            int nature = day >= Calendar.MONDAY && day <= Calendar.FRIDAY ? 1 : 2;
+                        %>
                         <div class="row data">
                             <!-- badge-1-A -->
+                            <% if(nature == 1){ %>
                             <div class="badge-2 badge-2-B">
-                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="10" height="10" rx="5" fill="#475569"/>
+                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="10" height="10" rx="5" fill="#475569" />
                                 </svg>
                                 <span>En-semaine</span>
                             </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- badge-1-B -->
+                            <% }else { %>
                             <div class="badge-2 badge-2-A">
-                                <svg width="10" height="11" viewBox="0 0 10 11" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <rect y="0.5" width="10" height="10" rx="5" fill="#57534E"/>
+                                <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect y="0.5" width="10" height="10" rx="5" fill="#57534E" />
                                 </svg>
                                 <span>Week-end</span>
                             </div>
+                            <% } %>
                         </div>
+                        <% } %>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -295,13 +289,11 @@
                         </div>
                         <!-- rows -->
                         <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021</span>
-                        </div>
+                        <c:forEach items="${requestScope._reservations}" var="reservation">
+                            <div class="row data">
+                                <span class="infos"><fmt:formatDate pattern = "yyyy-MM-dd" value = "${reservation.dateReservation}" /></span>
+                            </div>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -310,14 +302,11 @@
                             <span class="">emplacement</span>
                         </div>
                         <!-- rows -->
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Safi-A @ Agora</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Safi-A @ Agora</span>
-                        </div>
+                        <c:forEach items="${requestScope._reservations}" var="reservation">
+                            <div class="row data">
+                                <span class="infos"><c:out value="${reservation.emplacement.local.villeLocal}-${reservation.emplacement.local.libelleLocal} @ ${reservation.emplacement.libelleEmplacement}" /></span>
+                            </div>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -326,14 +315,11 @@
                             <span class="">Groupe</span>
                         </div>
                         <!-- rows -->
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
+                        <c:forEach items="${requestScope._reservations}" var="reservation">
+                            <div class="row data">
+                                <span class="infos"><c:out value="${reservation.apprenant.groupe != null ? reservation.apprenant.groupe.libelleGroupe : 'X'}"/></span>
+                            </div>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -342,14 +328,11 @@
                             <span class="">Promotion</span>
                         </div>
                         <!-- rows -->
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">2019/2020</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">2019/2020</span>
-                        </div>
+                        <c:forEach items="${requestScope._reservations}" var="reservation">
+                            <div class="row data">
+                                <span class="infos"><c:out value="${reservation.apprenant.groupe.promotion != null ? reservation.apprenant.groupe.promotion.libellePromotion : 'X'}"/></span>
+                            </div>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -358,14 +341,11 @@
                             <span class="">Date d’envoie</span>
                         </div>
                         <!-- rows -->
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
+                        <c:forEach items="${requestScope._reservations}" var="reservation">
+                            <div class="row data">
+                                <span class="infos"><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${reservation.dateCreation}" /></span>
+                            </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

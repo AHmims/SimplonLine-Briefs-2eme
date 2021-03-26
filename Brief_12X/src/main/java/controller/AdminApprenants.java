@@ -21,7 +21,7 @@ public class AdminApprenants {
     @PostMapping("/admin/apprenants/validator")
     public ModelAndView postAdminApprenantsValidator(@RequestParam String _action, @RequestParam String _id, ModelMap model) {
         ApprenantService apprenantService = new ApprenantService();
-        model.addAttribute("_update_res", apprenantService.validate(_id, _action));
+        model.addAttribute("_validation_res", apprenantService.validate(_id, _action));
         return new ModelAndView("redirect:/admin/apprenants", model);
     }
 

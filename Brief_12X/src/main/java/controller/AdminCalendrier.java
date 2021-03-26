@@ -17,10 +17,13 @@ public class AdminCalendrier {
     @GetMapping("/admin/calendrier")
     public String getCalendar(@RequestParam(required = false) String idCalendrier, ModelMap model) {
         CalendrierService calendrierService = new CalendrierService();
+        ReservationService reservationService = new ReservationService();
+        //
         model.addAttribute("_dates", calendrierService.getDates());
         if (idCalendrier != null) {
-            ReservationService reservationService = new ReservationService();
             model.addAttribute("_reservations", reservationService.getByCalendrier(idCalendrier));
+        }else{
+            model.addAttribute("_reservations", reservationService.getByLastCalendrier());
         }
         return "admin-calendrier";
     }
