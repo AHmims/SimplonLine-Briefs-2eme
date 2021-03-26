@@ -1,6 +1,7 @@
 package service;
 
 import config.Hibernate;
+import dao.ApprenantDao;
 import model.Apprenant;
 import model.Authentification;
 import org.hibernate.Session;
@@ -49,6 +50,28 @@ public class ApprenantService implements ServiceApprenant {
                 transaction.rollback();
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public int remove(String idApprenant) {
+        try {
+             /*
+            ERROR CODES:
+            -1: unknown
+            30: learner deleted
+            31: learner not deleted
+            300: learner not found
+             */
+            ApprenantDao apprenantDao = new ApprenantDao();
+            Apprenant apprenant = apprenantDao.get(idApprenant);
+            if (apprenant == null)
+                return 300;
+            boolean deleteRes = apprenantDao.delete(apprenant);
+            return deleteRes ? 30 : 31;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
         }
     }
 }

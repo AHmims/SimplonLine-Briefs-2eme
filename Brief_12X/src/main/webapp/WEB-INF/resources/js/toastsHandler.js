@@ -164,3 +164,27 @@ async function toastRedirectNormal(link, text, linkText) {
     return await toast(params);
 }
 //
+async function toastConfirmDelete() {
+    var params = {
+        content: "Est-ce que vous êtes sûr de vouloir supprimer cet apprenant ?",
+        type: "warning",
+        behavior: {
+            type: "advanced",
+            controls: [{
+                type: "button",
+                appearance: "main",
+                text: "Supprimer",
+                callback: "true"
+            },
+            {
+                type: "button",
+                appearance: "sec",
+                text: "Garder",
+                callback: "cancel"
+            }
+            ]
+        },
+        duration: "active"
+    }
+    return await toast(params);
+}

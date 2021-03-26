@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/toast.css">
+    <script src="/js/toast.js"></script>
+    <script src="/js/toastsHandler.js"></script>
     <title>List d'apprenants</title>
 </head>
 
@@ -68,108 +71,45 @@
                 <div class="w-full font-Inter space-y-4 px-10">
                     <span class="block font-medium text-xl text-coolGray-500">Demandes d'inscription</span>
                     <div class="w-full space-x-10 flex flex-row overflow-x-auto p-2">
-                        <!-- card -->
-                        <div class="card-learner">
-                            <!-- top -->
-                            <div class="top">
-                                <!-- left -->
-                                <div class="left">
-                                    <div class="top">
-                                        <span class="name">Ahmed Rafiqu</span>
-                                        <span class="email">AhmedRafiqu@gmail.com</span>
+                        <!-- cards -->
+                        <c:forEach items="${requestScope._app_count_inactive}" var="apprenant">
+                            <form method="post" action="/admin/apprenants/validator" class="card-learner">
+                                <!-- top -->
+                                <div class="top">
+                                    <!-- left -->
+                                    <div class="left">
+                                        <div class="top">
+                                            <span class="name"><c:out value="${apprenant.nomUtilisateur} ${apprenant.prenomUtilisateur}"/></span>
+                                            <span class="email"><c:out value="${apprenant.authentification.emailAuthentification}"/></span>
+                                        </div>
+                                        <div class="bot">
+                                            <span class="groupe"><c:out value="${apprenant.groupe !=null ? apprenant.groupe.libelleGroupe : 'X'}"/></span>
+                                            <span class="promotion"><c:out value="${apprenant.groupe.promotion != null ? apprenant.groupe.promotion.libellePromotion : 'X'}"/></span>
+                                        </div>
                                     </div>
-                                    <div class="bot">
-                                        <span class="groupe">Marry Jackson</span>
-                                        <span class="promotion">2019</span>
-                                    </div>
-                                </div>
-                                <!-- right -->
-                                <div class="right">
-                                    <div class="imgCont">
-                                        <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- bot -->
-                            <div class="bot">
-                                <div class="btnsCont">
-                                    <button class="buttonSec">
-                                        <span>refuser</span>
-                                    </button>
-                                    <button class="buttonMain">
-                                        <span>Verifier</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- card -->
-                        <div class="card-learner">
-                            <!-- top -->
-                            <div class="top">
-                                <!-- left -->
-                                <div class="left">
-                                    <div class="top">
-                                        <span class="name">Ahmed Rafiqu</span>
-                                        <span class="email">AhmedRafiqu@gmail.com</span>
-                                    </div>
-                                    <div class="bot">
-                                        <span class="groupe">Marry Jackson</span>
-                                        <span class="promotion">2019</span>
+                                    <!-- right -->
+                                    <div class="right">
+                                        <div class="imgCont">
+                                            <img src="<c:out value="${apprenant.imgApprenant}"/>" alt="" class="img">
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- right -->
-                                <div class="right">
-                                    <div class="imgCont">
-                                        <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
+                                <!-- bot -->
+                                <div class="bot">
+                                    <div class="btnsCont">
+                                        <button class="buttonSec">
+                                            <span>Refuser</span>
+                                        </button>
+                                        <button class="buttonMain">
+                                            <span>Verifier</span>
+                                        </button>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- bot -->
-                            <div class="bot">
-                                <div class="btnsCont">
-                                    <button class="buttonSec">
-                                        <span>refuser</span>
-                                    </button>
-                                    <button class="buttonMain">
-                                        <span>Verifier</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- card -->
-                        <div class="card-learner">
-                            <!-- top -->
-                            <div class="top">
-                                <!-- left -->
-                                <div class="left">
-                                    <div class="top">
-                                        <span class="name">Ahmed Rafiqu</span>
-                                        <span class="email">AhmedRafiqu@gmail.com</span>
-                                    </div>
-                                    <div class="bot">
-                                        <span class="groupe">Marry Jackson</span>
-                                        <span class="promotion">2019</span>
-                                    </div>
-                                </div>
-                                <!-- right -->
-                                <div class="right">
-                                    <div class="imgCont">
-                                        <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- bot -->
-                            <div class="bot">
-                                <div class="btnsCont">
-                                    <button class="buttonSec">
-                                        <span>refuser</span>
-                                    </button>
-                                    <button class="buttonMain">
-                                        <span>Verifier</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                                <!-- data -->
+                                <input type="hidden" name="_action" class="card_action" value="ok"/>
+                                <input type="hidden" name="_id" class="card_id" value="<c:out value="${apprenant.idUtilisateur}"/>"/>
+                            </form>
+                        </c:forEach>
                     </div>
                 </div>
                 <!-- table -->
@@ -182,209 +122,19 @@
                         </div>
                         <!-- rows -->
                         <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
+                        <c:forEach items="${requestScope._app_count_active}" var="apprenant">
+                            <div class="row data">
+                                <!-- img -->
+                                <div class="imgCont">
+                                    <img src="<c:out value="${apprenant.imgApprenant}"/>" alt="" class="img">
+                                </div>
+                                <!-- info -->
+                                <div class="infos">
+                                    <span class="name"><c:out value="${apprenant.nomUtilisateur} ${apprenant.prenomUtilisateur}"/></span>
+                                    <span class="email"><c:out value="${apprenant.authentification.emailAuthentification}"/></span>
+                                </div>
                             </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <!-- img -->
-                            <div class="imgCont">
-                                <img src="https://pbs.twimg.com/profile_images/1232803900857688065/1QzYpsjB_400x400.jpg" alt="" class="img">
-                            </div>
-                            <!-- info -->
-                            <div class="infos">
-                                <span class="name">Khalid ELFAKKIR</span>
-                                <span class="email">khalid.elfa@gmail.com</span>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -394,73 +144,11 @@
                         </div>
                         <!-- rows -->
                         <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">06/03/2021 04:56</span>
-                        </div>
+                        <c:forEach items="${requestScope._app_count_active}" var="apprenant">
+                            <div class="row data">
+                                <span class="infos"><c:out value="${apprenant.dateCreation}"/></span>
+                            </div>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -470,73 +158,11 @@
                         </div>
                         <!-- rows -->
                         <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
-                        <!-- row -->
-                        <div class="row data">
-                            <span class="infos">Mary Jackson</span>
-                        </div>
+                        <c:forEach items="${requestScope._app_count_active}" var="apprenant">
+                            <div class="row data">
+                                <span class="infos"><c:out value="${apprenant.groupe !=null ? apprenant.groupe.libelleGroupe : 'X'}"/></span>
+                            </div>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">
@@ -546,98 +172,24 @@
                         </div>
                         <!-- rows -->
                         <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
-                        <!-- row -->
-                        <div class="row data option">
-                            <span class="infos">2019/2020</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
-                            </svg>
-                        </div>
+                        <c:forEach items="${requestScope._app_count_active}" var="apprenant">
+                            <form action="/admin/apprenants/manager" method="post" class="row data option learner_row">
+                                <span class="infos"><c:out value="${apprenant.groupe.promotion != null ? apprenant.groupe.promotion.libellePromotion : 'X'}"/></span>
+                                <button type="button">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.70817 2.5C7.70817 2.15482 7.98799 1.875 8.33317 1.875H11.6665C12.0117 1.875 12.2915 2.15482 12.2915 2.5V3.125H15.8332C16.1783 3.125 16.4582 3.40482 16.4582 3.75C16.4582 4.09518 16.1783 4.375 15.8332 4.375H4.1665C3.82133 4.375 3.5415 4.09518 3.5415 3.75C3.5415 3.40482 3.82133 3.125 4.1665 3.125H7.70817V2.5Z" fill="#4B5563" />
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.19975 6.62065C5.2232 6.40964 5.40156 6.25 5.61387 6.25H14.3858C14.5981 6.25 14.7765 6.40964 14.7999 6.62065L14.9667 8.12178C15.2674 10.8276 15.2674 13.5584 14.9667 16.2642L14.9503 16.412C14.8408 17.3975 14.077 18.1833 13.095 18.3207C11.0416 18.6082 8.95808 18.6082 6.90462 18.3207C5.92265 18.1833 5.15888 17.3975 5.04938 16.412L5.03296 16.2642C4.73231 13.5584 4.73231 10.8276 5.03296 8.12177L5.19975 6.62065ZM12.1085 10.3914C12.3525 10.6355 12.3525 11.0312 12.1085 11.2753L10.8837 12.5L12.1084 13.7247C12.3525 13.9688 12.3525 14.3645 12.1084 14.6086C11.8644 14.8527 11.4686 14.8527 11.2246 14.6086L9.99984 13.3839L8.77512 14.6086C8.53104 14.8527 8.13531 14.8527 7.89124 14.6086C7.64716 14.3645 7.64716 13.9688 7.89124 13.7247L9.11595 12.5L7.89123 11.2753C7.64715 11.0312 7.64715 10.6355 7.89123 10.3914C8.13531 10.1473 8.53103 10.1473 8.77511 10.3914L9.99984 11.6161L11.2246 10.3914C11.4686 10.1473 11.8644 10.1473 12.1085 10.3914Z" fill="#4B5563" />
+                                    </svg>
+                                </button>
+                                <input type="hidden" name="_id" value="<c:out value="${apprenant.idUtilisateur}"/>"/>
+                            </form>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="/js/admin.learners.js"></script>
 </body>
 
 </html>

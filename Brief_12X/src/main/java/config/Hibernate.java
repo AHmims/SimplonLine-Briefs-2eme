@@ -36,10 +36,12 @@ public class Hibernate {
         }
         return sessionFactory;
     }
+
     //
     public static Session openSession() {
-        return getSessionFactory().openSession();
+        return getSessionFactory().getCurrentSession();// getSessionFactory().openSession();
     }
+
     //
     private static Configuration setupClasses(Configuration config) {
         //Classes here
