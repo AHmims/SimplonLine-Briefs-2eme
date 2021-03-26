@@ -74,4 +74,35 @@ public class ApprenantService implements ServiceApprenant {
             return -1;
         }
     }
+
+    @Override
+    public int validate(String idApprenant, String action) {
+        try {
+             /*
+            ERROR CODES:
+            -1: unknown
+            30: learner deleted
+            31: learner not deleted
+            32: learner updated / validated
+            33: learner not updated / validated
+            300: learner not found
+             */
+            if (action.equals("ok")) {
+                //validate
+                ApprenantDao apprenantDao = new ApprenantDao();
+                Apprenant apprenant = apprenantDao.get(idApprenant);
+                if (apprenant == null)
+                    return 300;
+                apprenant.setActif(true);
+                boolean updateRes = apprenantDao.update(apprenant);
+                return updateRes ? 32 : 33;
+            } else {
+                //delete
+                return remove(idApprenant);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }

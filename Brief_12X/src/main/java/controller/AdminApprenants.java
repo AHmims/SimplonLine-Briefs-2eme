@@ -11,7 +11,7 @@ import service.ApprenantService;
 @Controller
 public class AdminApprenants {
     @GetMapping("/admin/apprenants")
-    public String getHome(ModelMap model) {
+    public String getAdminApprenants(ModelMap model) {
         ApprenantService apprenantService = new ApprenantService();
         model.addAttribute("_app_count_active", apprenantService.getAll(true));
         model.addAttribute("_app_count_inactive", apprenantService.getAll(false));
@@ -19,19 +19,16 @@ public class AdminApprenants {
     }
 
     @PostMapping("/admin/apprenants/validator")
-    public ModelAndView postHomeValidator(@RequestParam String _action, @RequestParam String _id, ModelMap model) {
-        //model.addAttribute("message", "welcome welcome");
-        System.out.println(_action);
+    public ModelAndView postAdminApprenantsValidator(@RequestParam String _action, @RequestParam String _id, ModelMap model) {
+        ApprenantService apprenantService = new ApprenantService();
+        model.addAttribute("_update_res", apprenantService.validate(_id, _action));
         return new ModelAndView("redirect:/admin/apprenants", model);
     }
 
     @PostMapping("/admin/apprenants/manager")
-    public ModelAndView postHomeManager(@RequestParam String _id, ModelMap model) {
-        //model.addAttribute("message", "welcome welcome");
+    public ModelAndView postAdminApprenantsManager(@RequestParam String _id, ModelMap model) {
         ApprenantService apprenantService = new ApprenantService();
-        int deleteRes = apprenantService.remove(_id);
-        System.out.println(deleteRes);
-        model.addAttribute("_remove_res", deleteRes);
+        model.addAttribute("_remove_res", apprenantService.remove(_id));
         return new ModelAndView("redirect:/admin/apprenants", model);
     }
 }

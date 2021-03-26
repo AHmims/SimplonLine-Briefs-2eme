@@ -11,6 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/toast.css">
+    <script src="/js/toast.js"></script>
+    <script src="/js/toastsHandler.js"></script>
     <title>List d'apprenants</title>
 </head>
 
@@ -70,7 +73,7 @@
                     <span class="block font-medium text-xl text-coolGray-500">Demandes de réservations</span>
                     <div class="w-full space-x-10 flex flex-row overflow-x-auto p-2">
                         <c:forEach items="${requestScope._reservations_hold}" var="reservation">
-                            <form action="" method="post" class="card-reservation">
+                            <form action="/admin/reservations/validator" method="post" class="card-reservation">
                                 <!-- top -->
                                 <div class="c-top">
                                     <div class="top">
@@ -147,13 +150,15 @@
                                 <div class="c-bot">
                                     <div class="btnsCont">
                                         <button class="buttonSec">
-                                            <span>refuser</span>
+                                            <span>Refuser</span>
                                         </button>
                                         <button class="buttonMain">
                                             <span>Verifier</span>
                                         </button>
                                     </div>
                                 </div>
+                                <input type="hidden" name="_action" class="card_action" value="ok"/>
+                                <input type="hidden" name="_id" class="card_id" value="<c:out value="${reservation.reservation.idReservation}"/>"/>
                             </form>
                         </c:forEach>
                     </div>
@@ -285,6 +290,7 @@
             </div>
         </div>
     </div>
+    <script src="/js/admin.reservations.js"></script>
 </body>
 
 </html>
