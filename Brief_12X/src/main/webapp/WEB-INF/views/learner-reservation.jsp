@@ -7,10 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/learner.reservation.js"></script>
     <title>Reservations</title>
 </head>
 
 <body>
+    <%--@elvariable id="local" type="model.Local"--%>
+    <%--@elvariable id="emplacement" type="model.Emplacement"--%>
+    <script>
+        <c:forEach items="${requestScope._local_all}" var="local">
+            addData("local","${local.idLocal}","${local.villeLocal} @ ${local.libelleLocal}");
+        </c:forEach>
+        <c:forEach items="${requestScope._emplacement_all}" var="emplacement">
+            addData("emplacement","${emplacement.idEmplacement}","${emplacement.libelleEmplacement}","${emplacement.local.idLocal}");
+        </c:forEach>
+    </script>
     <div class="bg-white p-4 min-h-screen w-full flex flex-col">
         <!-- main -->
         <div class="w-full h-auto space-y-4 flex-1 flex flex-col justify-between">
@@ -54,7 +65,7 @@
                     </div>
                 </div>
                 <!-- form -->
-                <form class="mx-auto space-y-10 font-Inter w-150 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
+                <form action="/apprenant/reserver" method="post" class="mx-auto space-y-10 font-Inter w-150 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
                     <!-- top text -->
                     <div class="space-y-1.5">
                         <h1 class="text-2xl font-medium text-coolGray-900">Faire une reservation</h1>
@@ -67,15 +78,18 @@
                             <!-- column -->
                             <div class="formInputCombo w-full">
                                 <span>Local</span>
-                                <select name="" id="">
-                                    <option value="">Select</option>
+                                <select name="_local" id="inputLocal">
+                                    <option value="X" disabled selected>Select</option>
+                                    <c:forEach items="${requestScope._local_all}" var="local">
+                                        <option value="${local.idLocal}"><c:out value="${local.villeLocal} @ ${local.libelleLocal}"/></option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <!-- column -->
                             <div class="formInputCombo w-full">
                                 <span>Emplacement</span>
-                                <select name="" id="">
-                                    <option value="">Select</option>
+                                <select name="_emplacement" id="inputEmplacement" disabled>
+                                    <option value="X" disabled selected>Select</option>
                                 </select>
                             </div>
                         </div>
@@ -107,7 +121,6 @@
             </div>
         </div>
     </div>
-    <script src="/js/learner.reservation.js"></script>
 </body>
 
 </html>

@@ -14,6 +14,8 @@ public interface ServiceReservation {
 
     int validate(String idReservation, String action);
 
+    int insert(Apprenant apprenant, String date, String emplacement, String local);
+
     //
     List<Reservation> getByCalendrier(String idCalendrier);
 

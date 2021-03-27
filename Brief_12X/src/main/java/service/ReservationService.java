@@ -94,6 +94,24 @@ public class ReservationService implements ServiceReservation {
         }
     }
 
+    @Override
+    public int insert(Apprenant apprenant, String date, String emplacement, String local) {
+        try {
+            /*
+            ERROR CODES:
+            -1: unknown
+            500: learner(apprenant) not found
+             */
+            //
+            if(apprenant == null)
+                return 500;
+            return 50;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     //
     @Override
     public List<Reservation> getByCalendrier(String idCalendrier) {
