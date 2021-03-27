@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ApprenantReserver {
     @GetMapping("/apprenant/reserver")
-    public String getHome(ModelMap model) {
+    public String getApprenantReserver(ModelMap model) {
         //model.addAttribute("message", "welcome spring");
         return "learner-reservation";
     }
 
     @PostMapping("/apprenant/reserver")
-    public String postHome(ModelMap model) {
+    public String postApprenantReserver(ModelMap model) {
         //model.addAttribute("message", "welcome welcome");
         return "learner-reservation";
     }

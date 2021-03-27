@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <!-- form -->
-                <div class="mx-auto space-y-10 font-Inter w-150 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
+                <form class="mx-auto space-y-10 font-Inter w-150 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
                     <!-- top text -->
                     <div class="space-y-1.5">
                         <h1 class="text-2xl font-medium text-coolGray-900">Faire une reservation</h1>
@@ -82,16 +82,16 @@
                         <!-- row -->
                         <div class="formInputCombo">
                             <span>Date</span>
-                            <input type="date">
+                            <input type="date" name="_date" id="formDateInput">
                         </div>
                     </div>
                     <!-- btns -->
                     <div class="space-x-2.5 w-full flex">
                         <!-- main btn -->
-                        <button class="buttonSec py-3 w-full">Anuller</button>
+                        <button type="reset" class="buttonSec py-3 w-full">Anuller</button>
                         <button class="buttonMain py-3 w-full">Authentifier</button>
                     </div>
-                </div>
+                </form>
             </div>
             <!-- footer -->
             <div class="w-full bg-coolGray-900 p-10 space-x-10 flex flex-row justify-center items-center rounded-lg.5">
@@ -107,6 +107,7 @@
             </div>
         </div>
     </div>
+    <script src="/js/learner.reservation.js"></script>
 </body>
 
 </html>

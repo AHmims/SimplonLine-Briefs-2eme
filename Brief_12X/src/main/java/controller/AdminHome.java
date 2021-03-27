@@ -15,7 +15,7 @@ import java.util.Date;
 @Controller
 public class AdminHome {
     @GetMapping("/admin")
-    public String getHome(ModelMap model) {
+    public String getAdminHome(ModelMap model) {
         ReservationService reservationService = new ReservationService();
         CalendrierService calendrierService = new CalendrierService();
         ApprenantService apprenantService = new ApprenantService();
@@ -32,7 +32,7 @@ public class AdminHome {
     }
 
     @PostMapping("/admin")
-    public String postHome(ModelMap model) {
+    public String postAdminHome(ModelMap model) {
         //model.addAttribute("message", "welcome welcome");
         return "admin-home";
     }

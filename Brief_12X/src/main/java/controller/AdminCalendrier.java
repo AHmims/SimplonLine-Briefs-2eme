@@ -15,7 +15,7 @@ import java.util.Map;
 @Controller
 public class AdminCalendrier {
     @GetMapping("/admin/calendrier")
-    public String getCalendar(@RequestParam(required = false) String idCalendrier, ModelMap model) {
+    public String getAdminCalendrier(@RequestParam(required = false) String idCalendrier, ModelMap model) {
         CalendrierService calendrierService = new CalendrierService();
         ReservationService reservationService = new ReservationService();
         //
@@ -29,7 +29,7 @@ public class AdminCalendrier {
     }
 
     @PostMapping("/admin/calendrier")
-    public String postCalendar(@RequestParam Map<String, String> requestParams, ModelMap model, HttpSession session) {
+    public String postAdminCalendrier(@RequestParam Map<String, String> requestParams, ModelMap model, HttpSession session) {
         //model.addAttribute("message", "welcome welcome");
         CalendrierService calendrierService = new CalendrierService();
         int res = calendrierService.insert(requestParams, (Administrateur) session.getAttribute("__user_data"));
