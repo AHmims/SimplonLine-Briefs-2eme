@@ -60,7 +60,7 @@ public class AuthentificationService implements ServiceAuthentification {
                             ApprenantDao apprenantDao = new ApprenantDao();
                             String apprenantId = apprenantDao.insert(apprenant);
                             //
-                            return apprenantId != null ? 11 : 10;
+                            return apprenantId != null && !apprenantId.equals("") ? 11 : 10;
                         } else return 103;
                     } else return 102;
                 } else return 101;
@@ -97,11 +97,11 @@ public class AuthentificationService implements ServiceAuthentification {
                     if (authentification != null) {
                         ApprenantService apprenantService = new ApprenantService();
                         Apprenant apprenant = apprenantService.getByAuthentication(authentification);
-                        if(apprenant.isActif()) {
+                        if (apprenant.isActif()) {
                             session.setAttribute("__user_type", Apprenant.class.toString());
                             session.setAttribute("__user_data", apprenant);
                             return 12;
-                        }else return 105;
+                        } else return 105;
                     } else return 104;
                 } else return 101;
             } else {
@@ -124,22 +124,22 @@ public class AuthentificationService implements ServiceAuthentification {
         107: password field is empty
         108: credentials combo is wrong
          */
-        try{
-            if(email.equals(""))
+        try {
+            if (email.equals(""))
                 return 106;
-            if(password.equals(""))
+            if (password.equals(""))
                 return 107;
             //
             AdministrateurService administrateurService = new AdministrateurService();
             Administrateur administrateur = administrateurService.getByEmail(email);
-            if(administrateur != null){
-                if(administrateur.getPassAdministrateur().equals(password)){
+            if (administrateur != null) {
+                if (administrateur.getPassAdministrateur().equals(password)) {
                     session.setAttribute("__user_type", Administrateur.class.toString());
                     session.setAttribute("__user_data", administrateur);
                     return 13;
-                }else return 108;
-            }else return 108;
-        }catch (Exception e){
+                } else return 108;
+            } else return 108;
+        } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }

@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <!-- form -->
-                <div class="mx-auto space-y-10 font-Inter w-150 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
+                <form action="/apprenant/reserver/remove" method="post" class="mx-auto space-y-10 font-Inter w-150 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
                     <!-- top text -->
                     <div class="space-y-1.5">
                         <h1 class="text-2xl font-medium text-coolGray-900 flex items-center space-x-2.5">
@@ -73,7 +73,7 @@
                         <!-- main btn -->
                         <button class="buttonSec py-3 w-full">Anuller</button>
                     </div>
-                </div>
+                </form>
             </div>
             <!-- footer -->
             <div class="w-full bg-coolGray-900 p-10 space-x-10 flex flex-row justify-center items-center rounded-lg.5">

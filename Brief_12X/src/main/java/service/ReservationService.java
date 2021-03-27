@@ -3,14 +3,15 @@ package service;
 import beans.DemandeReservation;
 import config.Hibernate;
 import dao.CalendrierDao;
+import dao.EmplacementDao;
+import dao.LocalDao;
 import dao.ReservationDao;
-import model.Apprenant;
-import model.Calendrier;
-import model.Reservation;
+import model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import service.api.ServiceReservation;
+import util.Parser;
 
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class ReservationService implements ServiceReservation {
     }
 
     @Override
-    public int validate(String idReservation, String action) {
+    public int validate(Administrateur administrateur, String idReservation, String action) {
         try {
              /*
             ERROR CODES:
@@ -72,7 +73,10 @@ public class ReservationService implements ServiceReservation {
             42: learner updated / validated
             43: learner not updated / validated
             400: learner not found
+            401: admin not found
              */
+            if (administrateur == null)
+                return 401;
             ReservationDao reservationDao = new ReservationDao();
             Reservation reservation = reservationDao.get(idReservation);
             if (reservation == null)
@@ -81,6 +85,7 @@ public class ReservationService implements ServiceReservation {
             if (action.equals("ok")) {
                 //update / validate
                 reservation.setValideReservation(true);
+                reservation.setAdministrateur(administrateur);
                 boolean updateRes = reservationDao.update(reservation);
                 return updateRes ? 42 : 43;
             } else {
@@ -95,17 +100,82 @@ public class ReservationService implements ServiceReservation {
     }
 
     @Override
-    public int insert(Apprenant apprenant, String date, String emplacement, String local) {
+    public int insert(Apprenant apprenant, String str_date, String idEmplacement, String idLocal) {
         try {
             /*
             ERROR CODES:
             -1: unknown
+            50: inserted
+            51: not inserted
             500: learner(apprenant) not found
+            501: emplacement not found
+            502: local not found
+            503: date format is invalid
+            504: no calendar exists in the date given
+            505: already booked for this date, choose another date
+            506: already have a reservation in waiting for validation
+            506: queue filled for the provided date
              */
             //
-            if(apprenant == null)
+            if (apprenant == null)
                 return 500;
-            return 50;
+            //
+            EmplacementDao emplacementDao = new EmplacementDao();
+            Emplacement emplacement = emplacementDao.get(idEmplacement);
+            if (emplacement != null) {
+                LocalDao localDao = new LocalDao();
+                Local local = localDao.get(idLocal);
+                if (local != null) {
+                    Date date = Parser.toDate(str_date);
+                    if (date != null) {
+                        CalendrierService calendrierService = new CalendrierService();
+                        Calendrier calendrier = calendrierService.getByDate(date);
+                        if (calendrier != null) {
+                            Reservation pre_reservation = getByDateForUser(apprenant, date);
+                            if (pre_reservation == null) {
+                                boolean resCanReserve = canReserve(date, calendrier);
+                                if (resCanReserve) {
+                                    Reservation reservation = new Reservation(new Date(), date, apprenant, calendrier, emplacement);
+                                    ReservationDao reservationDao = new ReservationDao();
+                                    String insertRes = reservationDao.insert(reservation);
+                                    return insertRes != null && !insertRes.equals("") ? 50 : 51;
+                                } else return 507;
+                            } else {
+                                return pre_reservation.isValideReservation() ? 505 : 506;
+                            }
+                        } else return 504;
+                    } else return 503;
+                } else return 502;
+            } else return 501;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    @Override
+    public int cancel(Apprenant apprenant) {
+        try {
+            /*
+            ERROR CODES:
+            -1: unknown
+            60: reservation cancelled
+            61: reservation not cancelled
+            600: learner not found
+            601: reservation not found
+            602: reservation already validated
+
+            */
+            if (apprenant == null)
+                return 600;
+            //
+            Reservation reservation = getByDateForUser(apprenant, Parser.toDateWithNoTime(new Date()));
+            if(reservation != null){
+                if(!reservation.isValideReservation()){
+                    ReservationDao reservationDao = new ReservationDao();
+                    return reservationDao.delete(reservation) ? 60 : 61;
+                }else return 602;
+            }else return 601;
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
@@ -141,8 +211,6 @@ public class ReservationService implements ServiceReservation {
             Session session = Hibernate.openSession();
             transaction = session.beginTransaction();
             //
-            CalendrierDao calendrierDao = new CalendrierDao();
-            //
             ArrayList<Reservation> reservations = new ArrayList<>((List<Reservation>) session.createQuery("FROM Reservation WHERE calendrier = :cal").setParameter("cal", calendrier).list());
             transaction.commit();
             //
@@ -161,8 +229,6 @@ public class ReservationService implements ServiceReservation {
         try {
             Session session = Hibernate.openSession();
             transaction = session.beginTransaction();
-            //
-            CalendrierDao calendrierDao = new CalendrierDao();
             //
             Query query = session.createQuery("FROM Reservation WHERE calendrier = :cal AND valideReservation = :status");
             query.setParameter("cal", calendrier);
@@ -185,8 +251,6 @@ public class ReservationService implements ServiceReservation {
         try {
             Session session = Hibernate.openSession();
             transaction = session.beginTransaction();
-            //
-            CalendrierDao calendrierDao = new CalendrierDao();
             //
             Query query = session.createQuery("FROM Reservation WHERE calendrier = :cal AND valideReservation = :status AND apprenant = :apprenant");
             query.setParameter("cal", calendrier);
@@ -215,6 +279,67 @@ public class ReservationService implements ServiceReservation {
             //
             return getByCalendrier(calendrier, true);
         } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public boolean canReserve(Date date, Calendrier calendrier) {
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            //
+            JourService jourService = new JourService();
+            Jour jour = jourService.get(cal.get(Calendar.DAY_OF_WEEK), calendrier);
+            if (jour != null) {
+                List<Reservation> reservations = getByDate(date);
+                if (reservations != null)
+                    return reservations.size() < jour.getNbMaxReservations();
+                return false;
+            } else return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public Reservation getByDateForUser(Apprenant apprenant, Date date) {
+        Transaction transaction = null;
+        try {
+            Session session = Hibernate.openSession();
+            transaction = session.beginTransaction();
+            //
+            Query query = session.createQuery("FROM Reservation WHERE apprenant = :app AND dateReservation = :date");
+            query.setParameter("app", apprenant);
+            query.setParameter("date", date);
+            ArrayList<Reservation> reservations = new ArrayList<>((List<Reservation>) query.list());
+            transaction.commit();
+            //
+            return reservations.size() > 0 ? reservations.get(0) : null;
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Reservation> getByDate(Date date) {
+        Transaction transaction = null;
+        try {
+            Session session = Hibernate.openSession();
+            transaction = session.beginTransaction();
+            //
+            ArrayList<Reservation> reservations = new ArrayList<>((List<Reservation>) session.createQuery("FROM Reservation WHERE dateReservation = :date").setParameter("date", date).list());
+            transaction.commit();
+            //
+            return reservations;
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
             e.printStackTrace();
             return null;
         }

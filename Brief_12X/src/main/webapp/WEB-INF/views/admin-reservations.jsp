@@ -99,7 +99,7 @@
                                         <div class="top">
                                             <!-- date -->
                                             <div class="date">
-                                                <input type="date" value="<c:out value="${reservation.reservation.dateReservation}"/>" />
+                                                <input type="date" value="<fmt:formatDate pattern = "YYYY-MM-dd" value = "${reservation.reservation.dateReservation}" />" />
                                             </div>
                                             <!-- loc -->
                                             <div class="loc">

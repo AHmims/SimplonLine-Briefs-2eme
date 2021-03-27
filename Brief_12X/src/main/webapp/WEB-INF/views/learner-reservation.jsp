@@ -89,7 +89,7 @@
                             <div class="formInputCombo w-full">
                                 <span>Emplacement</span>
                                 <select name="_emplacement" id="inputEmplacement" disabled>
-                                    <option value="X" disabled selected>Select</option>
+                                    <option value="Y" disabled selected>Select</option>
                                 </select>
                             </div>
                         </div>

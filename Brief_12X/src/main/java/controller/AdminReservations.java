@@ -1,5 +1,7 @@
 package controller;
 
+import model.Administrateur;
+import model.Apprenant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import service.ApprenantService;
 import service.ReservationService;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class AdminReservations {
@@ -21,9 +25,9 @@ public class AdminReservations {
     }
 
     @PostMapping("/admin/reservations/validator")
-    public ModelAndView postAdminReservationsValidator(@RequestParam String _action, @RequestParam String _id, ModelMap model) {
+    public ModelAndView postAdminReservationsValidator(@RequestParam String _action, @RequestParam String _id, ModelMap model, HttpSession session) {
         ReservationService reservationService = new ReservationService();
-        model.addAttribute("_validation_res", reservationService.validate(_id, _action));
+        model.addAttribute("_validation_res", reservationService.validate((Administrateur) session.getAttribute("__user_data"), _id, _action));
         return new ModelAndView("redirect:/admin/reservations", model);
     }
 }

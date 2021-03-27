@@ -3,6 +3,7 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html lang="fr">
 
 <head>
@@ -14,6 +15,7 @@
 </head>
 
 <body>
+<%--@elvariable id="_reservations" type="model.Reservation"--%>
 <div class="bg-white h-screen max-h-screen min-h-screen w-full flex flex-row">
     <!-- sideBar -->
     <div class="h-full w-auto py-5.5 px-4 bg-coolGray-100 border-r-2 border-coolGray-200 flex flex-col justify-between items-center">
@@ -97,17 +99,6 @@
                             <div class="w-full flex flex-col space-y-1.5">
                                 <!-- top -->
                                 <div class="flex flex-row items-center space-x-2.5">
-                                    <span class="text-base text-coolGray-700 font-medium">Dimanche</span>
-                                </div>
-                                <!-- bot -->
-                                <input name="d-dimanche" type="text"
-                                       class="h-11 border-2 border-coolGray-100 rounded-lg px-4 text-coolGray-800"
-                                       placeholder="Nombre">
-                            </div>
-                            <!-- col -->
-                            <div class="w-full flex flex-col space-y-1.5">
-                                <!-- top -->
-                                <div class="flex flex-row items-center space-x-2.5">
                                     <span class="text-base text-coolGray-700 font-medium">Lundi</span>
                                 </div>
                                 <!-- bot -->
@@ -170,6 +161,17 @@
                                        class="h-11 border-2 border-coolGray-100 rounded-lg px-4 text-coolGray-800"
                                        placeholder="Nombre">
                             </div>
+                            <!-- col -->
+                            <div class="w-full flex flex-col space-y-1.5">
+                                <!-- top -->
+                                <div class="flex flex-row items-center space-x-2.5">
+                                    <span class="text-base text-coolGray-700 font-medium">Dimanche</span>
+                                </div>
+                                <!-- bot -->
+                                <input name="d-dimanche" type="text"
+                                       class="h-11 border-2 border-coolGray-100 rounded-lg px-4 text-coolGray-800"
+                                       placeholder="Nombre">
+                            </div>
                         </div>
                         <!-- row -->
                         <div class="w-full space-x-6 flex items-start">
@@ -202,7 +204,7 @@
                                     <li>Les dates de début et de fin permettent de définir un intervalle d'une semaine
                                         pour les demandes de réservation.
                                     </li>
-                                    <li>L'intervalle choisi doit commencer du dimanche au samedi, ce qui couvre
+                                    <li>L'intervalle choisi doit commencer du lundi au dimanche, ce qui couvre
                                         précisément 7 jours.
                                     </li>
                                 </ul>
@@ -215,7 +217,6 @@
                 </div>
             </div>
             <div class="flex flex-col w-full items-end">
-                <span><c:out value="${requestScope._reservations == null ? 'N' : 'Y'}"/></span>
                 <!-- filter -->
                 <form action="/admin/calendrier" method="GET" class="w-max formInputCombo user-reserv mb-4 mr-1">
                     <select name="idCalendrier" id="" class="rounded-lg" onchange="this.form.submit()">
@@ -225,7 +226,7 @@
                     </select>
                 </form>
                 <!-- table -->
-                <div class="flex-1 bg-white grid grid-cols-reservations relative">
+                <div class="flex-1 w-full bg-white grid grid-cols-reservations relative">
                     <!-- column -->
                     <div class="tableColumn">
                         <!-- table head -->
@@ -254,32 +255,35 @@
                             <span class="">nature</span>
                         </div>
                         <!-- rows -->
-                        <% for (Reservation reservation: (ArrayList<Reservation>) request.getAttribute("_reservations")) { %>
-                        <%
-                            Calendar cal_res = Calendar.getInstance();
-                            cal_res.setTime(reservation.getDateReservation());
-                            int day = cal_res.get(Calendar.DAY_OF_WEEK);
-                            int nature = day >= Calendar.MONDAY && day <= Calendar.FRIDAY ? 1 : 2;
-                        %>
-                        <div class="row data">
-                            <!-- badge-1-A -->
-                            <% if(nature == 1){ %>
-                            <div class="badge-2 badge-2-B">
-                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="10" height="10" rx="5" fill="#475569" />
-                                </svg>
-                                <span>En-semaine</span>
+                        <c:forEach items="${requestScope._reservations}" var="reservation">
+                            <%
+                                Calendar cal_res = Calendar.getInstance();
+                                cal_res.setTime(((Reservation) pageContext.getAttribute("reservation")).getDateReservation());
+                                int day = cal_res.get(Calendar.DAY_OF_WEEK);
+                                int nature = day >= Calendar.MONDAY && day <= Calendar.FRIDAY ? 1 : 2;
+                            %>
+                            <c:set var="nature" value="<%= nature %>"/>
+                            <div class="row data">
+                                <c:choose>
+                                    <c:when test="${nature==1}">
+                                        <div class="badge-2 badge-2-B">
+                                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect width="10" height="10" rx="5" fill="#475569" />
+                                            </svg>
+                                            <span>En-semaine</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="badge-2 badge-2-A">
+                                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect y="0.5" width="10" height="10" rx="5" fill="#57534E" />
+                                            </svg>
+                                            <span>Week-end</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
-                            <% }else { %>
-                            <div class="badge-2 badge-2-A">
-                                <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect y="0.5" width="10" height="10" rx="5" fill="#57534E" />
-                                </svg>
-                                <span>Week-end</span>
-                            </div>
-                            <% } %>
-                        </div>
-                        <% } %>
+                        </c:forEach>
                     </div>
                     <!-- column -->
                     <div class="tableColumn">

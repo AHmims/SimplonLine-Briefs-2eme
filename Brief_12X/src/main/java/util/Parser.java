@@ -41,6 +41,7 @@ public class Parser {
             return "";
         }
     }
+
     //
     public static String toDateTimeString(Date date) {
         try {
@@ -48,6 +49,17 @@ public class Parser {
         } catch (Exception e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    //
+    public static Date toDateWithNoTime(Date date) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            return sdf.parse(sdf.format(date));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

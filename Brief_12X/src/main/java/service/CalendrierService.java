@@ -78,7 +78,7 @@ public class CalendrierService implements ServiceCalendrier {
                             Calendar cal_DF = Calendar.getInstance();
                             cal_DF.setTime(Date.from(ld_DF.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
                             //
-                            if (cal_DD.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY || cal_DF.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY)
+                            if (cal_DD.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY || cal_DF.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
                                 return 204;
                             //
                             long daysInBetween = ChronoUnit.DAYS.between(ld_DD, ld_DF) + 1;
@@ -102,7 +102,7 @@ public class CalendrierService implements ServiceCalendrier {
                                         cal.setTime(Date.from(DD_clone.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
                                         //
                                         String insertRes = jourDao.insert(new Jour(cal.get(Calendar.DAY_OF_WEEK), nbMax, calendrier));
-                                        if (insertRes.equals("") || insertRes == null) {
+                                        if (insertRes == null || insertRes.equals("")) {
                                             valid = false;
                                             break;
                                         }

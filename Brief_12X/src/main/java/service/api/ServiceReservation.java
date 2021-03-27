@@ -1,10 +1,12 @@
 package service.api;
 
 import beans.DemandeReservation;
+import model.Administrateur;
 import model.Apprenant;
 import model.Calendrier;
 import model.Reservation;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ServiceReservation {
@@ -12,10 +14,11 @@ public interface ServiceReservation {
 
     List<DemandeReservation> getRequests();
 
-    int validate(String idReservation, String action);
+    int validate(Administrateur administrateur, String idReservation, String action);
 
     int insert(Apprenant apprenant, String date, String emplacement, String local);
 
+    int cancel(Apprenant apprenant);
     //
     List<Reservation> getByCalendrier(String idCalendrier);
 
@@ -26,4 +29,10 @@ public interface ServiceReservation {
     List<Reservation> getByCalendrierForLearner(Apprenant apprenant, Calendrier calendrier, boolean status);
 
     List<Reservation> getByLastCalendrier();
+
+    boolean canReserve(Date date, Calendrier calendrier);
+
+    Reservation getByDateForUser(Apprenant apprenant, Date date);
+
+    List<Reservation> getByDate(Date date);
 }
