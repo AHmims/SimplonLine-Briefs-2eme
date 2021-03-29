@@ -114,7 +114,7 @@ public class ReservationService implements ServiceReservation {
             504: no calendar exists in the date given
             505: already booked for this date, choose another date
             506: already have a reservation in waiting for validation
-            506: queue filled for the provided date
+            507: queue filled for the provided date
              */
             //
             if (apprenant == null)

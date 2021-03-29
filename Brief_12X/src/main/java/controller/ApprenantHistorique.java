@@ -21,10 +21,4 @@ public class ApprenantHistorique {
         model.addAttribute("_reservations", reservationService.getHistory((Apprenant) session.getAttribute("__user_data"), type != null ? type : "all"));
         return "learner-reservations";
     }
-
-    @PostMapping("/apprenant/reservations")
-    public String postApprenantHistorique(ModelMap model) {
-        //model.addAttribute("message", "welcome welcome");
-        return "learner-reservations";
-    }
 }

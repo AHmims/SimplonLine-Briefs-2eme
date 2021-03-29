@@ -59,8 +59,8 @@ public class ApprenantService implements ServiceApprenant {
              /*
             ERROR CODES:
             -1: unknown
-            30: learner deleted
-            31: learner not deleted
+            38: learner deleted
+            39: learner not deleted
             300: learner not found
              */
             ApprenantDao apprenantDao = new ApprenantDao();

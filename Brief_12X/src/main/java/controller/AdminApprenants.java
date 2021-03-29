@@ -21,14 +21,14 @@ public class AdminApprenants {
     @PostMapping("/admin/apprenants/validator")
     public ModelAndView postAdminApprenantsValidator(@RequestParam String _action, @RequestParam String _id, ModelMap model) {
         ApprenantService apprenantService = new ApprenantService();
-        model.addAttribute("_validation_res", apprenantService.validate(_id, _action));
+        model.addAttribute("ret_code", apprenantService.validate(_id, _action));
         return new ModelAndView("redirect:/admin/apprenants", model);
     }
 
     @PostMapping("/admin/apprenants/manager")
     public ModelAndView postAdminApprenantsManager(@RequestParam String _id, ModelMap model) {
         ApprenantService apprenantService = new ApprenantService();
-        model.addAttribute("_remove_res", apprenantService.remove(_id));
+        model.addAttribute("ret_code", apprenantService.remove(_id));
         return new ModelAndView("redirect:/admin/apprenants", model);
     }
 }

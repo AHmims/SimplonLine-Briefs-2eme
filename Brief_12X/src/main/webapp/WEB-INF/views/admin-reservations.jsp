@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/css/toast.css">
     <script src="/js/toast.js"></script>
     <script src="/js/toastsHandler.js"></script>
+    <script src="/js/request.errors.js"></script>
     <title>List d'apprenants</title>
 </head>
 
@@ -291,6 +292,11 @@
         </div>
     </div>
     <script src="/js/admin.reservations.js"></script>
+    <c:if test="${not empty param.ret_code}">
+        <script>
+            errorHandler(`<c:out value="${param.ret_code}"/>`);
+        </script>
+    </c:if>
 </body>
 
 </html>

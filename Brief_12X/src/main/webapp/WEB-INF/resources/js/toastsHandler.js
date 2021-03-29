@@ -42,7 +42,7 @@ async function logSuccess(text) {
         behavior: {
             type: "normal"
         },
-        duration: 3000
+        duration: "active"
     }
     return await toast(params);
 }

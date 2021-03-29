@@ -30,10 +30,4 @@ public class AdminHome {
         model.addAttribute("_logs", logService.getLogs());
         return "admin-home";
     }
-
-    @PostMapping("/admin")
-    public String postAdminHome(ModelMap model) {
-        //model.addAttribute("message", "welcome welcome");
-        return "admin-home";
-    }
 }

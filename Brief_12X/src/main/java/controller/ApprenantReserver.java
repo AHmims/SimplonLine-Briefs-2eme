@@ -40,10 +40,10 @@ public class ApprenantReserver {
             ERROR CODES:
             555: data received is invalid
              */
-            model.addAttribute("_insert_res", 555);
+            model.addAttribute("ret_code", 555);
         } else {
             ReservationService reservationService = new ReservationService();
-            model.addAttribute("_insert_res", reservationService.insert((Apprenant) session.getAttribute("__user_data"), requestParams.get("_date"), requestParams.get("_emplacement"), requestParams.get("_local")));
+            model.addAttribute("ret_code", reservationService.insert((Apprenant) session.getAttribute("__user_data"), requestParams.get("_date"), requestParams.get("_emplacement"), requestParams.get("_local")));
         }
         return new ModelAndView("redirect:/apprenant/reserver", model);
     }
@@ -51,7 +51,7 @@ public class ApprenantReserver {
     @PostMapping("/apprenant/reserver/remove")
     public ModelAndView postApprenantReserverRemove(ModelMap model, HttpSession session) {
         ReservationService reservationService = new ReservationService();
-        model.addAttribute("_insert_res", reservationService.cancel((Apprenant) session.getAttribute("__user_data")));
+        model.addAttribute("ret_code", reservationService.cancel((Apprenant) session.getAttribute("__user_data")));
         return new ModelAndView("redirect:/apprenant/reserver", model);
     }
 }

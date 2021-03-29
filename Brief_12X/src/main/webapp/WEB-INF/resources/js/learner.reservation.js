@@ -8,7 +8,7 @@ window.onload = () => {
     //date input manager
     (function () {
         let currDate = new Date();
-        /*currDate = currDate.setDate(currDate.getDate() + 1);
+        /*currDate = currDate.setDate(currDate.getDate() - 6);
         currDate = new Date(currDate);*/
         //
         let tempMonth = currDate.getMonth() + 1;
@@ -26,9 +26,13 @@ window.onload = () => {
         }
         //
         if (data.dayNumber >= 2 && data.dayNumber <= 7) {
-            let tempMaxDay = currDate.getDate() + 1 + 7 - data.dayNumber;
+            currDate.setDate(currDate.getDate() + 1 + 7 - data.dayNumber);
+            let tempMaxDay = currDate.getDate();
+            let newTempMonth = currDate.getMonth() + 1;
+            let maxMonth = newTempMonth.toString().length != 1 ? newTempMonth : `0${newTempMonth}`;
+            //
             data.interval.min = `${data.year}-${data.month}-${data.day}`;
-            data.interval.max = `${data.year}-${data.month}-${tempMaxDay.toString().length != 1 ? tempMaxDay : `0${tempMaxDay}`}`;
+            data.interval.max = `${data.year}-${maxMonth}-${tempMaxDay.toString().length != 1 ? tempMaxDay : `0${tempMaxDay}`}`;
         } else if (data.dayNumber == 1) {
             data.interval.min = `${data.year}-${data.month}-${data.day}`;
             data.interval.max = data.interval.min;

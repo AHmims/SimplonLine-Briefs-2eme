@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/toast.css">
+    <script src="/js/toast.js"></script>
+    <script src="/js/toastsHandler.js"></script>
+    <script src="/js/request.errors.js"></script>
     <title>Reservation</title>
 </head>
 
@@ -89,6 +93,11 @@
             </div>
         </div>
     </div>
+    <c:if test="${not empty param.ret_code}">
+        <script>
+            errorHandler(`<c:out value="${param.ret_code}"/>`);
+        </script>
+    </c:if>
 </body>
 
 </html>

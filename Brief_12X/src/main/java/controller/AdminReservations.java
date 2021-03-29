@@ -27,7 +27,7 @@ public class AdminReservations {
     @PostMapping("/admin/reservations/validator")
     public ModelAndView postAdminReservationsValidator(@RequestParam String _action, @RequestParam String _id, ModelMap model, HttpSession session) {
         ReservationService reservationService = new ReservationService();
-        model.addAttribute("_validation_res", reservationService.validate((Administrateur) session.getAttribute("__user_data"), _id, _action));
+        model.addAttribute("ret_code", reservationService.validate((Administrateur) session.getAttribute("__user_data"), _id, _action));
         return new ModelAndView("redirect:/admin/reservations", model);
     }
 }

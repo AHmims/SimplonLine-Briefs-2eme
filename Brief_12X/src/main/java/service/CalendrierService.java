@@ -27,7 +27,7 @@ public class CalendrierService implements ServiceCalendrier {
         201: inputs can't have alphabets, use numbers instead
         202: numbers can't be negative && can't be double
         203: date is not valid
-        204: start date isn't sunday || end date isn't saturday
+        204: start date isn't monday || end date isn't sunday
         205: date interval does not match 7 days
         206: interval already exists in DB
         207: error saving "Jour" record or "Calendrier"

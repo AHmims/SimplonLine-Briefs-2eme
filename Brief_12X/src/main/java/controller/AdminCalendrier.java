@@ -33,7 +33,7 @@ public class AdminCalendrier {
     public ModelAndView postAdminCalendrier(@RequestParam Map<String, String> requestParams, ModelMap model, HttpSession session) {
         CalendrierService calendrierService = new CalendrierService();
         int res = calendrierService.insert(requestParams, (Administrateur) session.getAttribute("__user_data"));
-        model.addAttribute("_insert_res", res);
+        model.addAttribute("ret_code", res);
         return new ModelAndView("redirect:/admin/calendrier", model);
     }
 }
