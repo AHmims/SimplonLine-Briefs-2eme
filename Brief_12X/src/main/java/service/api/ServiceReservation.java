@@ -19,6 +19,8 @@ public interface ServiceReservation {
     int insert(Apprenant apprenant, String date, String emplacement, String local);
 
     int cancel(Apprenant apprenant);
+
+    List<Reservation> getHistory(Apprenant apprenant, String type);
     //
     List<Reservation> getByCalendrier(String idCalendrier);
 

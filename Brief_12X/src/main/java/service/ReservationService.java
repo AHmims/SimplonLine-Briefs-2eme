@@ -170,15 +170,59 @@ public class ReservationService implements ServiceReservation {
                 return 600;
             //
             Reservation reservation = getByDateForUser(apprenant, Parser.toDateWithNoTime(new Date()));
-            if(reservation != null){
-                if(!reservation.isValideReservation()){
+            if (reservation != null) {
+                if (!reservation.isValideReservation()) {
                     ReservationDao reservationDao = new ReservationDao();
                     return reservationDao.delete(reservation) ? 60 : 61;
-                }else return 602;
-            }else return 601;
+                } else return 602;
+            } else return 601;
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    @Override
+    public List<Reservation> getHistory(Apprenant apprenant, String type) {
+        Transaction transaction = null;
+        try {
+            Session session = Hibernate.openSession();
+            transaction = session.beginTransaction();
+            //
+            Query query = session.createQuery("FROM Reservation WHERE apprenant = :app AND valideReservation = true");
+            query.setParameter("app", apprenant);
+            ArrayList<Reservation> reservations = new ArrayList<>((List<Reservation>) query.list());
+            transaction.commit();
+            //
+            if (type.equals("all"))
+                return reservations;
+            else {
+                int count = reservations.size();
+                for (int i = 0; i < count; i++) {
+                    Reservation reservation = reservations.get(i);
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(reservation.getDateReservation());
+                    int day = cal.get(Calendar.DAY_OF_WEEK);
+                    if (type.equals("week")) {
+                        if (day >= 7 || day <= 1) {
+                            reservations.remove(reservation);
+                            count--;
+                        }
+                    } else {
+                        if (day < 7 && day > 1) {
+                            reservations.remove(reservation);
+                            count--;
+                        }
+                    }
+                }
+                //
+                return reservations;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (transaction != null)
+                transaction.rollback();
+            return null;
         }
     }
 

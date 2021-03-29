@@ -1,5 +1,8 @@
+<%@ page import="java.util.Calendar" %>
+<%@ page import="model.Reservation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html lang="fr">
 
 <head>
@@ -7,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Reserver</title>
+    <title>Historique</title>
 </head>
 
 <body>
@@ -67,53 +70,75 @@
                             </svg>
                         </div>
                         <!-- filter -->
-                        <div class="formInputCombo user-reserv">
-                            <select name="" id="" class="rounded-lg">
-                                <option value="">Tous</option>
-                                <option value="">Week-End</option>
-                                <option value="">En-Semaine</option>
+                        <form action="/apprenant/reservations" method="get" class="user-reserv" style="margin-bottom: 0;">
+                            <select name="type" onchange="this.form.submit()" class="flex flex-row items-center h-11 space-x-5 px-5 rounded-lg outline-none border-coolGray-100 text-coolGray-500 border-2">
+                                <option value="all">Tous</option>
+                                <option value="week">Week-End</option>
+                                <option value="week-end">En-Semaine</option>
                             </select>
-                        </div>
+                        </form>
                     </div>
                     <!-- container -->
                     <div class="grid grid-cols-items gap-8.6 overflow-visible">
                         <!-- card -->
-                        <div class="reserv-card">
-                            <!-- top -->
-                            <div class="top">
-                                <input type="date" class="date">
-                            </div>
-                            <!-- bot -->
-                            <div class="bot">
+                        <%--@elvariable id="reservation" type="model.Reservation"--%>
+                        <c:forEach items="${requestScope._reservations}" var="reservation">
+                            <div class="reserv-card">
                                 <!-- top -->
                                 <div class="top">
-                                    <!-- loc -->
-                                    <div class="loc">
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6.5625 7.5C6.5625 6.15381 7.65381 5.0625 9 5.0625C10.3462 5.0625 11.4375 6.15381 11.4375 7.5C11.4375 8.84619 10.3462 9.9375 9 9.9375C7.65381 9.9375 6.5625 8.84619 6.5625 7.5Z" fill="#4B5563" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.83016 6.65804C3.08789 3.53134 5.70073 1.125 8.83804 1.125H9.162C12.2993 1.125 14.9122 3.53134 15.1699 6.65804C15.3086 8.34149 14.7886 10.0131 13.7194 11.3207L10.1246 15.7171C9.54337 16.4279 8.45667 16.4279 7.87544 15.7171L4.28064 11.3207C3.2114 10.0131 2.69139 8.34149 2.83016 6.65804ZM9 3.9375C7.03249 3.9375 5.4375 5.53249 5.4375 7.5C5.4375 9.46751 7.03249 11.0625 9 11.0625C10.9675 11.0625 12.5625 9.46751 12.5625 7.5C12.5625 5.53249 10.9675 3.9375 9 3.9375Z" fill="#4B5563" />
-                                        </svg>
-                                        <span>Safi-A</span>
-                                    </div>
-                                    <!-- emplace -->
-                                    <div class="empla">
-                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5625 1.5C9.5625 1.18934 9.31066 0.9375 9 0.9375C8.68934 0.9375 8.4375 1.18934 8.4375 1.5V2.83772C5.46911 3.10522 3.10522 5.46911 2.83772 8.4375H1.5C1.18934 8.4375 0.9375 8.68934 0.9375 9C0.9375 9.31066 1.18934 9.5625 1.5 9.5625H2.83772C3.10522 12.5309 5.46911 14.8948 8.4375 15.1623V16.5C8.4375 16.8107 8.68934 17.0625 9 17.0625C9.31066 17.0625 9.5625 16.8107 9.5625 16.5V15.1623C12.5309 14.8948 14.8948 12.5309 15.1623 9.5625H16.5C16.8107 9.5625 17.0625 9.31066 17.0625 9C17.0625 8.68934 16.8107 8.4375 16.5 8.4375H15.1623C14.8948 5.46911 12.5309 3.10522 9.5625 2.83772V1.5ZM6.1875 9C6.1875 7.4467 7.4467 6.1875 9 6.1875C10.5533 6.1875 11.8125 7.4467 11.8125 9C11.8125 10.5533 10.5533 11.8125 9 11.8125C7.4467 11.8125 6.1875 10.5533 6.1875 9Z" fill="#4B5563" />
-                                        </svg>
-                                        <span>Agora</span>
-                                    </div>
+                                    <input type="date" class="date" value="<fmt:formatDate pattern = "YYYY-MM-dd" value = "${reservation.dateReservation}" />" />
                                 </div>
                                 <!-- bot -->
                                 <div class="bot">
-                                    <div class="badge-2 badge-2-B">
-                                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="10" height="10" rx="5" fill="#475569" />
-                                        </svg>
-                                        <span>En-semaine</span>
+                                    <!-- top -->
+                                    <div class="top">
+                                        <!-- loc -->
+                                        <div class="loc">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6.5625 7.5C6.5625 6.15381 7.65381 5.0625 9 5.0625C10.3462 5.0625 11.4375 6.15381 11.4375 7.5C11.4375 8.84619 10.3462 9.9375 9 9.9375C7.65381 9.9375 6.5625 8.84619 6.5625 7.5Z" fill="#4B5563" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.83016 6.65804C3.08789 3.53134 5.70073 1.125 8.83804 1.125H9.162C12.2993 1.125 14.9122 3.53134 15.1699 6.65804C15.3086 8.34149 14.7886 10.0131 13.7194 11.3207L10.1246 15.7171C9.54337 16.4279 8.45667 16.4279 7.87544 15.7171L4.28064 11.3207C3.2114 10.0131 2.69139 8.34149 2.83016 6.65804ZM9 3.9375C7.03249 3.9375 5.4375 5.53249 5.4375 7.5C5.4375 9.46751 7.03249 11.0625 9 11.0625C10.9675 11.0625 12.5625 9.46751 12.5625 7.5C12.5625 5.53249 10.9675 3.9375 9 3.9375Z" fill="#4B5563" />
+                                            </svg>
+                                            <span><c:out value="${reservation.emplacement.local.villeLocal}-${reservation.emplacement.local.libelleLocal}"/></span>
+                                        </div>
+                                        <!-- emplace -->
+                                        <div class="empla">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.5625 1.5C9.5625 1.18934 9.31066 0.9375 9 0.9375C8.68934 0.9375 8.4375 1.18934 8.4375 1.5V2.83772C5.46911 3.10522 3.10522 5.46911 2.83772 8.4375H1.5C1.18934 8.4375 0.9375 8.68934 0.9375 9C0.9375 9.31066 1.18934 9.5625 1.5 9.5625H2.83772C3.10522 12.5309 5.46911 14.8948 8.4375 15.1623V16.5C8.4375 16.8107 8.68934 17.0625 9 17.0625C9.31066 17.0625 9.5625 16.8107 9.5625 16.5V15.1623C12.5309 14.8948 14.8948 12.5309 15.1623 9.5625H16.5C16.8107 9.5625 17.0625 9.31066 17.0625 9C17.0625 8.68934 16.8107 8.4375 16.5 8.4375H15.1623C14.8948 5.46911 12.5309 3.10522 9.5625 2.83772V1.5ZM6.1875 9C6.1875 7.4467 7.4467 6.1875 9 6.1875C10.5533 6.1875 11.8125 7.4467 11.8125 9C11.8125 10.5533 10.5533 11.8125 9 11.8125C7.4467 11.8125 6.1875 10.5533 6.1875 9Z" fill="#4B5563" />
+                                            </svg>
+                                            <span><c:out value="${reservation.emplacement.libelleEmplacement}"/></span>
+                                        </div>
+                                    </div>
+                                    <!-- bot -->
+                                    <div class="bot">
+                                        <%
+                                            Calendar cal_res = Calendar.getInstance();
+                                            cal_res.setTime(((Reservation) pageContext.getAttribute("reservation")).getDateReservation());
+                                            int day = cal_res.get(Calendar.DAY_OF_WEEK);
+                                            int nature = day >= Calendar.MONDAY && day <= Calendar.FRIDAY ? 1 : 2;
+                                        %>
+                                        <c:set var="nature" value="<%= nature %>"/>
+                                        <c:choose>
+                                            <c:when test="${nature == 1}">
+                                                <div class="badge-2 badge-2-B">
+                                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect width="10" height="10" rx="5" fill="#475569" />
+                                                    </svg>
+                                                    <span>En-semaine</span>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="badge-2 badge-2-A">
+                                                    <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect y="0.5" width="10" height="10" rx="5" fill="#57534E" />
+                                                    </svg>
+                                                    <span>Week-end</span>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
