@@ -41,6 +41,9 @@ public class Hibernate {
     public static Session openSession() {
         return getSessionFactory().getCurrentSession();// getSessionFactory().openSession();
     }
+    public static Session openNewSession(){
+        return getSessionFactory().openSession();
+    }
 
     //
     private static Configuration setupClasses(Configuration config) {

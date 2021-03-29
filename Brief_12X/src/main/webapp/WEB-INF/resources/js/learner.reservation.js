@@ -44,7 +44,6 @@ window.onload = () => {
     }());
     //select manager
     (function () {
-        console.log('uhmmm');
         const slct_1 = document.getElementById('inputLocal');
         slct_1.addEventListener('change', e => {
             const slct_2 = document.getElementById('inputEmplacement');

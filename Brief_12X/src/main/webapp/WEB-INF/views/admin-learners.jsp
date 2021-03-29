@@ -53,7 +53,7 @@
                 </a>
             </div>
             <!-- out -->
-            <a href="#" class="block">
+            <a href="/signout" class="block">
                 <svg width="35" height="34" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M16.4375 26.9166C16.4375 26.3298 16.9132 25.8541 17.5 25.8541H26C26.1956 25.8541 26.3542 25.6955 26.3542 25.4999L26.3542 8.49992C26.3542 8.30432 26.1956 8.14575 26 8.14575L17.5 8.14575C16.9132 8.14575 16.4375 7.67006 16.4375 7.08325C16.4375 6.49645 16.9132 6.02075 17.5 6.02075H26C27.3692 6.02075 28.4792 7.13071 28.4792 8.49992V25.4999C28.4792 26.8691 27.3692 27.9791 26 27.9791H17.5C16.9132 27.9791 16.4375 27.5034 16.4375 26.9166Z" fill="#111827" />
                     <path d="M22.6164 18.5798C22.6164 19.3622 21.9822 19.9965 21.1998 19.9965H14.3204C14.288 20.5 14.2473 21.0031 14.1985 21.5056L14.1564 21.938C14.0881 22.641 13.3416 23.062 12.7046 22.7568C10.1151 21.5158 7.7708 19.8175 5.78455 17.7437L5.74211 17.6994C5.36372 17.3043 5.36372 16.6813 5.74211 16.2862L5.78455 16.2419C7.7708 14.1681 10.1151 12.4698 12.7046 11.2288C13.3416 10.9235 14.0881 11.3445 14.1564 12.0475L14.1985 12.4799C14.2473 12.9824 14.288 13.4856 14.3204 13.9891L21.1998 13.9891C21.9822 13.9891 22.6164 14.6233 22.6164 15.4058V18.5798Z" fill="#111827" />
@@ -91,7 +91,7 @@
                                     <!-- right -->
                                     <div class="right">
                                         <div class="imgCont">
-                                            <img src="<c:out value="${apprenant.imgApprenant}"/>" alt="" class="img">
+                                            <img referrerpolicy="no-referrer" src="<c:out value="${apprenant.imgApprenant}"/>" alt="" class="img">
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                             <div class="row data">
                                 <!-- img -->
                                 <div class="imgCont">
-                                    <img src="<c:out value="${apprenant.imgApprenant}"/>" alt="" class="img">
+                                    <img referrerpolicy="no-referrer" src="<c:out value="${apprenant.imgApprenant}"/>" alt="" class="img">
                                 </div>
                                 <!-- info -->
                                 <div class="infos">
@@ -174,7 +174,7 @@
                         <!-- rows -->
                         <!-- row -->
                         <c:forEach items="${requestScope._app_count_active}" var="apprenant">
-                            <form action="/admin/apprenants/manager" method="post" class="row data option learner_row">
+                            <form action="/admin/apprenants/manager" method="post" class="row data option learner_row" style="margin: 0;">
                                 <span class="infos"><c:out value="${apprenant.groupe.promotion != null ? apprenant.groupe.promotion.libellePromotion : 'X'}"/></span>
                                 <button type="button">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

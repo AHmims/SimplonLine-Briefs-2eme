@@ -169,7 +169,7 @@ public class ReservationService implements ServiceReservation {
             if (apprenant == null)
                 return 600;
             //
-            Reservation reservation = getByDateForUser(apprenant, Parser.toDateWithNoTime(new Date()));
+            Reservation reservation = getLastReservationByUser(apprenant);
             if (reservation != null) {
                 if (!reservation.isValideReservation()) {
                     ReservationDao reservationDao = new ReservationDao();
@@ -231,7 +231,7 @@ public class ReservationService implements ServiceReservation {
     public List<Reservation> getByCalendrier(String idCalendrier) {
         Transaction transaction = null;
         try {
-            Session session = Hibernate.openSession();
+            Session session = Hibernate.openNewSession();
             transaction = session.beginTransaction();
             //
             CalendrierDao calendrierDao = new CalendrierDao();
@@ -313,13 +313,13 @@ public class ReservationService implements ServiceReservation {
     }
 
     @Override
-    public List<Reservation> getByLastCalendrier() {
+    public List<Reservation> getByFirstCalendrier() {
         try {
             CalendrierDao calendrierDao = new CalendrierDao();
             ArrayList<Calendrier> calendriers = calendrierDao.getAll();
             if (calendriers.size() == 0 || calendriers == null)
                 return null;
-            Calendrier calendrier = calendriers.get(calendriers.size() - 1);
+            Calendrier calendrier = calendriers.get(0);
             //
             return getByCalendrier(calendrier, true);
         } catch (Exception e) {
@@ -358,6 +358,27 @@ public class ReservationService implements ServiceReservation {
             Query query = session.createQuery("FROM Reservation WHERE apprenant = :app AND dateReservation = :date");
             query.setParameter("app", apprenant);
             query.setParameter("date", date);
+            ArrayList<Reservation> reservations = new ArrayList<>((List<Reservation>) query.list());
+            transaction.commit();
+            //
+            return reservations.size() > 0 ? reservations.get(0) : null;
+        } catch (Exception e) {
+            if (transaction != null)
+                transaction.rollback();
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Reservation getLastReservationByUser(Apprenant apprenant) {
+        Transaction transaction = null;
+        try {
+            Session session = Hibernate.openSession();
+            transaction = session.beginTransaction();
+            //
+            Query query = session.createQuery("FROM Reservation WHERE apprenant = :app ORDER BY dateCreation desc");
+            query.setParameter("app", apprenant);
             ArrayList<Reservation> reservations = new ArrayList<>((List<Reservation>) query.list());
             transaction.commit();
             //

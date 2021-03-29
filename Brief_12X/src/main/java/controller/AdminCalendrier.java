@@ -24,7 +24,7 @@ public class AdminCalendrier {
         if (idCalendrier != null) {
             model.addAttribute("_reservations", reservationService.getByCalendrier(idCalendrier));
         } else {
-            model.addAttribute("_reservations", reservationService.getByLastCalendrier());
+            model.addAttribute("_reservations", reservationService.getByFirstCalendrier());
         }
         return "admin-calendrier";
     }

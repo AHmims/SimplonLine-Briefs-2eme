@@ -49,7 +49,7 @@
                         <!-- user -->
                         <div class="w-3/12 flex flex-row items-center justify-end space-x-4">
                             <div class="w-9 h-9 rounded-full overflow-hidden border-3 border-coolGray-700 relative">
-                                <img src="<c:out value="${sessionScope.__user_data.imgApprenant}"/>" alt="" class="w-full h-full object-cover">
+                                <img referrerpolicy="no-referrer" src="<c:out value="${sessionScope.__user_data.imgApprenant}"/>" alt="" class="w-full h-full object-cover">
                                 <div class="w-full h-full rounded-full shadow-avatar absolute top-0 left-0"></div>
                             </div>
                             <a href="/signout">
@@ -76,9 +76,9 @@
                         <!-- filter -->
                         <form action="/apprenant/reservations" method="get" class="user-reserv" style="margin-bottom: 0;">
                             <select name="type" onchange="this.form.submit()" class="flex flex-row items-center h-11 space-x-5 px-5 rounded-lg outline-none border-coolGray-100 text-coolGray-500 border-2">
-                                <option value="all">Tous</option>
-                                <option value="week">Week-End</option>
-                                <option value="week-end">En-Semaine</option>
+                                <option value="all" ${empty param.type ? "selected" : ""}>Tous</option>
+                                <option value="week" ${param.type == "week" ? "selected" : ""}>En-Semaine</option>
+                                <option value="week-end" ${param.type == "week-end" ? "selected" : ""}>Week-End</option>
                             </select>
                         </form>
                     </div>
@@ -155,7 +155,7 @@
                 </svg>
                 <!--  -->
                 <div class="w-24">
-                    <img src="/img/white 1.png" alt="youcode logo">
+                    <img referrerpolicy="no-referrer" src="/img/white 1.png" alt="youcode logo">
                 </div>
             </div>
         </div>

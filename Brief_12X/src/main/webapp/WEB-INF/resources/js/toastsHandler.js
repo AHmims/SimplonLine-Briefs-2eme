@@ -46,6 +46,17 @@ async function logSuccess(text) {
     }
     return await toast(params);
 }
+async function logSuccessTimer(text) {
+    var params = {
+        content: text,
+        type: "success",
+        behavior: {
+            type: "normal"
+        },
+        duration: 1000
+    }
+    return await toast(params);
+}
 // 
 async function toastConfirm(text) {
     var params = {

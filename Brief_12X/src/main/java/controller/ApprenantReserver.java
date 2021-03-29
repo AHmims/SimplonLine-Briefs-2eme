@@ -21,8 +21,10 @@ import java.util.Map;
 public class ApprenantReserver {
     @GetMapping("/apprenant/reserver")
     public String getApprenantReserver(ModelMap model, HttpSession session) {
+        //if (ret_code != null) return "learner-reservation-hold";
+        //
         ReservationService reservationService = new ReservationService();
-        Reservation reservation = reservationService.getByDateForUser((Apprenant) session.getAttribute("__user_data"), Parser.toDateWithNoTime(new Date()));
+        Reservation reservation = reservationService.getLastReservationByUser((Apprenant) session.getAttribute("__user_data"));
         if (reservation == null || reservation.isValideReservation()) {
             EmplacementService emplacementService = new EmplacementService();
             LocalService localService = new LocalService();

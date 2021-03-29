@@ -74,7 +74,7 @@
             </a>
         </div>
         <!-- out -->
-        <a href="#" class="block">
+        <a href="/signout" class="block">
             <svg width="35" height="34" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M16.4375 26.9166C16.4375 26.3298 16.9132 25.8541 17.5 25.8541H26C26.1956 25.8541 26.3542 25.6955 26.3542 25.4999L26.3542 8.49992C26.3542 8.30432 26.1956 8.14575 26 8.14575L17.5 8.14575C16.9132 8.14575 16.4375 7.67006 16.4375 7.08325C16.4375 6.49645 16.9132 6.02075 17.5 6.02075H26C27.3692 6.02075 28.4792 7.13071 28.4792 8.49992V25.4999C28.4792 26.8691 27.3692 27.9791 26 27.9791H17.5C16.9132 27.9791 16.4375 27.5034 16.4375 26.9166Z"
                       fill="#111827"/>
@@ -242,7 +242,7 @@
                             <div class="row data">
                                 <!-- img -->
                                 <div class="imgCont">
-                                    <img src="<c:out value="${reservation.apprenant.imgApprenant}"/>" alt="" class="img">
+                                    <img referrerpolicy="no-referrer" src="<c:out value="${reservation.apprenant.imgApprenant}"/>" alt="" class="img">
                                 </div>
                                 <!-- info -->
                                 <div class="infos">

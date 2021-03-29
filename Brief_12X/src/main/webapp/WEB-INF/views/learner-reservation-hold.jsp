@@ -46,7 +46,7 @@
                         <!-- user -->
                         <div class="w-3/12 flex flex-row items-center justify-end space-x-4">
                             <div class="w-9 h-9 rounded-full overflow-hidden border-3 border-coolGray-700 relative">
-                                <img src="<c:out value="${sessionScope.__user_data.imgApprenant}"/>" alt="" class="w-full h-full object-cover">
+                                <img referrerpolicy="no-referrer" src="<c:out value="${sessionScope.__user_data.imgApprenant}"/>" alt="" class="w-full h-full object-cover">
                                 <div class="w-full h-full rounded-full shadow-avatar absolute top-0 left-0"></div>
                             </div>
                             <a href="/signout">
@@ -88,7 +88,7 @@
                 </svg>
                 <!--  -->
                 <div class="w-24">
-                    <img src="/img/white 1.png" alt="youcode logo">
+                    <img referrerpolicy="no-referrer" src="/img/white 1.png" alt="youcode logo">
                 </div>
             </div>
         </div>

@@ -76,8 +76,8 @@ async function errorHandler(errorCode) {
             logSuccess("Reservation envoyée avec succées!");
             break;
         //
-        case 30: logSuccess("La demande d'inscription a été refusée"); break;
-        case 32: logErrorActive("La demande d'inscription a été accepté"); break;
+        case 30: logErrorActive("La demande d'inscription a été refusée"); break;
+        case 32: logSuccess("La demande d'inscription a été accepté"); break;
         case 38: logSuccess("Apprenant supprimé avec succès"); break;
         case 39: logErrorActive("L'apprenant n'a pas été supprimé"); break;
         //
@@ -112,9 +112,9 @@ async function errorHandler(errorCode) {
         case 106: logErrorActive("Champ email no doit pas etre vide"); break;
         case 107: logErrorActive("Champ mot de passe ne doit pas etre vide"); break;
         case 108: logErrorActive("La combinaison d'email est mot de passe ne correspond a aucun utilisateur"); break;
-        case 11: await logSuccess("Compte créé avec succès"); window.location.href = loginLink; break;
-        case 12: await logSuccess("Authentifié avec succès"); window.location.href = window.location.origin + "/apprenant/reserver"; break;
-        case 13: await logSuccess("Authentifié avec succès"); window.location.href = window.location.origin + "/admin"; break;
+        case 11: await logSuccessTimer("Compte créé avec succès"); window.location.href = loginLink; break;
+        case 12: await logSuccessTimer("Authentifié avec succès"); window.location.href = window.location.origin + "/apprenant/reserver"; break;
+        case 13: await logSuccessTimer("Authentifié avec succès"); window.location.href = window.location.origin + "/admin"; break;
         case -1: case 10: case 100: case 101: case 61: case 601: case 41: case 43: case 400: case 207: case 31: case 33: case 300: default: await logServerError();
     }
 }

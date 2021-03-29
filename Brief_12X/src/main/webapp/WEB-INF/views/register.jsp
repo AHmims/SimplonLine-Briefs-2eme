@@ -97,7 +97,7 @@
                 </svg>
                 <!--  -->
                 <div class="w-24">
-                    <img src="/img/white 1.png" alt="youcode logo">
+                    <img referrerpolicy="no-referrer" src="/img/white 1.png" alt="youcode logo">
                 </div>
             </div>
         </div>

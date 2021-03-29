@@ -30,11 +30,13 @@ public interface ServiceReservation {
 
     List<Reservation> getByCalendrierForLearner(Apprenant apprenant, Calendrier calendrier, boolean status);
 
-    List<Reservation> getByLastCalendrier();
+    List<Reservation> getByFirstCalendrier();
 
     boolean canReserve(Date date, Calendrier calendrier);
 
     Reservation getByDateForUser(Apprenant apprenant, Date date);
+
+    Reservation getLastReservationByUser(Apprenant apprenant);
 
     List<Reservation> getByDate(Date date);
 }
