@@ -16,6 +16,27 @@
 		<property name="prefix" value="/WEB-INF/views/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
-
-
+	<!-- routes securing -->
+	<bean id="authInterceptor" class="security.AuthInterceptor"/>
+	<bean id="adminInterceptor" class="security.AdminInterceptor"/>
+	<bean id="apprenantInterceptor" class="security.ApprenantInterceptor"/>
+	<bean id="homeInterceptor" class="security.HomeInterceptor"/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/auth/*" />
+			<ref bean="authInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin**" />
+			<ref bean="adminInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/apprenant/*" />
+			<ref bean="apprenantInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/" />
+			<ref bean="homeInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

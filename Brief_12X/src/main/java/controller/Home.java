@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class Home {
     @GetMapping("/")
-    public String getHome(ModelMap model, HttpSession session) {
+    public String getHome(ModelMap model) {
         return "index";
     }
 }
