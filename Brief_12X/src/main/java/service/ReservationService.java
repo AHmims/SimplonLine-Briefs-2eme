@@ -6,6 +6,7 @@ import dao.CalendrierDao;
 import dao.EmplacementDao;
 import dao.LocalDao;
 import dao.ReservationDao;
+import dao.api.DaoReservation;
 import model.*;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -77,7 +78,7 @@ public class ReservationService implements ServiceReservation {
              */
             if (administrateur == null)
                 return 401;
-            ReservationDao reservationDao = new ReservationDao();
+            DaoReservation reservationDao = new ReservationDao();
             Reservation reservation = reservationDao.get(idReservation);
             if (reservation == null)
                 return 400;
