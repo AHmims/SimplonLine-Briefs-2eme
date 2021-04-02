@@ -23,7 +23,7 @@ public class AdminHome {
         //
         Calendrier calendrier = calendrierService.getByDate(new Date());
         //
-        model.addAttribute("_res_count_all", reservationService.getByCalendrier(calendrier).size());
+        model.addAttribute("_res_count_all", reservationService.getByCalendrier(calendrier, true).size());
         model.addAttribute("_res_count_onhold", reservationService.getByCalendrier(calendrier, false).size());
         model.addAttribute("_app_count_active", apprenantService.getAll(true).size());
         model.addAttribute("_app_count_inactive", apprenantService.getAll(false).size());
