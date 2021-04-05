@@ -10,15 +10,18 @@ import java.util.Date;
 @RestController
 public class Test {
 
-	@Autowired
-	private ClientService clientService;
+	private final ClientService clientService;
+
+	public Test(ClientService clientService) {
+		this.clientService = clientService;
+	}
 
 	@GetMapping("/user")
 	public String loginSuccess() {
-		/*Client client = new Client("XX","XX","XX","XX",new Date(),"");
+		Client client = new Client("XX","XX","XX","XX",new Date(),"");
 		client = clientService.save(client);
-		return client.getIdUtilisateur();*/
-		return "good";
+		return client.getIdUtilisateur();
+		//return "good";
 	}
 
 }

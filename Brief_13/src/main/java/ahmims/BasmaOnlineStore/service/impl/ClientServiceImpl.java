@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service("ClientService")
 public class ClientServiceImpl implements ClientService {
-    @Autowired
-    ClientDao clientDao;
+    private final ClientDao clientDao;
+    public ClientServiceImpl(ClientDao clientDao){
+        this.clientDao = clientDao;
+    }
+
     @Override
     public Client save(Client client) {
         return clientDao.save(client);
