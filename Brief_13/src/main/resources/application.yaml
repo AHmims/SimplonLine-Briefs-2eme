@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/brief_13
+    username: postgres
+    password: 123456789
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        # dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+server:
+  port: 3420 # This is the default port anyway, but you can change it here
+
+security:
+  jwt:
+    token:
+      secret-key: oeRaYY7Wo24sDqKSX3IM9ASGmdGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_
+      expire-length: 3600000 # 60 minutes duration by default: 60 minutes * 60 seconds * 1000 miliseconds
