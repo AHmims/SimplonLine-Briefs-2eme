@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "utilisateur")
-abstract class Utilisateur {
+public abstract class Utilisateur {
     @Id
     @GeneratedValue(generator = PkGenerator.rndmString)
     @GenericGenerator(name = PkGenerator.rndmString, strategy = "util.PkGenerator")

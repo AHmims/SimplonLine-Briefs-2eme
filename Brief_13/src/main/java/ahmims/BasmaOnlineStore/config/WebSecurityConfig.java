@@ -1,7 +1,6 @@
 package ahmims.BasmaOnlineStore.config;
 
-import ahmims.BasmaOnlineStore.security.JwtTokenFilterConfigurer;
-import ahmims.BasmaOnlineStore.security.JwtTokenProvider;
+import ahmims.BasmaOnlineStore.security.JwtManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,10 +18,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtManager jwtManager;
 
-    public WebSecurityConfig(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
+    public WebSecurityConfig(JwtManager jwtManager) {
+        this.jwtManager = jwtManager;
     }
 
     @Override
@@ -30,16 +29,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // Allowed routes to pass with no security checks
         http.authorizeRequests()
-                .antMatchers("/auth/signin").permitAll()
+                .antMatchers("/auth/login").permitAll()
                 .antMatchers("/auth/signup").permitAll()
+                .antMatchers("/test").permitAll()
                 // Disallow everything else
                 .anyRequest().authenticated();
 
         // redirect on non allowed access
         http.exceptionHandling().accessDeniedPage("/auth/signin");
 
-        // Apply JWT
-        http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+        //disable csrf Protection
+        http.cors().and().csrf().disable();
     }
 
     @Value("${security.crypt.length}")

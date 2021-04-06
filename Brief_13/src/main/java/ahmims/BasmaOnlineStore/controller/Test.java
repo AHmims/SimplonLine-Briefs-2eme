@@ -1,13 +1,15 @@
 package ahmims.BasmaOnlineStore.controller;
 
+import ahmims.BasmaOnlineStore.dao.RoleDao;
+import ahmims.BasmaOnlineStore.dto.UserAuthInputData;
 import ahmims.BasmaOnlineStore.model.Client;
 import ahmims.BasmaOnlineStore.model.Role;
-import ahmims.BasmaOnlineStore.security.JwtTokenProvider;
+import ahmims.BasmaOnlineStore.security.JwtManager;
 import ahmims.BasmaOnlineStore.service.ClientService;
-import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -16,26 +18,37 @@ import java.util.Date;
 public class Test {
 
     private final ClientService clientService;
+    private final RoleDao roleDao;
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JwtManager jwtManager;
+    private final ModelMapper modelMapper;
 
-    public Test(ClientService clientService, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public Test(ClientService clientService, RoleDao roleDao, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper) {
         this.clientService = clientService;
+        this.roleDao = roleDao;
         this.authenticationManager = authenticationManager;
-        this.jwtTokenProvider = jwtTokenProvider;
+        this.jwtManager = jwtManager;
+        this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/user")
-    public String loginSuccess() {
-        Client client = new Client("XX", "XX", "XX", "XX", new Date(), "");
+    @GetMapping("/test")
+    public String test() {
+        Role role = new Role("hmmm", -99);
+        role = roleDao.save(role);
+        Client client = new Client("XX", "XX", "XXX", "XX", new Date(), "");
+        client.setRole(role);
         client = clientService.save(client);
         return client.getIdUtilisateur();
         //return "good";
     }
 
-    @PostMapping("/auth/signin")
-    public String login(@ApiParam("email") @RequestParam String email, @ApiParam("pass") @RequestParam String pass) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, pass));
-        return jwtTokenProvider.createToken(email, new Role("__hmm", -99));
+    @PostMapping("/test")
+    public ResponseEntity<?> test2(@RequestBody UserAuthInputData payload) { //<?> => is a wildcard meaning it can be any type
+        //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(payload.getEmailUtilisateur(), payload.getPassUtilisateur()));
+        //String jwt = jwtManager.createToken(payload.getEmailUtilisateur(), new Role("__hmm", -99));
+        //System.out.println(jwt);
+        //System.out.println(payload.getEmailUtilisateur());
+        //return modelMapper.map(new Role("test", 12), Role.class);
+        return new ResponseEntity<>(modelMapper.map(payload, UserAuthInputData.class), HttpStatus.valueOf(200));
     }
 }
