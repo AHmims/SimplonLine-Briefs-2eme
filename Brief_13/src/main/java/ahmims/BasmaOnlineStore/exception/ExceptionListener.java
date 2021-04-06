@@ -42,8 +42,14 @@ public class ExceptionListener {
     }
 
     //
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public void handleHttpMessageNotReadableException(HttpServletResponse res) throws IOException {
+        res.sendError(HttpStatus.BAD_REQUEST.value(), "Les données fournies ne sont pas dans un format json valide");
+    }
+
+    //
     @ExceptionHandler(Exception.class)
-    protected void handleException(HttpServletResponse res, RequestException ex) throws IOException {
+    protected void handleException(HttpServletResponse res) throws IOException {
         res.sendError(HttpStatus.BAD_REQUEST.value(), "Unknown error");
     }
 }

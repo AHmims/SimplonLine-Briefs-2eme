@@ -31,18 +31,21 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public UserResponseData loginUser(UserAuthInputData userAuthInputData) {
-        Client client = clientService.getByEmail(userAuthInputData.getEmail());
-        if (client != null) {
-            if (client.getPassUtilisateur().equals(userAuthInputData.getPassword()))
-                return setupLoginResponse(client);
-        } else {
-            Administrateur administrateur = administrateurService.getByEmail(userAuthInputData.getEmail());
-            if (administrateur != null) {
-                if (administrateur.getPassUtilisateur().equals(userAuthInputData.getPassword()))
-                    return setupLoginResponse(administrateur);
-            } else throw new RequestException("Il existe aucun compte avec cet email", HttpStatus.NOT_FOUND);
-        }
-        throw new RequestException("Le mot de passe est incorrect.", HttpStatus.UNAUTHORIZED);
+        if (userAuthInputData.getEmail() != null && userAuthInputData.getPassword() != null) {
+            Client client = clientService.getByEmail(userAuthInputData.getEmail());
+            if (client != null) {
+                if (client.getPassUtilisateur().equals(userAuthInputData.getPassword()))
+                    return setupLoginResponse(client);
+            } else {
+                Administrateur administrateur = administrateurService.getByEmail(userAuthInputData.getEmail());
+                if (administrateur != null) {
+                    if (administrateur.getPassUtilisateur().equals(userAuthInputData.getPassword()))
+                        return setupLoginResponse(administrateur);
+                } else throw new RequestException("Il existe aucun compte avec cet email", HttpStatus.NOT_FOUND);
+            }
+            throw new RequestException("Le mot de passe est incorrect.", HttpStatus.UNAUTHORIZED);
+        } else
+            throw new RequestException("Le format des données n'est pas valide. Vous devez fournir \"email\" et \"password\"", HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     //
