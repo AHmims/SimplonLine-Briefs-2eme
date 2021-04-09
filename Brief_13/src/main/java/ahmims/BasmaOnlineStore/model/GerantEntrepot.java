@@ -1,5 +1,7 @@
 package ahmims.BasmaOnlineStore.model;
 
+import ahmims.BasmaOnlineStore.dto.UserFormData;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -26,6 +28,10 @@ public class GerantEntrepot extends Utilisateur {
 
     public GerantEntrepot(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation) {
         super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation);
+    }
+
+    public GerantEntrepot(UserFormData userFormData) {
+        super(userFormData);
     }
 
     public GerantEntrepot() {

@@ -48,8 +48,8 @@ public class ExceptionListener {
     }
 
     //
-    @ExceptionHandler(Exception.class)
+    /*@ExceptionHandler(Exception.class)
     protected void handleException(HttpServletResponse res) throws IOException {
         res.sendError(HttpStatus.BAD_REQUEST.value(), "Unknown error");
-    }
+    }*/
 }

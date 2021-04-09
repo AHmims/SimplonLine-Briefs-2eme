@@ -5,5 +5,5 @@ import org.springframework.data.repository.Repository;
 
 @org.springframework.stereotype.Repository("ClientRepository")
 public interface ClientRepository extends Repository<Client, String> {
-    Client findByEmailUtilisateur(String email);
+    Client findTopByEmailUtilisateur(String email);
 }

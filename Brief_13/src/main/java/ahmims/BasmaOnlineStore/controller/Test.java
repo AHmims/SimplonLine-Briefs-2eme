@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @RestController
@@ -49,6 +50,18 @@ public class Test {
         //System.out.println(jwt);
         //System.out.println(payload.getEmailUtilisateur());
         //return modelMapper.map(new Role("test", 12), Role.class);
-        return new ResponseEntity<>(modelMapper.map(payload, UserAuthInputData.class), HttpStatus.valueOf(200));
+        //return new ResponseEntity<>(modelMapper.map(payload, UserAuthInputData.class), HttpStatus.valueOf(200));
+
+
+        //creating new roles
+        ArrayList<Role> roles = new ArrayList<>();
+        roles.add(new Role("Role_1", 0));
+        roles.add(new Role("Role_2", 1));
+        roles.add(new Role("Role_3", 2));
+        for (Role role : roles) {
+            roleDao.save(role);
+        }
+        //
+        return new ResponseEntity<>("ff", HttpStatus.valueOf(200));
     }
 }

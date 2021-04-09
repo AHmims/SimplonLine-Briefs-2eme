@@ -1,5 +1,6 @@
 package ahmims.BasmaOnlineStore.model;
 
+import ahmims.BasmaOnlineStore.dto.UserFormData;
 import org.hibernate.annotations.GenericGenerator;
 import util.PkGenerator;
 
@@ -58,6 +59,22 @@ public abstract class Utilisateur {
         this.emailUtilisateur = emailUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = dateCreation;
+    }
+
+    public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur) {
+        this.nomUtilisateur = nomUtilisateur;
+        this.prenomUtilisateur = prenomUtilisateur;
+        this.emailUtilisateur = emailUtilisateur;
+        this.passUtilisateur = passUtilisateur;
+        this.dateCreation = new Date();
+    }
+
+    public Utilisateur(UserFormData userFormData) {
+        this.nomUtilisateur = userFormData.getNom();
+        this.prenomUtilisateur = userFormData.getPrenom();
+        this.emailUtilisateur = userFormData.getEmail();
+        this.passUtilisateur = userFormData.getPassword();
+        this.dateCreation = new Date();
     }
 
     public Utilisateur() {

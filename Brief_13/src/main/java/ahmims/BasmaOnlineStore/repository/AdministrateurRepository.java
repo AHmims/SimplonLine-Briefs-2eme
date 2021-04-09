@@ -5,5 +5,6 @@ import org.springframework.data.repository.Repository;
 
 @org.springframework.stereotype.Repository("AdministrateurRepository")
 public interface AdministrateurRepository extends Repository<Administrateur, String> {
-    Administrateur findByEmailUtilisateur(String email);
+    Administrateur findTopByEmailUtilisateur(String email);
 }
+

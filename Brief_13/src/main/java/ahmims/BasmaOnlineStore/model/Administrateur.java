@@ -1,5 +1,7 @@
 package ahmims.BasmaOnlineStore.model;
 
+import ahmims.BasmaOnlineStore.dto.UserFormData;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,10 @@ public class Administrateur extends Utilisateur {
 
     public Administrateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation) {
         super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation);
+    }
+
+    public Administrateur(UserFormData userFormData) {
+        super(userFormData);
     }
 
     public Administrateur() {

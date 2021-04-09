@@ -20,4 +20,9 @@ public class UserAuthInputData {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    //
+    public boolean isFilled() {
+        return this.email != null && this.password != null;
+    }
 }

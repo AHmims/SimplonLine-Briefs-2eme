@@ -22,11 +22,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client save(Client client) {
-        return clientDao.save(client);
+        try {
+            return clientDao.save(client);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
     public Client getByEmail(String email) {
-        return clientRepository.findByEmailUtilisateur(email);
+        return clientRepository.findTopByEmailUtilisateur(email);
     }
 }

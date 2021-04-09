@@ -1,5 +1,7 @@
 package ahmims.BasmaOnlineStore.model;
 
+import ahmims.BasmaOnlineStore.dto.UserFormData;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -55,6 +57,11 @@ public class Client extends Utilisateur {
 
     public Client(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation) {
         super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation);
+    }
+
+    public Client(UserFormData userFormData, String imgClient) {
+        super(userFormData);
+        this.imgClient = imgClient;
     }
 
     public Client() {

@@ -21,6 +21,15 @@ public class AdministrateurServiceImpl implements AdministrateurService {
 
     @Override
     public Administrateur getByEmail(String email) {
-        return administrateurRepository.findByEmailUtilisateur(email);
+        return administrateurRepository.findTopByEmailUtilisateur(email);
+    }
+
+    @Override
+    public Administrateur save(Administrateur administrateur) {
+        try {
+            return administrateurDao.save(administrateur);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

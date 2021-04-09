@@ -16,18 +16,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final JwtManager jwtManager;
 
-    public WebSecurityConfig(JwtManager jwtManager) {
+    public WebSecurity(JwtManager jwtManager) {
         this.jwtManager = jwtManager;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        // Allowed routes to pass with no security checks
         http.authorizeRequests()
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/auth/signup").permitAll()
@@ -40,6 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //disable csrf Protection
         http.cors().and().csrf().disable();
+
+        //append jwt config
+        http.apply(new JwtTokenFilterConfig(jwtManager));
     }
 
     @Value("${security.crypt.length}")
