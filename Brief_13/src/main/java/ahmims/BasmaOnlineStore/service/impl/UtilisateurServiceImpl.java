@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service("UtilisateurService")
 public class UtilisateurServiceImpl implements UtilisateurService {
@@ -126,6 +127,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public AllUsers getAll() {
         List<Utilisateur> users = (List<Utilisateur>) utilisateurDao.findAll();
+        if (users.size() == 0)
+            return new AllUsers(new ArrayList<>());
         List<UserMainData> usersMainData = new ArrayList<>();
         //
         modelMapper.typeMap(Utilisateur.class, UserMainData.class).addMappings(mapper -> {
@@ -146,6 +149,56 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         //
         return new AllUsers(usersMainData);
     }
+
+    @Override
+    public UserMainData updateUser(UserFormData utilisateur, String id) {
+        Optional<Utilisateur> user = utilisateurDao.findById(id);
+        if (user.isPresent()) {
+            Utilisateur originalUser = user.get();
+            //
+            if (utilisateur.getNom() != null)
+                originalUser.setNomUtilisateur(utilisateur.getNom());
+            if (utilisateur.getPrenom() != null)
+                originalUser.setPrenomUtilisateur(utilisateur.getPrenom());
+            if (utilisateur.getEmail() != null)
+                originalUser.setEmailUtilisateur(utilisateur.getEmail());
+            if (utilisateur.getPassword() != null)
+                originalUser.setPassUtilisateur(utilisateur.getPassword());
+            if (originalUser.getClass().getSimpleName().equals(Client.class.getSimpleName()) && utilisateur.getImg() != null)
+                ((Client) originalUser).setImgClient(utilisateur.getImg());
+            //
+            ArrayList<Validation> validations = utilisateurValidator.isValidNewObject(originalUser);
+            StringBuilder errorMessage = new StringBuilder();
+            boolean isValid = true;
+            for (Validation validation : validations) {
+                if (!validation.isResult()) {
+                    isValid = false;
+                    if (!errorMessage.toString().equals(""))
+                        errorMessage.append(" | ");
+                    errorMessage.append(String.format("%s", validation.getMessage()));
+                }
+            }
+            if (!isValid) throw new RequestException(errorMessage.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+            //
+            originalUser = utilisateurDao.save(originalUser);
+            if (originalUser != null) {
+                modelMapper.typeMap(Utilisateur.class, UserMainData.class).addMappings(mapper -> {
+                    mapper.map(Utilisateur::getNomUtilisateur, UserMainData::setNom);
+                    mapper.map(Utilisateur::getPrenomUtilisateur, UserMainData::setPrenom);
+                    mapper.map(Utilisateur::getEmailUtilisateur, UserMainData::setEmail);
+                    mapper.map(Utilisateur::getIdUtilisateur, UserMainData::setId);
+                });
+                UserMainData userMainData = modelMapper.map(originalUser, UserMainData.class);
+                userMainData.setRole(originalUser.getRole() != null ? modelMapper.map(originalUser.getRole(), RoleShort.class) : null);
+                if (originalUser.getClass().getSimpleName().equals(Client.class.getSimpleName()))
+                    userMainData.setImage(((Client) originalUser).getImgClient());
+                userMainData.setTypeUtilisateurByClass(originalUser.getClass());
+                //
+                return userMainData;
+            } else throw new RequestException("User not updated", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
+    }
+
 
     //
     //

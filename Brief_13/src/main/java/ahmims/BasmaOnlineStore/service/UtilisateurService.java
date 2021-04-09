@@ -9,8 +9,14 @@ import java.util.List;
 @Repository
 public interface UtilisateurService {
     UserResponseData loginUser(UserAuthInputData userAuthInputData);
+
     UserResponseData createUser(UserFormData utilisateur);
+
     Utilisateur insertUser(Utilisateur utilisateur);
+
     Utilisateur findTopByEmail(String email);
+
     AllUsers getAll();
+
+    UserMainData updateUser(UserFormData utilisateur, String id);
 }
