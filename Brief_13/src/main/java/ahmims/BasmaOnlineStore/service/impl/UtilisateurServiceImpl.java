@@ -12,8 +12,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -196,6 +196,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 //
                 return userMainData;
             } else throw new RequestException("User not updated", HttpStatus.INTERNAL_SERVER_ERROR);
+        } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    @Transactional
+    public DeleteRes deleteUser(String id) {
+        Optional<Utilisateur> user = utilisateurDao.findById(id);
+        if (user.isPresent()) {
+            Utilisateur utilisateur = user.get();
+            long res = utilisateurDao.deleteByIdUtilisateur(id);
+            //
+            return new DeleteRes(res, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 

@@ -44,4 +44,10 @@ public class UtilisateurCont {
     public ResponseEntity<UserMainData> updateUser(@RequestBody UserFormData payload, @PathVariable String id) {
         return new ResponseEntity<>(utilisateurService.updateUser(payload, id), HttpStatus.valueOf(200));
     }
+
+    //delete user
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<DeleteRes> deleteUser(@PathVariable String id) {
+        return new ResponseEntity<>(utilisateurService.deleteUser(id), HttpStatus.valueOf(200));
+    }
 }

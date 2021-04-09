@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository("UtilisateurDao")
 public interface UtilisateurDao extends CrudRepository<Utilisateur, String> {
+    long deleteByIdUtilisateur(String idUtilisateur);
 }

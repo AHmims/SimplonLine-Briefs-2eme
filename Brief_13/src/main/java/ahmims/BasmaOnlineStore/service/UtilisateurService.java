@@ -19,4 +19,6 @@ public interface UtilisateurService {
     AllUsers getAll();
 
     UserMainData updateUser(UserFormData utilisateur, String id);
+
+    DeleteRes deleteUser(String id);
 }
