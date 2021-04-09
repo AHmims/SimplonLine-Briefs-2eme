@@ -33,6 +33,12 @@ public class UtilisateurCont {
     }
 
     //#endregion
+    //get user data
+    @GetMapping("/{id}")
+    public ResponseEntity<UserMainData> getUser(@PathVariable String id) {
+        return new ResponseEntity<>(utilisateurService.get(id), HttpStatus.valueOf(200));
+    }
+
     //get all users
     @GetMapping("/all")
     public ResponseEntity<AllUsers> getAllUsers() {

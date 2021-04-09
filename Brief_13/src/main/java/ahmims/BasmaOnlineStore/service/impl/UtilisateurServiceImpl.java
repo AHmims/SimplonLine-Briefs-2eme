@@ -130,21 +130,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         if (users.size() == 0)
             return new AllUsers(new ArrayList<>());
         List<UserMainData> usersMainData = new ArrayList<>();
-        //
-        modelMapper.typeMap(Utilisateur.class, UserMainData.class).addMappings(mapper -> {
-            mapper.map(Utilisateur::getNomUtilisateur, UserMainData::setNom);
-            mapper.map(Utilisateur::getPrenomUtilisateur, UserMainData::setPrenom);
-            mapper.map(Utilisateur::getEmailUtilisateur, UserMainData::setEmail);
-            mapper.map(Utilisateur::getIdUtilisateur, UserMainData::setId);
-        });
+
         //
         for (Utilisateur user : users) {
-            UserMainData userMainData = modelMapper.map(user, UserMainData.class);
-            userMainData.setRole(user.getRole() != null ? modelMapper.map(user.getRole(), RoleShort.class) : null);
-            if (user.getClass().getSimpleName().equals(Client.class.getSimpleName()))
-                userMainData.setImage(((Client) user).getImgClient());
-            userMainData.setTypeUtilisateurByClass(user.getClass());
-            usersMainData.add(userMainData);
+            usersMainData.add(getUerResponse(user));
         }
         //
         return new AllUsers(usersMainData);
@@ -182,19 +171,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             //
             originalUser = utilisateurDao.save(originalUser);
             if (originalUser != null) {
-                modelMapper.typeMap(Utilisateur.class, UserMainData.class).addMappings(mapper -> {
-                    mapper.map(Utilisateur::getNomUtilisateur, UserMainData::setNom);
-                    mapper.map(Utilisateur::getPrenomUtilisateur, UserMainData::setPrenom);
-                    mapper.map(Utilisateur::getEmailUtilisateur, UserMainData::setEmail);
-                    mapper.map(Utilisateur::getIdUtilisateur, UserMainData::setId);
-                });
-                UserMainData userMainData = modelMapper.map(originalUser, UserMainData.class);
-                userMainData.setRole(originalUser.getRole() != null ? modelMapper.map(originalUser.getRole(), RoleShort.class) : null);
-                if (originalUser.getClass().getSimpleName().equals(Client.class.getSimpleName()))
-                    userMainData.setImage(((Client) originalUser).getImgClient());
-                userMainData.setTypeUtilisateurByClass(originalUser.getClass());
-                //
-                return userMainData;
+                return getUerResponse(originalUser);
             } else throw new RequestException("User not updated", HttpStatus.INTERNAL_SERVER_ERROR);
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
@@ -211,6 +188,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 
+    @Override
+    public UserMainData get(String id) {
+        Optional<Utilisateur> user = utilisateurDao.findById(id);
+        if (user.isPresent()) {
+            return getUerResponse(user.get());
+        } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
+    }
+
 
     //
     //
@@ -219,5 +204,22 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         userResponseData.setRole(utilisateur.getRole() != null ? modelMapper.map(utilisateur.getRole(), RoleShort.class) : null);
         userResponseData.setToken(jwtManager.createToken(utilisateur));
         return userResponseData;
+    }
+
+    private UserMainData getUerResponse(Utilisateur utilisateur) {
+        modelMapper.typeMap(Utilisateur.class, UserMainData.class).addMappings(mapper -> {
+            mapper.map(Utilisateur::getNomUtilisateur, UserMainData::setNom);
+            mapper.map(Utilisateur::getPrenomUtilisateur, UserMainData::setPrenom);
+            mapper.map(Utilisateur::getEmailUtilisateur, UserMainData::setEmail);
+            mapper.map(Utilisateur::getIdUtilisateur, UserMainData::setId);
+        });
+        //
+        UserMainData userMainData = modelMapper.map(utilisateur, UserMainData.class);
+        userMainData.setRole(utilisateur.getRole() != null ? modelMapper.map(utilisateur.getRole(), RoleShort.class) : null);
+        if (utilisateur.getClass().getSimpleName().equals(Client.class.getSimpleName()))
+            userMainData.setImage(((Client) utilisateur).getImgClient());
+        userMainData.setTypeUtilisateurByClass(utilisateur.getClass());
+        //
+        return userMainData;
     }
 }

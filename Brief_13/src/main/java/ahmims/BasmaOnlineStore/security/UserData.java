@@ -22,7 +22,7 @@ public class UserData implements UserDetailsService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         final Utilisateur user = utilisateurService.findTopByEmail(s);
         if (user == null)
-            throw new RequestException("There exists no user with this email", HttpStatus.NOT_FOUND);
+            throw new RequestException("Please re-login", HttpStatus.NOT_FOUND);
         return User.withUsername(user.getEmailUtilisateur()).password(user.getPassUtilisateur()).authorities(user.getRole().getLibelleRole()).build();
     }
 }

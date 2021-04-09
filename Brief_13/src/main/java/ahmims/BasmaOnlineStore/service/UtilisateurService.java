@@ -21,4 +21,6 @@ public interface UtilisateurService {
     UserMainData updateUser(UserFormData utilisateur, String id);
 
     DeleteRes deleteUser(String id);
+
+    UserMainData get(String id);
 }
