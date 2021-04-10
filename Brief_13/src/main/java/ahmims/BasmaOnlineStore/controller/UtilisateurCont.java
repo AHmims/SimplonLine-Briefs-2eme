@@ -8,9 +8,11 @@ import ahmims.BasmaOnlineStore.service.UtilisateurService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -41,18 +43,21 @@ public class UtilisateurCont {
 
     //get all users
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<AllUsers> getAllUsers() {
         return new ResponseEntity<>(utilisateurService.getAll(), HttpStatus.valueOf(200));
     }
 
     //update user
     @PutMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<UserMainData> updateUser(@RequestBody UserFormData payload, @PathVariable String id) {
         return new ResponseEntity<>(utilisateurService.updateUser(payload, id), HttpStatus.valueOf(200));
     }
 
     //delete user
     @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<DeleteRes> deleteUser(@PathVariable String id) {
         return new ResponseEntity<>(utilisateurService.deleteUser(id), HttpStatus.valueOf(200));
     }

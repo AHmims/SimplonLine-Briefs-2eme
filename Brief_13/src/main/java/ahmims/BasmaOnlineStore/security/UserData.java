@@ -23,6 +23,6 @@ public class UserData implements UserDetailsService {
         final Utilisateur user = utilisateurService.findTopByEmail(s);
         if (user == null)
             throw new RequestException("Please re-login", HttpStatus.NOT_FOUND);
-        return User.withUsername(user.getEmailUtilisateur()).password(user.getPassUtilisateur()).authorities(user.getRole().getLibelleRole()).build();
+        return User.withUsername(user.getEmailUtilisateur()).password(user.getPassUtilisateur()).authorities(user.getRole().getNivRole() + "").build();
     }
 }

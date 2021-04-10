@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-//@Import(Config.class)
 public class BasmaOnlineStoreApplication {
     public static void main(String[] args) {
         SpringApplication.run(BasmaOnlineStoreApplication.class, args);
