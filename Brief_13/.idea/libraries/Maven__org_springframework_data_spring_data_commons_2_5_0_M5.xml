@@ -8,7 +8,6 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.5.0-M5/spring-data-commons-2.5.0-M5-sources.jar!/" />
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/2.5.0-M5/spring-data-commons-2.5.0-M5.jar!/" />
     </SOURCES>
   </library>
 </component>

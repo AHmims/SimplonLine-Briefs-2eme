@@ -9,7 +9,12 @@ import ahmims.BasmaOnlineStore.security.JwtManager;
 import ahmims.BasmaOnlineStore.service.*;
 import ahmims.BasmaOnlineStore.validator.UtilisateurValidator;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -29,8 +34,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final GerantEntrepotService gerantEntrepotService;
     private final UtilisateurRepository utilisateurRepository;
     private final UtilisateurDao utilisateurDao;
+    private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
 
-    public UtilisateurServiceImpl(ClientService clientService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, GerantEntrepotService gerantEntrepotService, UtilisateurRepository utilisateurRepository, UtilisateurDao utilisateurDao) {
+    public UtilisateurServiceImpl(ClientService clientService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, GerantEntrepotService gerantEntrepotService, UtilisateurRepository utilisateurRepository, UtilisateurDao utilisateurDao, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
         this.clientService = clientService;
         this.administrateurService = administrateurService;
         this.jwtManager = jwtManager;
@@ -40,18 +47,20 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         this.gerantEntrepotService = gerantEntrepotService;
         this.utilisateurRepository = utilisateurRepository;
         this.utilisateurDao = utilisateurDao;
+        this.authenticationManager = authenticationManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
     //#endregion
     @Override
     public UserResponseData loginUser(UserAuthInputData userAuthInputData) {
         if (userAuthInputData.isFilled()) {
-            Utilisateur utilisateur = utilisateurRepository.findTopByEmailUtilisateur(userAuthInputData.getEmail());
-            if (utilisateur != null) {
-                if (utilisateur.getPassUtilisateur().equals(userAuthInputData.getPassword()))
-                    return setupLoginResponse(utilisateur);
-            } else throw new RequestException("Il existe aucun compte avec cet email", HttpStatus.NOT_FOUND);
-            throw new RequestException("Le mot de passe est incorrect.", HttpStatus.UNAUTHORIZED);
+            try {
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userAuthInputData.getEmail(), userAuthInputData.getPassword()));
+                return setupLoginResponse(utilisateurRepository.findTopByEmailUtilisateur(userAuthInputData.getEmail()));
+            } catch (AuthenticationException e) {
+                throw new RequestException("Email/mot de passe fourni non valide", HttpStatus.UNPROCESSABLE_ENTITY);
+            }
         } else
             throw new RequestException("Le format des données n'est pas valide. Vous devez fournir \"email\" et \"password\"", HttpStatus.UNPROCESSABLE_ENTITY);
     }
@@ -86,6 +95,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                     //if(role.getNivRole() > 0)
                     //test if current logged user is allowed to create an account for someone other than clients
                     user.setRole(role);
+                    user.setPassUtilisateur(passwordEncoder.encode(user.getPassUtilisateur()));
                     user = insertUser(user);
                     if (user != null && user.getIdUtilisateur() != null)
                         //all good
@@ -145,8 +155,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 originalUser.setPrenomUtilisateur(utilisateur.getPrenom());
             if (utilisateur.getEmail() != null)
                 originalUser.setEmailUtilisateur(utilisateur.getEmail());
-            if (utilisateur.getPassword() != null)
-                originalUser.setPassUtilisateur(utilisateur.getPassword());
+            if (utilisateur.getPassword() != null) {
+                if (!passwordEncoder.matches(utilisateur.getPassword(), originalUser.getPassUtilisateur()))
+                    originalUser.setPassUtilisateur(passwordEncoder.encode(utilisateur.getPassword()));
+            }
             if (originalUser.getClass().getSimpleName().equals(Client.class.getSimpleName()) && utilisateur.getImg() != null)
                 ((Client) originalUser).setImgClient(utilisateur.getImg());
             //

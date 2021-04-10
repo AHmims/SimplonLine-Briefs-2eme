@@ -1,7 +1,9 @@
 package ahmims.BasmaOnlineStore.config;
 
 import ahmims.BasmaOnlineStore.security.JwtManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,11 +20,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-    private final JwtManager jwtManager;
-
-    public WebSecurity(JwtManager jwtManager) {
-        this.jwtManager = jwtManager;
-    }
+    @Autowired
+    JwtManager jwtManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,12 +43,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.apply(new JwtTokenFilterConfig(jwtManager));
     }
 
-    @Value("${security.crypt.length}")
-    private int encryptionLength;
-
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(encryptionLength);
+        return new BCryptPasswordEncoder(EnvVariables.encryptionLength);
     }
 
     @Override
