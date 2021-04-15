@@ -2,7 +2,9 @@ package ahmims.BasmaOnlineStore.service.impl;
 
 import ahmims.BasmaOnlineStore.dao.ImageDao;
 import ahmims.BasmaOnlineStore.exception.RequestException;
+import ahmims.BasmaOnlineStore.model.Categorie;
 import ahmims.BasmaOnlineStore.model.Image;
+import ahmims.BasmaOnlineStore.model.Produit;
 import ahmims.BasmaOnlineStore.service.ImageService;
 import ahmims.BasmaOnlineStore.validator.ImageValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class ImageServiceImpl implements ImageService {
     public Image insertSingle(String url) {
         boolean isValid = imageValidator.isValidImageLink(url);
         if (!isValid)
-            throw new RequestException("Invalid image link", HttpStatus.BAD_REQUEST);
+            throw new RequestException("Invalid image link", HttpStatus.UNPROCESSABLE_ENTITY);
         //
         Image image = imageDao.save(new Image(url));
         return image.getIdImage() != null ? image : null;
@@ -36,10 +38,10 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public List<Image> insertMultiple(List<String> urls) {
-        if (urls!=null && urls.size() >= 4 && urls.size() <= 8) {
+        if (urls != null && urls.size() >= 4 && urls.size() <= 8) {
             for (String url : urls) {
                 if (!imageValidator.isValidImageLink(url))
-                    throw new RequestException("Invalid image link", HttpStatus.BAD_REQUEST);
+                    throw new RequestException("Invalid image link", HttpStatus.UNPROCESSABLE_ENTITY);
             }
             //
             List<Image> images = new ArrayList<>();
@@ -51,4 +53,6 @@ public class ImageServiceImpl implements ImageService {
             return images.contains(null) ? null : images;
         } else throw new RequestException("The number of images required is between 4 & 8", HttpStatus.BAD_REQUEST);
     }
+    //
+    //
 }

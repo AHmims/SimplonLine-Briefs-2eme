@@ -147,4 +147,20 @@ public class Produit {
     public void setFavoris(List<ProduitFavori> favoris) {
         this.favoris = favoris;
     }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 }

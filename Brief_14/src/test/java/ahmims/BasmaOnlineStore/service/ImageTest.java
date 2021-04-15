@@ -45,13 +45,13 @@ public class ImageTest {
     public void insertSinglePass() {
         try {
             assertNotNull(imageService.insertSingle("https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"));
-        } catch (RequestException ignored) {
+        } catch (RequestException e) {
             fail();
         }
     }
 
     //#endregion
-    //#region Multiple insertion tests
+    //#region Multiple insertions tests
     @Test
     public void insertMultipleFail_1() {
         try {

@@ -24,10 +24,16 @@ public class Categorie {
     //
     //
 
-    public Categorie(String idCategorie, String libelleCategorie, List<Produit> produits) {
+    public Categorie(String idCategorie, String libelleCategorie, List<Produit> produits, Image image) {
         this.idCategorie = idCategorie;
         this.libelleCategorie = libelleCategorie;
         this.produits = produits;
+        this.image = image;
+    }
+
+    public Categorie(String libelleCategorie, Image image) {
+        this.libelleCategorie = libelleCategorie;
+        this.image = image;
     }
 
     public Categorie(String libelleCategorie) {
@@ -61,5 +67,13 @@ public class Categorie {
 
     public void setProduits(List<Produit> produits) {
         this.produits = produits;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
