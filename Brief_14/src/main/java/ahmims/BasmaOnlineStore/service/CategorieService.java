@@ -10,5 +10,5 @@ public interface CategorieService {
 
     Categorie insert(CategorieFormData categorieFormData);
 
-    Categorie edit(Categorie categorie);
+    Categorie edit(CategorieFormData categorieFormData);
 }

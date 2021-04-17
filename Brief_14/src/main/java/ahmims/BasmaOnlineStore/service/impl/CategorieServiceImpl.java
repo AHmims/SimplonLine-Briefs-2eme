@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("CategorieService")
 public class CategorieServiceImpl implements CategorieService {
@@ -50,11 +51,44 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public Categorie insert(CategorieFormData categorieFormData) {
-        return null;
+        return insert(new Categorie(categorieFormData.getLibelle(), new Image(categorieFormData.getImage())));
     }
 
     @Override
-    public Categorie edit(Categorie categorie) {
-        return null;
+    public Categorie edit(CategorieFormData categorieFormData) {
+        if (categorieFormData == null) return null;
+        //
+        if (categorieFormData.getId() == null || categorieFormData.getId().length() == 0)
+            throw new RequestException("Categorie Id isn't valid", HttpStatus.UNPROCESSABLE_ENTITY);
+        else {
+            Optional<Categorie> optionalCategorie = categorieDao.findById(categorieFormData.getId());
+            if (optionalCategorie.isPresent()) {
+                Categorie categorie = optionalCategorie.get();
+                //Categorie originalCategorie = categorie;
+                //
+                if (categorieFormData.getLibelle() != null && categorieFormData.getLibelle().length() > 0) {
+                    Categorie existingCategorie = categorieRepository.findTopByLibelleCategorie(categorieFormData.getLibelle());
+                    if (existingCategorie == null) categorie.setLibelleCategorie(categorieFormData.getLibelle());
+                    else throw new RequestException("Categorie name already exists", HttpStatus.BAD_REQUEST);
+                }
+                //
+                if (categorieFormData.getImage() != null && categorieFormData.getImage().length() > 0) {
+                    Image image = imageService.insertSingle(categorieFormData.getImage());
+                    if (image != null) {
+                        Image previousImage = categorie.getImage();
+                        categorie.setImage(image);
+                        boolean resDlt = imageService.delete(previousImage);
+                        if (!resDlt)
+                            throw new RequestException("Server error while erasing previous image, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
+                    } else
+                        throw new RequestException("Server error while saving image, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+                //
+                //if (!originalCategorie.getImage().equals(categorie.getImage()) || !originalCategorie.getLibelleCategorie().equals(categorie.getLibelleCategorie())) {
+                categorie = categorieDao.save(categorie);
+                return categorie;
+                //}
+            } else throw new RequestException("No categorie exists with the given id", HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service("ImageService")
 public class ImageServiceImpl implements ImageService {
@@ -70,6 +71,17 @@ public class ImageServiceImpl implements ImageService {
             //
             return images.contains(null) ? null : images;
         } else throw new RequestException("The number of images required is between 4 & 8", HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public boolean delete(Image image) {
+        try {
+            imageDao.delete(image);
+            Optional<Image> imgDlt = imageDao.findById(image.getIdImage());
+            return imgDlt.isEmpty();
+        } catch (Exception e) {
+            return false;
+        }
     }
     //
     //

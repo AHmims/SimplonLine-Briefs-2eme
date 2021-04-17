@@ -14,4 +14,6 @@ public interface ImageService {
     List<Image> insertMultiple(List<String> urls);
 
     List<Image> insertMultiple(Produit produit, List<String> urls);
+
+    boolean delete(Image image);
 }
