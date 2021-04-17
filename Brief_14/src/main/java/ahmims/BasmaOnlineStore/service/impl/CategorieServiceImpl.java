@@ -41,6 +41,7 @@ public class CategorieServiceImpl implements CategorieService {
             if (categorie.getImage() != null) {
                 Image image = imageService.insertSingle(categorie.getImage().getLienImage());
                 if (image != null) {
+                    categorie.setImage(image);
                     categorie = categorieDao.save(categorie);
                     if (categorie.getIdCategorie() != null) return categorie;
                 }
@@ -76,6 +77,8 @@ public class CategorieServiceImpl implements CategorieService {
                     Image image = imageService.insertSingle(categorieFormData.getImage());
                     if (image != null) {
                         Image previousImage = categorie.getImage();
+                        categorie.setImage(null);
+                        categorieDao.save(categorie);
                         categorie.setImage(image);
                         boolean resDlt = imageService.delete(previousImage);
                         if (!resDlt)

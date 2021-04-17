@@ -1,6 +1,7 @@
 package ahmims.BasmaOnlineStore.model;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Categorie {
     //
     @OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
     private List<Produit> produits;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "idImage")
     private Image image;
     //
