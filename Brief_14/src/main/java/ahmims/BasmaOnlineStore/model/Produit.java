@@ -71,11 +71,20 @@ public class Produit {
         this.visible = visible;
     }
 
+    public Produit(String libelleProduit, String descriptionProduit, double prixProduit, Categorie categorie, List<Image> images) {
+        this.libelleProduit = libelleProduit;
+        this.descriptionProduit = descriptionProduit;
+        this.prixProduit = prixProduit;
+        this.categorie = categorie;
+        this.images = images;
+        this.dateCreation = new Date();
+    }
+
     public Produit() {
     }
     //
     //
-
+    
     public String getIdProduit() {
         return idProduit;
     }
@@ -162,5 +171,11 @@ public class Produit {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    //
+    //
+    public boolean isInsertable() {
+        return (this.libelleProduit != null && this.libelleProduit.length() > 0) && (this.prixProduit > 0);
     }
 }

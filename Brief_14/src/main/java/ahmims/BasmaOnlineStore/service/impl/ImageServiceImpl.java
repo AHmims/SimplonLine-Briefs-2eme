@@ -53,6 +53,24 @@ public class ImageServiceImpl implements ImageService {
             return images.contains(null) ? null : images;
         } else throw new RequestException("The number of images required is between 4 & 8", HttpStatus.BAD_REQUEST);
     }
+
+    @Override
+    public List<Image> insertMultiple(Produit produit, List<String> urls) {
+        if (urls != null && urls.size() >= 4 && urls.size() <= 8) {
+            for (String url : urls) {
+                if (!imageValidator.isValidImageLink(url))
+                    throw new RequestException("Invalid image link", HttpStatus.UNPROCESSABLE_ENTITY);
+            }
+            //
+            List<Image> images = new ArrayList<>();
+            for (String url : urls) {
+                Image image = imageDao.save(new Image(url, produit));
+                images.add(image.getIdImage() != null ? image : null);
+            }
+            //
+            return images.contains(null) ? null : images;
+        } else throw new RequestException("The number of images required is between 4 & 8", HttpStatus.BAD_REQUEST);
+    }
     //
     //
 }

@@ -34,11 +34,16 @@ public class Image {
         this.lienImage = lienImage;
     }
 
+    public Image(String lienImage, Produit produit) {
+        this.lienImage = lienImage;
+        this.produit = produit;
+    }
+
     public Image() {
     }
-    //
-    //
 
+    //
+    //
     public String getIdImage() {
         return idImage;
     }

@@ -1,6 +1,7 @@
 package ahmims.BasmaOnlineStore.service.impl;
 
 import ahmims.BasmaOnlineStore.dao.CategorieDao;
+import ahmims.BasmaOnlineStore.dto.CategorieFormData;
 import ahmims.BasmaOnlineStore.exception.RequestException;
 import ahmims.BasmaOnlineStore.model.Categorie;
 import ahmims.BasmaOnlineStore.model.Image;
@@ -45,5 +46,15 @@ public class CategorieServiceImpl implements CategorieService {
                 throw new RequestException("Server error while inserting categorie, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
             } else throw new RequestException("No image provided", HttpStatus.BAD_REQUEST);
         } else throw new RequestException("Categorie name already exists", HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
+    public Categorie insert(CategorieFormData categorieFormData) {
+        return null;
+    }
+
+    @Override
+    public Categorie edit(Categorie categorie) {
+        return null;
     }
 }
