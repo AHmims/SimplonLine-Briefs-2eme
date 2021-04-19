@@ -129,7 +129,7 @@ public class CategorieTest {
 
     @Test
     public void testEditPass_1() {
-        final String idCat = "2fda5fe74bdd46aca2c690338ddf9496";
+        final String idCat = "eaf69c4f9a36496d9069cb0e4035f4fa";
         byte[] array = new byte[7]; // length is bounded by 7
         new Random().nextBytes(array);
         String randomName = new String(array, Charset.forName("UTF-8"));
@@ -144,7 +144,7 @@ public class CategorieTest {
 
     @Test
     public void testEditPass_2() {
-        final String idCat = "2fda5fe74bdd46aca2c690338ddf9496";
+        final String idCat = "eaf69c4f9a36496d9069cb0e4035f4fa";
         //
         try {
             assertNotNull(categorieService.edit(new CategorieFormData(idCat, null, "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595258357/entity/f3272ea393f69dd6cb053f2c7d193f8a-entity.png")));
@@ -156,7 +156,7 @@ public class CategorieTest {
 
     @Test
     public void testEditPass_3() {
-        final String idCat = "2fda5fe74bdd46aca2c690338ddf9496";
+        final String idCat = "eaf69c4f9a36496d9069cb0e4035f4fa";
         byte[] array = new byte[7]; // length is bounded by 7
         new Random().nextBytes(array);
         String randomName = new String(array, Charset.forName("UTF-8"));
@@ -168,5 +168,52 @@ public class CategorieTest {
         }
     }
 
+    //#endregion
+    //#region Deleting categorie test
+    @Test
+    public void testDeleteFail_1() {
+        try {
+            assertFalse(categorieService.delete(null));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void testDeleteFail_2() {
+        try {
+            assertFalse(categorieService.delete(""));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void testDeleteFail_3() {
+        try {
+            assertFalse(categorieService.delete("BAD ID"));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void testDeletePass() {
+        try {
+            assertTrue(categorieService.delete("fa88f6a4656e4d19bfb898192a94d25f"));
+        } catch (RequestException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    //#endregion
+    //#region Get all categories test
+    @Test
+    public void getAll() {
+        try {
+            assertNotNull(categorieService.getAll());
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
     //#endregion
 }

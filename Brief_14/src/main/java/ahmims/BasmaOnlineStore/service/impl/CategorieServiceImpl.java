@@ -2,6 +2,8 @@ package ahmims.BasmaOnlineStore.service.impl;
 
 import ahmims.BasmaOnlineStore.dao.CategorieDao;
 import ahmims.BasmaOnlineStore.dto.CategorieFormData;
+import ahmims.BasmaOnlineStore.dto.CategorieMin;
+import ahmims.BasmaOnlineStore.dto.ImageMin;
 import ahmims.BasmaOnlineStore.exception.RequestException;
 import ahmims.BasmaOnlineStore.model.Categorie;
 import ahmims.BasmaOnlineStore.model.Image;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,5 +96,28 @@ public class CategorieServiceImpl implements CategorieService {
                 //}
             } else throw new RequestException("No categorie exists with the given id", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Override
+    public boolean delete(String idCategorie) {
+        if (idCategorie != null && idCategorie.length() > 0) {
+            Optional<Categorie> categorie = categorieDao.findById(idCategorie);
+            //categorie.ifPresent(categorieDao::delete);
+            if (categorie.isPresent()) {
+                categorieDao.delete(categorie.get());
+                return (categorieDao.findById(idCategorie)).isEmpty();
+            }
+        }
+        throw new RequestException("Please provide a valid Categorie Id", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Override
+    public List<CategorieMin> getAll() {
+        List<CategorieMin> categories = new ArrayList<>();
+        for (Categorie categorie : categorieDao.findAll()) {
+            categories.add(new CategorieMin(categorie.getLibelleCategorie(), new ImageMin(categorie.getImage().getLienImage())));
+        }
+        //
+        return categories.size() > 0 ? categories : null;
     }
 }
