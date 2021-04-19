@@ -18,7 +18,7 @@ public class CategorieTest {
     @Autowired
     private CategorieService categorieService;
 
-    //
+    // TODO
     //#region Inserting categorie test
     @Test
     public void insertFail_1() {

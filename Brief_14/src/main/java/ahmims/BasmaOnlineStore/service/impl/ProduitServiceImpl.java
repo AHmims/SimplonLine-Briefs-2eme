@@ -2,7 +2,10 @@ package ahmims.BasmaOnlineStore.service.impl;
 
 import ahmims.BasmaOnlineStore.dao.CategorieDao;
 import ahmims.BasmaOnlineStore.dao.ProduitDao;
+import ahmims.BasmaOnlineStore.dto.CategorieMin;
+import ahmims.BasmaOnlineStore.dto.ImageMin;
 import ahmims.BasmaOnlineStore.dto.ProduitFormData;
+import ahmims.BasmaOnlineStore.dto.ProduitMin;
 import ahmims.BasmaOnlineStore.exception.RequestException;
 import ahmims.BasmaOnlineStore.model.Categorie;
 import ahmims.BasmaOnlineStore.model.Image;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,4 +64,95 @@ public class ProduitServiceImpl implements ProduitService {
         } else
             throw new RequestException("Some of the product's main data is missing or malformatted", HttpStatus.UNPROCESSABLE_ENTITY);
     }
+
+    @Override
+    public Produit edit(ProduitFormData produitFormData) {
+        if (produitFormData == null) return null;
+        //
+        if (produitFormData.getId() == null || produitFormData.getId().length() == 0)
+            throw new RequestException("Produit Id isn't valid", HttpStatus.UNPROCESSABLE_ENTITY);
+        else {
+            Optional<Produit> optionalProduit = produitDao.findById(produitFormData.getId());
+            if (optionalProduit.isPresent()) {
+                Produit produit = optionalProduit.get();
+                //
+                if (produitFormData.getLibelle() != null && produitFormData.getLibelle().length() > 0) {
+                    Produit existingProduit = produitRepository.findTopByLibelleProduit(produitFormData.getLibelle());
+                    if (existingProduit == null) produit.setLibelleProduit(produitFormData.getLibelle());
+                    else throw new RequestException("Produit name already exists", HttpStatus.BAD_REQUEST);
+                }
+                //
+                if (produitFormData.getDescription() != null && produitFormData.getDescription().length() > 0) {
+                    produit.setDescriptionProduit(produitFormData.getDescription());
+                }
+                //
+                if (produitFormData.getPrix() > 0) {
+                    produit.setPrixProduit(produitFormData.getPrix());
+                }
+                //
+                if (produitFormData.getCategorie() != null && produitFormData.getCategorie().length() > 0) {
+                    Optional<Categorie> optionalCategorie = categorieDao.findById(produitFormData.getCategorie());
+                    if (optionalCategorie.isPresent()) {
+                        produit.setCategorie(optionalCategorie.get());
+                    } else throw new RequestException("Categorie doesn't exist", HttpStatus.NOT_FOUND);
+                }
+                //
+                if (produitFormData.getImages() != null && produitFormData.getImages().size() >= 4 && produitFormData.getImages().size() <= 8) {
+                    List<Image> images = imageService.insertMultiple(produit, produitFormData.getImages());
+                    if (images != null) {
+                        for (Image preImage : produit.getImages()) {
+                            imageService.delete(preImage);
+                        }
+                        produit.setImages(null);
+                    }
+                    throw new RequestException("Error while saving product, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+                //
+                return produitDao.save(produit);
+            } else throw new RequestException("No produit exists with the given Id", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Override
+    public boolean delete(String idProduit) {
+        if (idProduit != null && idProduit.length() > 0) {
+            Optional<Produit> optionalProduit = produitDao.findById(idProduit);
+            if (optionalProduit.isPresent()) {
+                produitDao.delete(optionalProduit.get());
+                return (produitDao.findById(idProduit)).isEmpty();
+            }
+        }
+        throw new RequestException("Please provide a valid produit Id", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Override
+    public List<ProduitMin> getAll() {
+        List<ProduitMin> produits = new ArrayList<>();
+        for (Produit produit : produitDao.findAll()) {
+            List<ImageMin> images = new ArrayList<>();
+            for (Image image : produit.getImages()) {
+                images.add(new ImageMin(image.getLienImage()));
+            }
+            produits.add(new ProduitMin(produit.getLibelleProduit(), produit.getDescriptionProduit(), produit.getPrixProduit(), new CategorieMin(produit.getCategorie().getLibelleCategorie(), new ImageMin(produit.getCategorie().getImage().getLienImage())), images, produit.getDateCreation()));
+        }
+        //
+        return produits.size() > 0 ? produits : null;
+    }
+
+    @Override
+    public ProduitMin get(String idProduit) {
+        if (idProduit != null && idProduit.length() > 0) {
+            Optional<Produit> optionalProduit = produitDao.findById(idProduit);
+            if (optionalProduit.isPresent()) {
+                Produit produit = optionalProduit.get();
+                List<ImageMin> images = new ArrayList<>();
+                for (Image image : produit.getImages()) {
+                    images.add(new ImageMin(image.getLienImage()));
+                }
+                return new ProduitMin(produit.getLibelleProduit(), produit.getDescriptionProduit(), produit.getPrixProduit(), new CategorieMin(produit.getCategorie().getLibelleCategorie(), new ImageMin(produit.getCategorie().getImage().getLienImage())), images, produit.getDateCreation());
+            } else throw new RequestException("No produit exists with the given Id", HttpStatus.BAD_REQUEST);
+        }
+        throw new RequestException("Please provide a valid Produit Id", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
 }

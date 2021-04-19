@@ -87,12 +87,11 @@ public class CategorieServiceImpl implements CategorieService {
                         if (!resDlt)
                             throw new RequestException("Server error while erasing previous image, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
                     } else
-                        throw new RequestException("Server error while saving image, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
+                        throw new RequestException("Server error while saving image, try again later", HttpStatus.BAD_REQUEST);
                 }
                 //
                 //if (!originalCategorie.getImage().equals(categorie.getImage()) || !originalCategorie.getLibelleCategorie().equals(categorie.getLibelleCategorie())) {
-                categorie = categorieDao.save(categorie);
-                return categorie;
+                return categorieDao.save(categorie);
                 //}
             } else throw new RequestException("No categorie exists with the given id", HttpStatus.BAD_REQUEST);
         }

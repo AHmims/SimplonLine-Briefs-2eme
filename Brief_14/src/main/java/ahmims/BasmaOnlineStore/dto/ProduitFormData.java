@@ -3,6 +3,7 @@ package ahmims.BasmaOnlineStore.dto;
 import java.util.List;
 
 public class ProduitFormData {
+    private String id;
     private String libelle;
     private String description;
     private double prix;
@@ -11,6 +12,15 @@ public class ProduitFormData {
 
     //
     //
+    public ProduitFormData(String id, String libelle, String description, double prix, String categorie, List<String> images) {
+        this.id = id;
+        this.libelle = libelle;
+        this.description = description;
+        this.prix = prix;
+        this.categorie = categorie;
+        this.images = images;
+    }
+
     public ProduitFormData(String libelle, String description, double prix, String categorie, List<String> images) {
         this.libelle = libelle;
         this.description = description;
@@ -23,6 +33,14 @@ public class ProduitFormData {
     }
     //
     //
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getLibelle() {
         return libelle;
