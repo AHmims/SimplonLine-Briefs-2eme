@@ -120,4 +120,16 @@ public class CategorieServiceImpl implements CategorieService {
         //
         return categories.size() > 0 ? categories : null;
     }
+
+    @Override
+    public CategorieMin get(String idCategorie) {
+        if (idCategorie != null && idCategorie.length() > 0) {
+            Optional<Categorie> optionalCategorie = categorieDao.findById(idCategorie);
+            if (optionalCategorie.isPresent()) {
+                Categorie categorie = optionalCategorie.get();
+                return new CategorieMin(categorie.getLibelleCategorie(), new ImageMin(categorie.getImage().getLienImage()));
+            } else throw new RequestException("No categorie exists with the given id", HttpStatus.BAD_REQUEST);
+        }
+        throw new RequestException("Please provide a valid Categorie Id", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 }

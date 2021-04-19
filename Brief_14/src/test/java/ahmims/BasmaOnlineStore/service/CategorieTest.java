@@ -215,5 +215,41 @@ public class CategorieTest {
             fail();
         }
     }
+
+    //#endregion
+    //#region Get Categorie By Id test
+    @Test
+    public void getCategorieFail_1() {
+        try {
+            assertNull(categorieService.get(null));
+        } catch (RequestException ignore) {
+        }
+    }
+
+    @Test
+    public void getCategorieFail_2() {
+        try {
+            assertNull(categorieService.get(""));
+        } catch (RequestException ignore) {
+        }
+    }
+
+    @Test
+    public void getCategorieFail_3() {
+        try {
+            assertNull(categorieService.get("BAD ID"));
+        } catch (RequestException ignore) {
+        }
+    }
+
+    @Test
+    public void getCategoriePass() {
+        try {
+            assertNotNull(categorieService.get("48480a2a6dfa468fb5badd33da75663c"));
+        } catch (RequestException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
     //#endregion
 }

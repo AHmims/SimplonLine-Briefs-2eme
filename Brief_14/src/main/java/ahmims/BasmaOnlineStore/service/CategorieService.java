@@ -18,4 +18,6 @@ public interface CategorieService {
     boolean delete(String idCategorie);
 
     List<CategorieMin> getAll();
+
+    CategorieMin get(String idCategorie);
 }
