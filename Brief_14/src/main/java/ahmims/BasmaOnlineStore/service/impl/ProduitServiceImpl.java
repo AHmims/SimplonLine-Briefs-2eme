@@ -97,15 +97,17 @@ public class ProduitServiceImpl implements ProduitService {
                     } else throw new RequestException("Categorie doesn't exist", HttpStatus.NOT_FOUND);
                 }
                 //
-                if (produitFormData.getImages() != null && produitFormData.getImages().size() >= 4 && produitFormData.getImages().size() <= 8) {
-                    List<Image> images = imageService.insertMultiple(produit, produitFormData.getImages());
-                    if (images != null) {
-                        for (Image preImage : produit.getImages()) {
-                            imageService.delete(preImage);
+                if (produitFormData.getImages() != null) {
+                    if (produitFormData.getImages().size() >= 4 && produitFormData.getImages().size() <= 8) {
+                        List<Image> images = imageService.insertMultiple(produit, produitFormData.getImages());
+                        if (images != null) {
+                            for (Image preImage : produit.getImages()) {
+                                imageService.delete(preImage);
+                            }
+                            produit.setImages(null);
                         }
-                        produit.setImages(null);
-                    }
-                    throw new RequestException("Error while saving product, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
+                        throw new RequestException("Error while saving product, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
+                    } else throw new RequestException("Images invalid", HttpStatus.UNPROCESSABLE_ENTITY);
                 }
                 //
                 return produitDao.save(produit);

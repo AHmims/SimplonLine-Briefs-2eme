@@ -37,7 +37,7 @@ public class Produit {
     @ManyToOne
     @JoinColumn(name = "idCategorie")
     private Categorie categorie;
-    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Image> images;
     //
     //
@@ -78,6 +78,7 @@ public class Produit {
         this.categorie = categorie;
         this.images = images;
         this.dateCreation = new Date();
+        this.visible = true;
     }
 
     public Produit() {

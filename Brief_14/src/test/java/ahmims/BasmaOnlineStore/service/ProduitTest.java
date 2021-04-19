@@ -99,7 +99,7 @@ public class ProduitTest {
     @Test
     public void insertPass_m1() {
         try {
-            Optional<Categorie> categorie = categorieDao.findById("5a459cc1e4c54aae957a323a86317bfa");
+            Optional<Categorie> categorie = categorieDao.findById("48480a2a6dfa468fb5badd33da75663c");
             byte[] array = new byte[7]; // length is bounded by 7
             new Random().nextBytes(array);
             String randomName = new String(array, Charset.forName("UTF-8"));
@@ -115,5 +115,134 @@ public class ProduitTest {
         }
     }
 
+    //#endregion
+    //#region Edit Produit tests
+    @Test
+    public void editFail_1() {
+        try {
+            ProduitFormData produitFormData = new ProduitFormData();
+            assertNull(produitService.edit(produitFormData));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void editFail_2() {
+        try {
+            assertNull(produitService.edit(null));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void editFail_3() {
+        try {
+            ProduitFormData produitFormData = new ProduitFormData("bad id", "new name", "", 230, "BadId", new ArrayList<>(List.of("hmmmm")));
+            assertNull(produitService.edit(produitFormData));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void editFail_4() {
+        try {
+            ProduitFormData produitFormData = new ProduitFormData("2e89132cc25c4f99afc289daf250c833", "new name", "", 230, "BadId", new ArrayList<>(List.of("hmmmm")));
+            assertNull(produitService.edit(produitFormData));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void editFail_5() {
+        try {
+            ProduitFormData produitFormData = new ProduitFormData("2e89132cc25c4f99afc289daf250c833", "new name 3", null, 0, null, new ArrayList<>(List.of("hmmmm")));
+            assertNull(produitService.edit(produitFormData));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void editPass_1() {
+        try {
+            ProduitFormData produitFormData = new ProduitFormData("2e89132cc25c4f99afc289daf250c833", "new name 3", null, 232, null, null);
+            ;
+            assertNotNull(produitService.edit(produitFormData));
+        } catch (RequestException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void editPass_2() {
+        try {
+            ProduitFormData produitFormData = new ProduitFormData("2e89132cc25c4f99afc289daf250c833", null, "New Desc", 0, "eaf69c4f9a36496d9069cb0e4035f4fa", null);
+            ;
+            assertNotNull(produitService.edit(produitFormData));
+        } catch (RequestException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    //#endregion
+    //#region Delete Produit test
+    @Test
+    public void deleteFail() {
+        try {
+            assertFalse(produitService.delete("BAD ID"));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void deletePass() {
+        try {
+            assertTrue(produitService.delete("2e89132cc25c4f99afc289daf250c833"));
+        } catch (RequestException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    //#endregion
+    //#region Get all Produits test
+    @Test
+    public void getAll() {
+        try {
+            assertNotNull(produitService.getAll());
+        } catch (RequestException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    //#endregion
+    //#region Get Produit by id tests
+    @Test
+    public void getByIdFail_1() {
+        try {
+            assertNull(produitService.get(null));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void getByIdFail_2() {
+        try {
+            assertNull(produitService.get("Bad Id"));
+        } catch (RequestException ignored) {
+        }
+    }
+
+    @Test
+    public void getByIdPass() {
+        try {
+            assertNotNull(produitService.get("8b9b87ea70994ff5a4c09a30cc0109a0"));
+        } catch (RequestException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
     //#endregion
 }
