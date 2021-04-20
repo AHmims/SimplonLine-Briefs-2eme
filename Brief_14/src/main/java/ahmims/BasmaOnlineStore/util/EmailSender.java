@@ -4,7 +4,10 @@ import ahmims.BasmaOnlineStore.dto.EmailFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Repository;
+
+import javax.mail.internet.MimeMessage;
 
 @Repository("EmailSender")
 public class EmailSender {
@@ -19,11 +22,12 @@ public class EmailSender {
     //
     public boolean sendEmail(EmailFormat emailFormat) {
         try {
-            SimpleMailMessage msg = new SimpleMailMessage();
+            MimeMessage msg = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(msg, true);
             //
-            msg.setTo(emailFormat.getReceiver());
-            msg.setSubject(emailFormat.getSubject());
-            msg.setText(emailFormat.getContent());
+            helper.setTo(emailFormat.getReceiver());
+            helper.setSubject(emailFormat.getSubject());
+            helper.setText(emailFormat.getContent());
             //
             javaMailSender.send(msg);
             return true;
