@@ -4,9 +4,11 @@ import ahmims.BasmaOnlineStore.config.SpringApplicationContext;
 import ahmims.BasmaOnlineStore.dto.UserResponseData;
 import ahmims.BasmaOnlineStore.model.Utilisateur;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
 
 @SpringBootApplication
 public class BasmaOnlineStoreApplication {
