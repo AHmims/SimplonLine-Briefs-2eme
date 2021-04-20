@@ -17,8 +17,8 @@ public class Administrateur extends Utilisateur {
     //
     //
 
-    public Administrateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, List<Coupon> coupons, List<Produit> produits) {
-        super(idUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, role);
+    public Administrateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, List<Coupon> coupons, List<Produit> produits) {
+        super(idUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
         this.coupons = coupons;
         this.produits = produits;
     }

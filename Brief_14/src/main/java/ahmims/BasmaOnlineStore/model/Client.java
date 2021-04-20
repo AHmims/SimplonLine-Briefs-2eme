@@ -28,8 +28,8 @@ public class Client extends Utilisateur {
     //
     //
 
-    public Client(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, String imgClient, Authentification authentification, Favori favori, List<Coupon> coupons, List<Panier> paniers, List<Adresse> adresses) {
-        super(idUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, role);
+    public Client(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, String imgClient, Authentification authentification, Favori favori, List<Coupon> coupons, List<Panier> paniers, List<Adresse> adresses) {
+        super(idUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
         this.imgClient = imgClient;
         this.authentification = authentification;
         this.favori = favori;

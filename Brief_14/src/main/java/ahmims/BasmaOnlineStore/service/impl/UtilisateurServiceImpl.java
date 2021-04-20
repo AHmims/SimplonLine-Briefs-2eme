@@ -57,7 +57,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         if (userAuthInputData.isFilled()) {
             try {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userAuthInputData.getEmail(), userAuthInputData.getPassword()));
-                return setupLoginResponse(utilisateurRepository.findTopByEmailUtilisateur(userAuthInputData.getEmail()));
+                Utilisateur utilisateur = utilisateurRepository.findTopByEmailUtilisateur(userAuthInputData.getEmail());
+                if (utilisateur.getClass().equals(Client.class)) {
+                    switch (utilisateur.getStatutUtilisateur()) {
+                        case -1:
+                            throw new RequestException("Your account has been disabled, please contact us if you believe this is a mistake.", HttpStatus.BAD_REQUEST);
+                        case 0:
+                            throw new RequestException("Please validate your account first before accessing the platform", HttpStatus.BAD_REQUEST);
+                        default:
+                            break;
+                    }
+                }
+                return setupLoginResponse(findTopByEmail(userAuthInputData.getEmail()));
             } catch (AuthenticationException e) {
                 throw new RequestException("Email/mot de passe fourni non valide", HttpStatus.UNPROCESSABLE_ENTITY);
             }
@@ -199,6 +210,20 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         Optional<Utilisateur> user = utilisateurDao.findById(id);
         if (user.isPresent()) {
             return getUerResponse(user.get());
+        } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public UpdateRes disableAccount(String idUtilisateur) {
+        Optional<Utilisateur> optionalUtilisateur = utilisateurDao.findById(idUtilisateur);
+        if (optionalUtilisateur.isPresent()) {
+            Utilisateur utilisateur = optionalUtilisateur.get();
+            utilisateur.setStatutUtilisateur(-1);
+            utilisateur = utilisateurDao.save(utilisateur);
+            //
+            if (utilisateur.getStatutUtilisateur() == -1)
+                return new UpdateRes(true, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
+            else throw new RequestException("Account was not disabled", HttpStatus.BAD_REQUEST);
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 

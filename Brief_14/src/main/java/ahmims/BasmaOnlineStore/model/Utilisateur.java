@@ -27,6 +27,8 @@ public abstract class Utilisateur {
     @Column(name = "dateCreation", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
+    @Column(name = "statutUtilisateur", columnDefinition = "integer default 0")
+    private int statutUtilisateur;
     //
     @ManyToOne
     @JoinColumn(name = "idRole")
@@ -34,13 +36,14 @@ public abstract class Utilisateur {
     //
     //
 
-    public Utilisateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role) {
+    public Utilisateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role) {
         this.idUtilisateur = idUtilisateur;
         this.nomUtilisateur = nomUtilisateur;
         this.prenomUtilisateur = prenomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = dateCreation;
+        this.statutUtilisateur = statutUtilisateur;
         this.role = role;
     }
 
@@ -136,5 +139,13 @@ public abstract class Utilisateur {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public int getStatutUtilisateur() {
+        return statutUtilisateur;
+    }
+
+    public void setStatutUtilisateur(int statutUtilisateur) {
+        this.statutUtilisateur = statutUtilisateur;
     }
 }

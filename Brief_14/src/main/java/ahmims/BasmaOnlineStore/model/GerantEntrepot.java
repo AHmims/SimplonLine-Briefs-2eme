@@ -17,8 +17,8 @@ public class GerantEntrepot extends Utilisateur {
     //
     //
 
-    public GerantEntrepot(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, List<Commande> commandes) {
-        super(idUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, role);
+    public GerantEntrepot(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, List<Commande> commandes) {
+        super(idUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
         this.commandes = commandes;
     }
 

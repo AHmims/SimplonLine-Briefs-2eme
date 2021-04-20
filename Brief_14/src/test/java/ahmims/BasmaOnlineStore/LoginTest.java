@@ -62,7 +62,7 @@ public class LoginTest {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        UserAuthInputData userAuthInputData = new UserAuthInputData("test@test.com", "123456789");
+        UserAuthInputData userAuthInputData = new UserAuthInputData("email99@test.com", "123456789");
         //
         this.mockMvc.perform(post("/auth/login").contentType(APPLICATION_JSON).content(ow.writeValueAsString(userAuthInputData))).andDo(print()).andExpect(status().isOk());
     }

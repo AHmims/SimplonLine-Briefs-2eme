@@ -61,4 +61,11 @@ public class UtilisateurCont {
     public ResponseEntity<DeleteRes> deleteUser(@PathVariable String id) {
         return new ResponseEntity<>(utilisateurService.deleteUser(id), HttpStatus.valueOf(200));
     }
+
+    //Disable user
+    @PostMapping("/disable/{id}")
+    @PreAuthorize("hasAuthority('1')")
+    public ResponseEntity<UpdateRes> disableUser(@PathVariable String id) {
+        return new ResponseEntity<>(utilisateurService.disableAccount(id), HttpStatus.valueOf(200));
+    }
 }

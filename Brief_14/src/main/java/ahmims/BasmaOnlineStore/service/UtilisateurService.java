@@ -23,4 +23,6 @@ public interface UtilisateurService {
     DeleteRes deleteUser(String id);
 
     UserMainData get(String id);
+
+    UpdateRes disableAccount(String idUtilisateur);
 }
