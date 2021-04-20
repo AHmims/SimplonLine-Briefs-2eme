@@ -36,8 +36,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final UtilisateurDao utilisateurDao;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final CompteVerificationService compteVerificationService;
 
-    public UtilisateurServiceImpl(ClientService clientService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, GerantEntrepotService gerantEntrepotService, UtilisateurRepository utilisateurRepository, UtilisateurDao utilisateurDao, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder) {
+    public UtilisateurServiceImpl(ClientService clientService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, GerantEntrepotService gerantEntrepotService, UtilisateurRepository utilisateurRepository, UtilisateurDao utilisateurDao, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, CompteVerificationService compteVerificationService) {
         this.clientService = clientService;
         this.administrateurService = administrateurService;
         this.jwtManager = jwtManager;
@@ -49,6 +50,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         this.utilisateurDao = utilisateurDao;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
+        this.compteVerificationService = compteVerificationService;
     }
 
     //#endregion
@@ -97,8 +99,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 if (!isValid) throw new RequestException(errorMessage.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
                 else {
                     String libelleRole = "Role_1";
-                    if (!userFormData.getType().toLowerCase().equals("client"))
+                    if (!userFormData.getType().toLowerCase().equals("client")) {
                         libelleRole = "Role_2";
+                    }
                     Role role = roleService.getByLibelle(libelleRole);
                     if (role == null)
                         throw new RequestException("Server error. Role not found", HttpStatus.BAD_REQUEST);
@@ -108,10 +111,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                     user.setRole(role);
                     user.setPassUtilisateur(passwordEncoder.encode(user.getPassUtilisateur()));
                     user = insertUser(user);
-                    if (user != null && user.getIdUtilisateur() != null)
+                    if (user != null && user.getIdUtilisateur() != null) {
                         //all good
+                        if (user.getClass().equals(Client.class)) {
+                            if (!compteVerificationService.sendEmail(user))
+                                throw new RequestException("Verification email not sent", HttpStatus.INTERNAL_SERVER_ERROR);
+                        }
                         return setupLoginResponse(user);
-                    else
+                    } else
                         throw new RequestException("Server error. User not saved", HttpStatus.BAD_REQUEST);
                 }
             } else throw new RequestException("Le champ <type> est invalide", HttpStatus.BAD_REQUEST);
