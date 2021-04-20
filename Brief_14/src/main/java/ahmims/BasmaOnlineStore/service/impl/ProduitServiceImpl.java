@@ -2,10 +2,7 @@ package ahmims.BasmaOnlineStore.service.impl;
 
 import ahmims.BasmaOnlineStore.dao.CategorieDao;
 import ahmims.BasmaOnlineStore.dao.ProduitDao;
-import ahmims.BasmaOnlineStore.dto.CategorieMin;
-import ahmims.BasmaOnlineStore.dto.ImageMin;
-import ahmims.BasmaOnlineStore.dto.ProduitFormData;
-import ahmims.BasmaOnlineStore.dto.ProduitMin;
+import ahmims.BasmaOnlineStore.dto.*;
 import ahmims.BasmaOnlineStore.exception.RequestException;
 import ahmims.BasmaOnlineStore.model.Categorie;
 import ahmims.BasmaOnlineStore.model.Image;
@@ -38,12 +35,12 @@ public class ProduitServiceImpl implements ProduitService {
 
     //#endregion
     @Override
-    public Produit insert(Produit produit) {
+    public ProduitMin insert(Produit produit) {
         if (produit != null && produit.isInsertable()) {
             Produit existingProduit = produitRepository.findTopByLibelleProduit(produit.getLibelleProduit());
             if (existingProduit == null || (existingProduit.getIdProduit() == null && existingProduit.getIdProduit().length() == 0)) {
                 produit = produitDao.save(produit);
-                return produit.getIdProduit() != null ? produit : null;
+                return produit.getIdProduit() != null ? new ProduitMin(produit) : null;
             } else
                 throw new RequestException("There is a product that already exists with the same name", HttpStatus.BAD_REQUEST);
         } else
@@ -51,7 +48,7 @@ public class ProduitServiceImpl implements ProduitService {
     }
 
     @Override
-    public Produit insert(ProduitFormData pfd) {
+    public ProduitMin insert(ProduitFormData pfd) {
         if (pfd != null && pfd.isInsertable()) {
             Optional<Categorie> categorie = categorieDao.findById(pfd.getCategorie());
             if (categorie.isPresent()) {
@@ -66,7 +63,7 @@ public class ProduitServiceImpl implements ProduitService {
     }
 
     @Override
-    public Produit edit(ProduitFormData produitFormData) {
+    public ProduitMin edit(ProduitFormData produitFormData) {
         if (produitFormData == null) return null;
         //
         if (produitFormData.getId() == null || produitFormData.getId().length() == 0)
@@ -110,18 +107,20 @@ public class ProduitServiceImpl implements ProduitService {
                     } else throw new RequestException("Images invalid", HttpStatus.UNPROCESSABLE_ENTITY);
                 }
                 //
-                return produitDao.save(produit);
+                return new ProduitMin(produitDao.save(produit));
             } else throw new RequestException("No produit exists with the given Id", HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public boolean delete(String idProduit) {
+    public DeleteRes delete(String idProduit) {
         if (idProduit != null && idProduit.length() > 0) {
             Optional<Produit> optionalProduit = produitDao.findById(idProduit);
             if (optionalProduit.isPresent()) {
                 produitDao.delete(optionalProduit.get());
-                return (produitDao.findById(idProduit)).isEmpty();
+                if ((produitDao.findById(idProduit)).isPresent())
+                    throw new RequestException("Produit not deleted", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new DeleteRes(1, optionalProduit.get().getIdProduit(), Produit.class.getSimpleName());
             }
         }
         throw new RequestException("Please provide a valid produit Id", HttpStatus.UNPROCESSABLE_ENTITY);

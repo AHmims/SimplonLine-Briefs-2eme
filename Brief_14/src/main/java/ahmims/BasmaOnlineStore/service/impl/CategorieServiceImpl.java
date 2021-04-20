@@ -33,7 +33,7 @@ public class CategorieServiceImpl implements CategorieService {
 
     //#endregion
     @Override
-    public Categorie insert(Categorie categorie) {
+    public CategorieMin insert(Categorie categorie) {
         if (categorie == null) return null;
         //
         if (categorie.getLibelleCategorie() == null || categorie.getLibelleCategorie().length() == 0)
@@ -46,7 +46,7 @@ public class CategorieServiceImpl implements CategorieService {
                 if (image != null) {
                     categorie.setImage(image);
                     categorie = categorieDao.save(categorie);
-                    if (categorie.getIdCategorie() != null) return categorie;
+                    if (categorie.getIdCategorie() != null) return new CategorieMin(categorie);
                 }
                 throw new RequestException("Server error while inserting categorie, try again later", HttpStatus.INTERNAL_SERVER_ERROR);
             } else throw new RequestException("No image provided", HttpStatus.BAD_REQUEST);
@@ -54,12 +54,12 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public Categorie insert(CategorieFormData categorieFormData) {
+    public CategorieMin insert(CategorieFormData categorieFormData) {
         return insert(new Categorie(categorieFormData.getLibelle(), new Image(categorieFormData.getImage())));
     }
 
     @Override
-    public Categorie edit(CategorieFormData categorieFormData) {
+    public CategorieMin edit(CategorieFormData categorieFormData) {
         if (categorieFormData == null) return null;
         //
         if (categorieFormData.getId() == null || categorieFormData.getId().length() == 0)
@@ -91,7 +91,7 @@ public class CategorieServiceImpl implements CategorieService {
                 }
                 //
                 //if (!originalCategorie.getImage().equals(categorie.getImage()) || !originalCategorie.getLibelleCategorie().equals(categorie.getLibelleCategorie())) {
-                return categorieDao.save(categorie);
+                return new CategorieMin(categorieDao.save(categorie));
                 //}
             } else throw new RequestException("No categorie exists with the given id", HttpStatus.BAD_REQUEST);
         }

@@ -1,5 +1,6 @@
 package ahmims.BasmaOnlineStore.service;
 
+import ahmims.BasmaOnlineStore.dto.DeleteRes;
 import ahmims.BasmaOnlineStore.dto.ProduitFormData;
 import ahmims.BasmaOnlineStore.dto.ProduitMin;
 import ahmims.BasmaOnlineStore.model.Produit;
@@ -9,13 +10,13 @@ import java.util.List;
 
 @Repository
 public interface ProduitService {
-    Produit insert(Produit produit);
+    ProduitMin insert(Produit produit);
 
-    Produit insert(ProduitFormData produitFormData);
+    ProduitMin insert(ProduitFormData produitFormData);
 
-    Produit edit(ProduitFormData produitFormData);
+    ProduitMin edit(ProduitFormData produitFormData);
 
-    boolean delete(String idProduit);
+    DeleteRes delete(String idProduit);
 
     List<ProduitMin> getAll();
 

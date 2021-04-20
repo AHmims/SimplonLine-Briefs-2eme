@@ -1,5 +1,9 @@
 package ahmims.BasmaOnlineStore.dto;
 
+import ahmims.BasmaOnlineStore.model.Image;
+import ahmims.BasmaOnlineStore.model.Produit;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +23,18 @@ public class ProduitMin {
         this.categorie = categorie;
         this.images = images;
         this.dateAjout = dateAjout;
+    }
+
+    public ProduitMin(Produit produit) {
+        this.libelle = produit.getLibelleProduit();
+        this.description = produit.getDescriptionProduit();
+        this.prix = produit.getPrixProduit();
+        this.categorie = new CategorieMin(produit.getCategorie());
+        this.images = new ArrayList<>();
+        for (Image image : produit.getImages()) {
+            this.images.add(new ImageMin(image.getLienImage()));
+        }
+        this.dateAjout = produit.getDateCreation();
     }
 
     public ProduitMin() {

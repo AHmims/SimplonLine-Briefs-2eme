@@ -1,5 +1,7 @@
 package ahmims.BasmaOnlineStore.dto;
 
+import ahmims.BasmaOnlineStore.model.Categorie;
+
 public class CategorieMin {
     private String libelle;
     private ImageMin image;
@@ -12,6 +14,11 @@ public class CategorieMin {
 
     public CategorieMin(String libelle) {
         this.libelle = libelle;
+    }
+
+    public CategorieMin(Categorie categorie) {
+        this.libelle = categorie.getLibelleCategorie();
+        this.image = new ImageMin(categorie.getImage().getLienImage());
     }
 
     public CategorieMin() {

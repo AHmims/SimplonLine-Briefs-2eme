@@ -9,11 +9,11 @@ import java.util.List;
 
 @Repository
 public interface CategorieService {
-    Categorie insert(Categorie categorie);
+    CategorieMin insert(Categorie categorie);
 
-    Categorie insert(CategorieFormData categorieFormData);
+    CategorieMin insert(CategorieFormData categorieFormData);
 
-    Categorie edit(CategorieFormData categorieFormData);
+    CategorieMin edit(CategorieFormData categorieFormData);
 
     boolean delete(String idCategorie);
 
