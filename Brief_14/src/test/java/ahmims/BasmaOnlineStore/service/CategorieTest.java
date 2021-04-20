@@ -173,7 +173,7 @@ public class CategorieTest {
     @Test
     public void testDeleteFail_1() {
         try {
-            assertFalse(categorieService.delete(null));
+            assertNull(categorieService.delete(null));
         } catch (RequestException ignored) {
         }
     }
@@ -181,7 +181,7 @@ public class CategorieTest {
     @Test
     public void testDeleteFail_2() {
         try {
-            assertFalse(categorieService.delete(""));
+            assertNull(categorieService.delete(""));
         } catch (RequestException ignored) {
         }
     }
@@ -189,7 +189,7 @@ public class CategorieTest {
     @Test
     public void testDeleteFail_3() {
         try {
-            assertFalse(categorieService.delete("BAD ID"));
+            assertNull(categorieService.delete("BAD ID"));
         } catch (RequestException ignored) {
         }
     }
@@ -197,7 +197,7 @@ public class CategorieTest {
     @Test
     public void testDeletePass() {
         try {
-            assertTrue(categorieService.delete("fa88f6a4656e4d19bfb898192a94d25f"));
+            assertNotNull(categorieService.delete("fa88f6a4656e4d19bfb898192a94d25f"));
         } catch (RequestException e) {
             e.printStackTrace();
             fail();
