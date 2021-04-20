@@ -3,6 +3,7 @@ package ahmims.BasmaOnlineStore.service.impl;
 import ahmims.BasmaOnlineStore.dao.CategorieDao;
 import ahmims.BasmaOnlineStore.dto.CategorieFormData;
 import ahmims.BasmaOnlineStore.dto.CategorieMin;
+import ahmims.BasmaOnlineStore.dto.DeleteRes;
 import ahmims.BasmaOnlineStore.dto.ImageMin;
 import ahmims.BasmaOnlineStore.exception.RequestException;
 import ahmims.BasmaOnlineStore.model.Categorie;
@@ -98,13 +99,15 @@ public class CategorieServiceImpl implements CategorieService {
     }
 
     @Override
-    public boolean delete(String idCategorie) {
+    public DeleteRes delete(String idCategorie) {
         if (idCategorie != null && idCategorie.length() > 0) {
             Optional<Categorie> categorie = categorieDao.findById(idCategorie);
             //categorie.ifPresent(categorieDao::delete);
             if (categorie.isPresent()) {
                 categorieDao.delete(categorie.get());
-                return (categorieDao.findById(idCategorie)).isEmpty();
+                if ((categorieDao.findById(idCategorie)).isPresent())
+                    throw new RequestException("Categorie not deleted", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new DeleteRes(1, categorie.get().getIdCategorie(), Categorie.class.getSimpleName());
             }
         }
         throw new RequestException("Please provide a valid Categorie Id", HttpStatus.UNPROCESSABLE_ENTITY);

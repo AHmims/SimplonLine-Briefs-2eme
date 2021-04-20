@@ -2,6 +2,7 @@ package ahmims.BasmaOnlineStore.service;
 
 import ahmims.BasmaOnlineStore.dto.CategorieFormData;
 import ahmims.BasmaOnlineStore.dto.CategorieMin;
+import ahmims.BasmaOnlineStore.dto.DeleteRes;
 import ahmims.BasmaOnlineStore.model.Categorie;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ public interface CategorieService {
 
     CategorieMin edit(CategorieFormData categorieFormData);
 
-    boolean delete(String idCategorie);
+    DeleteRes delete(String idCategorie);
 
     List<CategorieMin> getAll();
 
