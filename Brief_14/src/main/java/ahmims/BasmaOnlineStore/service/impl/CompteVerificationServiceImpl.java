@@ -1,6 +1,7 @@
 package ahmims.BasmaOnlineStore.service.impl;
 
 import ahmims.BasmaOnlineStore.dao.CompteVerificationDao;
+import ahmims.BasmaOnlineStore.dao.UtilisateurDao;
 import ahmims.BasmaOnlineStore.dto.EmailFormat;
 import ahmims.BasmaOnlineStore.dto.RoleShort;
 import ahmims.BasmaOnlineStore.dto.UserResponseData;
@@ -21,16 +22,18 @@ import java.util.Optional;
 public class CompteVerificationServiceImpl implements CompteVerificationService {
     //#region
     private final CompteVerificationDao compteVerificationDao;
+    private final UtilisateurDao utilisateurDao;
     private final EmailSender emailSender;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
 
 
-    public CompteVerificationServiceImpl(CompteVerificationDao compteVerificationDao, EmailSender emailSender, JwtManager jwtManager, ModelMapper modelMapper) {
+    public CompteVerificationServiceImpl(CompteVerificationDao compteVerificationDao, EmailSender emailSender, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurDao utilisateurDao) {
         this.compteVerificationDao = compteVerificationDao;
         this.emailSender = emailSender;
         this.jwtManager = jwtManager;
         this.modelMapper = modelMapper;
+        this.utilisateurDao = utilisateurDao;
     }
 
     //#endregion
@@ -60,9 +63,14 @@ public class CompteVerificationServiceImpl implements CompteVerificationService 
                 CompteVerification compteVerification = optionalCompteVerification.get();
                 if (compteVerification.getStatutCompteVerification() == 0) {
                     compteVerification.setStatutCompteVerification(1);
+                    //
+                    Utilisateur utilisateur = compteVerification.getUtilisateur();
+                    utilisateur.setStatutUtilisateur(1);
+                    compteVerification.setUtilisateur(utilisateur);
+                    //
                     compteVerificationDao.save(compteVerification);
                     //
-                    return setupLoginResponse(compteVerification.getUtilisateur());
+                    return setupLoginResponse(utilisateur);
                 } else throw new RequestException("Compte already validated", HttpStatus.ALREADY_REPORTED);
             }
         }

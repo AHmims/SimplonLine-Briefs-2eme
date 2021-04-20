@@ -240,7 +240,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private UserResponseData setupLoginResponse(Utilisateur utilisateur) {
         UserResponseData userResponseData = modelMapper.map(utilisateur, UserResponseData.class);
         userResponseData.setRole(utilisateur.getRole() != null ? modelMapper.map(utilisateur.getRole(), RoleShort.class) : null);
-        userResponseData.setToken(jwtManager.createToken(utilisateur));
+        if (!utilisateur.getClass().equals(Client.class))
+            userResponseData.setToken(jwtManager.createToken(utilisateur));
         return userResponseData;
     }
 
