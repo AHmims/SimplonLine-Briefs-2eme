@@ -27,7 +27,7 @@ public class EmailSender {
             //
             helper.setTo(emailFormat.getReceiver());
             helper.setSubject(emailFormat.getSubject());
-            helper.setText(emailFormat.getContent());
+            helper.setText(emailFormat.getContent(), true);
             //
             javaMailSender.send(msg);
             return true;

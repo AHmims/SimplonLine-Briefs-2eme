@@ -81,6 +81,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public UserResponseData createUser(UserFormData userFormData) {
         if (userFormData.isFilled(0)) {
+            if (utilisateurRepository.findTopByEmailUtilisateur(userFormData.getEmail()) != null)
+                throw new RequestException("Email already exists, choose another one", HttpStatus.BAD_REQUEST);
             Utilisateur user = null;
             user = userFormData.getType().toLowerCase().equals("client") ? new Client(userFormData, null) : userFormData.getType().toLowerCase().equals("administrateur") ? new Administrateur(userFormData) : userFormData.getType().toLowerCase().equals("gerantentrepot") ? new GerantEntrepot(userFormData) : null;
             //
@@ -240,7 +242,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private UserResponseData setupLoginResponse(Utilisateur utilisateur) {
         UserResponseData userResponseData = modelMapper.map(utilisateur, UserResponseData.class);
         userResponseData.setRole(utilisateur.getRole() != null ? modelMapper.map(utilisateur.getRole(), RoleShort.class) : null);
-        if (!utilisateur.getClass().equals(Client.class))
+        if (utilisateur.getStatutUtilisateur() == 1)
             userResponseData.setToken(jwtManager.createToken(utilisateur));
         return userResponseData;
     }
