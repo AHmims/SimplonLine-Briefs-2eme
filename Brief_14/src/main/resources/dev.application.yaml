@@ -13,8 +13,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: nioceusa@gmail.com
-    password: &jHVP3/D/fT<tX27
+    username: <username>
+    password: <password>
 
 server:
   port: 3420
