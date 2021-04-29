@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,12 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() {
-    console.log("ahln");
+  navType: number = 0;
+
+  constructor(router: Router) {
+    this.setNavType(router.url);
+    router.events.forEach((event) => {
+      if (event instanceof NavigationStart) {
+        this.setNavType(event.url);
+      }
+    });
   }
 
   ngOnInit(): void {
-    console.log("ahln");
   }
 
+  setNavType(url: string) {
+    switch (url.split('/')[2]) {
+      case 'users':
+        this.navType = 1;
+        break;
+      case 'commandes':
+        this.navType = 2;
+        break;
+      default:
+        this.navType = 0;
+    }
+  }
 }
