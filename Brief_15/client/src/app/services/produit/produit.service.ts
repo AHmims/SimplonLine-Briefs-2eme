@@ -16,6 +16,11 @@ export class ProduitService {
   }
 
   getAll = (): Observable<Produit[]> => {
-    return this.http.get(_BASE_URL.concat('/all')).pipe(map((res: any) => res.json().response.map((prodit: Produit) => new Produit().deserialize(prodit))));
+    return this.http.get(_BASE_URL.concat('/all')).pipe(map((res: any) => {
+      if (res == null || res.length == 0) {
+        return new Observable<Produit[]>();
+      }
+      return res.map((prodit: Produit) => new Produit().deserialize(prodit));
+    }));
   };
 }

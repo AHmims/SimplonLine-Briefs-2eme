@@ -1,0 +1,16 @@
+GET http://localhost:3420/api/produit/all
+
+<> 2021-04-29T162114.200.json
+
+###
+
+GET http://localhost:3420/api/produit/all
+
+###
+
+GET http://localhost:3420/produit/all
+
+<> 2021-04-29T162010.404.html
+
+###
+
