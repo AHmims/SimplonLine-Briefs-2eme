@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .navLink {
+    @apply block py-2 px-4.5 rounded-md transition-colors duration-300 ease-in-out hover:bg-coolGray-100;
+  }
+
+  .buttonMain {
+    @apply font-Inter text-sm font-medium py-2 px-7 bg-blueGray-900 rounded-md text-white;
+  }
+
+  .buttonSec {
+    @apply font-Inter text-sm font-medium py-2 px-7 bg-coolGray-200 rounded-md text-blueGray-900;
+  }
+
+  .buttonAlt {
+    @apply font-Inter text-lg font-medium py-3 px-7 bg-customClr-trans rounded-md text-white;
+  }
+
+  .buttonBorder {
+    @apply font-Inter text-sm font-medium py-2 px-7 border-2 border-blueGray-900 bg-coolGray-50 rounded-md text-blueGray-900;
+  }
+
+  /*  */
+  .formInputCombo {
+    @apply font-Inter space-y-1.5;
+  }
+
+  .formInputCombo > span {
+    @apply font-medium text-sm text-coolGray-800;
+  }
+
+  .formInputCombo input,
+  .formInputCombo select {
+    @apply w-full bg-white border border-coolGray-400 rounded-md h-8 px-3 text-sm font-medium text-coolGray-800;
+  }
+
+  .formInputCombo input:focus,
+  .formInputCombo input:active,
+  .formInputCombo select:focus,
+  .formInputCombo select:active {
+    @apply outline-none ring-4 ring-coolGray-400 ring-opacity-50;
+  }
+
+  .user-reserv .formInputCombo input,
+  .user-reserv .formInputCombo select {
+    @apply h-11 border-coolGray-100 text-coolGray-500 border-2;
+  }
+
+  /*  */
+  .seperator {
+    @apply w-full h-3 flex items-center justify-center px-16 font-Inter font-normal text-coolGray-500 text-xs;
+  }
+
+  .seperator div {
+    @apply w-full h-0.25 bg-coolGray-500 relative;
+  }
+
+  .seperator span {
+    @apply absolute bg-white px-1.5 left-offCenter -top-2;
+  }
+}
