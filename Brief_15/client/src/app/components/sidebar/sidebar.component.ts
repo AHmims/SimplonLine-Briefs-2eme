@@ -8,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   constructor() {
+    console.log("ahln");
   }
 
   ngOnInit(): void {
+    console.log("ahln");
   }
 
 }
