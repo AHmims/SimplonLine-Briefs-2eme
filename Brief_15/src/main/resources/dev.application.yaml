@@ -27,6 +27,8 @@ spring:
             enable: true
 server:
   port: 3420
+  servlet:
+    context-path: "/api"
 
 security:
   crypt:

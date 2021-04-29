@@ -18,3 +18,11 @@ Run `ng g m <ModuleName || path/ModuleName>` for a basic module
 Run `ng g m <path/ComponentName/ModuleName> --flat` for a component module
 
 Run `ng g m <ModuleName || path/ModuleName> --routing` for a module with routing
+
+### Generate Service
+
+Run `ng g s <ServiceName || path/ServiceName>` for a basic service
+
+### Generate Model
+
+Run `ng g c <ModelName || path/ModelName> --type=model` for a basic model

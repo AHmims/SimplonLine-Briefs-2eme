@@ -19,10 +19,10 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit = (): void => {
+  };
 
-  setNavType(url: string) {
+  setNavType = (url: string): void => {
     switch (url.split('/')[2]) {
       case 'users':
         this.navType = 1;
@@ -33,5 +33,5 @@ export class SidebarComponent implements OnInit {
       default:
         this.navType = 0;
     }
-  }
+  };
 }
