@@ -63,4 +63,278 @@
   .seperator span {
     @apply absolute bg-white px-1.5 left-offCenter -top-2;
   }
+
+  /*  */
+  .card-home > .top {
+    @apply flex-1 space-x-3.5 px-3.5 flex flex-row items-center;
+  }
+
+  .card-home > .top .left {
+    @apply flex-1 flex flex-col space-y-1;
+  }
+
+  .card-home > .top .left .main {
+    @apply text-lg font-medium text-coolGray-900;
+  }
+
+  .card-home > .top .left .desc {
+    @apply text-sm font-normal text-coolGray-500;
+  }
+
+  /*  */
+  .card-home > .bot,
+  .c-bot {
+    @apply w-full py-2.5 px-3.5 bg-coolGray-100;
+  }
+
+  .card-home > .bot a,
+  .c-bot a {
+    @apply w-max space-x-0.5 flex flex-row items-center font-medium text-xs text-coolGray-700;
+  }
+
+  /*  */
+  /*  */
+  .card-learner {
+    @apply card-home w-68 h-40;
+  }
+
+  .card-learner > .top {
+    @apply items-start py-2.5;
+  }
+
+  .card-learner .top .left {
+    @apply space-y-2 w-44;
+  }
+
+  .card-learner .top .left .top {
+    @apply space-y-0.5;
+  }
+
+  .card-learner .top .left span {
+    @apply block truncate;
+  }
+
+  .card-learner .top .left .top .name {
+    @apply text-lg font-medium text-coolGray-900;
+  }
+
+  .card-learner .top .left .top .email {
+    @apply text-xs font-normal text-coolGray-500;
+  }
+
+  .card-learner .top .left .bot {
+    @apply font-medium text-xs;
+  }
+
+  .card-learner .top .left .bot .groupe {
+    @apply text-coolGray-600;
+  }
+
+  .card-learner .top .left .bot .promotion {
+    @apply text-coolGray-500;
+  }
+
+  .card-learner .top .right {
+  }
+
+  .card-learner .top .right .imgCont {
+    @apply w-10.5 h-10.5 bg-coolGray-200 rounded-full overflow-hidden;
+  }
+
+  .card-learner .top .right .imgCont .img {
+    @apply w-full h-full object-cover;
+  }
+
+  .card-learner > .bot {
+    @apply flex flex-row justify-end;
+  }
+
+  .card-learner > .bot .btnsCont {
+    @apply space-x-2.5;
+  }
+
+  .card-learner > .bot .btnsCont button {
+    @apply px-4.5 text-xs;
+  }
+
+  /*  */
+  /*  */
+  .card-reservation {
+    @apply card-home w-72 h-44 justify-between;
+  }
+
+  .card-reservation span {
+    @apply block truncate;
+  }
+
+  .card-reservation .c-top {
+    @apply items-start py-2.5 px-3.5 space-y-2.5 flex flex-col;
+  }
+
+  .card-reservation .c-top > .top {
+    @apply flex flex-row space-x-3.5 items-center w-full;
+  }
+
+  .card-reservation .c-top > .top .user {
+    @apply flex flex-col space-y-0.5 w-full;
+  }
+
+  .card-reservation .c-top > .top .user .name {
+    @apply flex flex-row items-center space-x-1 text-lg font-medium text-coolGray-900;
+  }
+
+  .card-reservation .c-top > .top .user .email {
+    @apply text-xs font-normal text-coolGray-500;
+  }
+
+  .card-reservation .c-top > .top .imgCont {
+    @apply w-10.5 h-10.5 bg-coolGray-200 rounded-full overflow-hidden flex-none;
+  }
+
+  .card-reservation .c-top > .top .imgCont .img {
+    @apply w-full h-full object-cover;
+  }
+
+  .card-reservation .c-top > .bot {
+    @apply flex flex-col space-y-1.5;
+  }
+
+  .card-reservation .c-top > .bot > .top {
+    @apply flex flex-row space-x-3.5 items-center;
+  }
+
+  .card-reservation .c-top > .bot > .top * {
+    @apply text-xs text-coolGray-600 font-medium;
+  }
+
+  .card-reservation .c-top > .bot > .top .date input::-webkit-calendar-picker-indicator {
+    margin-left: -15px;
+  }
+
+  .card-reservation .c-top > .bot > .top .loc,
+  .empla {
+    @apply flex flex-row items-center space-x-1;
+  }
+
+  .card-reservation .c-top > .bot > .bot {
+    @apply flex flex-row space-x-2.5 items-center;
+  }
+
+  .card-reservation .c-top > .bot > .bot .badge-X {
+    @apply bg-blue-50 text-blue-500;
+  }
+
+  .card-reservation .c-bot {
+    @apply flex flex-row px-3.5 justify-end p-0 flex-1 max-h-12;
+  }
+
+  .card-reservation .c-bot .btnsCont {
+    @apply space-x-2.5 flex flex-row items-center;
+  }
+
+  .card-reservation .c-bot .btnsCont button {
+    @apply px-4.5 text-xs capitalize;
+  }
+
+  /*  */
+  /*  */
+  .tableColumn {
+    @apply font-Inter;
+  }
+
+  .tableColumn .row {
+    @apply flex flex-row items-center w-full px-8.5;
+  }
+
+  .tableColumn .head {
+    @apply sticky -top-12.2 h-12.5 bg-coolGray-50 border-b border-t border-coolGray-200;
+  }
+
+  .tableColumn .head span {
+    @apply flex-1 uppercase text-coolGray-500 text-base font-medium;
+  }
+
+  .tableColumn .data {
+    @apply h-14 border-b border-coolGray-200 flex flex-row items-center w-full;
+  }
+
+  .tableColumn .data .imgCont {
+    @apply h-9 w-9 rounded-full overflow-hidden mr-2.5;
+  }
+
+  .tableColumn .data .imgCont .img {
+    @apply h-full w-full object-cover;
+  }
+
+  .tableColumn .data .infos {
+    @apply font-normal text-sm text-coolGray-700;
+  }
+
+  .tableColumn .data .infos .name {
+    @apply block font-normal text-sm text-coolGray-700;
+  }
+
+  .tableColumn .data .infos .email {
+    @apply block font-normal text-xs text-coolGray-500;
+  }
+
+  .tableColumn .data .badge {
+    @apply py-1.5 px-3 rounded-2xl space-x-1.5 font-medium text-sm flex flex-row items-center;
+  }
+
+  .tableColumn .data .badge-1-A {
+    @apply bg-warmGray-100 text-warmGray-600;
+  }
+
+  .tableColumn .data .badge-1-B {
+    @apply bg-blueGray-100 text-blueGray-600;
+  }
+
+  .tableColumn .option {
+    @apply justify-between;
+  }
+
+  .badge-2 {
+    @apply px-2.5 py-1 whitespace-nowrap rounded-2xl space-x-1.5 font-medium text-sm flex flex-row items-center;
+  }
+
+  .badge-2-A {
+    @apply bg-warmGray-100 text-warmGray-600;
+  }
+
+  .badge-2-B {
+    @apply bg-blueGray-100 text-blueGray-600;
+  }
+
+  /*  */
+  /*  */
+  .reserv-card {
+    @apply bg-white shadow rounded-md border border-coolGray-100 p-3.5 flex flex-col space-y-2.5;
+  }
+
+  .reserv-card > .top .date {
+    @apply text-lg font-medium text-coolGray-600;
+  }
+
+  .reserv-card > .top .date::-webkit-calendar-picker-indicator {
+    margin-left: -15px;
+    @apply text-coolGray-600;
+  }
+
+  .reserv-card > .bot {
+    @apply space-y-1.5;
+  }
+
+  .reserv-card > .bot .top {
+    @apply flex flex-row space-x-3.5 items-center;
+  }
+
+  .reserv-card > .bot .top .loc,
+  .empla {
+    @apply flex flex-row items-center space-x-1 text-xs text-coolGray-600 font-medium;
+  }
+
+  .reserv-card > .bot .bot {
+    @apply w-max;
+  }
 }

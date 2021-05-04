@@ -7,6 +7,8 @@ import {HomeComponent} from './home/home.component';
 import { CommandesComponent } from './commandes/commandes.component';
 import {AdminRoutingModule} from './admin-routing.module';
 import {LoginComponent} from './login/login.component';
+import {TableProduitComponent} from '../../components/table/table-produit/table-produit.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,12 +16,14 @@ import {LoginComponent} from './login/login.component';
     HomeComponent,
     HeaderComponent,
     CommandesComponent,
-    LoginComponent
+    LoginComponent,
+    TableProduitComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    LayoutModule
+    LayoutModule,
+    ReactiveFormsModule
   ],
   exports: [
     HomeComponent,

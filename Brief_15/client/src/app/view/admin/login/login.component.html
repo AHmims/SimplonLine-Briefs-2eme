@@ -21,7 +21,7 @@
         </div>
       </div>
       <!-- form -->
-      <div class="mx-auto space-y-10 font-Inter w-122.5 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="mx-auto space-y-10 font-Inter w-122.5 border-3 border-coolGray-100 rounded-lg.5 py-10 px-7.5 flex flex-col">
         <!-- top text -->
         <div class="space-y-1.5">
           <h1 class="text-2xl font-medium text-coolGray-900">Authentfier vous</h1>
@@ -34,20 +34,20 @@
           <!-- row -->
           <div class="formInputCombo">
             <span>Identifiant</span>
-            <input type="text">
+            <input type="text" formControlName="email">
           </div>
           <!-- row -->
           <div class="formInputCombo">
             <span>Mot de passe</span>
-            <input type="password">
+            <input type="password" formControlName="password">
           </div>
         </div>
         <!-- btns -->
         <div class="space-y-3.5 w-full">
           <!-- main btn -->
-          <button class="buttonMain py-3 w-full">Authentifier</button>
+          <button class="buttonMain py-3 w-full" type="submit">Authentifier</button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </div>

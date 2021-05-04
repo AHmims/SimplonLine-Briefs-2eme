@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {UtilisateurService} from '../../../services/utilisateur/utilisateur.service';
 
 @Component({
   selector: 'app-users',
@@ -7,10 +8,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class UsersComponent implements OnInit {
 
-  constructor() {
+  @ViewChild('usersHolder', {read: ViewContainerRef}) prodsHolder!: ViewContainerRef;
+
+  constructor(private utilisateurService: UtilisateurService, private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit(): void {
+    this.utilisateurService.getAll().subscribe(data => console.log(data), error => console.error(error));
   }
 
 }

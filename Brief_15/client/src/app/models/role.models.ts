@@ -1,8 +1,8 @@
 import {Deserializable} from './deserializable.model';
 
-export class Image implements Deserializable {
-  lien?: string;
-
+export class Role implements Deserializable {
+  libelleRole?: string;
+  nivRole?: number;
   //
   deserialize = (input: any): this => {
     Object.assign(this, input);
