@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Produit} from '../../models/produit.model';
+import {RequestOptions} from '../../util/request-options';
 
 const _BASE_URL: string = _ENV.apiUrl.concat('/produit');
 
@@ -12,11 +13,11 @@ const _BASE_URL: string = _ENV.apiUrl.concat('/produit');
 })
 
 export class ProduitService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private requestOptions: RequestOptions) {
   }
 
   getAll = (): Observable<Produit[]> => {
-    return this.http.get(_BASE_URL.concat('/all')).pipe(map((res: any) => {
+    return this.http.get(_BASE_URL.concat('/all'), this.requestOptions.getAuthOptions()).pipe(map((res: any) => {
       if (res == null || res.length == 0) {
         return new Observable<Produit[]>();
       }

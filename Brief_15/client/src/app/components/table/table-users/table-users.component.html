@@ -63,7 +63,7 @@
     </div>
     <!-- rows -->
     <!-- row -->
-    <a href="#" class="row data option" *ngFor="let utilisateur of utilisateurs; index as i;">
+    <a [routerLink]="['/admin/commandes', utilisateur.id]" class="row data option" *ngFor="let utilisateur of utilisateurs; index as i;">
       <span class="infos">Liste des commandes</span>
       <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path
