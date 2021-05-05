@@ -10,13 +10,16 @@ import java.util.List;
 @Table(name = "administrateur")
 public class Administrateur extends Utilisateur {
     @OneToMany(mappedBy = "administrateur", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Coupon> coupons;
+    @OneToMany(mappedBy = "administrateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Produit> produits;
 
     //
     //
 
-    public Administrateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role,  List<Produit> produits) {
+    public Administrateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, List<Coupon> coupons, List<Produit> produits) {
         super(idUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
+        this.coupons = coupons;
         this.produits = produits;
     }
 
@@ -36,6 +39,15 @@ public class Administrateur extends Utilisateur {
     }
     //
     //
+
+    public List<Coupon> getCoupons() {
+        return coupons;
+    }
+
+    public void setCoupons(List<Coupon> coupons) {
+        this.coupons = coupons;
+    }
+
     public List<Produit> getProduits() {
         return produits;
     }

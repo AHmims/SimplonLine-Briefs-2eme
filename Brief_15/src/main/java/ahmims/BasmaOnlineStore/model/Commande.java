@@ -27,18 +27,22 @@ public class Commande {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idPanier")
     private Panier panier;
+    @ManyToOne
+    @JoinColumn(name = "idCoupon")
+    private Coupon coupon;
     //
     //
 
-    public Commande(String idCommande, Date dateCommande, int statutCommande, Adresse adresse, Panier panier) {
+    public Commande(String idCommande, Date dateCommande, int statutCommande, Adresse adresse, Panier panier, Coupon coupon) {
         this.idCommande = idCommande;
         this.dateCommande = dateCommande;
         this.statutCommande = statutCommande;
         this.adresse = adresse;
         this.panier = panier;
+        this.coupon = coupon;
     }
 
-    public Commande(Date dateCommande, int statutCommande,  Adresse adresse, Panier panier) {
+    public Commande(Date dateCommande, int statutCommande, Adresse adresse, Panier panier) {
         this.dateCommande = dateCommande;
         this.statutCommande = statutCommande;
         this.adresse = adresse;
@@ -93,5 +97,13 @@ public class Commande {
 
     public void setPanier(Panier panier) {
         this.panier = panier;
+    }
+
+    public Coupon getCoupon() {
+        return coupon;
+    }
+
+    public void setCoupon(Coupon coupon) {
+        this.coupon = coupon;
     }
 }
