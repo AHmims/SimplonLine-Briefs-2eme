@@ -24,14 +24,14 @@ public class Coupon {
     private boolean valide;
     //
     @OneToMany(mappedBy = "coupon", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Coupon> commandes;
+    private List<Commande> commandes;
     @ManyToOne
     @JoinColumn(name = "idAdministrateur")
     private Administrateur administrateur;
     //
     //
 
-    public Coupon(String idCoupon, String codeCoupon, Date dateCreation, boolean valide, List<Coupon> commandes, Administrateur administrateur) {
+    public Coupon(String idCoupon, String codeCoupon, Date dateCreation, boolean valide, List<Commande> commandes, Administrateur administrateur) {
         this.idCoupon = idCoupon;
         this.codeCoupon = codeCoupon;
         this.dateCreation = dateCreation;
@@ -81,11 +81,11 @@ public class Coupon {
         this.valide = valide;
     }
 
-    public List<Coupon> getCommandes() {
+    public List<Commande> getCommandes() {
         return commandes;
     }
 
-    public void setCommandes(List<Coupon> commandes) {
+    public void setCommandes(List<Commande> commandes) {
         this.commandes = commandes;
     }
 
