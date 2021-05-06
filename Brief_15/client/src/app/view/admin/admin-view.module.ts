@@ -9,6 +9,7 @@ import {AdminRoutingModule} from './admin-routing.module';
 import {LoginComponent} from './login/login.component';
 import {TableProduitComponent} from '../../components/table/table-produit/table-produit.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {CardCommandeComponent} from '../../components/cards/card-commande/card-commande.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     HeaderComponent,
     CommandesComponent,
     LoginComponent,
-    TableProduitComponent
+    TableProduitComponent,
+    CardCommandeComponent
   ],
   imports: [
     CommonModule,

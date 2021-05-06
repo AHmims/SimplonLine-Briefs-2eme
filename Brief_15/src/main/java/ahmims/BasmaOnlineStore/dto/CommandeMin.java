@@ -28,13 +28,10 @@ public class CommandeMin {
         this.dateCommand = commande.getDateCommande();
         this.status = commande.getStatutCommande();
         this.adresse = new AdresseMin(commande.getAdresse());
+        this.produits = new ArrayList<>();
         for (ProduitPanier produitPanier : commande.getPanier().getProduits()) {
             Produit produit = produitPanier.getProduit();
-            List<ImageMin> images = new ArrayList<>();
-            for (Image image : produit.getImages()) {
-                images.add(new ImageMin(image.getLienImage()));
-            }
-            this.produits.add(new ProduitMin(produit.getLibelleProduit(), produit.getDescriptionProduit(), produit.getPrixProduit(), new CategorieMin(produit.getCategorie().getLibelleCategorie(), new ImageMin(produit.getCategorie().getImage().getLienImage())), images, produit.getDateCreation()));
+            this.produits.add(new ProduitMin(produit, produitPanier.getCountProduit()));
         }
     }
 

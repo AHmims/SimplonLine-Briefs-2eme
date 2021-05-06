@@ -47,6 +47,9 @@ public class Coupon {
         this.administrateur = administrateur;
     }
 
+    public Coupon() {
+    }
+
     //
     //
     public String getIdCoupon() {

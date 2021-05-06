@@ -9,6 +9,7 @@ export class Produit implements Deserializable {
   categorie?: Categorie;
   images?: Image[];
   dateAjout?: Date;
+  nb?: number;
 
   //
   deserialize = (input: any): Produit => {

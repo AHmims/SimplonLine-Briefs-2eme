@@ -29,7 +29,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/auth/login").permitAll()
                 .antMatchers("/auth/signup").permitAll()
-                .antMatchers("/test").permitAll()
+                .antMatchers("/test/*").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/valider/*").permitAll()
                 // Disallow everything else

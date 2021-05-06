@@ -14,6 +14,7 @@ public class ProduitMin {
     private CategorieMin categorie;
     private List<ImageMin> images;
     private Date dateAjout;
+    private int nb;
     //
 
     public ProduitMin(String libelle, String description, double prix, CategorieMin categorie, List<ImageMin> images, Date dateAjout) {
@@ -35,6 +36,11 @@ public class ProduitMin {
             this.images.add(new ImageMin(image.getLienImage()));
         }
         this.dateAjout = produit.getDateCreation();
+    }
+
+    public ProduitMin(Produit produit, int nb) {
+        this(produit);
+        this.nb = nb;
     }
 
     public ProduitMin() {
@@ -87,5 +93,13 @@ public class ProduitMin {
 
     public void setDateAjout(Date dateAjout) {
         this.dateAjout = dateAjout;
+    }
+
+    public int getNb() {
+        return nb;
+    }
+
+    public void setNb(int nb) {
+        this.nb = nb;
     }
 }

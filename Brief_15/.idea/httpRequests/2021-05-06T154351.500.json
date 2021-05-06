@@ -1,0 +1,7 @@
+{
+  "timestamp": "2021-05-06T15:43:51.178+00:00",
+  "status": 500,
+  "error": "Internal Server Error",
+  "message": "Token expired",
+  "path": "/api/commande/user/cd7fd9c0b35f4d6caa4e3d1ab143178c"
+}

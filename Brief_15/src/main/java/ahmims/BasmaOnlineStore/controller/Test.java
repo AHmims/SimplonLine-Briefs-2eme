@@ -1,12 +1,13 @@
 package ahmims.BasmaOnlineStore.controller;
 
-import ahmims.BasmaOnlineStore.dao.RoleDao;
+import ahmims.BasmaOnlineStore.dao.*;
 import ahmims.BasmaOnlineStore.dto.UserAuthInputData;
-import ahmims.BasmaOnlineStore.model.Client;
-import ahmims.BasmaOnlineStore.model.Role;
+import ahmims.BasmaOnlineStore.exception.RequestException;
+import ahmims.BasmaOnlineStore.model.*;
 import ahmims.BasmaOnlineStore.security.JwtManager;
 import ahmims.BasmaOnlineStore.service.ClientService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController
+@RequestMapping("/test")
 public class Test {
 
     private final ClientService clientService;
@@ -23,6 +26,14 @@ public class Test {
     private final AuthenticationManager authenticationManager;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
+    @Autowired
+    ProduitDao produitDao;
+    @Autowired
+    PanierDao panierDao;
+    @Autowired
+    CommandeDao commandeDao;
+    @Autowired
+    AdresseDao adresseDao;
 
     public Test(ClientService clientService, RoleDao roleDao, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper) {
         this.clientService = clientService;
@@ -68,5 +79,27 @@ public class Test {
         }
         //
         return new ResponseEntity<>("ff", HttpStatus.valueOf(200));
+    }
+
+    //
+    //
+    @PostMapping("/cmd")
+    public ResponseEntity<?> test3() {
+        try {
+            Client user = clientService.getByEmail("nioce147@gmail.com");
+            Adresse adresse = adresseDao.save(new Adresse("bad", "end", "is", "a", 420, "good", "end"));
+            Iterable<Produit> produits = produitDao.findAll();
+            Panier panier = new Panier();
+            panier.setClient(user);
+            List<ProduitPanier> produitPaniers = new ArrayList<>();
+            produits.forEach(produit -> {
+                produitPaniers.add(new ProduitPanier(1, produit, panier));
+            });
+            panier.setProduits(produitPaniers);
+            Commande commande = commandeDao.save(new Commande(new Date(), 0, adresse, panier));
+            return new ResponseEntity<>(commande, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RequestException("bad", HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -17,8 +17,9 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.utilisateurService.getAll().subscribe(data => {
-      console.log(data);
-      this.displayUsers(data);
+      if (!!data.length) {
+        this.displayUsers(data);
+      }
     }, error => console.error(error));
   }
 

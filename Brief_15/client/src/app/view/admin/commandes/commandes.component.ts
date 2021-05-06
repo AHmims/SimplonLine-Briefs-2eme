@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CommandeService} from '../../../services/commande/commande.service';
+import {Commande} from '../../../models/commande.model';
+import {TableUsersComponent} from '../../../components/table/table-users/table-users.component';
+import {CardCommandeComponent} from '../../../components/cards/card-commande/card-commande.component';
 
 @Component({
   selector: 'app-commandes',
@@ -9,8 +12,9 @@ import {CommandeService} from '../../../services/commande/commande.service';
 })
 export class CommandesComponent implements OnInit {
   userId: string = '';
+  @ViewChild('cmdsHolder', {read: ViewContainerRef}) cmdsHolder!: ViewContainerRef;
 
-  constructor(private route: ActivatedRoute, private commandeService: CommandeService) {
+  constructor(private route: ActivatedRoute, private commandeService: CommandeService, private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit(): void {
@@ -18,11 +22,21 @@ export class CommandesComponent implements OnInit {
       this.userId = params['idUser'];
     });
     //
-    this.commandeService.getByUser(this.userId).subscribe(data => {
+    this.commandeService.getByUser(this.userId).subscribe((data) => {
       console.log(data);
+      this.displayCommandes(data);
     }, error => {
       console.error(error);
     });
   }
 
+  //
+  private displayCommandes = (commandes: Commande[]): void => {
+    this.cmdsHolder.clear();
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(CardCommandeComponent);
+    commandes.forEach((commande: Commande) => {
+      const dynamicComponent = <CardCommandeComponent> this.cmdsHolder.createComponent(componentFactory).instance;
+      dynamicComponent.commande = commande;
+    });
+  };
 }

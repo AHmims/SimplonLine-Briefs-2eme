@@ -16,8 +16,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileService.getAll().subscribe(data => {
-      console.log(data);
-      this.displayProducts(data);
+      if (!!data.length) {
+        this.displayProducts(data);
+      }
     }, error => console.error(error));
   }
 

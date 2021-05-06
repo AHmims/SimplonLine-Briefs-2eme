@@ -1,0 +1,12 @@
+<div class="flex flex-col p-2">
+  <span>Date de commande: {{this.commande.dateCommand | date :'short'}}</span>
+  <span>Statue: {{this.commande.status}}</span>
+  <span>Adresse: {{this.commande.adresse?.display()}}</span>
+  <div class="flex">
+    <div *ngFor="let produit of this.commande.produits" class="flex flex-col">
+      <img src="{{produit.images ? produit.images[0].lien : ''}}" alt="" class="img">
+      <span>{{produit.libelle}}</span>
+      <span>Quantité: {{produit.nb}}</span>
+    </div>
+  </div>
+</div>

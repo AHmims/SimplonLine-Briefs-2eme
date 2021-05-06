@@ -26,7 +26,7 @@ public class CommandeServiceImpl implements CommandeService {
     private final PanierRepository panierRepository;
     private final UtilisateurDao utilisateurDao;
 
-    public CommandeServiceImpl(CommandeDao commandeDao, CommandeRepository commandeRepository, PanierRepository panierRepository,UtilisateurDao utilisateurDao) {
+    public CommandeServiceImpl(CommandeDao commandeDao, CommandeRepository commandeRepository, PanierRepository panierRepository, UtilisateurDao utilisateurDao) {
         this.commandeDao = commandeDao;
         this.commandeRepository = commandeRepository;
         this.panierRepository = panierRepository;
@@ -42,16 +42,17 @@ public class CommandeServiceImpl implements CommandeService {
             throw new RequestException("User id not found", HttpStatus.NOT_FOUND);
         //
         List<Panier> paniers = panierRepository.findAllByClient(user.get());
-        if(paniers==null)
-            throw new RequestException("Error getting list of carts for selected user",HttpStatus.BAD_REQUEST);
+        if (paniers == null)
+            throw new RequestException("Error getting list of carts for selected user", HttpStatus.BAD_REQUEST);
         //
         List<Commande> commandes = new ArrayList<>();
-        for (Panier panier:paniers) {
+        for (Panier panier : paniers) {
             commandes.add(commandeRepository.findTopByPanier(panier));
         }
         //
         List<CommandeMin> commandeMins = new ArrayList<>();
-        for (Commande commande:commandes) {
+        for (Commande commande : commandes) {
+            CommandeMin commandeMin = new CommandeMin(commande);
             commandeMins.add(new CommandeMin(commande));
         }
         //
