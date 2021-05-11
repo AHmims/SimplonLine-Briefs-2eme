@@ -30,6 +30,9 @@ export class SidebarComponent implements OnInit {
       case 'commandes':
         this.navType = 2;
         break;
+      case 'coupon':
+        this.navType = 3;
+        break;
       default:
         this.navType = 0;
     }

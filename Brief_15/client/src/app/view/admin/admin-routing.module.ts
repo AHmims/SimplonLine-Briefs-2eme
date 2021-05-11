@@ -5,6 +5,7 @@ import {HomeComponent} from './home/home.component';
 import {UsersComponent} from './users/users.component';
 import {CommandesComponent} from './commandes/commandes.component';
 import {LoginComponent} from './login/login.component';
+import {CouponComponent} from './coupon/coupon.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
       },
       {
         path: 'commandes/:idUser', component: CommandesComponent
+      },
+      {
+        path: 'coupon', component: CouponComponent
       }
     ]
   },

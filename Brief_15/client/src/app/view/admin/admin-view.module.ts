@@ -10,6 +10,7 @@ import {LoginComponent} from './login/login.component';
 import {TableProduitComponent} from '../../components/table/table-produit/table-produit.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {CardCommandeComponent} from '../../components/cards/card-commande/card-commande.component';
+import { CouponComponent } from './coupon/coupon.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {CardCommandeComponent} from '../../components/cards/card-commande/card-c
     CommandesComponent,
     LoginComponent,
     TableProduitComponent,
-    CardCommandeComponent
+    CardCommandeComponent,
+    CouponComponent
   ],
   imports: [
     CommonModule,
