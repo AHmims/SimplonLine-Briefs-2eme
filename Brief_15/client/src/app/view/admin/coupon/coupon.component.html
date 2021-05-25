@@ -1,37 +1,35 @@
 <app-header textValue="Coupon"></app-header>
 <div class="w-full flex-1 overflow-y-auto overflow-hidden flex flex-col">
-  <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
-    <table>
+  <form [formGroup]="couponForm" (ngSubmit)="onSubmit()" class="px-10 mt-8">
+    <table class="text-coolGray-800 font-Inter">
       <tr>
         <td>Code:</td>
         <td>
-          <input type="text" formControlName="code"/>
+          <input type="text" formControlName="code" class="border-2 rounded-md border-coolGray-500 px-3 ml-4 mb-2"/>
         </td>
       </tr>
       <tr>
         <td>Remise:</td>
         <td>
-          <input type="number" formControlName="remise"/>
+          <input type="number" formControlName="remise" class="border-2 rounded-md border-coolGray-500 px-3 ml-4 mb-2"/>
         </td>
       </tr>
       <tr>
         <td>Date fin:</td>
         <td>
-          <input type="datetime-local" formControlName="dateExpiration"/>
+          <input type="datetime-local" formControlName="dateExpiration" class="border-2 rounded-md border-coolGray-500 px-3 ml-4 mb-2"/>
         </td>
       </tr>
       <tr>
         <td>Valide:</td>
         <td>
-          <input type="checkbox" formControlName="active"/>
+          <input type="checkbox" formControlName="active" class="ml-4"/>
         </td>
       </tr>
       <tr>
         <td></td>
         <td>
-          <button type="submit" [disabled]="!couponForm.valid">
-            Ajouter
-          </button>
+          <button type="submit" [disabled]="!couponForm.valid" class="ml-4 mt-2 bg-coolGray-100 px-5 py-2 rounded-md font-medium">Ajouter</button>
         </td>
       </tr>
     </table>
