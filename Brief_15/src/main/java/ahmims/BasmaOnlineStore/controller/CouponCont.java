@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/coupon")
@@ -21,11 +23,19 @@ public class CouponCont {
     public CouponCont(CouponService couponService) {
         this.couponService = couponService;
     }
+
     //#endregion
     //Add coupon
     @PostMapping("/add")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<CouponMin> addCoupon(@RequestBody CouponFormData payload) {
         return new ResponseEntity<>(couponService.insert(payload), HttpStatus.valueOf(200));
+    }
+
+    //Get all coupons
+    @GetMapping("/")
+    @PreAuthorize("hasAuthority('1')")
+    public ResponseEntity<List<CouponMin>> getAllCoupons() {
+        return new ResponseEntity<>(couponService.getAll(), HttpStatus.valueOf(200));
     }
 }

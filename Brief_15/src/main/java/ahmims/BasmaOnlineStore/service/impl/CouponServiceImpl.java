@@ -1,17 +1,17 @@
 package ahmims.BasmaOnlineStore.service.impl;
 
 import ahmims.BasmaOnlineStore.dao.CouponDao;
-import ahmims.BasmaOnlineStore.dto.CouponFormData;
-import ahmims.BasmaOnlineStore.dto.CouponMin;
+import ahmims.BasmaOnlineStore.dto.*;
 import ahmims.BasmaOnlineStore.exception.RequestException;
 import ahmims.BasmaOnlineStore.model.Coupon;
 import ahmims.BasmaOnlineStore.repository.CouponRepository;
 import ahmims.BasmaOnlineStore.service.CouponService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service("CouponService")
 public class CouponServiceImpl implements CouponService {
@@ -38,5 +38,15 @@ public class CouponServiceImpl implements CouponService {
             return coupon.getIdCoupon() != null ? new CouponMin(coupon) : null;
         } else
             throw new RequestException("Some of the Coupon's main data is missing or bad-formatted", HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @Override
+    public List<CouponMin> getAll() {
+        List<CouponMin> coupons = new ArrayList<>();
+        for (Coupon coupon : couponDao.findAll()) {
+            coupons.add(new CouponMin(coupon));
+        }
+        //
+        return coupons.size() > 0 ? coupons : null;
     }
 }

@@ -11,6 +11,8 @@ import {TableProduitComponent} from '../../components/table/table-produit/table-
 import {ReactiveFormsModule} from '@angular/forms';
 import {CardCommandeComponent} from '../../components/cards/card-commande/card-commande.component';
 import { CouponComponent } from './coupon/coupon.component';
+import {TableUsersComponent} from '../../components/table/table-users/table-users.component';
+import {TableCouponsComponent} from '../../components/table/table-coupons/table-coupons.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CouponComponent } from './coupon/coupon.component';
     LoginComponent,
     TableProduitComponent,
     CardCommandeComponent,
-    CouponComponent
+    CouponComponent,
+    TableUsersComponent,
+    TableCouponsComponent
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CouponService} from '../../../services/coupon/coupon.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {Coupon} from '../../../models/coupon.model';
+import {TableProduitComponent} from '../../../components/table/table-produit/table-produit.component';
+import {TableCouponsComponent} from '../../../components/table/table-coupons/table-coupons.component';
 
 @Component({
   selector: 'app-coupon',
@@ -9,6 +12,7 @@ import {HttpErrorResponse} from '@angular/common/http';
   styleUrls: ['./coupon.component.css']
 })
 export class CouponComponent implements OnInit {
+  @ViewChild('couponsHolder', {read: ViewContainerRef}) couponsHolder!: ViewContainerRef;
 
   couponForm = this.fb.group({
     code: ['', Validators.required],
@@ -17,10 +21,15 @@ export class CouponComponent implements OnInit {
     active: [true, Validators.required]
   });
 
-  constructor(private fb: FormBuilder, private couponService: CouponService) {
+  constructor(private fb: FormBuilder, private couponService: CouponService, private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit(): void {
+    this.couponService.getAll().subscribe(data => {
+      if (!!data.length) {
+        this.displayCoupons(data);
+      }
+    }, error => console.error(error));
   }
 
   onSubmit() {
@@ -36,5 +45,10 @@ export class CouponComponent implements OnInit {
 
   /**
    * */
-
+  displayCoupons = (data: Coupon[]) => {
+    this.couponsHolder.clear();
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(TableCouponsComponent);
+    const dyynamicComponent = <TableCouponsComponent> this.couponsHolder.createComponent(componentFactory).instance;
+    dyynamicComponent.coupons = data;
+  };
 }

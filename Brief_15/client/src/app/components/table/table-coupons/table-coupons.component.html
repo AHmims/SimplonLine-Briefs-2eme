@@ -1,0 +1,65 @@
+<span class="block px-10 font-medium text-lg text-coolGray-500 mt-8 mb-4">Liste des coupons</span>
+<div class="flex-1 bg-white grid grid-cols-5 relative">
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Code</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let coupon of coupons; index as i;">
+      <div class="infos">
+        {{ coupon.code }}
+      </div>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Remise</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let coupon of coupons; index as i;">
+      <span class="infos">{{ coupon.remise }}</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Date creation</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let coupon of coupons; index as i;">
+      <span class="infos">{{ coupon.dateCreation }}</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Date expiration</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let coupon of coupons; index as i;">
+      <span class="infos">{{ coupon.dateExpiration }}</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">State</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let coupon of coupons; index as i;">
+      <span class="infos">{{ coupon.active }}</span>
+    </div>
+  </div>
+</div>
