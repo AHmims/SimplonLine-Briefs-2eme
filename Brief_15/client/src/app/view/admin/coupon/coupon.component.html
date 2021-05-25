@@ -1,4 +1,39 @@
 <app-header textValue="Coupon"></app-header>
 <div class="w-full flex-1 overflow-y-auto overflow-hidden flex flex-col">
-
+  <form [formGroup]="couponForm" (ngSubmit)="onSubmit()">
+    <table>
+      <tr>
+        <td>Code:</td>
+        <td>
+          <input type="text" formControlName="code"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Remise:</td>
+        <td>
+          <input type="number" formControlName="remise"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Date fin:</td>
+        <td>
+          <input type="datetime-local" formControlName="dateExpiration"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Valide:</td>
+        <td>
+          <input type="checkbox" formControlName="active"/>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button type="submit" [disabled]="!couponForm.valid">
+            Ajouter
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
 </div>
