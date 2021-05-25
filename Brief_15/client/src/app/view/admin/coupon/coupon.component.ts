@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {CouponService} from '../../../services/coupon/coupon.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-coupon',
@@ -15,7 +17,7 @@ export class CouponComponent implements OnInit {
     active: [true, Validators.required]
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private couponService: CouponService) {
   }
 
   ngOnInit(): void {
@@ -23,5 +25,16 @@ export class CouponComponent implements OnInit {
 
   onSubmit() {
     console.log(this.couponForm.value);
+    this.couponService.add(this.couponForm.value).subscribe(data => {
+      console.log(data);
+      alert('Coupon added');
+    }, (error: HttpErrorResponse) => {
+      console.error(error);
+      alert(error.error.message);
+    });
   }
+
+  /**
+   * */
+
 }
