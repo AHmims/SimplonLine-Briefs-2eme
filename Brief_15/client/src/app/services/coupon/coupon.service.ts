@@ -24,7 +24,7 @@ export class CouponService {
   };
 
   getAll = (): Observable<Coupon[]> => {
-    return this.http.get(_BASE_URL, this.requestOptions.getAuthOptions()).pipe(map((res: any) => {
+    return this.http.get(_BASE_URL.concat('/'), this.requestOptions.getAuthOptions()).pipe(map((res: any) => {
       if (res == null || res.length == 0) {
         return EMPTY;
       }

@@ -23,7 +23,7 @@
     <!-- rows -->
     <!-- row -->
     <div class="row data" *ngFor="let coupon of coupons; index as i;">
-      <span class="infos">{{ coupon.remise }}</span>
+      <span class="infos">{{ coupon.remise }}%</span>
     </div>
   </div>
   <!-- column -->
@@ -35,7 +35,7 @@
     <!-- rows -->
     <!-- row -->
     <div class="row data" *ngFor="let coupon of coupons; index as i;">
-      <span class="infos">{{ coupon.dateCreation }}</span>
+      <span class="infos">{{ coupon.dateCreation | date: 'short'}}</span>
     </div>
   </div>
   <!-- column -->
@@ -47,7 +47,7 @@
     <!-- rows -->
     <!-- row -->
     <div class="row data" *ngFor="let coupon of coupons; index as i;">
-      <span class="infos">{{ coupon.dateExpiration }}</span>
+      <span class="infos">{{ coupon.dateExpiration | date: 'short'}}</span>
     </div>
   </div>
   <!-- column -->
@@ -59,7 +59,7 @@
     <!-- rows -->
     <!-- row -->
     <div class="row data" *ngFor="let coupon of coupons; index as i;">
-      <span class="infos">{{ coupon.active }}</span>
+      <span class="infos">{{ coupon.active ? 'Active' : 'Inactive' }}</span>
     </div>
   </div>
 </div>
