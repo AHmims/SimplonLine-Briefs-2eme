@@ -24,4 +24,10 @@ export class ProduitService {
       return res.map((prodit: Produit) => new Produit().deserialize(prodit));
     }));
   };
+
+  add = (produitData: any): Observable<Produit> => {
+    return this.http.post(_BASE_URL.concat('/add'), produitData, this.requestOptions.getAuthOptions()).pipe(map((res: any) => {
+      return new Produit().deserialize(res);
+    }));
+  };
 }

@@ -3,9 +3,16 @@ package ahmims.BasmaOnlineStore.dto;
 import ahmims.BasmaOnlineStore.model.Categorie;
 
 public class CategorieMin {
+    private String id;
     private String libelle;
     private ImageMin image;
     //
+
+    public CategorieMin(String libelle, ImageMin image, String id) {
+        this.libelle = libelle;
+        this.image = image;
+        this.id = id;
+    }
 
     public CategorieMin(String libelle, ImageMin image) {
         this.libelle = libelle;
@@ -19,11 +26,20 @@ public class CategorieMin {
     public CategorieMin(Categorie categorie) {
         this.libelle = categorie.getLibelleCategorie();
         this.image = new ImageMin(categorie.getImage().getLienImage());
+        this.id = categorie.getIdCategorie();
     }
 
     public CategorieMin() {
     }
     //
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getLibelle() {
         return libelle;

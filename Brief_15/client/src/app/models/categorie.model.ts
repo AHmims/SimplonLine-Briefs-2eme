@@ -2,6 +2,7 @@ import {Image} from './image.model';
 import {Deserializable} from './deserializable.model';
 
 export class Categorie implements Deserializable {
+  id?: string;
   libelle?: string;
   image?: Image;
 

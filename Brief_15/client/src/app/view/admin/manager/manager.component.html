@@ -1,0 +1,69 @@
+<app-header textValue="Manager"></app-header>
+<div class="w-full flex-1 overflow-y-auto overflow-hidden flex flex-col font-Inter">
+  <form [formGroup]="categorieForm" (ngSubmit)="onCategorieSubmit()" class="px-10 mt-8 border-b border-coolGray-200 pb-8">
+    <span class="block font-medium text-lg text-coolGray-500 mb-4">Ajouter une categorie</span>
+    <table class="text-coolGray-800">
+      <tr>
+        <td>Libelle:</td>
+        <td>
+          <input type="text" formControlName="libelle" class="border-2 rounded-md border-coolGray-500 px-1.5 ml-4 mb-2"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Image(url):</td>
+        <td>
+          <input type="text" formControlName="image" class="border-2 rounded-md border-coolGray-500 px-1.5 ml-4" placeholder="https://domain.com/example.jpg"/>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button type="submit" [disabled]="!categorieForm.valid" class="ml-4 mt-2 bg-coolGray-800 text-white disabled:bg-coolGray-200 disabled:cursor-not-allowed px-5 py-2 rounded-md font-medium">Ajouter</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <form [formGroup]="produitForm" (ngSubmit)="onProduitSubmit()" class="px-10 mt-8 border-b border-coolGray-200 pb-8">
+    <span class="block font-medium text-lg text-coolGray-500 mb-4">Ajouter un produit</span>
+    <table class="text-coolGray-800">
+      <tr>
+        <td>Libelle:</td>
+        <td>
+          <input type="text" formControlName="libelle" class="border-2 rounded-md border-coolGray-500 px-1.5 ml-4 mb-2"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td>
+          <textarea formControlName="description" class="border-2 rounded-md border-coolGray-500 px-1.5 ml-4 mb-2"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td>Prix:</td>
+        <td>
+          <input type="number" formControlName="prix" class="border-2 rounded-md border-coolGray-500 px-1.5 ml-4 mb-2"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Categorie:</td>
+        <td>
+          <select formControlName="categorie" class="border-2 rounded-md border-coolGray-500 px-1.5 ml-4 mb-2">
+            <option *ngFor="let categorie of categorieList" [value]="categorie.id">{{ categorie.libelle }}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Image(url):</td>
+        <td>
+          <input type="text" formControlName="images" class="border-2 rounded-md border-coolGray-500 px-1.5 ml-4" placeholder="image1.jpg image2.jpg..."/>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button type="submit" [disabled]="!produitForm.valid" class="ml-4 mt-2 bg-coolGray-800 text-white disabled:bg-coolGray-200 disabled:cursor-not-allowed px-5 py-2 rounded-md font-medium">Ajouter</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

@@ -13,6 +13,7 @@ import {CardCommandeComponent} from '../../components/cards/card-commande/card-c
 import { CouponComponent } from './coupon/coupon.component';
 import {TableUsersComponent} from '../../components/table/table-users/table-users.component';
 import {TableCouponsComponent} from '../../components/table/table-coupons/table-coupons.component';
+import { ManagerComponent } from './manager/manager.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {TableCouponsComponent} from '../../components/table/table-coupons/table-
     CardCommandeComponent,
     CouponComponent,
     TableUsersComponent,
-    TableCouponsComponent
+    TableCouponsComponent,
+    ManagerComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import {TableCouponsComponent} from '../../components/table/table-coupons/table-
     HomeComponent,
     UsersComponent,
     CommandesComponent,
-    LoginComponent
+    LoginComponent,
+    ManagerComponent
   ]
 })
 

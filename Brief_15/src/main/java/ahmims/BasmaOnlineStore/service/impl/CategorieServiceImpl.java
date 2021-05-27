@@ -117,7 +117,7 @@ public class CategorieServiceImpl implements CategorieService {
     public List<CategorieMin> getAll() {
         List<CategorieMin> categories = new ArrayList<>();
         for (Categorie categorie : categorieDao.findAll()) {
-            categories.add(new CategorieMin(categorie.getLibelleCategorie(), new ImageMin(categorie.getImage().getLienImage())));
+            categories.add(new CategorieMin(categorie));
         }
         //
         return categories.size() > 0 ? categories : null;
