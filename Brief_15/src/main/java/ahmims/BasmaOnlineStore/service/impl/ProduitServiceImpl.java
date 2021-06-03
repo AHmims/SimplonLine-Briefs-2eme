@@ -95,7 +95,7 @@ public class ProduitServiceImpl implements ProduitService {
                 }
                 //
                 if (produitFormData.getImages() != null) {
-                    if (produitFormData.getImages().size() >= 4 && produitFormData.getImages().size() <= 8) {
+                    if (produitFormData.getImages().length >= 4 && produitFormData.getImages().length <= 8) {
                         List<Image> images = imageService.insertMultiple(produit, produitFormData.getImages());
                         if (images != null) {
                             for (Image preImage : produit.getImages()) {
@@ -129,7 +129,9 @@ public class ProduitServiceImpl implements ProduitService {
     @Override
     public List<ProduitMin> getAll() {
         List<ProduitMin> produits = new ArrayList<>();
-        for (Produit produit : produitDao.findAll()) {
+        Iterable<Produit> recP = produitDao.findAll();
+        for (Produit produit : recP) {
+            System.out.println(produit.getImages().size());
             List<ImageMin> images = new ArrayList<>();
             for (Image image : produit.getImages()) {
                 images.add(new ImageMin(image.getLienImage()));

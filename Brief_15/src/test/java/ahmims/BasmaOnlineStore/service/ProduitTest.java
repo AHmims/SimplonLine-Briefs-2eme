@@ -91,7 +91,7 @@ public class ProduitTest {
     public void insertFail_m1_8() {
         try {
             Optional<Categorie> categorie = categorieDao.findById("5a459cc1e4c54aae957a323a86317bfa");
-            List<Image> images = imageService.insertMultiple(new ArrayList<>(List.of("https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png")));
+            List<Image> images = imageService.insertMultiple(new String[]{"https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"});
             assertNull(produitService.insert(new Produit("product1", null, 100, categorie.get(), images)));
         } catch (RequestException ignored) {
         }
@@ -138,7 +138,7 @@ public class ProduitTest {
     @Test
     public void editFail_3() {
         try {
-            ProduitFormData produitFormData = new ProduitFormData("bad id", "new name", "", 230, "BadId", new ArrayList<>(List.of("hmmmm")));
+            ProduitFormData produitFormData = new ProduitFormData("bad id", "new name", "", 230, "BadId", new String[]{"hmmm"});
             assertNull(produitService.edit(produitFormData));
         } catch (RequestException ignored) {
         }
@@ -147,7 +147,7 @@ public class ProduitTest {
     @Test
     public void editFail_4() {
         try {
-            ProduitFormData produitFormData = new ProduitFormData("2e89132cc25c4f99afc289daf250c833", "new name", "", 230, "BadId", new ArrayList<>(List.of("hmmmm")));
+            ProduitFormData produitFormData = new ProduitFormData("2e89132cc25c4f99afc289daf250c833", "new name", "", 230, "BadId", new String[]{"hmmmm"});
             assertNull(produitService.edit(produitFormData));
         } catch (RequestException ignored) {
         }
@@ -156,7 +156,7 @@ public class ProduitTest {
     @Test
     public void editFail_5() {
         try {
-            ProduitFormData produitFormData = new ProduitFormData("2e89132cc25c4f99afc289daf250c833", "new name 3", null, 0, null, new ArrayList<>(List.of("hmmmm")));
+            ProduitFormData produitFormData = new ProduitFormData("2e89132cc25c4f99afc289daf250c833", "new name 3", null, 0, null, new String[]{"hmmmm"});
             assertNull(produitService.edit(produitFormData));
         } catch (RequestException ignored) {
         }

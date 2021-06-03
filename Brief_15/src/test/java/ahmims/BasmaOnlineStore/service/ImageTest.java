@@ -63,7 +63,7 @@ public class ImageTest {
     @Test
     public void insertMultipleFail_2() {
         try {
-            assertNull(imageService.insertMultiple(new ArrayList<>(List.of("url1", "url2"))));
+            assertNull(imageService.insertMultiple(new String[]{"url1", "url2"}));
         } catch (RequestException ignored) {
         }
     }
@@ -71,7 +71,7 @@ public class ImageTest {
     @Test
     public void insertMultipleFail_3() {
         try {
-            assertNull(imageService.insertMultiple(new ArrayList<>(List.of("https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "url2", "url3", "url4"))));
+            assertNull(imageService.insertMultiple(new String[]{"https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "url2", "url3", "url4"}));
         } catch (RequestException ignored) {
         }
     }
@@ -79,7 +79,7 @@ public class ImageTest {
     @Test
     public void insertMultipleFail_4() {
         try {
-            assertNull(imageService.insertMultiple(new ArrayList<>(List.of("url1", "url2", "url3", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"))));
+            assertNull(imageService.insertMultiple(new String[]{"url1", "url2", "url3", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"}));
         } catch (RequestException ignored) {
         }
     }
@@ -87,7 +87,7 @@ public class ImageTest {
     @Test
     public void insertMultipleFail_5() {
         try {
-            assertNull(imageService.insertMultiple(new ArrayList<>(List.of("url1", "url2", "url3", "url4", "url5", "url6", "url7", "url8", "url9"))));
+            assertNull(imageService.insertMultiple(new String[]{"url1", "url2", "url3", "url4", "url5", "url6", "url7", "url8", "url9"}));
         } catch (RequestException ignored) {
         }
     }
@@ -95,7 +95,7 @@ public class ImageTest {
     @Test
     public void insertMultipleFail_6() {
         try {
-            assertNull(imageService.insertMultiple(new ArrayList<>(List.of("url1", "url2", "url3", "url4", "url5", "url6", "url7", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"))));
+            assertNull(imageService.insertMultiple(new String[]{"url1", "url2", "url3", "url4", "url5", "url6", "url7", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"}));
         } catch (RequestException ignored) {
         }
     }
@@ -103,7 +103,7 @@ public class ImageTest {
     @Test
     public void insertMultipleFail_7() {
         try {
-            assertNull(imageService.insertMultiple(new ArrayList<>(List.of("https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "url2", "url3", "url4", "url5", "url6", "url7", "url8"))));
+            assertNull(imageService.insertMultiple(new String[]{"https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "url2", "url3", "url4", "url5", "url6", "url7", "url8"}));
         } catch (RequestException ignored) {
         }
     }
@@ -111,7 +111,7 @@ public class ImageTest {
     @Test
     public void insertMultiplePass() {
         try {
-            assertNotNull(imageService.insertMultiple(new ArrayList<>(List.of("https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"))));
+            assertNotNull(imageService.insertMultiple(new String[]{"https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png", "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"}));
         } catch (RequestException ignored) {
             fail();
         }

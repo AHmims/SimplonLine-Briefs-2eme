@@ -38,8 +38,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<Image> insertMultiple(List<String> urls) {
-        if (urls != null && urls.size() >= 4 && urls.size() <= 8) {
+    public List<Image> insertMultiple(String[] urls) {
+        if (urls != null && urls.length >= 4 && urls.length <= 8) {
             for (String url : urls) {
                 if (!imageValidator.isValidImageLink(url))
                     throw new RequestException("Invalid image link", HttpStatus.UNPROCESSABLE_ENTITY);
@@ -56,8 +56,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<Image> insertMultiple(Produit produit, List<String> urls) {
-        if (urls != null && urls.size() >= 4 && urls.size() <= 8) {
+    public List<Image> insertMultiple(Produit produit, String[] urls) {
+        if (urls != null && urls.length >= 4 && urls.length <= 8) {
             for (String url : urls) {
                 if (!imageValidator.isValidImageLink(url))
                     throw new RequestException("Invalid image link", HttpStatus.UNPROCESSABLE_ENTITY);
