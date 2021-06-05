@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class Test1 {
-    @Autowired
+    /*@Autowired
     private ahmims.BasmaOnlineStore.controller.Test controller;
     @LocalServerPort
     private int port;
@@ -62,5 +62,5 @@ class Test1 {
         //
         //
         
-    }
+    }*/
 }

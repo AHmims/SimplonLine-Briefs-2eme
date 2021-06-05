@@ -1,4 +1,4 @@
-package util;
+package ahmims.BasmaOnlineStore.util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

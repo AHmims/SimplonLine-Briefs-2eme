@@ -38,7 +38,7 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public List<CommandeMin> getByUser(String idUser) {
         Optional<Utilisateur> user = utilisateurDao.findById(idUser);
-        if (user.isEmpty())
+        if (!user.isPresent())
             throw new RequestException("User id not found", HttpStatus.NOT_FOUND);
         //
         List<Panier> paniers = panierRepository.findAllByClient(user.get());

@@ -78,7 +78,7 @@ public class ImageServiceImpl implements ImageService {
         try {
             imageDao.delete(image);
             Optional<Image> imgDlt = imageDao.findById(image.getIdImage());
-            return imgDlt.isEmpty();
+            return !imgDlt.isPresent();
         } catch (Exception e) {
             return false;
         }
