@@ -1,5 +1,6 @@
 package ahmims.BasmaOnlineStore.model;
 
+import ahmims.BasmaOnlineStore.util.PkGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,8 +9,8 @@ import javax.persistence.*;
 @Table(name = "image")
 public class Image {
     @Id
-    @GeneratedValue(generator = util.PkGenerator.rndmString)
-    @GenericGenerator(name = util.PkGenerator.rndmString, strategy = "util.PkGenerator")
+    @GeneratedValue(generator = PkGenerator.rndmString)
+    @GenericGenerator(name = PkGenerator.rndmString, strategy = "util.PkGenerator")
     @Column(name = "idImage")
     private String idImage;
     @Column(name = "lienImage")

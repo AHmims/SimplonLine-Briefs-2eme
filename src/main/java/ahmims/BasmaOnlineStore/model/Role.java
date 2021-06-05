@@ -1,7 +1,7 @@
 package ahmims.BasmaOnlineStore.model;
 
+import ahmims.BasmaOnlineStore.util.PkGenerator;
 import org.hibernate.annotations.GenericGenerator;
-import util.PkGenerator;
 
 import javax.persistence.*;
 import java.util.List;

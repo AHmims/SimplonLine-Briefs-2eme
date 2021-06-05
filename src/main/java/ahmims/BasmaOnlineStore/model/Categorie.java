@@ -1,5 +1,6 @@
 package ahmims.BasmaOnlineStore.model;
 
+import ahmims.BasmaOnlineStore.util.PkGenerator;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 
@@ -10,8 +11,8 @@ import java.util.List;
 @Table(name = "categorie")
 public class Categorie {
     @Id
-    @GeneratedValue(generator = util.PkGenerator.rndmString)
-    @GenericGenerator(name = util.PkGenerator.rndmString, strategy = "util.PkGenerator")
+    @GeneratedValue(generator = PkGenerator.rndmString)
+    @GenericGenerator(name = PkGenerator.rndmString, strategy = "util.PkGenerator")
     @Column(name = "idCategorie")
     private String idCategorie;
     @Column(name = "libelleCategorie")
