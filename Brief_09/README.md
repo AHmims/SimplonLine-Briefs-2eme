@@ -1,1 +1,0 @@
-build tailwind : npx tailwindcss build ./t_res/css/style.css -o ./web/css/style.css

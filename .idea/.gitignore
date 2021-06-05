@@ -1,8 +1,6 @@
 # Default ignored files
-/shelf/
 /workspace.xml
+
 # Datasource local storage ignored files
-/../../../../../../../:\Users\qas14\Desktop\TO-DO\SimplonLine-Briefs-2eme\.idea/dataSources/
+/dataSources/
 /dataSources.local.xml
-# Editor-based HTTP Client requests
-/httpRequests/

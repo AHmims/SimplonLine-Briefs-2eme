@@ -1,3 +1,0 @@
-<logger name="org.hibernate">
-    <level value="info"/>
-</logger>
