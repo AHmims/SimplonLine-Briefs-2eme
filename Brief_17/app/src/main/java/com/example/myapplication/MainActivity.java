@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -24,13 +27,13 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         DbManager dbManager = new DbManager(this);
-
         CustomAdapter adapter = new CustomAdapter(dbManager.getAll(), this);
 
         ((ListView) findViewById(R.id.listView)).setAdapter(adapter);
@@ -75,6 +78,25 @@ public class MainActivity extends AppCompatActivity {
                 FragStat.EDIT_FRAG = false;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                Log.d(TAG, "onOptionsItemSelected: REFRESH");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     //

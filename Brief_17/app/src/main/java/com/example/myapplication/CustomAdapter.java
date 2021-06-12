@@ -90,4 +90,8 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter {
         intent.putExtra("candidat", candidat);
         context.sendBroadcast(intent);
     }
+
+    public static void refresh(){
+
+    }
 }
