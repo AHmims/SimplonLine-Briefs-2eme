@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class CustomAdapter extends BaseAdapter implements ListAdapter {
     private List<Candidat> list = new ArrayList<>();
@@ -66,8 +69,6 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 resetFrag(list.get(position));
-                list.set(position, dbManager.get(list.get(position).getId()));
-                notifyDataSetChanged();
             }
         });
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -85,10 +86,8 @@ public class CustomAdapter extends BaseAdapter implements ListAdapter {
     //
     //
     private void resetFrag(Candidat candidat) {
-        if (FragStat.ADD_FRAG) {
-            Intent intent = new Intent("call.fragment_add_item.switch");
-            intent.putExtra("candidat", candidat);
-            context.sendBroadcast(intent);
-        }
+        Intent intent = new Intent("call.fragment_add_item.switch");
+        intent.putExtra("candidat", candidat);
+        context.sendBroadcast(intent);
     }
 }

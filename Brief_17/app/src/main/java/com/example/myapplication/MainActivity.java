@@ -31,22 +31,30 @@ public class MainActivity extends AppCompatActivity {
 
         DbManager dbManager = new DbManager(this);
 
-        ((ListView) findViewById(R.id.listView)).setAdapter(new CustomAdapter(dbManager.getAll(), this));
+        CustomAdapter adapter = new CustomAdapter(dbManager.getAll(), this);
+
+        ((ListView) findViewById(R.id.listView)).setAdapter(adapter);
 
         BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Candidat candidat = (Candidat) intent.getSerializableExtra("candidat");
                 Bundle args = new Bundle();
+
+                Candidat candidat = (Candidat) intent.getSerializableExtra("candidat");
 
                 args.putInt("id", candidat.getId());
                 args.putString("nom", candidat.getNom());
                 args.putString("prenom", candidat.getPrenom());
                 args.putString("email", candidat.getEmail());
 
-                AddItem frag = new AddItem();
-                frag.setArguments(args);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, frag, null).commit();
+                if (!FragStat.ADD_FRAG && !FragStat.EDIT_FRAG) {
+                    showFrag(AddItem.class, args);
+                } else {
+                    switchFrag(new AddItem(), args);
+                }
+
+                FragStat.ADD_FRAG = false;
+                FragStat.EDIT_FRAG = true;
             }
         };
 
@@ -55,13 +63,28 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!FragStat.ADD_FRAG) {
-                    Bundle bundle = new Bundle();
-                    getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
-                            .add(R.id.fragmentContainerView, AddItem.class, bundle).commit();
-                    FragStat.ADD_FRAG = true;
+                Bundle args = new Bundle();
+
+                if (!FragStat.ADD_FRAG && !FragStat.EDIT_FRAG) {
+                    showFrag(AddItem.class,args);
+                } else {
+                    switchFrag(new AddItem(),args);
                 }
+
+                FragStat.ADD_FRAG = true;
+                FragStat.EDIT_FRAG = false;
             }
         });
+    }
+
+    //
+    private void showFrag(Class fragClass, Bundle args) {
+        getSupportFragmentManager().beginTransaction().setReorderingAllowed(true)
+                .add(R.id.fragmentContainerView, fragClass, args).commit();
+    }
+
+    private void switchFrag(Fragment fragment, Bundle args) {
+        fragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, fragment).commit();
     }
 }
