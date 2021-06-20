@@ -59,6 +59,7 @@ public class UtilisateurCont {
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<DeleteRes> deleteUser(@PathVariable String id) {
+        System.out.println(id);
         return new ResponseEntity<>(utilisateurService.deleteUser(id), HttpStatus.valueOf(200));
     }
 }
