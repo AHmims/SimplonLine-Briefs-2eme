@@ -82,7 +82,7 @@ public class AddItem extends Fragment {
 
         List<Candidat> candidats = dbManager.getAll();
 
-        ((EditText) root.findViewById(R.id.editTextTextId)).setText(id != 0 ? id + "" : candidats.get(candidats.size() - 1).getId() + 1 + "");
+        ((EditText) root.findViewById(R.id.editTextTextId)).setText(id != 0 ? id + "" : candidats.isEmpty() ? "1" : candidats.get(candidats.size() - 1).getId() + 1 + "");
         ((EditText) root.findViewById(R.id.editTextTextNom)).setText(nom != null ? nom : "");
         ((EditText) root.findViewById(R.id.editTextTextPrenom)).setText(prenom != null ? prenom : "");
         ((EditText) root.findViewById(R.id.editTextTextEmail)).setText(email != null ? email : "");

@@ -33,7 +33,7 @@
                     android:layout_marginLeft="5dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="Id" />
+                    android:text="1" />
 
             </TableRow>
             <TableRow

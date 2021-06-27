@@ -23,6 +23,6 @@ import java.util.concurrent.ExecutionException;
 import static android.content.ContentValues.TAG;
 
 public class Requester {
-    public static final String BASE_URL = "http://192.168.1.38:3420";
+    public static final String BASE_URL = "http://192.168.100.32:3420";
     public static String TOKEN = "";
 }
