@@ -74,6 +74,8 @@ public class UserFormData {
             ret = ret && this.password != null;
         if (type == 1)
             ret = ret && this.img != null;
+        if(type == 2)
+            ret = this.password != null && this.email != null;
         //
         return ret;
     }

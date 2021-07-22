@@ -43,7 +43,7 @@ public class CompteVerificationServiceImpl implements CompteVerificationService 
                 emailFormat.setReceiver(utilisateur.getEmailUtilisateur());
                 emailFormat.setSubject("scuffed_BAKURA account verification");
                 String verificationLink = String.format("http://localhost:3420/valider/%s", compteVerification.getIdCompteVerification());
-                emailFormat.setContent(String.format("Bonjour %s %s.\n</br>Pour valider votre compte, veuillez ouvrir le lien suivant:\n<a href=\"%s\"><h3>Lien de verification</h3></a>", utilisateur.getNomUtilisateur(), verificationLink));
+                emailFormat.setContent(String.format("Bonjour %s.\n</br>Pour valider votre compte, veuillez ouvrir le lien suivant:\n<a href=\"%s\"><h3>Lien de verification</h3></a>", utilisateur.getNomUtilisateur(), verificationLink));
                 //
                 //
                 return emailSender.sendEmail(emailFormat);

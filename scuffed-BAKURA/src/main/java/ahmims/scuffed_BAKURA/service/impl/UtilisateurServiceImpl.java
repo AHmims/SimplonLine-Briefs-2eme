@@ -17,6 +17,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final PasswordEncoder passwordEncoder;
     private final CompteVerificationService compteVerificationService;
 
-    public UtilisateurServiceImpl(MemberService MemberService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, UtilisateurRepository utilisateurRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder,CompteVerificationService compteVerificationService) {
+    public UtilisateurServiceImpl(MemberService MemberService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, UtilisateurRepository utilisateurRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, CompteVerificationService compteVerificationService) {
         this.MemberService = MemberService;
         this.administrateurService = administrateurService;
         this.jwtManager = jwtManager;
@@ -51,7 +52,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     //#endregion
     @Override
     public UserResponseData loginUser(UserFormData userAuthInputData) {
-        if (userAuthInputData.isFilled(0)) {
+        if (userAuthInputData.isFilled(2)) {
             try {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userAuthInputData.getEmail(), userAuthInputData.getPassword()));
                 Utilisateur utilisateur = utilisateurRepository.findTopByEmailUtilisateur(userAuthInputData.getEmail());
@@ -111,12 +112,15 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                     if (user != null && user.getIdUtilisateur() != null) {
                         //all good
                         if (user.getClass().equals(Member.class)) {
-                            if (!compteVerificationService.sendEmail(user))
+                            if (!compteVerificationService.sendEmail(user)) {
+                                deleteUser(user.getIdUtilisateur());
                                 throw new RequestException("Verification email not sent", HttpStatus.INTERNAL_SERVER_ERROR);
+                            }
+                        } else {
+                            user.setStatutUtilisateur(1);
                         }
                         return setupLoginResponse(user);
-                    } else
-                        throw new RequestException("Server error. User not saved", HttpStatus.BAD_REQUEST);
+                    } else throw new RequestException("Server error. User not saved", HttpStatus.BAD_REQUEST);
                 }
             } else throw new RequestException("Le champ <type> est invalide", HttpStatus.BAD_REQUEST);
         } else
@@ -193,17 +197,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 
-    /*@Override
+    @Override
     @Transactional
     public DeleteRes deleteUser(String id) {
-        Optional<Utilisateur> user = utilisateurDao.findById(id);
+        Optional<Utilisateur> user = utilisateurRepository.findById(id);
         if (user.isPresent()) {
             Utilisateur utilisateur = user.get();
-            long res = utilisateurDao.deleteByIdUtilisateur(id);
+            utilisateurRepository.deleteById(id);
             //
-            return new DeleteRes(res, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
+            return new DeleteRes(-1, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
-    }*/
+    }
 
     @Override
     public UserMainData get(String id) {

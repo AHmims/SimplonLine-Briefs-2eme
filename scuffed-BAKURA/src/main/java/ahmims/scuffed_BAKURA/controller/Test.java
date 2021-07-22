@@ -1,9 +1,8 @@
-/* package ahmims.scuffed_BAKURA.controller;
+package ahmims.scuffed_BAKURA.controller;
 
-import ahmims.scuffed_BAKURA.dao.RoleDao;
-import ahmims.scuffed_BAKURA.dto.UserAuthInputData;
 import ahmims.scuffed_BAKURA.model.Member;
 import ahmims.scuffed_BAKURA.model.Role;
+import ahmims.scuffed_BAKURA.repository.RoleRepository;
 import ahmims.scuffed_BAKURA.security.JwtManager;
 import ahmims.scuffed_BAKURA.service.MemberService;
 import org.modelmapper.ModelMapper;
@@ -19,14 +18,14 @@ import java.util.Date;
 public class Test {
 
     private final MemberService MemberService;
-    private final RoleDao roleDao;
+    private final RoleRepository roleRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
 
-    public Test(MemberService MemberService, RoleDao roleDao, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper) {
+    public Test(MemberService MemberService, RoleRepository roleRepository, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper) {
         this.MemberService = MemberService;
-        this.roleDao = roleDao;
+        this.roleRepository = roleRepository;
         this.authenticationManager = authenticationManager;
         this.jwtManager = jwtManager;
         this.modelMapper = modelMapper;
@@ -35,8 +34,8 @@ public class Test {
     @GetMapping("/test")
     public String test() {
         Role role = new Role("hmmm", -99);
-        role = roleDao.save(role);
-        Member member = new Member("XX", "XX", "XXX", "XX", new Date(), "");
+        role = roleRepository.save(role);
+        Member member = new Member("XX", "XX", "XXX", new Date(), "");
         member.setRole(role);
         member = MemberService.save(member);
         return member.getIdUtilisateur();
@@ -49,7 +48,7 @@ public class Test {
     }
 
     @PostMapping("/test")
-    public ResponseEntity<?> test2(@RequestBody UserAuthInputData payload) { //<?> => is a wildcard meaning it can be any type
+    public ResponseEntity<?> test2() { //<?> => is a wildcard meaning it can be any type
         //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(payload.getEmailUtilisateur(), payload.getPassUtilisateur()));
         //String jwt = jwtManager.createToken(payload.getEmailUtilisateur(), new Role("__hmm", -99));
         //System.out.println(jwt);
@@ -64,10 +63,9 @@ public class Test {
         roles.add(new Role("Role_2", 1));
         roles.add(new Role("Role_3", 2));
         for (Role role : roles) {
-            roleDao.save(role);
+            roleRepository.save(role);
         }
         //
         return new ResponseEntity<>("ff", HttpStatus.valueOf(200));
     }
 }
-**/
