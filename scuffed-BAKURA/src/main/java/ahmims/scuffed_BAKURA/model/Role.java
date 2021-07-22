@@ -1,7 +1,6 @@
 package ahmims.scuffed_BAKURA.model;
 
 import org.hibernate.annotations.GenericGenerator;
-import ahmims.scuffed_BAKURA.util.PkGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,8 +9,8 @@ import java.util.List;
 @Table(name = "role")
 public class Role {
     @Id
-    @GeneratedValue(generator = PkGenerator.rndmString)
-    @GenericGenerator(name = PkGenerator.rndmString, strategy = "util.PkGenerator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "idRole")
     private String idRole;
     @Column(name = "libelleRole")

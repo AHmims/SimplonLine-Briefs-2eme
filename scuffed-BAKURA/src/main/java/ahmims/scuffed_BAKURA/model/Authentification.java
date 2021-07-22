@@ -1,9 +1,6 @@
 package ahmims.scuffed_BAKURA.model;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "authentification")

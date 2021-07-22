@@ -1,4 +1,4 @@
-package ahmims.scuffed_BAKURA.controller;
+/* package ahmims.scuffed_BAKURA.controller;
 
 import ahmims.BasmaOnlineStore.dto.*;
 import ahmims.scuffed_BAKURA.dto.*;
@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/user")
 public class UtilisateurCont {
@@ -54,3 +53,4 @@ public class UtilisateurCont {
         return new ResponseEntity<>(utilisateurService.disableAccount(id), HttpStatus.valueOf(200));
     }
 }
+**/

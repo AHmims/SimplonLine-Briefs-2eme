@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class BasmaOnlineStoreApplication {
+public class ScuffedApplication {
     public static void main(String[] args) {
-        SpringApplication.run(BasmaOnlineStoreApplication.class, args);
+        SpringApplication.run(ScuffedApplication.class, args);
     }
 
     @Bean
@@ -20,7 +20,6 @@ public class BasmaOnlineStoreApplication {
         //
         modelMapper.typeMap(Utilisateur.class, UserResponseData.class).addMappings(mapper -> {
             mapper.map(Utilisateur::getNomUtilisateur, UserResponseData::setNom);
-            mapper.map(Utilisateur::getPrenomUtilisateur, UserResponseData::setPrenom);
             mapper.map(Utilisateur::getEmailUtilisateur, UserResponseData::setEmail);
             mapper.map(Utilisateur::getRole, UserResponseData::setRole);
         });

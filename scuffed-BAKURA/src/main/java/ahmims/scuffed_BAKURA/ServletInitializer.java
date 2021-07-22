@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(BasmaOnlineStoreApplication.class);
+		return application.sources(ScuffedApplication.class);
 	}
 
 }

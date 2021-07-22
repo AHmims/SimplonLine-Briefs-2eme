@@ -2,7 +2,6 @@ package ahmims.scuffed_BAKURA.model;
 
 import ahmims.scuffed_BAKURA.dto.UserFormData;
 import org.hibernate.annotations.GenericGenerator;
-import ahmims.scuffed_BAKURA.util.PkGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,14 +11,12 @@ import java.util.Date;
 @Table(name = "utilisateur")
 public abstract class Utilisateur {
     @Id
-    @GeneratedValue(generator = PkGenerator.rndmString)
-    @GenericGenerator(name = PkGenerator.rndmString, strategy = "util.PkGenerator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "idUtilisateur")
     private String idUtilisateur;
     @Column(name = "nomUtilisateur", nullable = false)
     private String nomUtilisateur;
-    @Column(name = "prenomUtilisateur", nullable = false)
-    private String prenomUtilisateur;
     @Column(name = "emailUtilisateur", nullable = false)
     private String emailUtilisateur;
     @Column(name = "passUtilisateur")
@@ -36,10 +33,9 @@ public abstract class Utilisateur {
     //
     //
 
-    public Utilisateur(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role) {
+    public Utilisateur(String idUtilisateur, String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role) {
         this.idUtilisateur = idUtilisateur;
         this.nomUtilisateur = nomUtilisateur;
-        this.prenomUtilisateur = prenomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = dateCreation;
@@ -47,26 +43,23 @@ public abstract class Utilisateur {
         this.role = role;
     }
 
-    public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role) {
+    public Utilisateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role) {
         this.nomUtilisateur = nomUtilisateur;
-        this.prenomUtilisateur = prenomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = dateCreation;
         this.role = role;
     }
 
-    public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation) {
+    public Utilisateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation) {
         this.nomUtilisateur = nomUtilisateur;
-        this.prenomUtilisateur = prenomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = dateCreation;
     }
 
-    public Utilisateur(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur) {
+    public Utilisateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
-        this.prenomUtilisateur = prenomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = new Date();
@@ -74,7 +67,6 @@ public abstract class Utilisateur {
 
     public Utilisateur(UserFormData userFormData) {
         this.nomUtilisateur = userFormData.getNom();
-        this.prenomUtilisateur = userFormData.getPrenom();
         this.emailUtilisateur = userFormData.getEmail();
         this.passUtilisateur = userFormData.getPassword();
         this.dateCreation = new Date();
@@ -99,14 +91,6 @@ public abstract class Utilisateur {
 
     public void setNomUtilisateur(String nomUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
-    }
-
-    public String getPrenomUtilisateur() {
-        return prenomUtilisateur;
-    }
-
-    public void setPrenomUtilisateur(String prenomUtilisateur) {
-        this.prenomUtilisateur = prenomUtilisateur;
     }
 
     public String getEmailUtilisateur() {

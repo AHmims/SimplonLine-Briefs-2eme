@@ -1,17 +1,13 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
-import ahmims.scuffed_BAKURA.dao.UtilisateurDao;
-import ahmims.BasmaOnlineStore.dto.*;
 import ahmims.scuffed_BAKURA.dto.*;
 import ahmims.scuffed_BAKURA.exception.RequestException;
-import ahmims.BasmaOnlineStore.model.*;
 import ahmims.scuffed_BAKURA.model.Administrateur;
-import ahmims.scuffed_BAKURA.model.Client;
+import ahmims.scuffed_BAKURA.model.Member;
 import ahmims.scuffed_BAKURA.model.Role;
 import ahmims.scuffed_BAKURA.model.Utilisateur;
 import ahmims.scuffed_BAKURA.repository.UtilisateurRepository;
 import ahmims.scuffed_BAKURA.security.JwtManager;
-import ahmims.BasmaOnlineStore.service.*;
 import ahmims.scuffed_BAKURA.service.*;
 import ahmims.scuffed_BAKURA.validator.UtilisateurValidator;
 import org.modelmapper.ModelMapper;
@@ -22,35 +18,31 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service("UtilisateurService")
 public class UtilisateurServiceImpl implements UtilisateurService {
     //#region
-    private final ClientService clientService;
+    private final MemberService MemberService;
     private final AdministrateurService administrateurService;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
     private final UtilisateurValidator utilisateurValidator;
     private final RoleService roleService;
     private final UtilisateurRepository utilisateurRepository;
-    private final UtilisateurDao utilisateurDao;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final CompteVerificationService compteVerificationService;
 
-    public UtilisateurServiceImpl(ClientService clientService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, UtilisateurRepository utilisateurRepository, UtilisateurDao utilisateurDao, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, CompteVerificationService compteVerificationService) {
-        this.clientService = clientService;
+    public UtilisateurServiceImpl(MemberService MemberService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, UtilisateurRepository utilisateurRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder,CompteVerificationService compteVerificationService) {
+        this.MemberService = MemberService;
         this.administrateurService = administrateurService;
         this.jwtManager = jwtManager;
         this.modelMapper = modelMapper;
         this.utilisateurValidator = utilisateurValidator;
         this.roleService = roleService;
         this.utilisateurRepository = utilisateurRepository;
-        this.utilisateurDao = utilisateurDao;
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.compteVerificationService = compteVerificationService;
@@ -58,12 +50,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     //#endregion
     @Override
-    public UserResponseData loginUser(UserAuthInputData userAuthInputData) {
-        if (userAuthInputData.isFilled()) {
+    public UserResponseData loginUser(UserFormData userAuthInputData) {
+        if (userAuthInputData.isFilled(0)) {
             try {
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userAuthInputData.getEmail(), userAuthInputData.getPassword()));
                 Utilisateur utilisateur = utilisateurRepository.findTopByEmailUtilisateur(userAuthInputData.getEmail());
-                if (utilisateur.getClass().equals(Client.class)) {
+                if (utilisateur.getClass().equals(Member.class)) {
                     switch (utilisateur.getStatutUtilisateur()) {
                         case -1:
                             throw new RequestException("Your account has been disabled, please contact us if you believe this is a mistake.", HttpStatus.BAD_REQUEST);
@@ -87,7 +79,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             if (utilisateurRepository.findTopByEmailUtilisateur(userFormData.getEmail()) != null)
                 throw new RequestException("Email already exists, choose another one", HttpStatus.BAD_REQUEST);
             Utilisateur user = null;
-            user = userFormData.getType().toLowerCase().equals("client") ? new Client(userFormData, null) : userFormData.getType().toLowerCase().equals("administrateur") ? new Administrateur(userFormData) : null;
+            user = userFormData.getType().toLowerCase().equals("member") ? new Member(userFormData, null) : userFormData.getType().toLowerCase().equals("administrateur") ? new Administrateur(userFormData) : null;
             //
             ArrayList<Validation> validations = utilisateurValidator.isValidNewObject(user);
             if (validations != null) {
@@ -104,7 +96,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 if (!isValid) throw new RequestException(errorMessage.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
                 else {
                     String libelleRole = "Role_1";
-                    if (!userFormData.getType().toLowerCase().equals("client")) {
+                    if (!userFormData.getType().toLowerCase().equals("member")) {
                         libelleRole = "Role_2";
                     }
                     Role role = roleService.getByLibelle(libelleRole);
@@ -112,13 +104,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                         throw new RequestException("Server error. Role not found", HttpStatus.BAD_REQUEST);
                     //
                     //if(role.getNivRole() > 0)
-                    //test if current logged user is allowed to create an account for someone other than clients
+                    //test if current logged user is allowed to create an account for someone other than Members
                     user.setRole(role);
                     user.setPassUtilisateur(passwordEncoder.encode(user.getPassUtilisateur()));
                     user = insertUser(user);
                     if (user != null && user.getIdUtilisateur() != null) {
                         //all good
-                        if (user.getClass().equals(Client.class)) {
+                        if (user.getClass().equals(Member.class)) {
                             if (!compteVerificationService.sendEmail(user))
                                 throw new RequestException("Verification email not sent", HttpStatus.INTERNAL_SERVER_ERROR);
                         }
@@ -134,8 +126,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public Utilisateur insertUser(Utilisateur utilisateur) {
         switch (utilisateur.getClass().getSimpleName()) {
-            case "Client":
-                return clientService.save((Client) utilisateur);
+            case "Member":
+                return MemberService.save((Member) utilisateur);
             case "Administrateur":
                 return administrateurService.save((Administrateur) utilisateur);
             default:
@@ -149,7 +141,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return utilisateurRepository.findTopByEmailUtilisateur(email);
     }
 
-    @Override
+    /*@Override
     public AllUsers getAll() {
         List<Utilisateur> users = (List<Utilisateur>) utilisateurDao.findAll();
         if (users.size() == 0)
@@ -162,26 +154,24 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }
         //
         return new AllUsers(usersMainData);
-    }
+    }*/
 
     @Override
     public UserMainData updateUser(UserFormData utilisateur, String id) {
-        Optional<Utilisateur> user = utilisateurDao.findById(id);
+        Optional<Utilisateur> user = utilisateurRepository.findById(id);
         if (user.isPresent()) {
             Utilisateur originalUser = user.get();
             //
             if (utilisateur.getNom() != null)
                 originalUser.setNomUtilisateur(utilisateur.getNom());
-            if (utilisateur.getPrenom() != null)
-                originalUser.setPrenomUtilisateur(utilisateur.getPrenom());
             if (utilisateur.getEmail() != null)
                 originalUser.setEmailUtilisateur(utilisateur.getEmail());
             if (utilisateur.getPassword() != null) {
                 if (!passwordEncoder.matches(utilisateur.getPassword(), originalUser.getPassUtilisateur()))
                     originalUser.setPassUtilisateur(passwordEncoder.encode(utilisateur.getPassword()));
             }
-            if (originalUser.getClass().getSimpleName().equals(Client.class.getSimpleName()) && utilisateur.getImg() != null)
-                ((Client) originalUser).setImgClient(utilisateur.getImg());
+            if (originalUser.getClass().getSimpleName().equals(Member.class.getSimpleName()) && utilisateur.getImg() != null)
+                ((Member) originalUser).setImgMember(utilisateur.getImg());
             //
             ArrayList<Validation> validations = utilisateurValidator.isValidNewObject(originalUser);
             StringBuilder errorMessage = new StringBuilder();
@@ -196,14 +186,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             }
             if (!isValid) throw new RequestException(errorMessage.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
             //
-            originalUser = utilisateurDao.save(originalUser);
+            originalUser = utilisateurRepository.save(originalUser);
             if (originalUser != null) {
                 return getUerResponse(originalUser);
             } else throw new RequestException("User not updated", HttpStatus.INTERNAL_SERVER_ERROR);
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 
-    @Override
+    /*@Override
     @Transactional
     public DeleteRes deleteUser(String id) {
         Optional<Utilisateur> user = utilisateurDao.findById(id);
@@ -213,17 +203,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             //
             return new DeleteRes(res, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
-    }
+    }*/
 
     @Override
     public UserMainData get(String id) {
-        Optional<Utilisateur> user = utilisateurDao.findById(id);
+        Optional<Utilisateur> user = utilisateurRepository.findById(id);
         if (user.isPresent()) {
             return getUerResponse(user.get());
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 
-    @Override
+    /*@Override
     public UpdateRes disableAccount(String idUtilisateur) {
         Optional<Utilisateur> optionalUtilisateur = utilisateurDao.findById(idUtilisateur);
         if (optionalUtilisateur.isPresent()) {
@@ -235,7 +225,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 return new UpdateRes(true, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
             else throw new RequestException("Account was not disabled", HttpStatus.BAD_REQUEST);
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
-    }
+    }*/
 
 
     //
@@ -251,15 +241,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private UserMainData getUerResponse(Utilisateur utilisateur) {
         modelMapper.typeMap(Utilisateur.class, UserMainData.class).addMappings(mapper -> {
             mapper.map(Utilisateur::getNomUtilisateur, UserMainData::setNom);
-            mapper.map(Utilisateur::getPrenomUtilisateur, UserMainData::setPrenom);
             mapper.map(Utilisateur::getEmailUtilisateur, UserMainData::setEmail);
             mapper.map(Utilisateur::getIdUtilisateur, UserMainData::setId);
         });
         //
         UserMainData userMainData = modelMapper.map(utilisateur, UserMainData.class);
         userMainData.setRole(utilisateur.getRole() != null ? modelMapper.map(utilisateur.getRole(), RoleShort.class) : null);
-        if (utilisateur.getClass().getSimpleName().equals(Client.class.getSimpleName()))
-            userMainData.setImage(((Client) utilisateur).getImgClient());
+        if (utilisateur.getClass().getSimpleName().equals(Member.class.getSimpleName()))
+            userMainData.setImage(((Member) utilisateur).getImgMember());
         userMainData.setTypeUtilisateurByClass(utilisateur.getClass());
         //
         return userMainData;

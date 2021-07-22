@@ -1,13 +1,12 @@
 package ahmims.scuffed_BAKURA.service;
 
-import ahmims.BasmaOnlineStore.dto.*;
 import ahmims.scuffed_BAKURA.dto.*;
 import ahmims.scuffed_BAKURA.model.Utilisateur;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UtilisateurService {
-    UserResponseData loginUser(UserAuthInputData userAuthInputData);
+    UserResponseData loginUser(UserFormData userAuthInputData);
 
     UserResponseData createUser(UserFormData utilisateur);
 
@@ -15,13 +14,13 @@ public interface UtilisateurService {
 
     Utilisateur findTopByEmail(String email);
 
-    AllUsers getAll();
+    //AllUsers getAll();
 
     UserMainData updateUser(UserFormData utilisateur, String id);
 
-    DeleteRes deleteUser(String id);
+    //DeleteRes deleteUser(String id);
 
     UserMainData get(String id);
 
-    UpdateRes disableAccount(String idUtilisateur);
+    //UpdateRes disableAccount(String idUtilisateur);
 }

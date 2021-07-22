@@ -1,13 +1,12 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
-import ahmims.scuffed_BAKURA.dao.CompteVerificationDao;
-import ahmims.scuffed_BAKURA.dao.UtilisateurDao;
 import ahmims.scuffed_BAKURA.dto.EmailFormat;
 import ahmims.scuffed_BAKURA.dto.RoleShort;
 import ahmims.scuffed_BAKURA.dto.UserResponseData;
 import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.CompteVerification;
 import ahmims.scuffed_BAKURA.model.Utilisateur;
+import ahmims.scuffed_BAKURA.repository.CompteVerificationRepository;
 import ahmims.scuffed_BAKURA.security.JwtManager;
 import ahmims.scuffed_BAKURA.service.CompteVerificationService;
 import ahmims.scuffed_BAKURA.util.EmailSender;
@@ -20,19 +19,17 @@ import java.util.Optional;
 @Service("CompteVerificationService")
 public class CompteVerificationServiceImpl implements CompteVerificationService {
     //#region
-    private final CompteVerificationDao compteVerificationDao;
-    private final UtilisateurDao utilisateurDao;
     private final EmailSender emailSender;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
+    private final CompteVerificationRepository compteVerificationRepository;
 
 
-    public CompteVerificationServiceImpl(CompteVerificationDao compteVerificationDao, EmailSender emailSender, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurDao utilisateurDao) {
-        this.compteVerificationDao = compteVerificationDao;
+    public CompteVerificationServiceImpl(EmailSender emailSender, JwtManager jwtManager, ModelMapper modelMapper, CompteVerificationRepository compteVerificationRepository) {
         this.emailSender = emailSender;
         this.jwtManager = jwtManager;
         this.modelMapper = modelMapper;
-        this.utilisateurDao = utilisateurDao;
+        this.compteVerificationRepository = compteVerificationRepository;
     }
 
     //#endregion
@@ -40,13 +37,13 @@ public class CompteVerificationServiceImpl implements CompteVerificationService 
     @Override
     public boolean sendEmail(Utilisateur utilisateur) {
         if (utilisateur != null && utilisateur.getIdUtilisateur().length() > 0) {
-            CompteVerification compteVerification = compteVerificationDao.save(new CompteVerification(utilisateur));
+            CompteVerification compteVerification = compteVerificationRepository.save(new CompteVerification(utilisateur));
             if (compteVerification.getIdCompteVerification() != null) {
                 EmailFormat emailFormat = new EmailFormat();
                 emailFormat.setReceiver(utilisateur.getEmailUtilisateur());
-                emailFormat.setSubject("BasmaOnlineStore account verification");
+                emailFormat.setSubject("scuffed_BAKURA account verification");
                 String verificationLink = String.format("http://localhost:3420/valider/%s", compteVerification.getIdCompteVerification());
-                emailFormat.setContent(String.format("Bonjour %s %s.\n</br>Pour valider votre compte, veuillez ouvrir le lien suivant:\n<a href=\"%s\"><h3>Lien de verification</h3></a>", utilisateur.getNomUtilisateur(), utilisateur.getPrenomUtilisateur(), verificationLink));
+                emailFormat.setContent(String.format("Bonjour %s %s.\n</br>Pour valider votre compte, veuillez ouvrir le lien suivant:\n<a href=\"%s\"><h3>Lien de verification</h3></a>", utilisateur.getNomUtilisateur(), verificationLink));
                 //
                 //
                 return emailSender.sendEmail(emailFormat);
@@ -57,7 +54,7 @@ public class CompteVerificationServiceImpl implements CompteVerificationService 
     @Override
     public UserResponseData validate(String idCompteVerification) {
         if (idCompteVerification != null && idCompteVerification.length() > 0) {
-            Optional<CompteVerification> optionalCompteVerification = compteVerificationDao.findById(idCompteVerification);
+            Optional<CompteVerification> optionalCompteVerification = compteVerificationRepository.findById(idCompteVerification);
             if (optionalCompteVerification.isPresent()) {
                 CompteVerification compteVerification = optionalCompteVerification.get();
                 if (compteVerification.getStatutCompteVerification() == 0) {
@@ -67,7 +64,7 @@ public class CompteVerificationServiceImpl implements CompteVerificationService 
                     utilisateur.setStatutUtilisateur(1);
                     compteVerification.setUtilisateur(utilisateur);
                     //
-                    compteVerificationDao.save(compteVerification);
+                    compteVerificationRepository.save(compteVerification);
                     //
                     return setupLoginResponse(utilisateur);
                 } else throw new RequestException("Compte already validated", HttpStatus.ALREADY_REPORTED);

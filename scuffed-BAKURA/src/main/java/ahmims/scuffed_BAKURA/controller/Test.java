@@ -1,11 +1,11 @@
-package ahmims.scuffed_BAKURA.controller;
+/* package ahmims.scuffed_BAKURA.controller;
 
 import ahmims.scuffed_BAKURA.dao.RoleDao;
 import ahmims.scuffed_BAKURA.dto.UserAuthInputData;
-import ahmims.scuffed_BAKURA.model.Client;
+import ahmims.scuffed_BAKURA.model.Member;
 import ahmims.scuffed_BAKURA.model.Role;
 import ahmims.scuffed_BAKURA.security.JwtManager;
-import ahmims.scuffed_BAKURA.service.ClientService;
+import ahmims.scuffed_BAKURA.service.MemberService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,14 +18,14 @@ import java.util.Date;
 @RestController
 public class Test {
 
-    private final ClientService clientService;
+    private final MemberService MemberService;
     private final RoleDao roleDao;
     private final AuthenticationManager authenticationManager;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
 
-    public Test(ClientService clientService, RoleDao roleDao, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper) {
-        this.clientService = clientService;
+    public Test(MemberService MemberService, RoleDao roleDao, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper) {
+        this.MemberService = MemberService;
         this.roleDao = roleDao;
         this.authenticationManager = authenticationManager;
         this.jwtManager = jwtManager;
@@ -36,10 +36,10 @@ public class Test {
     public String test() {
         Role role = new Role("hmmm", -99);
         role = roleDao.save(role);
-        Client client = new Client("XX", "XX", "XXX", "XX", new Date(), "");
-        client.setRole(role);
-        client = clientService.save(client);
-        return client.getIdUtilisateur();
+        Member member = new Member("XX", "XX", "XXX", "XX", new Date(), "");
+        member.setRole(role);
+        member = MemberService.save(member);
+        return member.getIdUtilisateur();
         //return "good";
     }
 
@@ -70,3 +70,4 @@ public class Test {
         return new ResponseEntity<>("ff", HttpStatus.valueOf(200));
     }
 }
+**/

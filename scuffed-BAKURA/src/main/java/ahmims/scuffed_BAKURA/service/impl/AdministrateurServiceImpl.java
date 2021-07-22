@@ -1,6 +1,5 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
-import ahmims.scuffed_BAKURA.dao.AdministrateurDao;
 import ahmims.scuffed_BAKURA.model.Administrateur;
 import ahmims.scuffed_BAKURA.repository.AdministrateurRepository;
 import ahmims.scuffed_BAKURA.service.AdministrateurService;
@@ -8,11 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Service("AdministrateurService")
 public class AdministrateurServiceImpl implements AdministrateurService {
-    private final AdministrateurDao administrateurDao;
     private final AdministrateurRepository administrateurRepository;
 
-    public AdministrateurServiceImpl(AdministrateurDao administrateurDao, AdministrateurRepository administrateurRepository) {
-        this.administrateurDao = administrateurDao;
+    public AdministrateurServiceImpl(AdministrateurRepository administrateurRepository) {
         this.administrateurRepository = administrateurRepository;
     }
 
@@ -24,7 +21,7 @@ public class AdministrateurServiceImpl implements AdministrateurService {
     @Override
     public Administrateur save(Administrateur administrateur) {
         try {
-            return administrateurDao.save(administrateur);
+            return administrateurRepository.save(administrateur);
         } catch (Exception e) {
             return null;
         }

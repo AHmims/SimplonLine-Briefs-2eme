@@ -1,7 +1,6 @@
 package ahmims.scuffed_BAKURA.model;
 
 import org.hibernate.annotations.GenericGenerator;
-import ahmims.scuffed_BAKURA.util.PkGenerator;
 
 import javax.persistence.*;
 
@@ -9,8 +8,8 @@ import javax.persistence.*;
 @Table(name = "compteVerification")
 public class CompteVerification {
     @Id
-    @GeneratedValue(generator = PkGenerator.rndmString)
-    @GenericGenerator(name = PkGenerator.rndmString, strategy = "util.PkGenerator")
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "idCompteVerification")
     private String idCompteVerification;
     @Column(name = "statutCompteVerification", columnDefinition = "int default 0")
