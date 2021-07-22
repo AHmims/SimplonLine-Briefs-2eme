@@ -1,0 +1,71 @@
+<span class="block px-10 font-medium text-lg text-coolGray-500 mt-8 mb-4">Liste des produits</span>
+<div class="flex-1 bg-white grid grid-cols-5 relative">
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Produit</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let produit of produits; index as i;">
+      <div class="imgCont">
+        <img src="{{produit.images ? produit.images[0].lien : ''}}" alt="" class="img">
+      </div>
+      <div class="infos">
+        <span class="name">{{produit.libelle}}</span>
+      </div>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Description</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let produit of produits; index as i;">
+      <span class="infos">{{produit.description === null ? 'vide' : produit.description}}</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Prix</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let produit of produits; index as i;">
+      <span class="infos">{{produit.prix}} DH</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Date d'ajout</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let produit of produits; index as i;">
+      <span class="infos">{{produit.dateAjout | date: 'short'}}</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Categorie</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let produit of produits; index as i;">
+      <div class="imgCont">
+        <img src="{{produit.categorie?.image?.lien}}" alt="" class="img">
+      </div>
+      <span class="infos">{{produit.categorie?.libelle}}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+[
+  {
+    "libelle": "�YXgp",
+    "description": null,
+    "prix": 100.0,
+    "categorie": {
+      "libelle": "Bio & Santé",
+      "image": {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      }
+    },
+    "images": [
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      }
+    ],
+    "dateAjout": "2021-04-19T15:27:29.412+00:00"
+  },
+  {
+    "libelle": "�\"_Z}�\\",
+    "description": null,
+    "prix": 100.0,
+    "categorie": {
+      "libelle": "Bio & Santé",
+      "image": {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      }
+    },
+    "images": [
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      },
+      {
+        "lien": "https://res.cloudinary.com/dcphm6bor/image/upload/h_100/v1595608701/entity/05837145d2f33310c24672086ac017f1-entity.png"
+      }
+    ],
+    "dateAjout": "2021-04-19T15:27:42.262+00:00"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "security.crypt.length",
+      "type": "java.lang.Integer",
+      "description": "Description for security.crypt.length."
+    }
+  ]
+}

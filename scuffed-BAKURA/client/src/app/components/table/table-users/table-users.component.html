@@ -1,0 +1,75 @@
+<span class="block px-10 font-medium text-lg text-coolGray-500 mt-8 mb-4">Liste des utilisateurs</span>
+<div class="flex-1 bg-white grid grid-cols-5 relative">
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Utilisateur</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let utilisateur of utilisateurs; index as i;">
+      <div class="imgCont">
+        <img
+          src="{{utilisateur.image ? utilisateur.image : 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png'}}"
+          alt="" class="img">
+      </div>
+      <div class="infos">
+        <span class="name">{{utilisateur.nom}} {{utilisateur.prenom}}</span>
+      </div>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Email</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let utilisateur of utilisateurs; index as i;">
+      <span class="infos">{{utilisateur.email}}</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Type</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let utilisateur of utilisateurs; index as i;">
+      <span class="infos">{{utilisateur.typeUtilisateur}}</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Role</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <div class="row data" *ngFor="let utilisateur of utilisateurs; index as i;">
+      <span class="infos">{{utilisateur.role?.libelleRole}}</span>
+    </div>
+  </div>
+  <!-- column -->
+  <div class="tableColumn">
+    <!-- table head -->
+    <div class="row head">
+      <span class="">Commandes</span>
+    </div>
+    <!-- rows -->
+    <!-- row -->
+    <a [routerLink]="['/admin/commandes', utilisateur.id]" class="row data option" *ngFor="let utilisateur of utilisateurs; index as i;">
+      <span class="infos">Liste des commandes</span>
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+      </svg>
+    </a>
+  </div>
+</div>
