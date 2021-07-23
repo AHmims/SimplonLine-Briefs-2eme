@@ -1,24 +1,16 @@
 package ahmims.scuffed_BAKURA.controller;
 
-import ahmims.scuffed_BAKURA.model.Image;
 import ahmims.scuffed_BAKURA.service.ImageService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URLDecoder;
 import java.nio.file.Files;
-import java.util.Base64;
-import java.util.List;
-import java.util.Properties;
 
 @Controller
 @RequestMapping("/serve")
