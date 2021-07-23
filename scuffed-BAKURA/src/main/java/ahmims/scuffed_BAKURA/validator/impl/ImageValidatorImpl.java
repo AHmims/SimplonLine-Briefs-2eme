@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -15,7 +16,19 @@ public class ImageValidatorImpl implements ImageValidator {
         try {
             BufferedImage image = ImageIO.read(new URL(url));
             return image != null;
-        } catch (IOException ignored) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isValidLocalImageLink(String path) {
+        try {
+            BufferedImage image = ImageIO.read(new File(path));
+            return image != null;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

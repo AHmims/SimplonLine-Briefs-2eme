@@ -2,6 +2,7 @@ package ahmims.scuffed_BAKURA.service;
 
 import ahmims.scuffed_BAKURA.model.Image;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,4 +15,8 @@ public interface ImageService {
     //List<Image> insertMultiple(Produit produit, List<String> urls);
 
     boolean delete(Image image);
+
+    List<Image> uploadMultiple(MultipartFile[] images);
+
+
 }

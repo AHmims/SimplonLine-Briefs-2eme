@@ -25,6 +25,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtManager {
     @Autowired
     private UserData userData;
+
     @Value("${security.jwt.token.secret-key}")
     private String secretKey;
 
