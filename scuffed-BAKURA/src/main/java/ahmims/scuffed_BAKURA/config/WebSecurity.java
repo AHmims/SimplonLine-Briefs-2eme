@@ -30,6 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/test").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/valider/*").permitAll()
+                .antMatchers("/serve/images/*").permitAll()
                 // Disallow everything else
                 .anyRequest().authenticated();
 

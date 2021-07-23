@@ -126,6 +126,18 @@ public class ImageServiceImpl implements ImageService {
 
         return savedImages;
     }
+
+    @Override
+    public File getLocalImage(String imageName) {
+        try {
+            return new File(toAbsolutePath(String.format("%s/%s", uploadDir, imageName)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
     //
     //
 

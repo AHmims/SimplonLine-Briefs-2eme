@@ -8,12 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
-public class AuthentificationCont {
+@RequestMapping("/api/auth")
+public class AuthentificationController {
     //#region
     private final UtilisateurService utilisateurService;
 
-    public AuthentificationCont(UtilisateurService utilisateurService) {
+    public AuthentificationController(UtilisateurService utilisateurService) {
         this.utilisateurService = utilisateurService;
     }
 

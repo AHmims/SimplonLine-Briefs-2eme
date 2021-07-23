@@ -10,12 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/image")
-public class ImageCont {
+@RequestMapping("/api/image")
+public class ImageController {
     //#region
     private final ImageService imageService;
 
-    public ImageCont(ImageService imageService) {
+    public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }
 
