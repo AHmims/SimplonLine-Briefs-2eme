@@ -20,7 +20,7 @@ public class ImageController {
     }
 
     //#endregion
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<List<Image>> postLogin(@RequestParam("images") MultipartFile[] images) {
         return new ResponseEntity<>(imageService.uploadMultiple(images), HttpStatus.valueOf(200));
     }

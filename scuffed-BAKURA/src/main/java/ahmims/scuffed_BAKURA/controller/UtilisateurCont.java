@@ -40,13 +40,21 @@ public class UtilisateurCont {
     }
     */
 
-    /*
-    //update user
+
+    //update a users data
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<UserMainData> updateUser(@RequestBody UserFormData payload, @PathVariable String id) {
         return new ResponseEntity<>(utilisateurService.updateUser(payload, id), HttpStatus.valueOf(200));
     }
 
+    //update current user data
+    @PutMapping("")
+    public ResponseEntity<UserMainData> updateCurrentUser(@RequestBody UserFormData payload, @RequestHeader(name = "Authorization") String token) {
+        return new ResponseEntity<>(utilisateurService.updateUserByToken(payload, token), HttpStatus.valueOf(200));
+    }
+
+    /*
     //delete user
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('1')")

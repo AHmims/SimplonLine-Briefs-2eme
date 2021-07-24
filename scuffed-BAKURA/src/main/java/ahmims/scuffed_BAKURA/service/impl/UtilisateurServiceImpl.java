@@ -109,6 +109,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                     user.setRole(role);
                     user.setAvatarUtilisateur(userImage);
                     user.setPassUtilisateur(passwordEncoder.encode(user.getPassUtilisateur()));
+                    if (user.getClass() == Administrateur.class) {
+                        user.setStatutUtilisateur(1);
+                    }
                     user = insertUser(user);
                     if (user != null && user.getIdUtilisateur() != null) {
                         //all good
@@ -117,9 +120,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                                 deleteUser(user.getIdUtilisateur());
                                 throw new RequestException("Verification email not sent", HttpStatus.INTERNAL_SERVER_ERROR);
                             }
-                        } else {
-                            user.setStatutUtilisateur(1);
                         }
+
                         return setupLoginResponse(user);
                     } else throw new RequestException("Server error. User not saved", HttpStatus.BAD_REQUEST);
                 }
@@ -221,11 +223,24 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public UserMainData getByToken(String token) {
-        if(token != null && token.length()>0){
+        if (token != null && token.length() > 0) {
             String userEmail = jwtManager.getEmail(token.substring(7));
             Utilisateur utilisateur = utilisateurRepository.findTopByEmailUtilisateur(userEmail);
-            if(utilisateur != null){
+            if (utilisateur != null) {
                 return getUerResponse(utilisateur);
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public UserMainData updateUserByToken(UserFormData utilisateur, String token) {
+        if (token != null && token.length() > 0) {
+            String userEmail = jwtManager.getEmail(token.substring(7));
+            Utilisateur utilisateurObject = utilisateurRepository.findTopByEmailUtilisateur(userEmail);
+            if (utilisateur != null) {
+                return updateUser(utilisateur, utilisateurObject.getIdUtilisateur());
             }
         }
 
@@ -262,7 +277,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             mapper.map(Utilisateur::getNomUtilisateur, UserMainData::setNom);
             mapper.map(Utilisateur::getEmailUtilisateur, UserMainData::setEmail);
             mapper.map(Utilisateur::getIdUtilisateur, UserMainData::setId);
-            mapper.map(Utilisateur::getAvatarUtilisateur, UserMainData::setImage);
+            mapper.map(Utilisateur::getAvatarUtilisateur, UserMainData::setAvatar);
         });
         //
         UserMainData userMainData = modelMapper.map(utilisateur, UserMainData.class);
