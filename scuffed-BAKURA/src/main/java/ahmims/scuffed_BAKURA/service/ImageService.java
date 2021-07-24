@@ -20,4 +20,6 @@ public interface ImageService {
     List<Image> uploadMultiple(MultipartFile[] images);
 
     File getLocalImage(String imageName);
+
+    Image assertImage(Image image);
 }

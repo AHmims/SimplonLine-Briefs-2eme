@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.controller;
 
+import ahmims.scuffed_BAKURA.model.Image;
 import ahmims.scuffed_BAKURA.model.Member;
 import ahmims.scuffed_BAKURA.model.Role;
 import ahmims.scuffed_BAKURA.repository.RoleRepository;
@@ -35,7 +36,7 @@ public class Test {
     public String test() {
         Role role = new Role("hmmm", -99);
         role = roleRepository.save(role);
-        Member member = new Member("XX", "XX", "XXX", new Date(), "");
+        Member member = new Member("XX", "XX", "XXX", new Date(), new Image());
         member.setRole(role);
         member = MemberService.save(member);
         return member.getIdUtilisateur();

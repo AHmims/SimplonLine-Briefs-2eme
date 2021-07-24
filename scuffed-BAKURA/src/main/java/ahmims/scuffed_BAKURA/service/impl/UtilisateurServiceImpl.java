@@ -2,10 +2,7 @@ package ahmims.scuffed_BAKURA.service.impl;
 
 import ahmims.scuffed_BAKURA.dto.*;
 import ahmims.scuffed_BAKURA.exception.RequestException;
-import ahmims.scuffed_BAKURA.model.Administrateur;
-import ahmims.scuffed_BAKURA.model.Member;
-import ahmims.scuffed_BAKURA.model.Role;
-import ahmims.scuffed_BAKURA.model.Utilisateur;
+import ahmims.scuffed_BAKURA.model.*;
 import ahmims.scuffed_BAKURA.repository.UtilisateurRepository;
 import ahmims.scuffed_BAKURA.security.JwtManager;
 import ahmims.scuffed_BAKURA.service.*;
@@ -35,8 +32,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final CompteVerificationService compteVerificationService;
+    private final ImageService imageService;
 
-    public UtilisateurServiceImpl(MemberService MemberService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, UtilisateurRepository utilisateurRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, CompteVerificationService compteVerificationService) {
+    public UtilisateurServiceImpl(MemberService MemberService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, UtilisateurRepository utilisateurRepository, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, CompteVerificationService compteVerificationService, ImageService imageService) {
         this.MemberService = MemberService;
         this.administrateurService = administrateurService;
         this.jwtManager = jwtManager;
@@ -47,6 +45,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.compteVerificationService = compteVerificationService;
+        this.imageService = imageService;
     }
 
     //#endregion
@@ -80,7 +79,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             if (utilisateurRepository.findTopByEmailUtilisateur(userFormData.getEmail()) != null)
                 throw new RequestException("Email already exists, choose another one", HttpStatus.BAD_REQUEST);
             Utilisateur user = null;
-            user = userFormData.getType().toLowerCase().equals("member") ? new Member(userFormData, null) : userFormData.getType().toLowerCase().equals("administrateur") ? new Administrateur(userFormData) : null;
+            user = userFormData.getType().toLowerCase().equals("member") ? new Member(userFormData) : userFormData.getType().toLowerCase().equals("administrateur") ? new Administrateur(userFormData) : null;
             //
             ArrayList<Validation> validations = utilisateurValidator.isValidNewObject(user);
             if (validations != null) {
@@ -174,8 +173,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 if (!passwordEncoder.matches(utilisateur.getPassword(), originalUser.getPassUtilisateur()))
                     originalUser.setPassUtilisateur(passwordEncoder.encode(utilisateur.getPassword()));
             }
-            if (originalUser.getClass().getSimpleName().equals(Member.class.getSimpleName()) && utilisateur.getImg() != null)
-                ((Member) originalUser).setImgMember(utilisateur.getImg());
+            Image userImage = imageService.assertImage(utilisateur.getAvatar());
+            if (userImage != null) {
+                originalUser.setAvatarUtilisateur(userImage);
+            }
+
             //
             ArrayList<Validation> validations = utilisateurValidator.isValidNewObject(originalUser);
             StringBuilder errorMessage = new StringBuilder();
@@ -191,9 +193,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             if (!isValid) throw new RequestException(errorMessage.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
             //
             originalUser = utilisateurRepository.save(originalUser);
-            if (originalUser != null) {
-                return getUerResponse(originalUser);
-            } else throw new RequestException("User not updated", HttpStatus.INTERNAL_SERVER_ERROR);
+            return getUerResponse(originalUser);
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 
@@ -247,12 +247,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             mapper.map(Utilisateur::getNomUtilisateur, UserMainData::setNom);
             mapper.map(Utilisateur::getEmailUtilisateur, UserMainData::setEmail);
             mapper.map(Utilisateur::getIdUtilisateur, UserMainData::setId);
+            mapper.map(Utilisateur::getAvatarUtilisateur, UserMainData::setImage);
         });
         //
         UserMainData userMainData = modelMapper.map(utilisateur, UserMainData.class);
         userMainData.setRole(utilisateur.getRole() != null ? modelMapper.map(utilisateur.getRole(), RoleShort.class) : null);
-        if (utilisateur.getClass().getSimpleName().equals(Member.class.getSimpleName()))
-            userMainData.setImage(((Member) utilisateur).getImgMember());
         userMainData.setTypeUtilisateurByClass(utilisateur.getClass());
         //
         return userMainData;

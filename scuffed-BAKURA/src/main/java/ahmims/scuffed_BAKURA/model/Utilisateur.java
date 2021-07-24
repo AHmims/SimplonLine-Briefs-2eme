@@ -30,37 +30,44 @@ public abstract class Utilisateur {
     @ManyToOne
     @JoinColumn(name = "idRole")
     private Role role;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "avatarUtilisateur", referencedColumnName = "idImage")
+    private Image avatarUtilisateur;
     //
     //
 
-    public Utilisateur(String idUtilisateur, String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role) {
+    public Utilisateur(String idUtilisateur, String nomUtilisateur, String emailUtilisateur, Image avatarUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role) {
         this.idUtilisateur = idUtilisateur;
         this.nomUtilisateur = nomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
+        this.avatarUtilisateur = avatarUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = dateCreation;
         this.statutUtilisateur = statutUtilisateur;
         this.role = role;
     }
 
-    public Utilisateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role) {
+    public Utilisateur(String nomUtilisateur, String emailUtilisateur, Image avatarUtilisateur, String passUtilisateur, Date dateCreation, Role role) {
         this.nomUtilisateur = nomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
+        this.avatarUtilisateur = avatarUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = dateCreation;
         this.role = role;
     }
 
-    public Utilisateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation) {
+    public Utilisateur(String nomUtilisateur, String emailUtilisateur, Image avatarUtilisateur, String passUtilisateur, Date dateCreation) {
         this.nomUtilisateur = nomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
+        this.avatarUtilisateur = avatarUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = dateCreation;
     }
 
-    public Utilisateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur) {
+    public Utilisateur(String nomUtilisateur, String emailUtilisateur, Image avatarUtilisateur, String passUtilisateur) {
         this.nomUtilisateur = nomUtilisateur;
         this.emailUtilisateur = emailUtilisateur;
+        this.avatarUtilisateur = avatarUtilisateur;
         this.passUtilisateur = passUtilisateur;
         this.dateCreation = new Date();
     }
@@ -68,6 +75,7 @@ public abstract class Utilisateur {
     public Utilisateur(UserFormData userFormData) {
         this.nomUtilisateur = userFormData.getNom();
         this.emailUtilisateur = userFormData.getEmail();
+        this.avatarUtilisateur = userFormData.getAvatar();
         this.passUtilisateur = userFormData.getPassword();
         this.dateCreation = new Date();
     }
@@ -131,5 +139,13 @@ public abstract class Utilisateur {
 
     public void setStatutUtilisateur(int statutUtilisateur) {
         this.statutUtilisateur = statutUtilisateur;
+    }
+
+    public Image getAvatarUtilisateur() {
+        return avatarUtilisateur;
+    }
+
+    public void setAvatarUtilisateur(Image avatarUtilisateur) {
+        this.avatarUtilisateur = avatarUtilisateur;
     }
 }

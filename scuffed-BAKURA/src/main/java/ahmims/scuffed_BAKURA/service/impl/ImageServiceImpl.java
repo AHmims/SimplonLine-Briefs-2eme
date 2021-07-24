@@ -137,6 +137,21 @@ public class ImageServiceImpl implements ImageService {
         }
     }
 
+    @Override
+    public Image assertImage(Image image) {
+        try {
+            if (image != null) {
+                Optional<Image> optionalImage = imageRepository.findById(image.getIdImage());
+                if (optionalImage.isPresent()) {
+                    return optionalImage.get();
+                }
+            }
+        } catch (Exception ignored) {
+        }
+
+        return null;
+    }
+
 
     //
     //

@@ -1,19 +1,21 @@
 package ahmims.scuffed_BAKURA.dto;
 
+import ahmims.scuffed_BAKURA.model.Image;
+
 public class UserFormData {
     private String nom;
     private String email;
     private String password;
-    private String img;
+    private Image avatar;
     private String type;
 
     //
     //
-    public UserFormData(String nom, String email, String password, String img, String type) {
+    public UserFormData(String nom, String email, String password, Image avatar, String type) {
         this.nom = nom;
         this.email = email;
         this.password = password;
-        this.img = img;
+        this.avatar = avatar;
         this.type = type;
     }
 
@@ -46,12 +48,12 @@ public class UserFormData {
         this.password = password;
     }
 
-    public String getImg() {
-        return img;
+    public Image getAvatar() {
+        return avatar;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setAvatar(Image avatar) {
+        this.avatar = avatar;
     }
 
     public String getType() {
@@ -73,7 +75,7 @@ public class UserFormData {
         if (type == 0)
             ret = ret && this.password != null;
         if (type == 1)
-            ret = ret && this.img != null;
+            ret = ret && this.avatar != null;
         if(type == 2)
             ret = this.password != null && this.email != null;
         //

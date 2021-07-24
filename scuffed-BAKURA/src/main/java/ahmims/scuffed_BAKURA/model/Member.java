@@ -17,49 +17,32 @@ public class Member extends Utilisateur {
     //
     //
 
-    public Member(String idUtilisateur, String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, String imgMember, Authentification authentification) {
-        super(idUtilisateur, nomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
-        this.imgMember = imgMember;
+    public Member(String idUtilisateur, String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, Image avatarUtilisateur, Authentification authentification) {
+        super(idUtilisateur, nomUtilisateur, emailUtilisateur, avatarUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
         this.authentification = authentification;
     }
 
-    public Member(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, String imgMember, Authentification authentification) {
-        super(nomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, role);
-        this.imgMember = imgMember;
+    public Member(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, Image avatarUtilisateur, Authentification authentification) {
+        super(nomUtilisateur, emailUtilisateur, avatarUtilisateur, passUtilisateur, dateCreation, role);
         this.authentification = authentification;
     }
 
-    public Member(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, String imgMember) {
-        super(nomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, role);
-        this.imgMember = imgMember;
+    public Member(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, Image avatarUtilisateur) {
+        super(nomUtilisateur, emailUtilisateur, avatarUtilisateur, passUtilisateur, dateCreation, role);
     }
 
-    public Member(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, String imgMember) {
-        super(nomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation);
-        this.imgMember = imgMember;
+    public Member(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Image avatarUtilisateur) {
+        super(nomUtilisateur, emailUtilisateur, avatarUtilisateur, passUtilisateur, dateCreation);
     }
 
-    public Member(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation) {
-        super(nomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation);
-    }
-
-    public Member(UserFormData userFormData, String imgMember) {
+    public Member(UserFormData userFormData) {
         super(userFormData);
-        this.imgMember = imgMember;
     }
 
     public Member() {
     }
     //
     //
-
-    public String getImgMember() {
-        return imgMember;
-    }
-
-    public void setImgMember(String imgMember) {
-        this.imgMember = imgMember;
-    }
 
     public Authentification getAuthentification() {
         return authentification;

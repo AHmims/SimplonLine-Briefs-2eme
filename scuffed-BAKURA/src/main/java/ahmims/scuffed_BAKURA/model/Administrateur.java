@@ -12,16 +12,16 @@ public class Administrateur extends Utilisateur {
     //
     //
 
-    public Administrateur(String idUtilisateur, String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role) {
-        super(idUtilisateur, nomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
+    public Administrateur(String idUtilisateur, String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, Image avatarUtilisateur) {
+        super(idUtilisateur, nomUtilisateur, emailUtilisateur, avatarUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
     }
 
-    public Administrateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role) {
-        super(nomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, role);
+    public Administrateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, Image avatarUtilisateur) {
+        super(nomUtilisateur, emailUtilisateur, avatarUtilisateur, passUtilisateur, dateCreation, role);
     }
 
-    public Administrateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation) {
-        super(nomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation);
+    public Administrateur(String nomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Image avatarUtilisateur) {
+        super(nomUtilisateur, emailUtilisateur, avatarUtilisateur, passUtilisateur, dateCreation);
     }
 
     public Administrateur(UserFormData userFormData) {
