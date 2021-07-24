@@ -78,8 +78,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         if (userFormData.isFilled(0)) {
             if (utilisateurRepository.findTopByEmailUtilisateur(userFormData.getEmail()) != null)
                 throw new RequestException("Email already exists, choose another one", HttpStatus.BAD_REQUEST);
-            Utilisateur user = null;
-            user = userFormData.getType().toLowerCase().equals("member") ? new Member(userFormData) : userFormData.getType().toLowerCase().equals("administrateur") ? new Administrateur(userFormData) : null;
+            Utilisateur user;
+            user = userFormData.getType().equalsIgnoreCase("member") ? new Member(userFormData) : userFormData.getType().equalsIgnoreCase("administrateur") ? new Administrateur(userFormData) : null;
             //
             ArrayList<Validation> validations = utilisateurValidator.isValidNewObject(user);
             if (validations != null) {
@@ -96,16 +96,18 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 if (!isValid) throw new RequestException(errorMessage.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
                 else {
                     String libelleRole = "Role_1";
-                    if (!userFormData.getType().toLowerCase().equals("member")) {
+                    if (!userFormData.getType().equalsIgnoreCase("member")) {
                         libelleRole = "Role_2";
                     }
                     Role role = roleService.getByLibelle(libelleRole);
                     if (role == null)
                         throw new RequestException("Server error. Role not found", HttpStatus.BAD_REQUEST);
                     //
+                    Image userImage = imageService.assertImage(userFormData.getAvatar());
                     //if(role.getNivRole() > 0)
                     //test if current logged user is allowed to create an account for someone other than Members
                     user.setRole(role);
+                    user.setAvatarUtilisateur(userImage);
                     user.setPassUtilisateur(passwordEncoder.encode(user.getPassUtilisateur()));
                     user = insertUser(user);
                     if (user != null && user.getIdUtilisateur() != null) {
