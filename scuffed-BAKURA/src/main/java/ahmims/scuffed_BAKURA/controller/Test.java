@@ -48,7 +48,7 @@ public class Test {
         return "good";
     }
 
-    @PostMapping("/test")
+    @PostMapping("/api/test")
     public ResponseEntity<?> test2() { //<?> => is a wildcard meaning it can be any type
         //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(payload.getEmailUtilisateur(), payload.getPassUtilisateur()));
         //String jwt = jwtManager.createToken(payload.getEmailUtilisateur(), new Role("__hmm", -99));

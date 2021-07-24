@@ -25,9 +25,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests()
-                .antMatchers("/auth/login").permitAll()
-                .antMatchers("/auth/signup").permitAll()
-                .antMatchers("/test").permitAll()
+                .antMatchers("/api/auth/login").permitAll()
+                .antMatchers("/api/auth/signup").permitAll()
+                .antMatchers("/api/test").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/valider/*").permitAll()
                 .antMatchers("/serve/images/*").permitAll()

@@ -1,19 +1,21 @@
 package ahmims.scuffed_BAKURA.dto;
 
+import ahmims.scuffed_BAKURA.model.Image;
+
 public class UserResponseData {
     private String nom;
-    private String prenom;
     private String email;
     private RoleShort role;
+    private Image avatar;
     private String token;
     //
     //
 
-    public UserResponseData(String nom, String prenom, String email, RoleShort role, String token) {
+    public UserResponseData(String nom, String email, RoleShort role, Image avatar, String token) {
         this.nom = nom;
-        this.prenom = prenom;
         this.email = email;
         this.role = role;
+        this.avatar = avatar;
         this.token = token;
     }
 
@@ -30,14 +32,6 @@ public class UserResponseData {
         this.nom = nom;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -52,6 +46,14 @@ public class UserResponseData {
 
     public void setRole(RoleShort role) {
         this.role = role;
+    }
+
+    public Image getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Image avatar) {
+        this.avatar = avatar;
     }
 
     public String getToken() {

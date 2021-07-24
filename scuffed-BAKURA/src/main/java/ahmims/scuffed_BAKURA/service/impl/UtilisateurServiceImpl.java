@@ -219,6 +219,19 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 
+    @Override
+    public UserMainData getByToken(String token) {
+        if(token != null && token.length()>0){
+            String userEmail = jwtManager.getEmail(token.substring(7));
+            Utilisateur utilisateur = utilisateurRepository.findTopByEmailUtilisateur(userEmail);
+            if(utilisateur != null){
+                return getUerResponse(utilisateur);
+            }
+        }
+
+        return null;
+    }
+
     /*@Override
     public UpdateRes disableAccount(String idUtilisateur) {
         Optional<Utilisateur> optionalUtilisateur = utilisateurDao.findById(idUtilisateur);

@@ -22,6 +22,7 @@ public class ScuffedApplication {
             mapper.map(Utilisateur::getNomUtilisateur, UserResponseData::setNom);
             mapper.map(Utilisateur::getEmailUtilisateur, UserResponseData::setEmail);
             mapper.map(Utilisateur::getRole, UserResponseData::setRole);
+            mapper.map(Utilisateur::getAvatarUtilisateur, UserResponseData::setAvatar);
         });
 
         return modelMapper;

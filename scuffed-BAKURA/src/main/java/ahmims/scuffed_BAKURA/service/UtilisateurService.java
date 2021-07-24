@@ -22,5 +22,7 @@ public interface UtilisateurService {
 
     UserMainData get(String id);
 
+    UserMainData getByToken(String token);
+
     //UpdateRes disableAccount(String idUtilisateur);
 }
