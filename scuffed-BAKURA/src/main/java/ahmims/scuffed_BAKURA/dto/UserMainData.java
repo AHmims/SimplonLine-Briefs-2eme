@@ -3,6 +3,8 @@ package ahmims.scuffed_BAKURA.dto;
 import ahmims.scuffed_BAKURA.model.Image;
 import ahmims.scuffed_BAKURA.model.Utilisateur;
 
+import java.util.Date;
+
 public class UserMainData {
     private String id;
     private String nom;
@@ -10,22 +12,22 @@ public class UserMainData {
     private Image avatar;
     private RoleShort role;
     private String typeUtilisateur;
-    //
-    //
+    private int status;
+    private Date creationDate;
 
-    public UserMainData(String id, String nom, String email, Image avatar, RoleShort role, String typeUtilisateur) {
+    public UserMainData(String id, String nom, String email, Image avatar, RoleShort role, String typeUtilisateur, int status, Date creationDate) {
         this.id = id;
         this.nom = nom;
         this.email = email;
         this.avatar = avatar;
         this.role = role;
         this.typeUtilisateur = typeUtilisateur;
+        this.status = status;
+        this.creationDate = creationDate;
     }
 
     public UserMainData() {
     }
-    //
-    //
 
     public String getId() {
         return id;
@@ -77,5 +79,21 @@ public class UserMainData {
 
     public void setTypeUtilisateurByClass(Class<? extends Utilisateur> className) {
         this.typeUtilisateur = className.getSimpleName();
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

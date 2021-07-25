@@ -86,7 +86,7 @@ public abstract class Utilisateur {
     //
 
     public String getIdUtilisateur() {
-        return idUtilisateur;
+        return this.idUtilisateur;
     }
 
     public void setIdUtilisateur(String idUtilisateur) {
@@ -94,7 +94,7 @@ public abstract class Utilisateur {
     }
 
     public String getNomUtilisateur() {
-        return nomUtilisateur;
+        return this.nomUtilisateur;
     }
 
     public void setNomUtilisateur(String nomUtilisateur) {
@@ -102,7 +102,7 @@ public abstract class Utilisateur {
     }
 
     public String getEmailUtilisateur() {
-        return emailUtilisateur;
+        return this.emailUtilisateur;
     }
 
     public void setEmailUtilisateur(String emailUtilisateur) {
@@ -110,7 +110,7 @@ public abstract class Utilisateur {
     }
 
     public String getPassUtilisateur() {
-        return passUtilisateur;
+        return this.passUtilisateur;
     }
 
     public void setPassUtilisateur(String passUtilisateur) {
@@ -118,7 +118,7 @@ public abstract class Utilisateur {
     }
 
     public Date getDateCreation() {
-        return dateCreation;
+        return this.dateCreation;
     }
 
     public void setDateCreation(Date dateCreation) {
@@ -126,7 +126,7 @@ public abstract class Utilisateur {
     }
 
     public Role getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(Role role) {
@@ -134,7 +134,7 @@ public abstract class Utilisateur {
     }
 
     public int getStatutUtilisateur() {
-        return statutUtilisateur;
+        return this.statutUtilisateur;
     }
 
     public void setStatutUtilisateur(int statutUtilisateur) {
@@ -142,7 +142,7 @@ public abstract class Utilisateur {
     }
 
     public Image getAvatarUtilisateur() {
-        return avatarUtilisateur;
+        return this.avatarUtilisateur;
     }
 
     public void setAvatarUtilisateur(Image avatarUtilisateur) {

@@ -258,9 +258,9 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 utilisateur.setStatutUtilisateur(status);
                 utilisateur = utilisateurRepository.save(utilisateur);
                 //
-                if (utilisateur.getStatutUtilisateur() == -1)
+                if (utilisateur.getStatutUtilisateur() == status)
                     return new UpdateRes(true, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
-                else throw new RequestException("Account was not disabled", HttpStatus.BAD_REQUEST);
+                else throw new RequestException("Account was not performed", HttpStatus.BAD_REQUEST);
             } else {
                 String message = "Account already ";
                 switch (status) {
@@ -303,6 +303,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         UserMainData userMainData = modelMapper.map(utilisateur, UserMainData.class);
         userMainData.setRole(utilisateur.getRole() != null ? modelMapper.map(utilisateur.getRole(), RoleShort.class) : null);
         userMainData.setTypeUtilisateurByClass(utilisateur.getClass());
+        userMainData.setStatus(utilisateur.getStatutUtilisateur());
         //
         return userMainData;
     }
