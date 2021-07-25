@@ -208,8 +208,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         if (user.isPresent()) {
             Utilisateur utilisateur = user.get();
             utilisateurRepository.deleteById(id);
+
+            user = utilisateurRepository.findById(id);
             //
-            return new DeleteRes(-1, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
+            return new DeleteRes(user.isEmpty() ? 1 : 0, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
     }
 

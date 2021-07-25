@@ -53,13 +53,12 @@ public class UtilisateurCont {
         return new ResponseEntity<>(utilisateurService.updateUserByToken(payload, token), HttpStatus.valueOf(200));
     }
 
-    /*
     //delete user
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<DeleteRes> deleteUser(@PathVariable String id) {
         return new ResponseEntity<>(utilisateurService.deleteUser(id), HttpStatus.valueOf(200));
-    } */
+    }
 
     /*
     //Disable user
