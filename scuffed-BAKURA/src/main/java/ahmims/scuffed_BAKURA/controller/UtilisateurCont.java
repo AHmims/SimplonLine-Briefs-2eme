@@ -53,17 +53,31 @@ public class UtilisateurCont {
         return new ResponseEntity<>(utilisateurService.updateUserByToken(payload, token), HttpStatus.valueOf(200));
     }
 
-    //Delete a user
+    //Delete a users account
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<DeleteRes> deleteUser(@PathVariable String id) {
         return new ResponseEntity<>(utilisateurService.deleteUser(id), HttpStatus.valueOf(200));
     }
 
-    //Disable a user
-    @PostMapping("/disable/{id}")
+    //Disable a users account
+    @PutMapping("/disable/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<UpdateRes> disableUser(@PathVariable String id) {
         return new ResponseEntity<>(utilisateurService.controllAccount(id, -1), HttpStatus.valueOf(200));
+    }
+
+    //Enable a users account
+    @PutMapping("/enable/{id}")
+    @PreAuthorize("hasAuthority('1')")
+    public ResponseEntity<UpdateRes> enableUser(@PathVariable String id) {
+        return new ResponseEntity<>(utilisateurService.controllAccount(id, 0), HttpStatus.valueOf(200));
+    }
+
+    //Activate a users account
+    @PutMapping("/activate/{id}")
+    @PreAuthorize("hasAuthority('1')")
+    public ResponseEntity<UpdateRes> activateUser(@PathVariable String id) {
+        return new ResponseEntity<>(utilisateurService.controllAccount(id, 1), HttpStatus.valueOf(200));
     }
 }
