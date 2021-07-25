@@ -249,22 +249,40 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return null;
     }
 
-    /*@Override
-    public UpdateRes disableAccount(String idUtilisateur) {
-        Optional<Utilisateur> optionalUtilisateur = utilisateurDao.findById(idUtilisateur);
+    @Override
+    public UpdateRes controllAccount(String idUtilisateur, int status) {
+        Optional<Utilisateur> optionalUtilisateur = utilisateurRepository.findById(idUtilisateur);
         if (optionalUtilisateur.isPresent()) {
             Utilisateur utilisateur = optionalUtilisateur.get();
-            utilisateur.setStatutUtilisateur(-1);
-            utilisateur = utilisateurDao.save(utilisateur);
-            //
-            if (utilisateur.getStatutUtilisateur() == -1)
-                return new UpdateRes(true, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
-            else throw new RequestException("Account was not disabled", HttpStatus.BAD_REQUEST);
+            if (status != utilisateur.getStatutUtilisateur()) {
+                utilisateur.setStatutUtilisateur(status);
+                utilisateur = utilisateurRepository.save(utilisateur);
+                //
+                if (utilisateur.getStatutUtilisateur() == -1)
+                    return new UpdateRes(true, utilisateur.getIdUtilisateur(), utilisateur.getClass().getSimpleName());
+                else throw new RequestException("Account was not disabled", HttpStatus.BAD_REQUEST);
+            } else {
+                String message = "Account already ";
+                switch (status) {
+                    case -1:
+                        message = message.concat("disabled");
+                        break;
+                    case 0:
+                        message = message.concat("inactive");
+                        break;
+                    case 1:
+                        message = message.concat("active");
+                        break;
+                    default:
+                        message = "Unknown action";
+                }
+
+                throw new RequestException(message, HttpStatus.BAD_REQUEST);
+            }
         } else throw new RequestException("User not found", HttpStatus.NOT_FOUND);
-    }*/
+    }
 
 
-    //
     //
     private UserResponseData setupLoginResponse(Utilisateur utilisateur) {
         UserResponseData userResponseData = modelMapper.map(utilisateur, UserResponseData.class);

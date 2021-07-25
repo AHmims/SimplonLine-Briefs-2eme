@@ -28,5 +28,5 @@ public interface UtilisateurService {
 
     UserMainData updateUserByToken(UserFormData utilisateur, String token);
 
-    //UpdateRes disableAccount(String idUtilisateur);
+    UpdateRes controllAccount(String idUtilisateur, int status);
 }
