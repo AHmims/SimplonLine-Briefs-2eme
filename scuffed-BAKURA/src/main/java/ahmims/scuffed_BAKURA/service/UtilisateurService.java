@@ -4,6 +4,8 @@ import ahmims.scuffed_BAKURA.dto.*;
 import ahmims.scuffed_BAKURA.model.Utilisateur;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UtilisateurService {
     UserResponseData loginUser(UserFormData userAuthInputData);
@@ -14,7 +16,7 @@ public interface UtilisateurService {
 
     Utilisateur findTopByEmail(String email);
 
-    //AllUsers getAll();
+    List<UserMainData> getAll();
 
     UserMainData updateUser(UserFormData utilisateur, String id);
 

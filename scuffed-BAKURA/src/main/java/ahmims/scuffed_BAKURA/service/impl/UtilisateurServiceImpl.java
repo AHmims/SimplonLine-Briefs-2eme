@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service("UtilisateurService")
@@ -148,20 +149,19 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return utilisateurRepository.findTopByEmailUtilisateur(email);
     }
 
-    /*@Override
-    public AllUsers getAll() {
-        List<Utilisateur> users = (List<Utilisateur>) utilisateurDao.findAll();
+    @Override
+    public List<UserMainData> getAll() {
+        List<Utilisateur> users = utilisateurRepository.findAll();
         if (users.size() == 0)
-            return new AllUsers(new ArrayList<>());
-        List<UserMainData> usersMainData = new ArrayList<>();
+            return new ArrayList<>();
 
-        //
+        List<UserMainData> usersMainData = new ArrayList<>();
         for (Utilisateur user : users) {
             usersMainData.add(getUerResponse(user));
         }
-        //
-        return new AllUsers(usersMainData);
-    }*/
+
+        return usersMainData;
+    }
 
     @Override
     public UserMainData updateUser(UserFormData utilisateur, String id) {

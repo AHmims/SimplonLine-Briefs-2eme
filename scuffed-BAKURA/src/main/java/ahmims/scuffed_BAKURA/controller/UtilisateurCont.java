@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/user")
 public class UtilisateurCont {
@@ -31,15 +33,12 @@ public class UtilisateurCont {
         return new ResponseEntity<>(utilisateurService.getByToken(token), HttpStatus.valueOf(200));
     }
 
-    /*
     //get all users
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('1')")
-    public ResponseEntity<AllUsers> getAllUsers() {
+    public ResponseEntity<List<UserMainData>> getAllUsers() {
         return new ResponseEntity<>(utilisateurService.getAll(), HttpStatus.valueOf(200));
     }
-    */
-
 
     //update a users data
     @PutMapping("/{id}")
