@@ -11,6 +11,7 @@ import ahmims.scuffed_BAKURA.security.JwtManager;
 import ahmims.scuffed_BAKURA.service.CompteVerificationService;
 import ahmims.scuffed_BAKURA.util.EmailSender;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ import java.util.Optional;
 @Service("CompteVerificationService")
 public class CompteVerificationServiceImpl implements CompteVerificationService {
     //#region
+    @Value("${server-url}")
+    private String serverUrl;
     private final EmailSender emailSender;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
@@ -42,7 +45,7 @@ public class CompteVerificationServiceImpl implements CompteVerificationService 
                 EmailFormat emailFormat = new EmailFormat();
                 emailFormat.setReceiver(utilisateur.getEmailUtilisateur());
                 emailFormat.setSubject("scuffed_BAKURA account verification");
-                String verificationLink = String.format("http://localhost:3420/valider/%s", compteVerification.getIdCompteVerification());
+                String verificationLink = String.format("%s/valider/%s", serverUrl, compteVerification.getIdCompteVerification());
                 emailFormat.setContent(String.format("Bonjour %s.\n</br>Pour valider votre compte, veuillez ouvrir le lien suivant:\n<a href=\"%s\"><h3>Lien de verification</h3></a>", utilisateur.getNomUtilisateur(), verificationLink));
                 //
                 //
