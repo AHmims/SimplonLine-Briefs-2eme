@@ -28,6 +28,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/login").permitAll()
                 .antMatchers("/api/auth/signup").permitAll()
                 .antMatchers("/api/test").permitAll()
+                .antMatchers("/api/seed").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/valider/*").permitAll()
                 .antMatchers("/serve/images/*").permitAll()

@@ -4,7 +4,7 @@ import ahmims.scuffed_BAKURA.repository.TrapRepository;
 import ahmims.scuffed_BAKURA.service.TrapService;
 import org.springframework.stereotype.Service;
 
-@Service("RoleService")
+@Service("TrapService")
 public class TrapServiceImpl implements TrapService {
     //#region
     private final TrapRepository trapRepository;

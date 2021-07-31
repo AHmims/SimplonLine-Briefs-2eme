@@ -4,7 +4,7 @@ import ahmims.scuffed_BAKURA.repository.CarteRepository;
 import ahmims.scuffed_BAKURA.service.CarteService;
 import org.springframework.stereotype.Service;
 
-@Service("RoleService")
+@Service("CarteService")
 public class CarteServiceImpl implements CarteService {
     //#region
     private final CarteRepository carteRepository;

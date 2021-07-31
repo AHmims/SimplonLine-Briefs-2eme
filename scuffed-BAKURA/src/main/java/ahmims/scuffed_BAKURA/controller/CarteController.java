@@ -1,11 +1,18 @@
 package ahmims.scuffed_BAKURA.controller;
 
+import ahmims.scuffed_BAKURA.dto.UserFormData;
+import ahmims.scuffed_BAKURA.model.Carte;
+import ahmims.scuffed_BAKURA.model.Image;
 import ahmims.scuffed_BAKURA.service.CarteService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/carte")
 public class CarteController {
     //#region
     private final CarteService carteService;
@@ -15,4 +22,5 @@ public class CarteController {
     }
 
     //#endregion
+
 }

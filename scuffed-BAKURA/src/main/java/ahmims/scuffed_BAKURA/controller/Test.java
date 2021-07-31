@@ -1,11 +1,13 @@
 package ahmims.scuffed_BAKURA.controller;
 
+import ahmims.scuffed_BAKURA.dto.CardValues;
 import ahmims.scuffed_BAKURA.model.Image;
 import ahmims.scuffed_BAKURA.model.Member;
 import ahmims.scuffed_BAKURA.model.Role;
 import ahmims.scuffed_BAKURA.repository.RoleRepository;
 import ahmims.scuffed_BAKURA.security.JwtManager;
 import ahmims.scuffed_BAKURA.service.MemberService;
+import ahmims.scuffed_BAKURA.util.Requester;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,15 +53,7 @@ public class Test {
     }
 
     @PostMapping("/api/test")
-    public ResponseEntity<?> test2() { //<?> => is a wildcard meaning it can be any type
-        //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(payload.getEmailUtilisateur(), payload.getPassUtilisateur()));
-        //String jwt = jwtManager.createToken(payload.getEmailUtilisateur(), new Role("__hmm", -99));
-        //System.out.println(jwt);
-        //System.out.println(payload.getEmailUtilisateur());
-        //return modelMapper.map(new Role("test", 12), Role.class);
-        //return new ResponseEntity<>(modelMapper.map(payload, UserAuthInputData.class), HttpStatus.valueOf(200));
-
-
+    public ResponseEntity<?> test2() {
         //creating new roles
         ArrayList<Role> roles = new ArrayList<>();
         roles.add(new Role("Role_1", 0));
@@ -71,4 +65,12 @@ public class Test {
         //
         return new ResponseEntity<>("ff", HttpStatus.valueOf(200));
     }
+
+    @PostMapping("/api/seed")
+    public ResponseEntity<?> seed() {
+        Requester<CardValues> requester = new Requester<>("https://db.ygoprodeck.com/api_internal/v7/cardvalues.php", "get", CardValues.class);
+
+        return new ResponseEntity<>(requester.sendJsonRequest(), HttpStatus.OK);
+    }
+
 }

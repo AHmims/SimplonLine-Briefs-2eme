@@ -4,7 +4,7 @@ import ahmims.scuffed_BAKURA.repository.SpellRepository;
 import ahmims.scuffed_BAKURA.service.SpellService;
 import org.springframework.stereotype.Service;
 
-@Service("RoleService")
+@Service("SpellService")
 public class SpellServiceImpl implements SpellService {
     //#region
     private final SpellRepository spellRepository;

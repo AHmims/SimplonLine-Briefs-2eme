@@ -4,7 +4,7 @@ import ahmims.scuffed_BAKURA.repository.RaceRepository;
 import ahmims.scuffed_BAKURA.service.RaceService;
 import org.springframework.stereotype.Service;
 
-@Service("RoleService")
+@Service("RaceService")
 public class RaceServiceImpl implements RaceService {
     //#region
     private final RaceRepository raceRepository;

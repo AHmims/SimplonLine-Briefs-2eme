@@ -4,7 +4,7 @@ import ahmims.scuffed_BAKURA.repository.AttributeRepository;
 import ahmims.scuffed_BAKURA.service.AttributeService;
 import org.springframework.stereotype.Service;
 
-@Service("RoleService")
+@Service("AttributeService")
 public class AttributeServiceImpl implements AttributeService {
     //#region
     private final AttributeRepository attributeRepository;

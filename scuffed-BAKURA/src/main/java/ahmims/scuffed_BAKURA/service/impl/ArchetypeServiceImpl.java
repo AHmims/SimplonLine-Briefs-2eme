@@ -4,7 +4,7 @@ import ahmims.scuffed_BAKURA.repository.ArchetypeRepository;
 import ahmims.scuffed_BAKURA.service.ArchetypeService;
 import org.springframework.stereotype.Service;
 
-@Service("RoleService")
+@Service("ArchetypeService")
 public class ArchetypeServiceImpl implements ArchetypeService {
     //#region
     private final ArchetypeRepository archetypeRepository;
