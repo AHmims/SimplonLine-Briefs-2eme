@@ -27,13 +27,17 @@ spring:
             enable: true
 server:
   port: 3420
-  servlet:
-    context-path: "/api"
 
 security:
   crypt:
-    length: 16
+    length: 6
   jwt:
     token:
-      secret-key: oeRaYY7Wo24sDqKSX3IM9ASGmdGPmkTd9jo1QTy4b7P9Ze5_9hKolVX8xNrQDcNRfVEdTZNOuOyqEGhXEbdJI-ZQ19k_
-      expire-length: 3600000 # 60 minutes
+      secret-key: ZQ19k
+      expire-length: 360000000000
+
+images:
+  upload-dir: '/uploads/images'
+  serve-endpoint: '/serve/images'
+
+server-url: 'http://localhost:3420'
