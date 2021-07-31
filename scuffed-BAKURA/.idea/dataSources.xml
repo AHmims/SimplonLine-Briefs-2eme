@@ -14,5 +14,12 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/brief_13</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="SCUFFED_DB" uuid="97499367-b3e8-4cb2-8b9b-fb845bc25164">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://containers-us-west-3.railway.app:6435/railway</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
