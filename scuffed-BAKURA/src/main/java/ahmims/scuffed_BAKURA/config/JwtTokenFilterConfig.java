@@ -9,7 +9,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 public class JwtTokenFilterConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
 
-    private JwtManager jwtManager;
+    private final JwtManager jwtManager;
 
     public JwtTokenFilterConfig(JwtManager jwtManager) {
         this.jwtManager = jwtManager;

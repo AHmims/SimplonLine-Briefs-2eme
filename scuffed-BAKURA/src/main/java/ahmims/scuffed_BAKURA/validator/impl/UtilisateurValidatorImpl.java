@@ -16,8 +16,8 @@ public class UtilisateurValidatorImpl implements UtilisateurValidator {
             return null;
         else {
             ArrayList<Validation> validations = new ArrayList<>();
-            validations.add(new Validation(Validator.isEmail(utilisateur.getEmailUtilisateur()),"Email invalide"));
-            validations.add(new Validation(Validator.isPassword(utilisateur.getPassUtilisateur()),"Mot de passe invalide"));
+            validations.add(new Validation(Validator.isEmail(utilisateur.getEmailUtilisateur()), "Email invalide"));
+            validations.add(new Validation(Validator.isPassword(utilisateur.getPassUtilisateur()), "Mot de passe invalide"));
             //
             return validations;
         }

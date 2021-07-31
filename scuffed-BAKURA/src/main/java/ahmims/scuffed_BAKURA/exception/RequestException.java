@@ -10,6 +10,7 @@ public class RequestException extends RuntimeException {
         this.message = message;
         this.httpStatus = httpStatus;
     }
+
     public RequestException(HttpStatus httpStatus) {
         this.message = "";
         this.httpStatus = httpStatus;

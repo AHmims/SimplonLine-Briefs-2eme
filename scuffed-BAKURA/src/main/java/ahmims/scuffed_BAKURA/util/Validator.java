@@ -22,7 +22,7 @@ public class Validator {
 
     //
     public static Date toDate(String str) {
-        if (!str.equals("") && str != null) {
+        if (!str.equals("")) {
             try {
                 return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(str);
             } catch (Exception e) {
@@ -53,7 +53,7 @@ public class Validator {
         try {
             boolean exists = false;
             for (String choice : choices) {
-                if (user_choice.toLowerCase().equals(choice.toLowerCase())) {
+                if (user_choice.equalsIgnoreCase(choice)) {
                     exists = true;
                     break;
                 }

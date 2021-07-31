@@ -2,9 +2,9 @@ package ahmims.scuffed_BAKURA.model;
 
 import ahmims.scuffed_BAKURA.dto.UserFormData;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "administrateur")

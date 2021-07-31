@@ -1,21 +1,19 @@
 package ahmims.scuffed_BAKURA.security;
 
-import java.io.IOException;
+import ahmims.scuffed_BAKURA.exception.RequestException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import ahmims.scuffed_BAKURA.exception.RequestException;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
-import org.springframework.web.filter.OncePerRequestFilter;
+import java.io.IOException;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
 
-    private JwtManager jwtManager;
+    private final JwtManager jwtManager;
 
     public JwtTokenFilter(JwtManager jwtManager) {
         this.jwtManager = jwtManager;

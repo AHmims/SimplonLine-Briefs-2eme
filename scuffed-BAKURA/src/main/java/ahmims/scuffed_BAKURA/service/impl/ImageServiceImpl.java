@@ -1,13 +1,13 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
 import ahmims.scuffed_BAKURA.exception.RequestException;
+import ahmims.scuffed_BAKURA.model.Image;
 import ahmims.scuffed_BAKURA.repository.ImageRepository;
 import ahmims.scuffed_BAKURA.service.ImageService;
 import ahmims.scuffed_BAKURA.validator.ImageValidator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import ahmims.scuffed_BAKURA.model.Image;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -17,17 +17,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.List;
 
 @Service("ImageService")
 public class ImageServiceImpl implements ImageService {
+    private final ImageRepository imageRepository;
+    private final ImageValidator imageValidator;
     //#region
     @Value("${images.upload-dir}")
     private String uploadDir;
     @Value("${images.serve-endpoint}")
     private String serveEndpoint;
-    private final ImageRepository imageRepository;
-    private final ImageValidator imageValidator;
 
     public ImageServiceImpl(ImageRepository imageRepository, ImageValidator imageValidator) {
         this.imageRepository = imageRepository;

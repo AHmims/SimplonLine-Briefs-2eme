@@ -19,13 +19,13 @@ import java.util.Optional;
 
 @Service("CompteVerificationService")
 public class CompteVerificationServiceImpl implements CompteVerificationService {
-    //#region
-    @Value("${server-url}")
-    private String serverUrl;
     private final EmailSender emailSender;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
     private final CompteVerificationRepository compteVerificationRepository;
+    //#region
+    @Value("${server-url}")
+    private String serverUrl;
 
 
     public CompteVerificationServiceImpl(EmailSender emailSender, JwtManager jwtManager, ModelMapper modelMapper, CompteVerificationRepository compteVerificationRepository) {

@@ -1,6 +1,9 @@
 package ahmims.scuffed_BAKURA.controller;
 
-import ahmims.scuffed_BAKURA.dto.*;
+import ahmims.scuffed_BAKURA.dto.DeleteRes;
+import ahmims.scuffed_BAKURA.dto.UpdateRes;
+import ahmims.scuffed_BAKURA.dto.UserFormData;
+import ahmims.scuffed_BAKURA.dto.UserMainData;
 import ahmims.scuffed_BAKURA.service.UtilisateurService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
