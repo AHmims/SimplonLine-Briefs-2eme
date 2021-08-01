@@ -56,132 +56,132 @@ public class CardValues implements Serializable {
     public void setSKILL(GenericCardAttr SKILL) {
         this.SKILL = SKILL;
     }
-}
 
-class CardContainer {
-    private String name;
-    private String group;
-    private String sortGroup;
-    private String[] area;
+    public class Monster {
+        private String[] type;
+        private String[] race;
+        private String[] attributes;
+        private int[] level;
+        private String[] linkmarkers;
 
-    public CardContainer(String name, String group, String sortGroup, String[] area) {
-        this.name = name;
-        this.group = group;
-        this.sortGroup = sortGroup;
-        this.area = area;
+        public Monster(String[] type, String[] race, String[] attributes, int[] level, String[] linkmarkers) {
+            this.type = type;
+            this.race = race;
+            this.attributes = attributes;
+            this.level = level;
+            this.linkmarkers = linkmarkers;
+        }
+
+        public String[] getType() {
+            return type;
+        }
+
+        public void setType(String[] type) {
+            this.type = type;
+        }
+
+        public String[] getRace() {
+            return race;
+        }
+
+        public void setRace(String[] race) {
+            this.race = race;
+        }
+
+        public String[] getAttributes() {
+            return attributes;
+        }
+
+        public void setAttributes(String[] attributes) {
+            this.attributes = attributes;
+        }
+
+        public int[] getLevel() {
+            return level;
+        }
+
+        public void setLevel(int[] level) {
+            this.level = level;
+        }
+
+        public String[] getLinkmarkers() {
+            return linkmarkers;
+        }
+
+        public void setLinkmarkers(String[] linkmarkers) {
+            this.linkmarkers = linkmarkers;
+        }
     }
 
-    public String getName() {
-        return name;
+    public class CardContainer {
+        private String name;
+        private String group;
+        private String sortGroup;
+        private String[] area;
+
+        public CardContainer(String name, String group, String sortGroup, String[] area) {
+            this.name = name;
+            this.group = group;
+            this.sortGroup = sortGroup;
+            this.area = area;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getGroup() {
+            return group;
+        }
+
+        public void setGroup(String group) {
+            this.group = group;
+        }
+
+        public String getSortGroup() {
+            return sortGroup;
+        }
+
+        public void setSortGroup(String sortGroup) {
+            this.sortGroup = sortGroup;
+        }
+
+        public String[] getArea() {
+            return area;
+        }
+
+        public void setArea(String[] area) {
+            this.area = area;
+        }
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public class GenericCardAttr {
+        private String[] type;
+        private String[] race;
 
-    public String getGroup() {
-        return group;
-    }
+        public GenericCardAttr(String[] type, String[] race) {
+            this.type = type;
+            this.race = race;
+        }
 
-    public void setGroup(String group) {
-        this.group = group;
-    }
+        public String[] getType() {
+            return type;
+        }
 
-    public String getSortGroup() {
-        return sortGroup;
-    }
+        public void setType(String[] type) {
+            this.type = type;
+        }
 
-    public void setSortGroup(String sortGroup) {
-        this.sortGroup = sortGroup;
-    }
+        public String[] getRace() {
+            return race;
+        }
 
-    public String[] getArea() {
-        return area;
-    }
-
-    public void setArea(String[] area) {
-        this.area = area;
-    }
-}
-
-class Monster {
-    private String[] type;
-    private String[] race;
-    private String[] attributes;
-    private int[] level;
-    private String[] linkmarkers;
-
-    public Monster(String[] type, String[] race, String[] attributes, int[] level, String[] linkmarkers) {
-        this.type = type;
-        this.race = race;
-        this.attributes = attributes;
-        this.level = level;
-        this.linkmarkers = linkmarkers;
-    }
-
-    public String[] getType() {
-        return type;
-    }
-
-    public void setType(String[] type) {
-        this.type = type;
-    }
-
-    public String[] getRace() {
-        return race;
-    }
-
-    public void setRace(String[] race) {
-        this.race = race;
-    }
-
-    public String[] getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(String[] attributes) {
-        this.attributes = attributes;
-    }
-
-    public int[] getLevel() {
-        return level;
-    }
-
-    public void setLevel(int[] level) {
-        this.level = level;
-    }
-
-    public String[] getLinkmarkers() {
-        return linkmarkers;
-    }
-
-    public void setLinkmarkers(String[] linkmarkers) {
-        this.linkmarkers = linkmarkers;
-    }
-}
-
-class GenericCardAttr {
-    private String[] type;
-    private String[] race;
-
-    public GenericCardAttr(String[] type, String[] race) {
-        this.type = type;
-        this.race = race;
-    }
-
-    public String[] getType() {
-        return type;
-    }
-
-    public void setType(String[] type) {
-        this.type = type;
-    }
-
-    public String[] getRace() {
-        return race;
-    }
-
-    public void setRace(String[] race) {
-        this.race = race;
+        public void setRace(String[] race) {
+            this.race = race;
+        }
     }
 }

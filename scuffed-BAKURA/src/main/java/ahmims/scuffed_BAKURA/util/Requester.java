@@ -1,9 +1,11 @@
 package ahmims.scuffed_BAKURA.util;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.web.client.RestTemplate;
+import com.google.gson.Gson;
 
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Requester<T> {
     private final String url;
@@ -12,26 +14,33 @@ public class Requester<T> {
 
     public Requester(String url, String method, Class<T> type) {
         this.url = url;
-        this.method = method;
+        this.method = method.toUpperCase();
         this.type = type;
     }
 
     public T sendJsonRequest() {
-        RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
-        RestTemplate restTemplate = restTemplateBuilder.build();
-
+        HttpURLConnection con;
         try {
-            switch (this.method.toLowerCase()) {
-                case "get":
-                    return restTemplate.getForObject(url, this.type);
-                default:
-                    return null;
+            URL url = new URL(this.url);
+            con = (HttpURLConnection) url.openConnection();
+
+            con.setDoOutput(true);
+            con.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+            con.setRequestProperty("Accept", "application/json");
+            con.setRequestMethod(this.method);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String output;
+            StringBuilder response = new StringBuilder();
+            while ((output = in.readLine()) != null) {
+                response.append(output);
             }
-        }catch (Exception e){
-            System.out.println(Arrays.toString(e.getStackTrace()));
+            in.close();
+            
+            Gson g = new Gson();
+            return g.fromJson(response.toString(), type);
+        } catch (Exception e) {
             return null;
         }
     }
-
-
 }

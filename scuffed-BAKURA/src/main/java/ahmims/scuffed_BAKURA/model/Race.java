@@ -34,6 +34,10 @@ public class Race {
         this.imageRace = imageRace;
     }
 
+    public Race(String libelleRace) {
+        this.libelleRace = libelleRace;
+    }
+
     public Race() {
     }
 

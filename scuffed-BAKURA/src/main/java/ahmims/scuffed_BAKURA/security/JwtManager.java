@@ -56,7 +56,7 @@ public class JwtManager {
 
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && !bearerToken.equals(""))
+        if (bearerToken != null && bearerToken.length() > 7)
             return bearerToken.substring(7);
         return null;
     }
