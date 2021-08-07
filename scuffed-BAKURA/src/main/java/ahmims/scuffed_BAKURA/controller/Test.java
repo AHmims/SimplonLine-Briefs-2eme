@@ -91,15 +91,15 @@ public class Test {
 
         CardValues cardValues = requester.sendJsonRequest();
         Map<String, String> attributes = new HashMap<String, String>() {{
-            put("dark", "6a680ef1-03a3-4ea1-b014-904b1303197e");
-            put("divine", "f30ab178-0d38-4eb4-817f-18dc9cfe78a8");
-            put("earth", "b291e01f-52d0-4cce-95aa-5c2045784a03");
-            put("fire", "0fe96d53-b76b-49fa-b973-bca027ecf8f1");
-            put("light", "7faa16cd-4faf-4a5d-8b05-cdc87720ceb3");
-            put("spell", "ced26349-9da0-44c8-8518-41db3a9e3d22");
-            put("trap", "fd6f2b5e-1cab-4b04-94af-7fa03c7c7fae");
-            put("water", "af0c6a62-4671-492e-b9f9-96d842bc80c9");
-            put("wind", "152a82ff-1e38-4203-9f08-0a796fed4b5a");
+            put("dark", "57208fb8-1ac7-4372-ba11-398b3a57e794");
+            put("divine", "2f010c5a-1950-4d04-bd1a-63770d727c9c");
+            put("earth", "941c1f64-b5e8-47e1-bda5-8b092e350e1f");
+            put("fire", "01d6c229-e4be-4862-89d4-5c1535ee4fc2");
+            put("light", "1e2ff60f-225a-4079-829a-bc0912f3dbd7");
+            put("spell", "76fc0413-41f6-4ace-bf8b-d9dc530a9a54");
+            put("trap", "3839005a-4342-4dc6-b629-1eba1548002e");
+            put("water", "09f6d01d-f65c-4614-8f32-603b73eb2de2");
+            put("wind", "7d9f6561-4214-41a9-b62f-8b1c29065115");
         }};
 
         if (cardValues != null) {
@@ -129,7 +129,7 @@ public class Test {
 
         System.out.println("==========|Seed DB with cards|>");
         for (int i = 0; i < cardInfo.getData().length; i++) {
-            System.out.printf("---<%d : %d>---%n", i, cardInfo.getData().length);
+            System.out.printf("---<%d : %d>---%n", i + 1, cardInfo.getData().length);
             CardInfo.CardData cardData = cardInfo.getData()[i];
 
             if (carteService.cardExists(cardData.getId())) {

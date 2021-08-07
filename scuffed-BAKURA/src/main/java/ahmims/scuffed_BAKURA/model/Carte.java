@@ -15,7 +15,7 @@ public abstract class Carte {
     private String idCarte;
     @Column(name = "nomCarte", nullable = false)
     private String nomCarte;
-    @Column(name = "descriptionCarte", nullable = false)
+    @Column(columnDefinition = "TEXT NOT NULL", name = "descriptionCarte")
     private String descriptionCarte;
     @Column(name = "givenCarteId", nullable = false)
     private int givenCarteId;
