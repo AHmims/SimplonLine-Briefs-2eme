@@ -34,4 +34,13 @@ public class AttributeServiceImpl implements AttributeService {
         }
     }
 
+    @Override
+    public Attribute getAttributeByName(String attributeName) {
+        try {
+            return this.attributeRepository.findTopByLibelleAttribute(attributeName);
+        } catch (Exception e) {
+            throw new RequestException("Error while getting attribute", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

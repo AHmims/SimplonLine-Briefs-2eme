@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @org.springframework.stereotype.Repository("RaceRepository")
 public interface RaceRepository extends JpaRepository<Race, String> {
+    Race findTopByLibelleRace(String raceName);
 }

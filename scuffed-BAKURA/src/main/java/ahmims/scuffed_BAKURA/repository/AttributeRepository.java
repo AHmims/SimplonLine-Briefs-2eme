@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @org.springframework.stereotype.Repository("AttributeRepository")
 public interface AttributeRepository extends JpaRepository<Attribute, String> {
+    Attribute findTopByLibelleAttribute(String attributeName);
 }

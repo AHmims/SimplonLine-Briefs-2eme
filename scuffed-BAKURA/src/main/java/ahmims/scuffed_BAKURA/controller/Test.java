@@ -31,11 +31,13 @@ public class Test {
     private final MonsterService monsterService;
     private final ImageService imageService;
     private final ArchetypeService archetypeService;
+    private final SpellService spellService;
+    private final TrapService trapService;
     private final AuthenticationManager authenticationManager;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
 
-    public Test(MemberService MemberService, RoleRepository roleRepository, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper, RaceService raceService, AttributeService attributeService,CarteService carteService,MonsterService monsterService, ImageService imageService, ArchetypeService archetypeService) {
+    public Test(MemberService MemberService, RoleRepository roleRepository, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper, RaceService raceService, AttributeService attributeService, CarteService carteService, MonsterService monsterService, ImageService imageService, ArchetypeService archetypeService, SpellService spellService, TrapService trapService) {
         this.MemberService = MemberService;
         this.roleRepository = roleRepository;
         this.authenticationManager = authenticationManager;
@@ -47,6 +49,8 @@ public class Test {
         this.monsterService = monsterService;
         this.imageService = imageService;
         this.archetypeService = archetypeService;
+        this.spellService = spellService;
+        this.trapService = trapService;
     }
 
     @GetMapping("/test")
@@ -117,7 +121,7 @@ public class Test {
 
     @PostMapping("/api/seed/cards")
     public ResponseEntity<?> seedC() {
-        ArrayList<String> seedingResult = new ArrayList<>();
+        ArrayList<String[]> seedingResult = new ArrayList<>();
         Requester<CardInfo> requester = new Requester<>("https://db.ygoprodeck.com/api/v7/cardinfo.php", "get", CardInfo.class);
 
 
@@ -128,27 +132,44 @@ public class Test {
             System.out.printf("---<%d : %d>---%n", i, cardInfo.getData().length);
             CardInfo.CardData cardData = cardInfo.getData()[i];
 
-            if(carteService.cardExists(cardData.getId())){
+            if (carteService.cardExists(cardData.getId())) {
                 System.out.printf("=> Card %d already exists%n", cardData.getId());
                 continue;
             }
 
             Image cardImage = this.imageService.insertSingle(cardData.getCard_images()[0].getImage_url());
 
-            if(cardImage == null){
+            if (cardImage == null) {
                 System.out.printf("=> Card image <%s> couldn't be saved%n", cardData.getCard_images()[0].getImage_url());
                 continue;
             }
 
-            if (cardData.getType().toLowerCase().contains("monster")){
-                Archetype archetype = this.archetypeService.assertArchetype(cardData.getType());
-                Attribute attribute = null;
-                Race race = null;
+            Archetype archetype = this.archetypeService.assertArchetype(cardData.getType());
+            Attribute attribute = this.attributeService.getAttributeByName(cardData.getAttribute());
+            Race race = this.raceService.getRaceByName(cardData.getRace());
 
-                Monster monster = new Monster(cardData.getName(),cardData.getDesc(), cardData.getId(), cardData.getType(), cardImage, archetype, null, cardData.getAtk(),cardData.getDef(),cardData.getLevel(), cardData.getScale() == 0 ? cardData.getLinkval() : cardData.getScale(), attribute, race);
+            Carte savedCarte = null;
+
+            if (cardData.getType().toLowerCase().contains("monster")) {
+                Monster monster = new Monster(cardData.getName(), cardData.getDesc(), cardData.getId(), cardData.getType(), cardImage, archetype, null, cardData.getAtk(), cardData.getDef(), cardData.getLevel(), cardData.getScale() == 0 ? cardData.getLinkval() : cardData.getScale(), attribute, race);
+                savedCarte = this.monsterService.saveMonster(monster);
             }
+            if (cardData.getType().toLowerCase().contains("spell")) {
+                Spell spell = new Spell(cardData.getName(), cardData.getDesc(), cardData.getId(), cardData.getType(), cardImage, archetype, null);
+                savedCarte = this.spellService.saveSpell(spell);
+            }
+            if (cardData.getType().toLowerCase().contains("trap")) {
+                Trap trap = new Trap(cardData.getName(), cardData.getDesc(), cardData.getId(), cardData.getType(), cardImage, archetype, null);
+                savedCarte = this.trapService.saveTrap(trap);
+            }
+
+            if (savedCarte == null) {
+                System.out.printf("=> Card <%s> couldn't be saved%n", cardData.getId());
+            }
+
+            seedingResult.add(new String[]{cardData.getId() + "", (savedCarte == null) + ""});
         }
 
-        return new ResponseEntity<>(cardInfo, HttpStatus.OK);
+        return new ResponseEntity<>(seedingResult, HttpStatus.OK);
     }
 }

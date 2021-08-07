@@ -33,4 +33,13 @@ public class RaceServiceImpl implements RaceService {
             throw new RequestException("Error while saving race", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public Race getRaceByName(String raceName) {
+        try {
+            return this.raceRepository.findTopByLibelleRace(raceName);
+        } catch (Exception e) {
+            throw new RequestException("Error while getting race", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
