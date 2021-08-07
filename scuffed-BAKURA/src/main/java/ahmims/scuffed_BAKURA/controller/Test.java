@@ -167,7 +167,7 @@ public class Test {
                 System.out.printf("=> Card <%s> couldn't be saved%n", cardData.getId());
             }
 
-            seedingResult.add(new String[]{cardData.getId() + "", (savedCarte == null) + ""});
+            seedingResult.add(new String[]{cardData.getId() + "", (savedCarte != null) + ""});
         }
 
         return new ResponseEntity<>(seedingResult, HttpStatus.OK);
