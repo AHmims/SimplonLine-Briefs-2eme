@@ -2,14 +2,10 @@ package ahmims.scuffed_BAKURA.controller;
 
 import ahmims.scuffed_BAKURA.dto.CardInfo;
 import ahmims.scuffed_BAKURA.dto.CardValues;
-import ahmims.scuffed_BAKURA.model.Image;
-import ahmims.scuffed_BAKURA.model.Member;
-import ahmims.scuffed_BAKURA.model.Role;
+import ahmims.scuffed_BAKURA.model.*;
 import ahmims.scuffed_BAKURA.repository.RoleRepository;
 import ahmims.scuffed_BAKURA.security.JwtManager;
-import ahmims.scuffed_BAKURA.service.AttributeService;
-import ahmims.scuffed_BAKURA.service.MemberService;
-import ahmims.scuffed_BAKURA.service.RaceService;
+import ahmims.scuffed_BAKURA.service.*;
 import ahmims.scuffed_BAKURA.util.Requester;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -31,11 +27,15 @@ public class Test {
     private final RoleRepository roleRepository;
     private final RaceService raceService;
     private final AttributeService attributeService;
+    private final CarteService carteService;
+    private final MonsterService monsterService;
+    private final ImageService imageService;
+    private final ArchetypeService archetypeService;
     private final AuthenticationManager authenticationManager;
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
 
-    public Test(MemberService MemberService, RoleRepository roleRepository, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper, RaceService raceService, AttributeService attributeService) {
+    public Test(MemberService MemberService, RoleRepository roleRepository, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper, RaceService raceService, AttributeService attributeService,CarteService carteService,MonsterService monsterService, ImageService imageService, ArchetypeService archetypeService) {
         this.MemberService = MemberService;
         this.roleRepository = roleRepository;
         this.authenticationManager = authenticationManager;
@@ -43,6 +43,10 @@ public class Test {
         this.modelMapper = modelMapper;
         this.raceService = raceService;
         this.attributeService = attributeService;
+        this.carteService = carteService;
+        this.monsterService = monsterService;
+        this.imageService = imageService;
+        this.archetypeService = archetypeService;
     }
 
     @GetMapping("/test")
@@ -102,7 +106,7 @@ public class Test {
                 seedingResult.add(String.format("Insert <Attribute>, Result => %b", savingResult));
             }
             //Image upload for races is skipped for now
-            for(String race : cardValues.getMONSTER().getRace()){
+            for (String race : cardValues.getMONSTER().getRace()) {
                 boolean savingResult = this.raceService.insertRace(race, null);
                 seedingResult.add(String.format("Insert <Race>, Result => %b", savingResult));
             }
@@ -119,7 +123,31 @@ public class Test {
 
         CardInfo cardInfo = requester.sendJsonRequest();
 
-        System.out.println(cardInfo);
+        System.out.println("==========|Seed DB with cards|>");
+        for (int i = 0; i < cardInfo.getData().length; i++) {
+            System.out.printf("---<%d : %d>---%n", i, cardInfo.getData().length);
+            CardInfo.CardData cardData = cardInfo.getData()[i];
+
+            if(carteService.cardExists(cardData.getId())){
+                System.out.printf("=> Card %d already exists%n", cardData.getId());
+                continue;
+            }
+
+            Image cardImage = this.imageService.insertSingle(cardData.getCard_images()[0].getImage_url());
+
+            if(cardImage == null){
+                System.out.printf("=> Card image <%s> couldn't be saved%n", cardData.getCard_images()[0].getImage_url());
+                continue;
+            }
+
+            if (cardData.getType().toLowerCase().contains("monster")){
+                Archetype archetype = this.archetypeService.assertArchetype(cardData.getType());
+                Attribute attribute = null;
+                Race race = null;
+
+                Monster monster = new Monster(cardData.getName(),cardData.getDesc(), cardData.getId(), cardData.getType(), cardImage, archetype, null, cardData.getAtk(),cardData.getDef(),cardData.getLevel(), cardData.getScale() == 0 ? cardData.getLinkval() : cardData.getScale(), attribute, race);
+            }
+        }
 
         return new ResponseEntity<>(cardInfo, HttpStatus.OK);
     }

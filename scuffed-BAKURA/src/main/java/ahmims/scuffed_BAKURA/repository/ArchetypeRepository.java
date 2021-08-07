@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 @org.springframework.stereotype.Repository("ArchetypeRepository")
 public interface ArchetypeRepository extends JpaRepository<Archetype, String> {
+    Archetype findTopByLibelleArchetype(String archetypeName);
 }

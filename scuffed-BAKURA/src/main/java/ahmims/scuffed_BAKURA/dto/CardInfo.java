@@ -15,8 +15,8 @@ public class CardInfo {
         this.data = data;
     }
 
-    private class CardData {
-        private String id;
+    public class CardData {
+        private int id;
         private String name;
         private String type;
         private String desc;
@@ -30,7 +30,7 @@ public class CardInfo {
         private int linkval;
         private CardImage[] card_images;
 
-        public CardData(String id, String name, String type, String desc, int atk, int def, int level, String race, String attribute, String archetype, int scale, int linkval, CardImage[] card_images) {
+        public CardData(int id, String name, String type, String desc, int atk, int def, int level, String race, String attribute, String archetype, int scale, int linkval, CardImage[] card_images) {
             this.id = id;
             this.name = name;
             this.type = type;
@@ -46,11 +46,11 @@ public class CardInfo {
             this.card_images = card_images;
         }
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 

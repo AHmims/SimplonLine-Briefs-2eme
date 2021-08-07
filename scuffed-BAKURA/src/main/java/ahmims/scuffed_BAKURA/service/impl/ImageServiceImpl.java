@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,12 +38,36 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Image insertSingle(String url) {
-        boolean isValid = imageValidator.isValidImageLink(url);
-        if (!isValid)
+        try (InputStream input = new URL(url).openStream()) {
+            String originalFileName = url.substring(url.lastIndexOf("/"));
+            String newFileName = UUID.randomUUID().toString().replace("-", "");
+            String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+            String fileName = newFileName.concat(extension);
+
+            Files.createDirectories(Paths.get(this.uploadDir));
+            //
+            File uploads = new File(this.uploadDir);
+            File file = new File(this.uploadDir, fileName);
+
+            Files.copy(input, file.toPath());
+
+            if (!imageValidator.isValidLocalImageLink(toAbsolutePath(String.format("%s/%s", this.uploadDir, fileName)))) {
+                deleteSingleImage(fileName);
+                return null;
+            }
+
+            Image image = imageRepository.save(new Image(String.format("%s/%s", this.serveEndpoint, fileName)));
+
+            if (image.getIdImage() == null) {
+                deleteSingleImage(fileName);
+
+                throw new RequestException(String.format("Error while uploading images, error at: %s", fileName), HttpStatus.BAD_REQUEST);
+            } else {
+                return image;
+            }
+        } catch (IOException e) {
             throw new RequestException("Invalid image link", HttpStatus.UNPROCESSABLE_ENTITY);
-        //
-        Image image = imageRepository.save(new Image(url));
-        return image.getIdImage() != null ? image : null;
+        }
     }
 
     @Override
@@ -86,7 +112,7 @@ public class ImageServiceImpl implements ImageService {
             imageRepository.delete(image);
 
             String fileName = image.getLienImage();
-            if (fileName.contains(serveEndpoint)) {
+            if (fileName.contains(this.serveEndpoint)) {
                 deleteSingleImage(fileName.substring(fileName.lastIndexOf('/') + 1));
             }
 
@@ -108,7 +134,7 @@ public class ImageServiceImpl implements ImageService {
                     throw new RequestException("Error while saving image", HttpStatus.INTERNAL_SERVER_ERROR);
                 }
 
-                Image image = imageRepository.save(new Image(String.format("%s/%s", serveEndpoint, imageName)));
+                Image image = imageRepository.save(new Image(String.format("%s/%s", this.serveEndpoint, imageName)));
 
                 if (image.getIdImage() == null) {
                     deleteSingleImage(imageName);
@@ -164,15 +190,15 @@ public class ImageServiceImpl implements ImageService {
         try {
             InputStream fileContent = image.getInputStream();
 
-            Files.createDirectories(Paths.get(uploadDir));
+            Files.createDirectories(Paths.get(this.uploadDir));
             //
-            File uploads = new File(uploadDir);
-            File file = new File(uploadDir, fileName);
+            File uploads = new File(this.uploadDir);
+            File file = new File(this.uploadDir, fileName);
             try (InputStream input = fileContent) {
                 Files.copy(input, file.toPath());
             }
 
-            if (!imageValidator.isValidLocalImageLink(toAbsolutePath(String.format("%s/%s", uploadDir, fileName)))) {
+            if (!imageValidator.isValidLocalImageLink(toAbsolutePath(String.format("%s/%s", this.uploadDir, fileName)))) {
                 deleteSingleImage(fileName);
                 return null;
             }
@@ -186,7 +212,7 @@ public class ImageServiceImpl implements ImageService {
 
     private boolean deleteSingleImage(String imageName) {
         try {
-            Path path = Paths.get(String.format("%s/%s", uploadDir, imageName));
+            Path path = Paths.get(String.format("%s/%s", this.uploadDir, imageName));
             Files.delete(path);
             return true;
         } catch (Exception e) {
