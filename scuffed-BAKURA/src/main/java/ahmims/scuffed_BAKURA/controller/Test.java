@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.controller;
 
+import ahmims.scuffed_BAKURA.dto.CardInfo;
 import ahmims.scuffed_BAKURA.dto.CardValues;
 import ahmims.scuffed_BAKURA.model.Image;
 import ahmims.scuffed_BAKURA.model.Member;
@@ -60,7 +61,7 @@ public class Test {
         return "good";
     }
 
-    @PostMapping("/api/test")
+    @PostMapping("/api/seed/roles")
     public ResponseEntity<?> test2() {
         //creating new roles
         ArrayList<Role> roles = new ArrayList<>();
@@ -74,8 +75,8 @@ public class Test {
         return new ResponseEntity<>("ff", HttpStatus.valueOf(200));
     }
 
-    @PostMapping("/api/seed")
-    public ResponseEntity<?> seed() {
+    @PostMapping("/api/seed/race_attr")
+    public ResponseEntity<?> seedRA() {
         ArrayList<String> seedingResult = new ArrayList<>();
         Requester<CardValues> requester = new Requester<>("https://db.ygoprodeck.com/api_internal/v7/cardvalues.php", "get", CardValues.class);
 
@@ -107,7 +108,19 @@ public class Test {
             }
         }
 
-        return new ResponseEntity<>(cardValues, HttpStatus.OK);
+        return new ResponseEntity<>(seedingResult, HttpStatus.OK);
     }
 
+    @PostMapping("/api/seed/cards")
+    public ResponseEntity<?> seedC() {
+        ArrayList<String> seedingResult = new ArrayList<>();
+        Requester<CardInfo> requester = new Requester<>("https://db.ygoprodeck.com/api/v7/cardinfo.php", "get", CardInfo.class);
+
+
+        CardInfo cardInfo = requester.sendJsonRequest();
+
+        System.out.println(cardInfo);
+
+        return new ResponseEntity<>(cardInfo, HttpStatus.OK);
+    }
 }
