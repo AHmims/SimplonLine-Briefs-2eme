@@ -9,5 +9,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface CarteRepository extends PagingAndSortingRepository<Carte, String> {
     Carte findTopByGivenCarteId(int givenCarteId);
 
-    Page<Carte> findAll(Pageable pageable);
+    Page<Carte> findAllByNomCarteNotNull(Pageable pageable);
 }

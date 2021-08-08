@@ -29,7 +29,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/signup").permitAll()
                 .antMatchers("/api/test").permitAll()
                 .antMatchers("/api/seed/*").permitAll()
-                .antMatchers("/api/card/*").permitAll()
+                .antMatchers("/api/card").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/valider/*").permitAll()
                 .antMatchers("/serve/images/*").permitAll()

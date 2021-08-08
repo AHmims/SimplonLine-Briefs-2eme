@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Race {
     @JoinColumn(name = "imageRace", referencedColumnName = "idImage")
     private Image imageRace;
     @OneToMany(mappedBy = "race", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Monster> monsters;
 
     public Race(String idRace, String libelleRace, Image imageRace, List<Monster> monsters) {

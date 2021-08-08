@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Archetype {
     private String libelleArchetype;
 
     @OneToMany(mappedBy = "archetype", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Carte> cartes;
 
     public Archetype(String idArchetype, String libelleArchetype, List<Carte> cartes) {

@@ -45,7 +45,7 @@ public class CarteServiceImpl implements CarteService {
         try {
             Pageable pageable = PageRequest.of(page, itemsPerPage);
 
-            return this.carteRepository.findAll(pageable);
+            return this.carteRepository.findAllByNomCarteNotNull(pageable);
         } catch (Exception e) {
             throw new RequestException("Error while getting list of cards", HttpStatus.INTERNAL_SERVER_ERROR);
         }
