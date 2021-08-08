@@ -64,11 +64,6 @@ public class Test {
         //return "good";
     }
 
-    @GetMapping("/")
-    public String testGet() {
-        return "good";
-    }
-
     @PostMapping("/api/seed/roles")
     public ResponseEntity<?> test2() {
         //creating new roles

@@ -50,6 +50,4 @@ public class CarteServiceImpl implements CarteService {
             throw new RequestException("Error while getting list of cards", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }

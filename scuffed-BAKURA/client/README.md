@@ -1,28 +1,31 @@
-# Client
+# Vue2 + Typescript + Vite Starter Template
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10.
+[![CodeFactor](https://www.codefactor.io/repository/github/martinussuherman/vue-template/badge)](https://www.codefactor.io/repository/github/martinussuherman/vue-template) [![CodeQL](https://github.com/martinussuherman/vue-template/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/martinussuherman/vue-template/actions/workflows/codeql-analysis.yml) [![Publish to Github Pages](https://github.com/martinussuherman/vue-template/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/martinussuherman/vue-template/actions/workflows/gh-pages.yml)
+---
 
-## Development server
+Starter template example for Vue2 + Typescript + Vite.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Note: Using pnpm for package manager.
 
-## Useful Cmds
-### Generate Component
+## Project setup
+```
+pnpm install
+```
 
-Run `ng g c <ComponentName || path/ComponentName>`
+### Compiles and hot-reloads for development
+```
+pnpm run serve
+```
 
-### Generate Module
+### Compiles and minifies for production
+```
+pnpm run build
+```
 
-Run `ng g m <ModuleName || path/ModuleName>` for a basic module
+### Lints and fixes files
+```
+pnpm run lint
+```
 
-Run `ng g m <path/ComponentName/ModuleName> --flat` for a component module
-
-Run `ng g m <ModuleName || path/ModuleName> --routing` for a module with routing
-
-### Generate Service
-
-Run `ng g s <ServiceName || path/ServiceName>` for a basic service
-
-### Generate Model
-
-Run `ng g c <ModelName || path/ModelName> --type=model` for a basic model
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
