@@ -23,11 +23,11 @@ public class AuthentificationController {
     //#endregion
     @PostMapping("/login")
     public ResponseEntity<UserResponseData> postLogin(@RequestBody UserFormData payload) {
-        return new ResponseEntity<>(utilisateurService.loginUser(payload), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.loginUser(payload), HttpStatus.valueOf(200));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<UserResponseData> postSignup(@RequestBody UserFormData payload) {
-        return new ResponseEntity<>(utilisateurService.createUser(payload), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.createUser(payload), HttpStatus.valueOf(200));
     }
 }

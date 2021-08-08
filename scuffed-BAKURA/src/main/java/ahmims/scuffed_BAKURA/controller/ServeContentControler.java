@@ -28,7 +28,7 @@ public class ServeContentControler {
 
     @GetMapping("/images/{imageName}")
     public ResponseEntity<?> postLogin(@PathVariable String imageName) {
-        File image = imageService.getLocalImage(imageName);
+        File image = this.imageService.getLocalImage(imageName);
 
         try {
             return ResponseEntity.ok()

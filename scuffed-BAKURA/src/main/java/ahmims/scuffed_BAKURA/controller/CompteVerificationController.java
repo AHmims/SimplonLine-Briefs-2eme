@@ -22,6 +22,6 @@ public class CompteVerificationController {
     //#endregion
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseData> validateAccount(@PathVariable String id) {
-        return new ResponseEntity<>(compteVerificationService.validate(id), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.compteVerificationService.validate(id), HttpStatus.valueOf(200));
     }
 }

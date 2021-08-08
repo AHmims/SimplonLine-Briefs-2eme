@@ -4,6 +4,9 @@ import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.Carte;
 import ahmims.scuffed_BAKURA.repository.CarteRepository;
 import ahmims.scuffed_BAKURA.service.CarteService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -36,4 +39,17 @@ public class CarteServiceImpl implements CarteService {
             throw new RequestException("Error while finding carte by given Id", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public Page<Carte> getAllCards(int page, int itemsPerPage) {
+        try {
+            Pageable pageable = PageRequest.of(page, itemsPerPage);
+
+            return this.carteRepository.findAll(pageable);
+        } catch (Exception e) {
+            throw new RequestException("Error while getting list of cards", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

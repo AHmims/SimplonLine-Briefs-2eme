@@ -27,60 +27,60 @@ public class UtilisateurCont {
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<UserMainData> getUser(@PathVariable String id) {
-        return new ResponseEntity<>(utilisateurService.get(id), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.get(id), HttpStatus.valueOf(200));
     }
 
     //get current user data
     @GetMapping("")
     public ResponseEntity<UserMainData> getCurrentUser(@RequestHeader(name = "Authorization") String token) {
-        return new ResponseEntity<>(utilisateurService.getByToken(token), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.getByToken(token), HttpStatus.valueOf(200));
     }
 
     //get all users
     @GetMapping("/all")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<List<UserMainData>> getAllUsers() {
-        return new ResponseEntity<>(utilisateurService.getAll(), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.getAll(), HttpStatus.valueOf(200));
     }
 
     //update a users data
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<UserMainData> updateUser(@RequestBody UserFormData payload, @PathVariable String id) {
-        return new ResponseEntity<>(utilisateurService.updateUser(payload, id), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.updateUser(payload, id), HttpStatus.valueOf(200));
     }
 
     //update current user data
     @PutMapping("")
     public ResponseEntity<UserMainData> updateCurrentUser(@RequestBody UserFormData payload, @RequestHeader(name = "Authorization") String token) {
-        return new ResponseEntity<>(utilisateurService.updateUserByToken(payload, token), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.updateUserByToken(payload, token), HttpStatus.valueOf(200));
     }
 
     //Delete a users account
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<DeleteRes> deleteUser(@PathVariable String id) {
-        return new ResponseEntity<>(utilisateurService.deleteUser(id), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.deleteUser(id), HttpStatus.valueOf(200));
     }
 
     //Disable a users account
     @PutMapping("/disable/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<UpdateRes> disableUser(@PathVariable String id) {
-        return new ResponseEntity<>(utilisateurService.controllAccount(id, -1), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.controllAccount(id, -1), HttpStatus.valueOf(200));
     }
 
     //Enable a users account
     @PutMapping("/enable/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<UpdateRes> enableUser(@PathVariable String id) {
-        return new ResponseEntity<>(utilisateurService.controllAccount(id, 0), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.controllAccount(id, 0), HttpStatus.valueOf(200));
     }
 
     //Activate a users account
     @PutMapping("/activate/{id}")
     @PreAuthorize("hasAuthority('1')")
     public ResponseEntity<UpdateRes> activateUser(@PathVariable String id) {
-        return new ResponseEntity<>(utilisateurService.controllAccount(id, 1), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.utilisateurService.controllAccount(id, 1), HttpStatus.valueOf(200));
     }
 }

@@ -25,7 +25,7 @@ public class ImageController {
     //#endregion
     @PostMapping("")
     public ResponseEntity<List<Image>> postLogin(@RequestParam("images") MultipartFile[] images) {
-        return new ResponseEntity<>(imageService.uploadMultiple(images), HttpStatus.valueOf(200));
+        return new ResponseEntity<>(this.imageService.uploadMultiple(images), HttpStatus.valueOf(200));
     }
 
 }
