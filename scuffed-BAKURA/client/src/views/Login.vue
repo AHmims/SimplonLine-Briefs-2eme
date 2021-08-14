@@ -37,7 +37,12 @@ export default {
       const response = await login(this.auth);
       this.isLoading = false;
 
-      console.log(response);
+      if (response.status === true) {
+        await this.$store.dispatch('setUserData', response.data);
+        await this.$store.dispatch('setAuthToken', response.data.token);
+      } else {
+        console.error(response.data);
+      }
     }
   }
 };
