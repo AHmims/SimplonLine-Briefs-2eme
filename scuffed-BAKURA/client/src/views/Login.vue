@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import Authentication from '@/models/login/Authentication';
+import {login} from '@/services/Auth';
 
 export default {
   name: 'login',
@@ -27,20 +28,16 @@ export default {
       isLoading: false as Boolean
     };
   },
+  created() {
+    this.auth = new Authentication('ali.hmims99@gmail.com', '123456789');
+  },
   methods: {
-    login(): void {
+    async login(): void {
       this.isLoading = true;
-      // @ts-ignore
-      axios.post(`${API_ENDPOINT}/auth/login`, {
-        email: this.auth.email,
-        password: this.auth.password
-      }).then((response: Response) => {
-        console.log(response);
-      }).catch((error: Error) => {
-        console.error(error);
-      }).finally(() => {
-        this.isLoading = false;
-      });
+      const response = await login(this.auth);
+      this.isLoading = false;
+
+      console.log(response);
     }
   }
 };
