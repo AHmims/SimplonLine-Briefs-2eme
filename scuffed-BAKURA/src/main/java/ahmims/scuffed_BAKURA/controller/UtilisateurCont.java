@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:6969")
 @RestController
 @RequestMapping("/api/user")
 public class UtilisateurCont {
