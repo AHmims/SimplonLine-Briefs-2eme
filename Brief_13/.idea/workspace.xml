@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b141a2f9-beab-4d75-aabb-ae47ee4a8389" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../BASMAAPP/app/src/main/java/com/example/basma_app/Requester.java" beforeDir="false" afterPath="$PROJECT_DIR$/../BASMAAPP/app/src/main/java/com/example/basma_app/Requester.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -249,6 +248,8 @@
       <workItem from="1618310994175" duration="159000" />
       <workItem from="1624105804671" duration="3583000" />
       <workItem from="1624191270996" duration="4425000" />
+      <workItem from="1626875033158" duration="51000" />
+      <workItem from="1626875134887" duration="180000" />
     </task>
     <servers />
   </component>

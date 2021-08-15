@@ -24,15 +24,16 @@ export default {
   props: {},
   data() {
     return {
-      auth: new Authentication,
+      auth: {} as Authentication,
       isLoading: false as Boolean
     };
   },
   created() {
-    this.auth = new Authentication('ali.hmims99@gmail.com', '123456789');
+    this.auth.email = 'ali.hmims99@gmail.com';
+    this.auth.password = '123456789';
   },
   methods: {
-    async login(): void {
+    async login() {
       this.isLoading = true;
       const response = await login(this.auth);
       this.isLoading = false;

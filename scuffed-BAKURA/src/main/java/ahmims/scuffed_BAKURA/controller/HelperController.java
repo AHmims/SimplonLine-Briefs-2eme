@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class Test {
+public class HelperController {
 
     private final MemberService MemberService;
     private final RoleRepository roleRepository;
@@ -37,7 +38,7 @@ public class Test {
     private final JwtManager jwtManager;
     private final ModelMapper modelMapper;
 
-    public Test(MemberService MemberService, RoleRepository roleRepository, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper, RaceService raceService, AttributeService attributeService, CarteService carteService, MonsterService monsterService, ImageService imageService, ArchetypeService archetypeService, SpellService spellService, TrapService trapService) {
+    public HelperController(MemberService MemberService, RoleRepository roleRepository, AuthenticationManager authenticationManager, JwtManager jwtManager, ModelMapper modelMapper, RaceService raceService, AttributeService attributeService, CarteService carteService, MonsterService monsterService, ImageService imageService, ArchetypeService archetypeService, SpellService spellService, TrapService trapService) {
         this.MemberService = MemberService;
         this.roleRepository = roleRepository;
         this.authenticationManager = authenticationManager;
@@ -166,5 +167,10 @@ public class Test {
         }
 
         return new ResponseEntity<>(seedingResult, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/ping")
+    public ResponseEntity<Boolean> ping() {
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 }

@@ -1,3 +1,10 @@
+declare interface State {
+  nom: string,
+  email: string,
+  role: Object,
+  avatar: string | null
+}
+
 export default {
   state: {
     nom: null,
@@ -9,12 +16,12 @@ export default {
     avatar: null
   },
   getters: {
-    getUserData: (state) => {
+    getUserData: (state: State) => {
       return state;
     }
   },
   mutations: {
-    setUserData: (state, {nom, email, role, avatar}) => {
+    setUserData: (state: State, {nom, email, role, avatar}: State) => {
       state.nom = nom;
       state.email = email;
       state.role = role;
@@ -22,7 +29,7 @@ export default {
     }
   },
   actions: {
-    setUserData: ({commit}, userData) => {
+    setUserData: ({commit}: any, userData: State) => {
       commit('setUserData', userData);
     }
   }
