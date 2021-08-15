@@ -6,7 +6,7 @@ import About from '@/views/About.vue';
 import Login from '@/views/Login.vue';
 import Signup from '@/views/Signup.vue';
 
-import {isAuthenticated} from '@/gaurds/Auth';
+import {isNotAuthenticated} from '@/gaurds/Auth';
 
 Vue.use(VueRouter);
 
@@ -14,10 +14,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-    beforeEnter: (to, from, next) => {
-      isAuthenticated(to, from, next);
-    }
+    component: Home
   },
   {
     path: '/about',
@@ -28,11 +25,17 @@ const routes: Array<RouteConfig> = [
     path: '/login',
     name: 'Login',
     component: Login,
+    beforeEnter: (to, from, next) => {
+      isNotAuthenticated(to, from, next);
+    }
   },
   {
     path: '/signup',
     name: 'Signup',
     component: Signup,
+    beforeEnter: (to, from, next) => {
+      isNotAuthenticated(to, from, next);
+    }
   }
 ];
 

@@ -9,4 +9,5 @@ export default interface UserMainData {
   typeUtilisateur: string;
   status: number;
   creationDate: Date;
+  password: string;
 }

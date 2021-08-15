@@ -20,12 +20,11 @@ import Authentication from '@/models/login/Authentication';
 import {login} from '@/services/Auth';
 
 export default {
-  name: 'login',
   props: {},
   data() {
     return {
       auth: {} as Authentication,
-      isLoading: false as Boolean
+      isLoading: false as boolean
     };
   },
   created() {

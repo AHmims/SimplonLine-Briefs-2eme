@@ -169,6 +169,7 @@ public class HelperController {
         return new ResponseEntity<>(seedingResult, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:6969")
     @GetMapping("/api/ping")
     public ResponseEntity<Boolean> ping() {
         return new ResponseEntity<>(true, HttpStatus.OK);
