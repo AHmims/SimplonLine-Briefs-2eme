@@ -26,9 +26,14 @@ export default {
     };
   },
   created() {
-    this.currentPage = this.$store.getters.getCurrentPage;
+    this.currentPage = this.$store.getters.getCurrentPage == null ? 0 : this.$store.getters.getCurrentPage;
     this.totalPages = this.$store.getters.getTotalPages;
-    this.initCards(this.currentPage);
+    this.cards = this.$store.getters.getCards;
+
+    console.log(this.$store.getters.getCurrentPage == null);
+    if (this.$store.getters.getCurrentPage == null) {
+      this.initCards(this.currentPage);
+    }
   },
   methods: {
     async initCards(page: number) {
@@ -37,13 +42,13 @@ export default {
       this.isLoading = false;
 
       if (response.status === true) {
-        await this.$store.dispatch('setCurrentPage', response.data.number);
-        await this.$store.dispatch('setTotalPages', response.data.totalPages);
-
-        this.totalPages = response.data.totalPages;
         this.currentPage = response.data.number;
-
+        this.totalPages = response.data.totalPages;
         this.cards = response.data.content;
+
+        await this.$store.dispatch('setCurrentPage', this.currentPage);
+        await this.$store.dispatch('setTotalPages', this.totalPages);
+        await this.$store.dispatch('setCards', this.cards);
       } else {
         console.error(response.data);
       }

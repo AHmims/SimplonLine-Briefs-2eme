@@ -1,14 +1,18 @@
 export default {
   state: {
-    currentPage: 0 as number,
-    totalPages: 0 as number
+    currentPage: null,
+    totalPages: null,
+    cards: []
   },
   getters: {
     getCurrentPage: (state: any) => {
       return state.currentPage;
     },
-    getTotalPages:  (state: any) => {
+    getTotalPages: (state: any) => {
       return state.totalPages;
+    },
+    getCards: (state: any) => {
+      return state.cards;
     },
     getNextPage: (state: any) => {
       let nextPage = state.currentPage + 1;
@@ -22,6 +26,9 @@ export default {
     },
     setTotalPages: (state: any, totalPages: number) => {
       state.totalPages = totalPages;
+    },
+    setCards: (state: any, cards: []) => {
+      state.cards = cards;
     }
   },
   actions: {
@@ -30,6 +37,9 @@ export default {
     },
     setTotalPages: ({commit}: any, totalPages: number) => {
       commit('setTotalPages', totalPages);
+    },
+    setCards: ({commit}: any, cards: []) => {
+      commit('setCards', cards);
     }
   }
 };

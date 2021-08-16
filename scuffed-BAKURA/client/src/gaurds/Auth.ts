@@ -8,7 +8,7 @@ const isAuthenticated = async (to: Route, from: Route, next: NavigationGuardNext
 const isNotAuthenticated = async (to: Route, from: Route, next: NavigationGuardNext) => {
   const response = await ping();
   if (response.status) {
-    next({name: 'Home'});
+    next({name: from.name ?? 'Home'});
   } else {
     next();
   }
