@@ -40,6 +40,7 @@ export default {
       if (response.status === true) {
         await this.$store.dispatch('setUserData', response.data);
         await this.$store.dispatch('setAuthToken', response.data.token);
+        await this.$router.push({name: 'Home'});
       } else {
         console.error(response.data);
       }

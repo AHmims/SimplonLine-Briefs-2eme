@@ -1,10 +1,11 @@
-import Role from '@/models/login/Role';
+import Role from '@/models/user/Role';
+import Image from '@/models/image/Image';
 
 export default interface UserMainData {
   id: string;
   nom: string;
   email: string;
-  avatar: string;
+  avatar: Image;
   role: Role;
   typeUtilisateur: string;
   status: number;

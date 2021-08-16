@@ -3,6 +3,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link>
       |
+      <router-link to="/cards">Cards</router-link>
+      |
       <router-link to="/about">About</router-link>
       |
       <router-link to="/login">Login</router-link>
@@ -24,7 +26,7 @@
 <script lang="ts">
 import {ping} from '@/services/Auth';
 import {me} from '@/services/User';
-import UserMainData from '@/models/login/UserMainData';
+import UserMainData from '@/models/user/UserMainData';
 
 export default {
   name: 'nav-bar',
@@ -36,6 +38,17 @@ export default {
     };
   },
   async mounted() {
+    this.$store.watch(
+      (state: any) => {
+        return this.$store.getters.getAuthToken;
+      },
+      (val: any) => {
+        this.initUser();
+      },
+      {
+        deep: true
+      }
+    );
     await this.initUser();
   },
   methods: {

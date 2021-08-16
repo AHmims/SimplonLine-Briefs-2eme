@@ -1,8 +1,11 @@
+import Image from '@/models/image/Image';
+import Role from '@/models/user/Role';
+
 declare interface State {
   nom: string,
   email: string,
-  role: Object,
-  avatar: string | null
+  role: Role,
+  avatar: Image
 }
 
 export default {

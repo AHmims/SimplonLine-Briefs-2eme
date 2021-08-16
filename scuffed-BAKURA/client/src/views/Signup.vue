@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import UserMainData from '@/models/login/UserMainData';
+import UserMainData from '@/models/user/UserMainData';
 import {signup} from '@/services/Auth';
 
 export default {

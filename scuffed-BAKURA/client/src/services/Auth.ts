@@ -1,7 +1,7 @@
 import Authentication from '@/models/login/Authentication';
 import {CustomResponse, responseHandler} from '@/helpers/ResponseHandler';
 import store from '@/store';
-import UserMainData from '@/models/login/UserMainData';
+import UserMainData from '@/models/user/UserMainData';
 
 function login(loginData: Authentication): Promise<CustomResponse> {
   return new Promise((resolve, reject) => {
@@ -28,6 +28,9 @@ function signup(userData: UserMainData): Promise<CustomResponse> {
 
 function ping(): Promise<CustomResponse> {
   return new Promise((resolve, reject) => {
+    if (store.getters.getAuthToken == null || store.getters.getAuthToken === '') {
+      return resolve(responseHandler(false, {error: 'Token invalid'}));
+    }
     // @ts-ignore
     axios.get(`${API_ENDPOINT}/ping`, {
       headers: {
