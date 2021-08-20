@@ -4,6 +4,9 @@ import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.Trap;
 import ahmims.scuffed_BAKURA.repository.TrapRepository;
 import ahmims.scuffed_BAKURA.service.TrapService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,17 @@ public class TrapServiceImpl implements TrapService {
             return trap.getIdCarte() != null ? trap : null;
         } catch (Exception e) {
             throw new RequestException("Error while saving trap", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public Page<Trap> getAllCards(int page, int itemsPerPage) {
+        try {
+            Pageable pageable = PageRequest.of(page, itemsPerPage);
+
+            return this.trapRepository.findAllByNomCarteNotNull(pageable);
+        } catch (Exception e) {
+            throw new RequestException("Error while getting list of traps", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
