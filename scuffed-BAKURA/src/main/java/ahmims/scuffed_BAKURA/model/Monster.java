@@ -41,6 +41,10 @@ public class Monster extends Carte {
         this.race = race;
     }
 
+    public Monster(String idCarte, String nomCarte, Image imageCarte) {
+        super(idCarte, nomCarte, imageCarte);
+    }
+
     public Monster() {
     }
 

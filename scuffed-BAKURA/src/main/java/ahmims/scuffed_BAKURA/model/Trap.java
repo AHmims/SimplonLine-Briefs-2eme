@@ -14,6 +14,10 @@ public class Trap extends Carte {
         super(nomCarte, descriptionCarte, givenCarteId, typeCarte, imageCarte, archetype, administrateur);
     }
 
+    public Trap(String idCarte, String nomCarte, Image imageCarte) {
+        super(idCarte, nomCarte, imageCarte);
+    }
+
     public Trap() {
     }
 

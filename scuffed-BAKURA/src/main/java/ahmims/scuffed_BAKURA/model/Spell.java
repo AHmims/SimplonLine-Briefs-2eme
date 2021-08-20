@@ -14,6 +14,10 @@ public class Spell extends Carte {
         super(nomCarte, descriptionCarte, givenCarteId, typeCarte, imageCarte, archetype, administrateur);
     }
 
+    public Spell(String idCarte, String nomCarte, Image imageCarte) {
+        super(idCarte, nomCarte, imageCarte);
+    }
+
     public Spell() {
     }
 }

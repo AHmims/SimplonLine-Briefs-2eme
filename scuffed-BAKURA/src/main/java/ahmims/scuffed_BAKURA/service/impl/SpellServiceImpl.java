@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
+import ahmims.scuffed_BAKURA.dto.MinifiedCard;
 import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.Spell;
 import ahmims.scuffed_BAKURA.repository.SpellRepository;
@@ -40,6 +41,17 @@ public class SpellServiceImpl implements SpellService {
             return this.spellRepository.findAllByNomCarteNotNull(pageable);
         } catch (Exception e) {
             throw new RequestException("Error while getting list of spells", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public Page<MinifiedCard> search(String searchText, int page, int size, boolean isMinified) {
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+
+            return this.spellRepository.minifiedSearch(searchText, pageable);
+        } catch (Exception e) {
+            throw new RequestException("Error while searching for cards", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

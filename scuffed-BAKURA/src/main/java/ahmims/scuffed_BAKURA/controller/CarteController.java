@@ -42,4 +42,20 @@ public class CarteController {
                 return new ResponseEntity<>(this.carteService.getAllCards(page, size), HttpStatus.valueOf(200));
         }
     }
+
+    @GetMapping("/search/minified")
+    public ResponseEntity<Page<?>> searchMinified(@RequestParam int size, @RequestParam int page, @RequestParam String cardType, @RequestParam String searchText) {
+        searchText = searchText.toLowerCase();
+
+        switch (cardType.toLowerCase()) {
+            case "monster":
+                return new ResponseEntity<>(this.monsterService.search(searchText, page, size, true), HttpStatus.valueOf(200));
+            case "spell":
+                return new ResponseEntity<>(this.spellService.search(searchText, page, size, true), HttpStatus.valueOf(200));
+            case "trap":
+                return new ResponseEntity<>(this.trapService.search(searchText, page, size, true), HttpStatus.valueOf(200));
+            default:
+                return new ResponseEntity<>(this.carteService.search(searchText, page, size, true), HttpStatus.valueOf(200));
+        }
+    }
 }

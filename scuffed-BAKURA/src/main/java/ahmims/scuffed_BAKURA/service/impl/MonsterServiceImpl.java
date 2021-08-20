@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
+import ahmims.scuffed_BAKURA.dto.MinifiedCard;
 import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.Monster;
 import ahmims.scuffed_BAKURA.repository.MonsterRepository;
@@ -40,6 +41,17 @@ public class MonsterServiceImpl implements MonsterService {
             return this.monsterRepository.findAllByNomCarteNotNull(pageable);
         } catch (Exception e) {
             throw new RequestException("Error while getting list of monsters", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public Page<MinifiedCard> search(String searchText, int page, int size, boolean isMinified) {
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+
+            return this.monsterRepository.minifiedSearch(searchText, pageable);
+        } catch (Exception e) {
+            throw new RequestException("Error while searching for cards", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

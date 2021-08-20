@@ -53,6 +53,12 @@ public abstract class Carte {
         this.administrateur = administrateur;
     }
 
+    public Carte(String idCarte, String nomCarte, Image imageCarte) {
+        this.idCarte = idCarte;
+        this.nomCarte = nomCarte;
+        this.imageCarte = imageCarte;
+    }
+
     public Carte() {
     }
 

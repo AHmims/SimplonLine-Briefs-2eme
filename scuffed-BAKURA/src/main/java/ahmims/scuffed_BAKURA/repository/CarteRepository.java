@@ -10,4 +10,6 @@ public interface CarteRepository extends PagingAndSortingRepository<Carte, Strin
     Carte findTopByGivenCarteId(int givenCarteId);
 
     Page<Carte> findAllByNomCarteNotNull(Pageable pageable);
+
+    Page<Carte> findAllByNomCarteContains(String searchText, Pageable pageable);
 }

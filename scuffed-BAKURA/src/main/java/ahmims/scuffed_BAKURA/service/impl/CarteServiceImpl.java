@@ -50,4 +50,15 @@ public class CarteServiceImpl implements CarteService {
             throw new RequestException("Error while getting list of cards", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public Page<Carte> search(String searchText, int page, int size, boolean isMinified) {
+        try {
+            Pageable pageable = PageRequest.of(page, size);
+
+            return this.carteRepository.findAllByNomCarteContains(searchText, pageable);
+        } catch (Exception e) {
+            throw new RequestException("Error while searching for cards", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
