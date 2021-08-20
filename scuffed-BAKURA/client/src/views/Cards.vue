@@ -2,8 +2,11 @@
   <div>
     <h3>Cards</h3>
     <div>
-      <div v-for="card in cards">
-        <span>{{ card.nomCarte }}</span>
+      <h4 v-if="isLoading">Traveling through the cards verse to get cards...</h4>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 50%;margin: 0 auto; grid-gap: 20px;">
+        <template v-for="(card, index) in cards">
+          <card :value="card" :key="index"/>
+        </template>
       </div>
     </div>
     <div></div>
@@ -13,9 +16,11 @@
 <script lang="ts">
 import Card from '@/models/card/Card';
 import {getAllCards} from '@/services/Cards';
+import CardComponent from '@/components/Card.vue';
 
 export default {
   name: 'cards',
+  components: {CardComponent},
   props: {},
   data() {
     return {
@@ -30,7 +35,6 @@ export default {
     this.totalPages = this.$store.getters.getTotalPages;
     this.cards = this.$store.getters.getCards;
 
-    console.log(this.$store.getters.getCurrentPage == null);
     if (this.$store.getters.getCurrentPage == null) {
       this.initCards(this.currentPage);
     }

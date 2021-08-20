@@ -3,7 +3,7 @@ interface CustomResponse {
   data: any
 }
 
-function responseHandler(status: boolean, data: any) {
+const responseHandler = (status: boolean, data: any) => {
   return {
     status,
     data
