@@ -5,7 +5,7 @@
       <pagination v-model="totalPages"
                   :offset="3"
                   :pagination-count="10"
-                  :starting-page="1"
+                  :starting-page="currentPage + 1"
                   :enable-navigation="true"
                   @paginated="initCards"/>
     </div>
