@@ -38,7 +38,6 @@ public class ArchetypeServiceImpl implements ArchetypeService {
 
             return archetype.getIdArchetype() != null ? archetype : null;
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RequestException("Error while asserting archetype", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

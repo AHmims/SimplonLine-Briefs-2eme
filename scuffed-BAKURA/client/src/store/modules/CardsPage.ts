@@ -3,7 +3,8 @@ export default {
     currentPage: null,
     totalPages: null,
     cards: [],
-    cardsType: 'all'
+    cardsType: 'all',
+    archetype: ''
   },
   getters: {
     getCurrentPage: (state: any) => {
@@ -17,6 +18,9 @@ export default {
     },
     getCardsType: (state: any) => {
       return state.cardsType;
+    },
+    getArchetype: (state: any) => {
+      return state.archetype;
     },
     getNextPage: (state: any) => {
       let nextPage = state.currentPage + 1;
@@ -36,6 +40,9 @@ export default {
     },
     setCardsType: (state: any, cardsType: String) => {
       state.cardsType = cardsType;
+    },
+    setArchetype: (state: any, archetype: String) => {
+      state.archetype = archetype;
     }
   },
   actions: {
@@ -50,6 +57,9 @@ export default {
     },
     setCardsType: ({commit}: any, cardsType: String) => {
       commit('setCardsType', cardsType);
+    },
+    setArchetype: ({commit}: any, archetype: String) => {
+      commit('setArchetype', archetype);
     }
   }
 };

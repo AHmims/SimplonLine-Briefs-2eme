@@ -24,6 +24,10 @@
         <option value="spell">Spells</option>
         <option value="trap">Traps</option>
       </select>
+      <select v-model="cardsFilterArchetype" @change="filterCards" :disabled="isLoadingCards">
+        <option value="">All</option>
+        <option v-for="archetype in archetypes" :value="archetype.idArchetype">{{ archetype.libelleArchetype }}</option>
+      </select>
       <pagination v-model="totalPages"
                   :offset="3"
                   :pagination-count="10"
@@ -48,6 +52,8 @@ import {getAllCards, searchForCards} from '@/services/Cards';
 import CardComponent from '@/components/card/Card.vue';
 import Pagination from '@/components/common/Pagination.vue';
 import MiniCard from '@/components/card/MiniCard.vue';
+import Archetype from '@/models/card/Archetype';
+import {getArchetypesList} from '@/services/Archetypes';
 
 export default {
   name: 'cards',
@@ -61,6 +67,8 @@ export default {
       totalPages: null,
       cardsPerPage: 25,
       cardsFilterType: 'all',
+      cardsFilterArchetype: '',
+      archetypes: [] as Archetype[],
       searchValue: '' as String,
       searchedCards: [] as Card[],
       searchCardType: 'all' as String,
@@ -68,10 +76,13 @@ export default {
     };
   },
   created() {
+    this.initArchetypes();
+
     this.currentPage = this.$store.getters.getCurrentPage == null ? 0 : this.$store.getters.getCurrentPage;
     this.totalPages = this.$store.getters.getTotalPages || 0;
     this.cards = this.$store.getters.getCards;
     this.cardsFilterType = this.$store.getters.getCardsType;
+    this.cardsFilterArchetype = this.$store.getters.getArchetype;
 
     if (this.$store.getters.getCurrentPage == null) {
       this.initCards(this.currentPage);
@@ -84,7 +95,7 @@ export default {
       }
 
       this.isLoadingCards = true;
-      const response = await getAllCards(page, this.cardsPerPage, this.cardsFilterType);
+      const response = await getAllCards(page, this.cardsPerPage, this.cardsFilterType, this.cardsFilterArchetype);
       this.isLoadingCards = false;
 
       if (response.status === true) {
@@ -96,6 +107,7 @@ export default {
         await this.$store.dispatch('setTotalPages', this.totalPages);
         await this.$store.dispatch('setCards', this.cards);
         await this.$store.dispatch('setCardsType', this.cardsFilterType);
+        await this.$store.dispatch('setArchetype', this.cardsFilterArchetype);
       } else {
         console.error(response.data);
       }
@@ -110,6 +122,15 @@ export default {
 
       if (response.status === true) {
         this.searchedCards = response.data.content;
+      } else {
+        console.error(response.data);
+      }
+    },
+    async initArchetypes() {
+      const response = await getArchetypesList();
+
+      if (response.status === true) {
+        this.archetypes = response.data;
       } else {
         console.error(response.data);
       }
