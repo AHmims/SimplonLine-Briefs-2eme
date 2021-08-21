@@ -11,8 +11,8 @@
           <option value="trap">Traps</option>
         </select>
         <input type="submit" value="search" :disabled="isSearchingCards"/>
-        <div>
-          <h4>Search results</h4>
+        <div v-if="showSearchResults">
+          <h4>Search results <input type="button" value="close" @click="showSearchResults = false"></h4>
           <div>
             <mini-card v-for="(card, index) in searchedCards" :value="card" :key="card.idCarte"/>
           </div>
@@ -72,7 +72,8 @@ export default {
       searchValue: '' as String,
       searchedCards: [] as Card[],
       searchCardType: 'all' as String,
-      isSearchingCards: false as boolean
+      isSearchingCards: false as boolean,
+      showSearchResults: false as boolean
     };
   },
   created() {
@@ -116,6 +117,7 @@ export default {
       this.initCards(0);
     },
     async searchCards() {
+      this.showSearchResults = true;
       this.isSearchingCards = true;
       const response = await searchForCards(this.searchValue, 0, 5, this.searchCardType);
       this.isSearchingCards = false;
