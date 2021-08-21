@@ -11,9 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -31,6 +28,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/test").permitAll()
                 .antMatchers("/api/seed/*").permitAll()
                 .antMatchers("/api/card").permitAll()
+                .antMatchers("/api/archetype").permitAll()
                 .antMatchers("/api/card/**/*").permitAll()
                 .antMatchers("/valider/*").permitAll()
                 .antMatchers("/serve/images/*").permitAll()

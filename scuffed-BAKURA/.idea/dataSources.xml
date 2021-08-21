@@ -18,7 +18,7 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://containers-us-west-3.railway.app:6435/railway</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/scuffed_bakura</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

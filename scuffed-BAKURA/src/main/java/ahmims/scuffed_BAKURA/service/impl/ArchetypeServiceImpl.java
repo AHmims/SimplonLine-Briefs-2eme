@@ -1,11 +1,14 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
+import ahmims.scuffed_BAKURA.dto.MinifiedArchetype;
 import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.Archetype;
 import ahmims.scuffed_BAKURA.repository.ArchetypeRepository;
 import ahmims.scuffed_BAKURA.service.ArchetypeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service("ArchetypeService")
 public class ArchetypeServiceImpl implements ArchetypeService {
@@ -21,6 +24,10 @@ public class ArchetypeServiceImpl implements ArchetypeService {
     @Override
     public Archetype assertArchetype(String archetypeName) {
         try {
+            if(archetypeName == null){
+                return null;
+            }
+
             Archetype archetype = this.archetypeRepository.findTopByLibelleArchetype(archetypeName);
             if (archetype != null) {
                 return archetype;
@@ -31,7 +38,17 @@ public class ArchetypeServiceImpl implements ArchetypeService {
 
             return archetype.getIdArchetype() != null ? archetype : null;
         } catch (Exception e) {
-            throw new RequestException("Error while asserting archtype", HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            throw new RequestException("Error while asserting archetype", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public List<MinifiedArchetype> getArchetypes() {
+        try {
+            return this.archetypeRepository.allArchetypes();
+        } catch (Exception e) {
+            throw new RequestException("Error while getting archetypes list", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

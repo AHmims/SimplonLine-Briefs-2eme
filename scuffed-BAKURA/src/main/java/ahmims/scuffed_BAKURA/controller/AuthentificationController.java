@@ -26,7 +26,6 @@ public class AuthentificationController {
 
     @PostMapping("/signup")
     public ResponseEntity<UserResponseData> postSignup(@RequestBody UserFormData payload) {
-        payload.setType("Member");
         return new ResponseEntity<>(this.utilisateurService.createUser(payload), HttpStatus.valueOf(200));
     }
 }

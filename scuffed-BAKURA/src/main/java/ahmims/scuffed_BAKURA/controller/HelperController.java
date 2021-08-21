@@ -140,7 +140,7 @@ public class HelperController {
                 continue;
             }
 
-            Archetype archetype = this.archetypeService.assertArchetype(cardData.getType());
+            Archetype archetype = this.archetypeService.assertArchetype(cardData.getArchetype());
             Attribute attribute = this.attributeService.getAttributeByName(cardData.getAttribute());
             Race race = this.raceService.getRaceByName(cardData.getRace());
 

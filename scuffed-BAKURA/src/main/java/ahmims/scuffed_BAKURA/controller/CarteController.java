@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.controller;
 
+import ahmims.scuffed_BAKURA.dto.MinifiedCard;
 import ahmims.scuffed_BAKURA.service.CarteService;
 import ahmims.scuffed_BAKURA.service.MonsterService;
 import ahmims.scuffed_BAKURA.service.SpellService;
@@ -28,9 +29,11 @@ public class CarteController {
 
     //#endregion
 
-    //Activate a users account
+    //Get all cards, can be filtered by archetype and card type
     @GetMapping("")
     public ResponseEntity<Page<?>> getAllCards(@RequestParam int page, @RequestParam int size, @RequestParam String cardType, @RequestParam String archetype) {
+        archetype = archetype.toLowerCase();
+
         switch (cardType.toLowerCase()) {
             case "monster":
                 return new ResponseEntity<>(this.monsterService.getAllCards(archetype, page, size), HttpStatus.valueOf(200));
@@ -43,8 +46,9 @@ public class CarteController {
         }
     }
 
+    //Get a minified list of cards by the provided search term and can be filtered by card type
     @GetMapping("/search/minified")
-    public ResponseEntity<Page<?>> searchMinified(@RequestParam int size, @RequestParam int page, @RequestParam String cardType, @RequestParam String searchText) {
+    public ResponseEntity<Page<MinifiedCard>> searchMinified(@RequestParam int size, @RequestParam int page, @RequestParam String cardType, @RequestParam String searchText) {
         searchText = searchText.toLowerCase();
 
         switch (cardType.toLowerCase()) {
