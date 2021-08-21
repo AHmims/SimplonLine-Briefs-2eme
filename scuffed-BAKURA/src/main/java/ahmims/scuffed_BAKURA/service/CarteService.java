@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.service;
 
+import ahmims.scuffed_BAKURA.dto.MinifiedCard;
 import ahmims.scuffed_BAKURA.model.Carte;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
@@ -12,5 +13,5 @@ public interface CarteService {
 
     Page<Carte> getAllCards(int page, int itemsPerPage);
 
-    Page<Carte> search(String searchText, int page, int size, boolean isMinified);
+    Page<MinifiedCard> search(String searchText, int page, int size, boolean isMinified);
 }

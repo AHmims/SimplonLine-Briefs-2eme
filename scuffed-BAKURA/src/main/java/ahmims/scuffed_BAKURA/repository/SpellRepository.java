@@ -13,6 +13,6 @@ public interface SpellRepository extends PagingAndSortingRepository<Spell, Strin
 
     Page<Spell> findAllByNomCarteContains(String searchText, Pageable pageable);
 
-    @Query(value = "SELECT new ahmims.scuffed_BAKURA.dto.MinifiedCard(tt.idCarte, tt.nomCarte, tt.imageCarte) FROM Monster as tt WHERE LOWER(tt.nomCarte) LIKE %:searchText%", nativeQuery = false)
+    @Query(value = "SELECT new ahmims.scuffed_BAKURA.dto.MinifiedCard(tt.idCarte, tt.nomCarte, tt.imageCarte) FROM Spell as tt WHERE LOWER(tt.nomCarte) LIKE %:searchText% OR LOWER(tt.descriptionCarte) LIKE %:searchText% OR LOWER(tt.archetype.libelleArchetype) LIKE %:searchText%", nativeQuery = false)
     Page<MinifiedCard> minifiedSearch(String searchText, Pageable pageable);
 }

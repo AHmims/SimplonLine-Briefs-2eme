@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
+import ahmims.scuffed_BAKURA.dto.MinifiedCard;
 import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.Carte;
 import ahmims.scuffed_BAKURA.repository.CarteRepository;
@@ -52,11 +53,11 @@ public class CarteServiceImpl implements CarteService {
     }
 
     @Override
-    public Page<Carte> search(String searchText, int page, int size, boolean isMinified) {
+    public Page<MinifiedCard> search(String searchText, int page, int size, boolean isMinified) {
         try {
             Pageable pageable = PageRequest.of(page, size);
 
-            return this.carteRepository.findAllByNomCarteContains(searchText, pageable);
+            return this.carteRepository.minifiedSearch(searchText, pageable);
         } catch (Exception e) {
             throw new RequestException("Error while searching for cards", HttpStatus.INTERNAL_SERVER_ERROR);
         }

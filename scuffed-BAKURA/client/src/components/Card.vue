@@ -8,7 +8,7 @@
     <p>
       <span>{{ card.givenCarteId }} | </span>
       <span>{{ card.typeCarte }} | </span>
-      <span>{{ card.race.libelleRace }}</span>
+      <span v-if="card.race">{{ card.race.libelleRace }}</span>
     </p>
   </div>
 </template>

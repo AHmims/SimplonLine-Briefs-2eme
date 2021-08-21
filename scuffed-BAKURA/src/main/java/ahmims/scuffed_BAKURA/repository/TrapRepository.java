@@ -13,6 +13,6 @@ public interface TrapRepository extends PagingAndSortingRepository<Trap, String>
 
     Page<Trap> findAllByNomCarteContains(String searchText, Pageable pageable);
 
-    @Query(value = "SELECT new ahmims.scuffed_BAKURA.dto.MinifiedCard(tt.idCarte, tt.nomCarte, tt.imageCarte) FROM Monster as tt WHERE LOWER(tt.nomCarte) LIKE %:searchText%", nativeQuery = false)
+    @Query(value = "SELECT new ahmims.scuffed_BAKURA.dto.MinifiedCard(tt.idCarte, tt.nomCarte, tt.imageCarte) FROM Trap as tt WHERE LOWER(tt.nomCarte) LIKE %:searchText% OR LOWER(tt.descriptionCarte) LIKE %:searchText% OR LOWER(tt.archetype.libelleArchetype) LIKE %:searchText%", nativeQuery = false)
     Page<MinifiedCard> minifiedSearch(String searchText, Pageable pageable);
 }

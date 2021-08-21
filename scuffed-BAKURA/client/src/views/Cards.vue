@@ -2,11 +2,18 @@
   <div>
     <h3>Cards</h3>
     <div>
+      <select v-model="cardsFilterType" @change="filterCards" :disabled="isLoading">
+        <option value="all">All</option>
+        <option value="monster">Monsters</option>
+        <option value="spell">Spells</option>
+        <option value="trap">Traps</option>
+      </select>
       <pagination v-model="totalPages"
                   :offset="3"
                   :pagination-count="10"
                   :starting-page="currentPage + 1"
                   :enable-navigation="true"
+                  :disabled="isLoading"
                   @paginated="initCards"/>
     </div>
     <div>
@@ -33,8 +40,10 @@ export default {
     return {
       cards: [] as Card[],
       isLoading: false as boolean,
-      currentPage: null as Number,
-      totalPages: null
+      currentPage: -1 as Number,
+      totalPages: null,
+      cardsPerPage: 25,
+      cardsFilterType: 'all'
     };
   },
   created() {
@@ -53,7 +62,7 @@ export default {
       }
 
       this.isLoading = true;
-      const response = await getAllCards(page);
+      const response = await getAllCards(page, this.cardsPerPage, this.cardsFilterType);
       this.isLoading = false;
 
       if (response.status === true) {
@@ -67,6 +76,9 @@ export default {
       } else {
         console.error(response.data);
       }
+    },
+    filterCards(){
+      this.initCards(0);
     }
   }
 };
