@@ -37,7 +37,7 @@ export default {
     return {
       userData: {} as UserMainData,
       passwordConfirmation: null as string,
-      isLoading: false as boolean
+      isLoadingCards: false as boolean
     };
   },
   created() {

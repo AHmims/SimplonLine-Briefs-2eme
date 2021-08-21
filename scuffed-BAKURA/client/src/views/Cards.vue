@@ -2,7 +2,23 @@
   <div>
     <h3>Cards</h3>
     <div>
-      <select v-model="cardsFilterType" @change="filterCards" :disabled="isLoading">
+      <form @submit.prevent="searchCards">
+        <input type="text" v-model="searchValue"/>
+        <select v-model="searchCardType" :disabled="isSearchingCards">
+          <option value="all">All</option>
+          <option value="monster">Monsters</option>
+          <option value="spell">Spells</option>
+          <option value="trap">Traps</option>
+        </select>
+        <input type="submit" value="search" :disabled="isSearchingCards"/>
+        <div>
+          <h4>Search results</h4>
+          <div>
+            <mini-card v-for="(card, index) in searchedCards" :value="card" :key="card.idCarte"/>
+          </div>
+        </div>
+      </form>
+      <select v-model="cardsFilterType" @change="filterCards" :disabled="isLoadingCards">
         <option value="all">All</option>
         <option value="monster">Monsters</option>
         <option value="spell">Spells</option>
@@ -13,11 +29,11 @@
                   :pagination-count="10"
                   :starting-page="currentPage + 1"
                   :enable-navigation="true"
-                  :disabled="isLoading"
+                  :disabled="isLoadingCards"
                   @paginated="initCards"/>
     </div>
     <div>
-      <h4 v-if="isLoading">Traveling through the cards verse to get cards...</h4>
+      <h4 v-if="isLoadingCards">Traveling through the cards verse to get cards...</h4>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 50%;margin: 0 auto; grid-gap: 20px;">
         <card v-for="(card, index) in cards" :value="card" :key="card.idCarte"/>
       </div>
@@ -28,28 +44,34 @@
 
 <script lang="ts">
 import Card from '@/models/card/Card';
-import {getAllCards} from '@/services/Cards';
-import CardComponent from '@/components/Card.vue';
+import {getAllCards, searchForCards} from '@/services/Cards';
+import CardComponent from '@/components/card/Card.vue';
 import Pagination from '@/components/common/Pagination.vue';
+import MiniCard from '@/components/card/MiniCard.vue';
 
 export default {
   name: 'cards',
-  components: {Pagination, CardComponent},
+  components: {MiniCard, Pagination, CardComponent},
   props: {},
   data() {
     return {
       cards: [] as Card[],
-      isLoading: false as boolean,
+      isLoadingCards: false as boolean,
       currentPage: -1 as Number,
       totalPages: null,
       cardsPerPage: 25,
-      cardsFilterType: 'all'
+      cardsFilterType: 'all',
+      searchValue: '' as String,
+      searchedCards: [] as Card[],
+      searchCardType: 'all' as String,
+      isSearchingCards: false as boolean
     };
   },
   created() {
     this.currentPage = this.$store.getters.getCurrentPage == null ? 0 : this.$store.getters.getCurrentPage;
     this.totalPages = this.$store.getters.getTotalPages || 0;
     this.cards = this.$store.getters.getCards;
+    this.cardsFilterType = this.$store.getters.getCardsType;
 
     if (this.$store.getters.getCurrentPage == null) {
       this.initCards(this.currentPage);
@@ -61,9 +83,9 @@ export default {
         return;
       }
 
-      this.isLoading = true;
+      this.isLoadingCards = true;
       const response = await getAllCards(page, this.cardsPerPage, this.cardsFilterType);
-      this.isLoading = false;
+      this.isLoadingCards = false;
 
       if (response.status === true) {
         this.currentPage = response.data.number;
@@ -73,12 +95,24 @@ export default {
         await this.$store.dispatch('setCurrentPage', this.currentPage);
         await this.$store.dispatch('setTotalPages', this.totalPages);
         await this.$store.dispatch('setCards', this.cards);
+        await this.$store.dispatch('setCardsType', this.cardsFilterType);
       } else {
         console.error(response.data);
       }
     },
-    filterCards(){
+    filterCards() {
       this.initCards(0);
+    },
+    async searchCards() {
+      this.isSearchingCards = true;
+      const response = await searchForCards(this.searchValue, 0, 5, this.searchCardType);
+      this.isSearchingCards = false;
+
+      if (response.status === true) {
+        this.searchedCards = response.data.content;
+      } else {
+        console.error(response.data);
+      }
     }
   }
 };

@@ -58,15 +58,15 @@ export default {
   },
   methods: {
     navigate(page: Number) {
-      if (page < 0) {
-        this.currentPage = 0;
-      } else if (page > this.value) {
-        this.currentPage = this.value;
-      } else {
-        this.currentPage = page;
-      }
-
       if (this.currentPage != page) {
+        if (page < 0) {
+          this.currentPage = 0;
+        } else if (page > this.value) {
+          this.currentPage = this.value;
+        } else {
+          this.currentPage = page;
+        }
+
         this.setupPaginationView();
         this.$emit('paginated', this.currentPage);
       }
@@ -95,7 +95,6 @@ export default {
       }
     },
     startingPage: function(newVal: Number, oldVal: Number) {
-      console.log(newVal, oldVal);
       if (newVal != oldVal) {
         this.currentPage = newVal - 1;
         this.setupPaginationView();

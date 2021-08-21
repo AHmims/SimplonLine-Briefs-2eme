@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       auth: {} as Authentication,
-      isLoading: false as boolean
+      isLoadingCards: false as boolean
     };
   },
   created() {
