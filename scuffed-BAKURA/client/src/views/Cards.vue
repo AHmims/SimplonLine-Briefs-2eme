@@ -38,6 +38,7 @@
     </div>
     <div>
       <h4 v-if="isLoadingCards">Traveling through the cards verse to get cards...</h4>
+      <h5>Cards {{ getTotalPassedCards() }} / {{ cardsCount }}</h5>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); width: 50%;margin: 0 auto; grid-gap: 20px;">
         <card v-for="(card, index) in cards" :value="card" :key="card.idCarte"/>
       </div>
@@ -73,7 +74,8 @@ export default {
       searchedCards: [] as Card[],
       searchCardType: 'all' as String,
       isSearchingCards: false as boolean,
-      showSearchResults: false as boolean
+      showSearchResults: false as boolean,
+      cardsCount: 0 as Number
     };
   },
   created() {
@@ -84,6 +86,7 @@ export default {
     this.cards = this.$store.getters.getCards;
     this.cardsFilterType = this.$store.getters.getCardsType;
     this.cardsFilterArchetype = this.$store.getters.getArchetype;
+    this.cardsCount = this.$store.getters.getCardsCount;
 
     if (this.$store.getters.getCurrentPage == null) {
       this.initCards(this.currentPage);
@@ -103,12 +106,14 @@ export default {
         this.currentPage = response.data.number;
         this.totalPages = response.data.totalPages;
         this.cards = response.data.content;
+        this.cardsCount = response.data.totalElements;
 
         await this.$store.dispatch('setCurrentPage', this.currentPage);
         await this.$store.dispatch('setTotalPages', this.totalPages);
         await this.$store.dispatch('setCards', this.cards);
         await this.$store.dispatch('setCardsType', this.cardsFilterType);
         await this.$store.dispatch('setArchetype', this.cardsFilterArchetype);
+        await this.$store.dispatch('setCardsCount', this.cardsCount);
       } else {
         console.error(response.data);
       }
@@ -136,6 +141,11 @@ export default {
       } else {
         console.error(response.data);
       }
+    },
+    getTotalPassedCards(): Number {
+      let count = this.cardsPerPage * (this.currentPage + 1);
+
+      return count > this.cardsCount ? this.cardsCount : count;
     }
   }
 };
