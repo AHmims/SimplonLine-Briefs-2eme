@@ -11,6 +11,6 @@ import java.util.List;
 public interface ArchetypeRepository extends JpaRepository<Archetype, String> {
     Archetype findTopByLibelleArchetype(String archetypeName);
 
-    @Query(value = "SELECT new ahmims.scuffed_BAKURA.dto.MinifiedArchetype(tt.idArchetype, tt.libelleArchetype) FROM Archetype as tt", nativeQuery = false)
+    @Query(value = "SELECT new ahmims.scuffed_BAKURA.dto.MinifiedArchetype(tt.idArchetype, tt.libelleArchetype) FROM Archetype as tt ORDER BY tt.libelleArchetype ASC", nativeQuery = false)
     List<MinifiedArchetype> allArchetypes();
 }

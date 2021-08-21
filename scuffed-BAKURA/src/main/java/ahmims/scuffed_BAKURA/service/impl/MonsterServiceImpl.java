@@ -27,6 +27,7 @@ public class MonsterServiceImpl implements MonsterService {
         try {
             monster = this.monsterRepository.save(monster);
 
+            System.out.println(monster);
             return monster.getIdCarte() != null ? monster : null;
         } catch (Exception e) {
             throw new RequestException("Error while saving monster", HttpStatus.INTERNAL_SERVER_ERROR);

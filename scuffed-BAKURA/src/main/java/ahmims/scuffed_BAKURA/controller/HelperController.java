@@ -117,7 +117,7 @@ public class HelperController {
 
     @PostMapping("/api/seed/cards")
     public ResponseEntity<?> seedC() {
-        ArrayList<String[]> seedingResult = new ArrayList<>();
+        ArrayList<CardInfo.CardData> seedingResult = new ArrayList<>();
         Requester<CardInfo> requester = new Requester<>("https://db.ygoprodeck.com/api/v7/cardinfo.php", "get", CardInfo.class);
 
 
@@ -146,24 +146,23 @@ public class HelperController {
 
             Carte savedCarte = null;
 
-            if (cardData.getType().toLowerCase().contains("monster")) {
+            if (cardData.getType().toLowerCase().contains("monster") || cardData.getType().equalsIgnoreCase("token")) {
                 Monster monster = new Monster(cardData.getName(), cardData.getDesc(), cardData.getId(), cardData.getType(), cardImage, archetype, null, cardData.getAtk(), cardData.getDef(), cardData.getLevel(), cardData.getScale() == 0 ? cardData.getLinkval() : cardData.getScale(), attribute, race);
                 savedCarte = this.monsterService.saveMonster(monster);
             }
-            if (cardData.getType().toLowerCase().contains("spell")) {
+            else if (cardData.getType().toLowerCase().contains("spell")) {
                 Spell spell = new Spell(cardData.getName(), cardData.getDesc(), cardData.getId(), cardData.getType(), cardImage, archetype, null);
                 savedCarte = this.spellService.saveSpell(spell);
             }
-            if (cardData.getType().toLowerCase().contains("trap")) {
+            else if (cardData.getType().toLowerCase().contains("trap")) {
                 Trap trap = new Trap(cardData.getName(), cardData.getDesc(), cardData.getId(), cardData.getType(), cardImage, archetype, null);
                 savedCarte = this.trapService.saveTrap(trap);
             }
 
             if (savedCarte == null) {
+                seedingResult.add(cardData);
                 System.out.printf("=> Card <%s> couldn't be saved%n", cardData.getId());
             }
-
-            seedingResult.add(new String[]{cardData.getId() + "", (savedCarte != null) + ""});
         }
 
         return new ResponseEntity<>(seedingResult, HttpStatus.OK);
