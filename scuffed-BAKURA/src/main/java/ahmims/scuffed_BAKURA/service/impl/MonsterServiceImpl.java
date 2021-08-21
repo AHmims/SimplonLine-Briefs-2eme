@@ -34,11 +34,11 @@ public class MonsterServiceImpl implements MonsterService {
     }
 
     @Override
-    public Page<Monster> getAllCards(int page, int itemsPerPage) {
+    public Page<Monster> getAllCards(String archetype, int page, int itemsPerPage) {
         try {
             Pageable pageable = PageRequest.of(page, itemsPerPage);
 
-            return this.monsterRepository.findAllByNomCarteNotNull(pageable);
+            return this.monsterRepository.allCards(archetype, pageable);
         } catch (Exception e) {
             throw new RequestException("Error while getting list of monsters", HttpStatus.INTERNAL_SERVER_ERROR);
         }

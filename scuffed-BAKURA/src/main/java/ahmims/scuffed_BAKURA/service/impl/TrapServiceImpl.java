@@ -34,11 +34,11 @@ public class TrapServiceImpl implements TrapService {
     }
 
     @Override
-    public Page<Trap> getAllCards(int page, int itemsPerPage) {
+    public Page<Trap> getAllCards(String archetype, int page, int itemsPerPage) {
         try {
             Pageable pageable = PageRequest.of(page, itemsPerPage);
 
-            return this.trapRepository.findAllByNomCarteNotNull(pageable);
+            return this.trapRepository.allCards(archetype, pageable);
         } catch (Exception e) {
             throw new RequestException("Error while getting list of traps", HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -42,11 +42,11 @@ public class CarteServiceImpl implements CarteService {
     }
 
     @Override
-    public Page<Carte> getAllCards(int page, int itemsPerPage) {
+    public Page<Carte> getAllCards(String archetype, int page, int itemsPerPage) {
         try {
             Pageable pageable = PageRequest.of(page, itemsPerPage);
 
-            return this.carteRepository.findAllByNomCarteNotNull(pageable);
+            return this.carteRepository.allCards(archetype, pageable);
         } catch (Exception e) {
             throw new RequestException("Error while getting list of cards", HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -11,9 +11,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface CarteRepository extends PagingAndSortingRepository<Carte, String> {
     Carte findTopByGivenCarteId(int givenCarteId);
 
-    Page<Carte> findAllByNomCarteNotNull(Pageable pageable);
-
-    Page<Carte> findAllByNomCarteContains(String searchText, Pageable pageable);
+    @Query(value = "SELECT tt FROM Carte as tt WHERE LOWER(tt.archetype.idArchetype) LIKE %:archetype%", nativeQuery = false)
+    Page<Carte> allCards(String archetype, Pageable pageable);
 
     @Query(value = "SELECT new ahmims.scuffed_BAKURA.dto.MinifiedCard(tt.idCarte, tt.nomCarte, tt.imageCarte) FROM Carte as tt WHERE LOWER(tt.nomCarte) LIKE %:searchText% OR LOWER(tt.descriptionCarte) LIKE %:searchText% OR LOWER(tt.archetype.libelleArchetype) LIKE %:searchText%", nativeQuery = false)
     Page<MinifiedCard> minifiedSearch(String searchText, Pageable pageable);

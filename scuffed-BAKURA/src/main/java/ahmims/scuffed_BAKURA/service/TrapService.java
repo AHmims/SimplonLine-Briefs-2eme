@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface TrapService {
     Trap saveTrap(Trap trap);
 
-    Page<Trap> getAllCards(int page, int itemsPerPage);
+    Page<Trap> getAllCards(String archetype, int page, int itemsPerPage);
 
     Page<MinifiedCard> search(String searchText, int page, int size, boolean isMinified);
 }

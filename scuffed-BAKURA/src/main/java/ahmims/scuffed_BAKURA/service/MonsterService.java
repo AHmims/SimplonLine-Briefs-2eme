@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface MonsterService {
     Monster saveMonster(Monster monster);
 
-    Page<Monster> getAllCards(int page, int itemsPerPage);
+    Page<Monster> getAllCards(String archetype, int page, int itemsPerPage);
 
     Page<MinifiedCard> search(String searchText, int page, int size, boolean isMinified);
 }

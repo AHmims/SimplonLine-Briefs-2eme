@@ -30,16 +30,16 @@ public class CarteController {
 
     //Activate a users account
     @GetMapping("")
-    public ResponseEntity<Page<?>> getAllCards(@RequestParam int page, @RequestParam int size, @RequestParam String cardType) {
+    public ResponseEntity<Page<?>> getAllCards(@RequestParam int page, @RequestParam int size, @RequestParam String cardType, @RequestParam String archetype) {
         switch (cardType.toLowerCase()) {
             case "monster":
-                return new ResponseEntity<>(this.monsterService.getAllCards(page, size), HttpStatus.valueOf(200));
+                return new ResponseEntity<>(this.monsterService.getAllCards(archetype, page, size), HttpStatus.valueOf(200));
             case "spell":
-                return new ResponseEntity<>(this.spellService.getAllCards(page, size), HttpStatus.valueOf(200));
+                return new ResponseEntity<>(this.spellService.getAllCards(archetype, page, size), HttpStatus.valueOf(200));
             case "trap":
-                return new ResponseEntity<>(this.trapService.getAllCards(page, size), HttpStatus.valueOf(200));
+                return new ResponseEntity<>(this.trapService.getAllCards(archetype, page, size), HttpStatus.valueOf(200));
             default:
-                return new ResponseEntity<>(this.carteService.getAllCards(page, size), HttpStatus.valueOf(200));
+                return new ResponseEntity<>(this.carteService.getAllCards(archetype, page, size), HttpStatus.valueOf(200));
         }
     }
 

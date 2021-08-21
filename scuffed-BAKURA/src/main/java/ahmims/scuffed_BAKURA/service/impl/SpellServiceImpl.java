@@ -34,11 +34,11 @@ public class SpellServiceImpl implements SpellService {
     }
 
     @Override
-    public Page<Spell> getAllCards(int page, int itemsPerPage) {
+    public Page<Spell> getAllCards(String archetype, int page, int itemsPerPage) {
         try {
             Pageable pageable = PageRequest.of(page, itemsPerPage);
 
-            return this.spellRepository.findAllByNomCarteNotNull(pageable);
+            return this.spellRepository.allCards(archetype, pageable);
         } catch (Exception e) {
             throw new RequestException("Error while getting list of spells", HttpStatus.INTERNAL_SERVER_ERROR);
         }
