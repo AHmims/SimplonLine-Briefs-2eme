@@ -22,4 +22,6 @@ public interface ImageService {
     File getLocalImage(String imageName);
 
     Image assertImage(Image image);
+
+    List<Image> getImagesById(List<String> imagesIds);
 }

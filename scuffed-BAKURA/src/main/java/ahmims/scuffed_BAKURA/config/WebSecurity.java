@@ -31,6 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/archetype").permitAll()
                 .antMatchers("/api/card/**/*").permitAll()
                 .antMatchers("/valider/*").permitAll()
+                .antMatchers("/api/image/avatars").permitAll()
                 .antMatchers("/serve/images/*").permitAll()
                 // Disallow everything else
                 .anyRequest().authenticated();

@@ -177,6 +177,22 @@ public class ImageServiceImpl implements ImageService {
         return null;
     }
 
+    @Override
+    public List<Image> getImagesById(List<String> imagesIds) {
+        try {
+            List<Image> images = new ArrayList<>();
+
+            for (String imageId : imagesIds) {
+                Optional<Image> optionalImage = this.imageRepository.findById(imageId);
+                optionalImage.ifPresent(images::add);
+            }
+
+            return images;
+        } catch (Exception e) {
+            throw new RequestException("Error while getting avatars", HttpStatus.BAD_REQUEST);
+        }
+    }
+
 
     //
     //
