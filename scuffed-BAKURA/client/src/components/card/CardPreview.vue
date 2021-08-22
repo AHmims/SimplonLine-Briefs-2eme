@@ -5,7 +5,7 @@
         <h3>Card preview <input type="button" value="X" @click="hidePreview"/></h3>
         <img :src="getImageUrl(card.imageCarte.lienImage)" :alt="card.nomCarte" style="width: 350px"/>
         <p>{{ card.nomCarte }}</p>
-        <p>{{ card.givenCarteId }}</p>
+        <p>{{ card.givenCarteId }}<span v-if="card.archetype != null"> | Archetype: {{ card.archetype.libelleArchetype }}</span></p>
         <div v-if="isMonster(card)">
           <span>
             <span>{{ card.monsterAtk }}-ATK /{{ card.monsterDef }}-DEF </span>
