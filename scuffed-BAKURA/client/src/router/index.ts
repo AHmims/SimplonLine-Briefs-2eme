@@ -6,8 +6,10 @@ import About from '@/views/About.vue';
 import Login from '@/views/Login.vue';
 import Signup from '@/views/Signup.vue';
 import Cards from '@/views/Cards.vue';
+import AccountSettings from '@/views/AccountSettings.vue';
+import Profile from '@/views/Profile.vue';
 
-import {isNotAuthenticated} from '@/gaurds/Auth';
+import {isAuthenticated, isNotAuthenticated} from '@/gaurds/Auth';
 
 Vue.use(VueRouter);
 
@@ -41,6 +43,22 @@ const routes: Array<RouteConfig> = [
     component: Signup,
     beforeEnter: (to, from, next) => {
       isNotAuthenticated(to, from, next);
+    }
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: AccountSettings,
+    beforeEnter: (to, from, next) => {
+      isAuthenticated(to, from, next);
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    beforeEnter: (to, from, next) => {
+      isAuthenticated(to, from, next);
     }
   }
 ];

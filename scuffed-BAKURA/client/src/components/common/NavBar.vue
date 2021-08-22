@@ -17,7 +17,8 @@
         <span>Loading...</span>
       </div>
       <div v-else>
-        <h6>{{ user.nom }}</h6>
+        <router-link to="/profile"><h6>{{ user.nom }}</h6></router-link>
+        <router-link to="/settings">Settings</router-link>
         <button type="button" @click="logOut">Log-out</button>
       </div>
     </div>
@@ -72,6 +73,9 @@ export default {
     },
     logOut() {
       this.$store.commit('setAuthToken', null);
+      if(this.$route.name != 'Home') {
+        this.$router.push({name: 'Home'});
+      }
     }
   }
 };
