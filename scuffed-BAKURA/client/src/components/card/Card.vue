@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="showPreview">
     <img :src="getImageUrl(card.imageCarte.lienImage)"
          :id="card.imageCarte.idImage"
          :alt="card.nomCarte"
@@ -37,6 +37,16 @@ export default {
   },
   mounted() {
   },
-  methods: {}
+  methods: {
+    showPreview() {
+      if (this.card.idCarte != this.$store.getters.getCardPreviewId) {
+        this.$store.dispatch('setCardPreviewId', this.card.idCarte);
+        this.$store.dispatch('setCardPreviewData', this.card);
+      }
+      if (!this.$store.getters.isCardPreviewVisible) {
+        this.$store.dispatch('setCardPreviewVisible', true);
+      }
+    }
+  }
 };
 </script>

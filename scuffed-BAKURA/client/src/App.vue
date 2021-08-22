@@ -1,15 +1,19 @@
 <template>
   <div id="app">
     <nav-bar/>
-    <router-view/>
+    <div style="display: flex; width: 100%">
+      <router-view style="flex: 1"/>
+      <card-preview/>
+    </div>
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/common/NavBar.vue";
+import CardPreview from "@/components/card/CardPreview.vue";
 
 export default {
-  components: {NavBar}
+  components: {CardPreview, NavBar}
 }
 </script>
 

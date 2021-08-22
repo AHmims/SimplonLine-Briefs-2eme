@@ -16,4 +16,6 @@ public interface CarteRepository extends PagingAndSortingRepository<Carte, Strin
 
     @Query(value = "SELECT new ahmims.scuffed_BAKURA.dto.MinifiedCard(tt.idCarte, tt.nomCarte, tt.imageCarte) FROM Carte as tt WHERE LOWER(tt.nomCarte) LIKE %:searchText% OR LOWER(tt.descriptionCarte) LIKE %:searchText% OR LOWER(tt.archetype.libelleArchetype) LIKE %:searchText%", nativeQuery = false)
     Page<MinifiedCard> minifiedSearch(String searchText, Pageable pageable);
+
+    Carte findTopByIdCarte(String id);
 }

@@ -62,4 +62,18 @@ public class CarteServiceImpl implements CarteService {
             throw new RequestException("Error while searching for cards", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public Carte getCardById(String id) {
+        try {
+            Carte card = this.carteRepository.findTopByIdCarte(id);
+            if (card != null) {
+                return card;
+            }
+
+            throw new RequestException("No card mathes the provided id", HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            throw new RequestException("Error while finding carte by given Id", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

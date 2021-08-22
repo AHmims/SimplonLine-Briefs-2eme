@@ -7,6 +7,7 @@ import Race from '@/models/card/Race';
 export default interface Card {
   idCarte: string,
   nomCarte: string,
+  descriptionCarte: string,
   givenCarteId: string,
   typeCarte: string,
   imageCarte: Image,

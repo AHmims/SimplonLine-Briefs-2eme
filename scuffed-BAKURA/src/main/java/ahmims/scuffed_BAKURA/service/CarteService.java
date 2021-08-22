@@ -14,4 +14,6 @@ public interface CarteService {
     Page<Carte> getAllCards(String archetype, int page, int itemsPerPage);
 
     Page<MinifiedCard> search(String searchText, int page, int size, boolean isMinified);
+
+    Carte getCardById(String id);
 }

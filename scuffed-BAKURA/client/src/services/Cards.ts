@@ -36,7 +36,20 @@ function searchForCards(searchText: String, page = 0 as Number, size = 25 as Num
   });
 }
 
+function getCardData(cardId: String): Promise<CustomResponse> {
+  return new Promise((resolve, reject) => {
+    // @ts-ignore
+    axios.get(`${API_ENDPOINT}/card/${cardId}`).then(({data}: any) => {
+      resolve(responseHandler(true, data));
+    }).catch((error: Error) => {
+      resolve(responseHandler(false, error));
+    });
+  });
+}
+
+
 export {
   getAllCards,
-  searchForCards
+  searchForCards,
+  getCardData
 };

@@ -1,6 +1,7 @@
 package ahmims.scuffed_BAKURA.controller;
 
 import ahmims.scuffed_BAKURA.dto.MinifiedCard;
+import ahmims.scuffed_BAKURA.model.Carte;
 import ahmims.scuffed_BAKURA.service.CarteService;
 import ahmims.scuffed_BAKURA.service.MonsterService;
 import ahmims.scuffed_BAKURA.service.SpellService;
@@ -61,5 +62,11 @@ public class CarteController {
             default:
                 return new ResponseEntity<>(this.carteService.search(searchText, page, size, true), HttpStatus.valueOf(200));
         }
+    }
+
+    //Get card data
+    @GetMapping("/{id}")
+    public ResponseEntity<Carte> getCardData(@PathVariable String id) {
+        return new ResponseEntity<>(this.carteService.getCardById(id), HttpStatus.valueOf(200));
     }
 }
