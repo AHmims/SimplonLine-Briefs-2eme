@@ -2,14 +2,10 @@
   <div style="display: flex; align-items: center; justify-content: center">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      |
-      <router-link to="/cards">Cards</router-link>
-      |
-      <router-link to="/about">About</router-link>
-      |
-      <router-link to="/login">Login</router-link>
-      |
-      <router-link to="/signup">Signup</router-link>
+      <router-link to="/cards"> | Cards</router-link>
+      <router-link to="/about"> | About</router-link>
+      <router-link to="/login" v-if="!isAuthenticated"> | Login</router-link>
+      <router-link to="/signup" v-if="!isAuthenticated">| Signup</router-link>
     </div>
     <div v-if="isAuthenticated">
       <h5>Le me: </h5>
