@@ -18,6 +18,7 @@
       </div>
       <div v-else>
         <h6>{{ user.nom }}</h6>
+        <button type="button" @click="logOut">Log-out</button>
       </div>
     </div>
   </div>
@@ -43,7 +44,9 @@ export default {
         return this.$store.getters.getAuthToken;
       },
       (val: any) => {
-        this.initUser();
+        if (val != null) {
+          this.initUser();
+        }
       },
       {
         deep: true
@@ -66,6 +69,9 @@ export default {
       } else {
         console.error(userResponse.data);
       }
+    },
+    logOut() {
+      this.$store.commit('setAuthToken', null);
     }
   }
 };

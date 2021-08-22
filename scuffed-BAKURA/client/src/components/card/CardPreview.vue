@@ -45,6 +45,7 @@ export default {
   name: 'card-preview',
   props: {},
   mixins: [Util],
+  components: {},
   data() {
     return {
       isVisible: false as boolean,
@@ -53,7 +54,7 @@ export default {
     };
   },
   created() {
-    if(this.isVisible && this.$store.getters.getCardPreviewId != null){
+    if (this.isVisible && this.$store.getters.getCardPreviewId != null) {
       this.fetchCardData(this.$store.getters.getCardPreviewId);
       this.isVisible = this.$store.getters.isCardPreviewVisible;
     }
