@@ -19,14 +19,14 @@
         <div>
           <span>{{ card.typeCarte }} </span>
           <span v-if="isMonster(card)">
-            <span>{{ card.race.libelleRace }} <img v-if="card.race.imageRace != null"
+            <span>/{{ card.race.libelleRace }} <img v-if="card.race.imageRace != null"
                                                    :src="getImageUrl(card.race.imageRace.lienImage)"
                                                    :alt="card.race.libelleRace"
-                                                   style="width: 30px;"></span>
-            <span>{{ card.attribute.libelleAttribute }} <img v-if="card.attribute.imageAttribute != null"
+                                                   style="width: 30px;"> </span>
+            <span>/{{ card.attribute.libelleAttribute }} <img v-if="card.attribute.imageAttribute != null"
                                                              :src="getImageUrl(card.attribute.imageAttribute.lienImage)"
                                                              :alt="card.attribute.libelleAttribute"
-                                                             style="width: 30px;"></span>
+                                                             style="width: 30px;"> </span>
           </span>
         </div>
         <textarea :value="card.descriptionCarte" cols="46" rows="6"></textarea>
