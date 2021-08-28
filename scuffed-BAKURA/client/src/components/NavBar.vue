@@ -13,6 +13,8 @@
         <span>Loading...</span>
       </div>
       <div v-else>
+        <img :src="getImageUrl(user.avatar.lienImage)" alt=""
+             style="width: 60px; height: 60px; object-fit: cover; border-radius: 9999px">
         <router-link to="/profile"><h6>{{ user.nom }}</h6></router-link>
         <router-link to="/settings">Settings</router-link>
         <button type="button" @click="logOut">Log-out</button>
@@ -22,12 +24,14 @@
 </template>
 
 <script lang="ts">
+import Util from '@/helpers/Util';
 import {ping} from '@/services/Auth';
 import {me} from '@/services/User';
 import UserMainData from '@/models/user/UserMainData';
 
 export default {
   name: 'nav-bar',
+  mixins: [Util],
   props: {},
   data() {
     return {
@@ -38,11 +42,16 @@ export default {
   async mounted() {
     this.$store.watch(
       (state: any) => {
-        return this.$store.getters.getAuthToken;
+        return {token: this.$store.getters.getAuthToken, userData: this.$store.getters.getUserData};
       },
       (val: any) => {
-        if (val != null) {
+        if (val.token != null && val.userData === this.user) {
           this.initUser();
+          return;
+        }
+
+        if (val.userData != this.user) {
+          this.user = val.userData;
         }
       },
       {
@@ -71,7 +80,7 @@ export default {
     },
     logOut() {
       this.$store.commit('setAuthToken', null);
-      if(this.$route.name != 'Home') {
+      if (this.$route.name != 'Home') {
         this.$router.push({name: 'Home'});
       }
     }

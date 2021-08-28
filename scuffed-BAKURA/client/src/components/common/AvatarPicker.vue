@@ -9,6 +9,7 @@
            :src="getImageUrl(avatar.lienImage)"
            :alt="'Avatar number ' + index"/>
     </div>
+    <button @click="updateAvatar">Change</button>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import Util from '@/helpers/Util';
 import Image from '@/models/image/Image';
 import {getDefaultAvatars} from '@/services/Images';
 import SingleImageUploader from '@/components/common/SingleImageUploader.vue';
+import {updateProfile} from '@/services/User';
 
 export default {
   name: 'avatar-picker',
@@ -63,6 +65,40 @@ export default {
     },
     setUserImage(image: Image) {
       this.userProfileImage = image;
+
+      if (this.userProfileImage === null) {
+        return;
+      }
+
+      this.defaultAvatars.forEach(avatar => {
+        avatar.selected = false;
+      });
+
+      this.userAvatar = null;
+    },
+    getUserAvatar() {
+      if (this.userAvatar === null) {
+        return this.userProfileImage;
+      }
+
+      return this.userAvatar;
+    },
+    async updateAvatar() {
+      if (this.getUserAvatar() === null) {
+        console.error('Select an image first');
+        return;
+      }
+
+      const response = await updateProfile({avatar: this.getUserAvatar()});
+
+      if (response.status === true) {
+        let userData = this.$store.getters.getUserData;
+        userData.avatar = this.getUserAvatar();
+
+        await this.$store.dispatch('setUserData', userData);
+      } else {
+        console.error(response.data);
+      }
     }
   }
 };
@@ -70,6 +106,6 @@ export default {
 
 <style scoped>
 .inactive {
-  opacity: 0.5;
+  opacity: 0.2;
 }
 </style>
