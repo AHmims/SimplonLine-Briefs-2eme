@@ -9,8 +9,12 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "filepond-plugin-file-validate-type": "^1.2.6",
+    "filepond-plugin-image-crop": "^2.0.6",
+    "filepond-plugin-image-preview": "^4.6.8",
     "vue": "^2.6.12",
     "vue-class-component": "^7.2.6",
+    "vue-filepond": "^6.0.0",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"

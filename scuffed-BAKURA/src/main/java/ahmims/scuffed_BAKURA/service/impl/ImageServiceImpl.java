@@ -88,6 +88,17 @@ public class ImageServiceImpl implements ImageService {
         } else throw new RequestException("Please provide valid images", HttpStatus.BAD_REQUEST);
     }
 
+    @Override
+    public boolean deleteImages(Image[] images) {
+        for (Image image : images) {
+            if (!this.delete(image)) {
+                throw new RequestException("Error while deleting image", HttpStatus.UNPROCESSABLE_ENTITY);
+            }
+        }
+
+        return true;
+    }
+
     /*@Override
     public List<Image> insertMultiple(Produit produit, List<String> urls) {
         if (urls != null && urls.size() >= 4 && urls.size() <= 8) {
@@ -105,6 +116,7 @@ public class ImageServiceImpl implements ImageService {
             return images.contains(null) ? null : images;
         } else throw new RequestException("The number of images required is between 4 & 8", HttpStatus.BAD_REQUEST);
     }*/
+
 
     @Override
     public boolean delete(Image image) {

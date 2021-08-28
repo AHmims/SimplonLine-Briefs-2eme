@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import NavBar from "@/components/common/NavBar.vue";
+import NavBar from "@/components/NavBar.vue";
 import CardPreview from "@/components/card/CardPreview.vue";
 
 export default {

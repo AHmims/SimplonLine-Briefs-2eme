@@ -63,6 +63,8 @@ export default {
       const userResponse = await me();
       if (userResponse.status === true) {
         this.user = userResponse.data;
+
+        await this.$store.dispatch('setUserData', this.user);
       } else {
         console.error(userResponse.data);
       }

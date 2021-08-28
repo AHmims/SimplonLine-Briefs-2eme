@@ -94,7 +94,7 @@ export default {
         this.setupPaginationView();
       }
     },
-    startingPage: function(newVal: Number, oldVal: Number) {
+    startingPage(newVal: Number, oldVal: Number) {
       if (newVal != oldVal) {
         this.currentPage = newVal - 1;
         this.setupPaginationView();

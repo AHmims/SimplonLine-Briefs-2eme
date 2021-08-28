@@ -29,6 +29,11 @@ public class ImageController {
         return new ResponseEntity<>(this.imageService.uploadMultiple(images), HttpStatus.valueOf(200));
     }
 
+    @DeleteMapping("")
+    public ResponseEntity<Boolean> deleteImages(@RequestBody Image[] images) {
+        return new ResponseEntity<>(this.imageService.deleteImages(images), HttpStatus.valueOf(200));
+    }
+
     //Get default avatars
     @GetMapping("/avatars")
     public ResponseEntity<List<Image>> getAvatars() {
