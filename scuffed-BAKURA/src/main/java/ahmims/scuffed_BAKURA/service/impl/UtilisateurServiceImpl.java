@@ -185,6 +185,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 }
 
                 originalUser.setAvatarUtilisateur(userImage);
+            } else {
+                throw new RequestException("Invalid image provided", HttpStatus.BAD_REQUEST);
             }
 
             //
