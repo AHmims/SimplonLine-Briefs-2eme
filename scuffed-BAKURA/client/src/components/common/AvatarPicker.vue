@@ -4,7 +4,7 @@
     <single-image-uploader @input="setUserImage" style="width: 190px; margin: 0 auto;"/>
     <div>
       <img v-for="(avatar, index) in defaultAvatars"
-           :class="{inactive: !avatar.selected}"
+           :class="{inactive: avatar.selected}"
            @click="selectAvatar(index)"
            :src="getImageUrl(avatar.lienImage)"
            :alt="'Avatar number ' + index"/>
@@ -106,6 +106,7 @@ export default {
 
 <style scoped>
 .inactive {
-  opacity: 0.2;
+  /*opacity: 0.2;*/
+  background: red;
 }
 </style>

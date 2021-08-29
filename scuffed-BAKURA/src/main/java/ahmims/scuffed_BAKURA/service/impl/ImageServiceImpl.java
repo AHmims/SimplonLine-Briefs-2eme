@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
+import ahmims.scuffed_BAKURA.controller.ImageController;
 import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.Image;
 import ahmims.scuffed_BAKURA.repository.ImageRepository;
@@ -120,6 +121,10 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public boolean delete(Image image) {
+        if (ImageController.avatarsIds.contains(image.getIdImage())) {
+            return true;
+        }
+
         try {
             imageRepository.delete(image);
 

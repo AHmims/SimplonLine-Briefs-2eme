@@ -48,6 +48,11 @@ public class Validator {
     }
 
     //
+    public static boolean isUsername(String username) {
+        return username.length() >= 2;
+    }
+
+    //
     //
     private static boolean inRange(String user_choice, String[] choices) {
         try {

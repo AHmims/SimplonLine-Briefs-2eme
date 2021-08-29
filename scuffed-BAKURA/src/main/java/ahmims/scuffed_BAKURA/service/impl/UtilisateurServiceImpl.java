@@ -173,12 +173,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 originalUser.setNomUtilisateur(utilisateur.getNom());
             if (utilisateur.getEmail() != null)
                 originalUser.setEmailUtilisateur(utilisateur.getEmail());
+
             if (utilisateur.getPassword() != null) {
                 if (!passwordEncoder.matches(utilisateur.getPassword(), originalUser.getPassUtilisateur()))
-                    originalUser.setPassUtilisateur(passwordEncoder.encode(utilisateur.getPassword()));
+                    originalUser.setPassUtilisateur(utilisateur.getPassword());
             }
             Image userImage = imageService.assertImage(utilisateur.getAvatar());
             if (userImage != null) {
+                if (originalUser.getAvatarUtilisateur() != null) {
+                    this.imageService.delete(originalUser.getAvatarUtilisateur());
+                }
+
                 originalUser.setAvatarUtilisateur(userImage);
             }
 
@@ -195,6 +200,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 }
             }
             if (!isValid) throw new RequestException(errorMessage.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+            //
+            if (utilisateur.getPassword() != null) {
+                originalUser.setPassUtilisateur(passwordEncoder.encode(utilisateur.getPassword()));
+            }
             //
             originalUser = utilisateurRepository.save(originalUser);
             return getUerResponse(originalUser);
