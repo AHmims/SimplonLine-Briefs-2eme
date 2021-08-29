@@ -17,7 +17,7 @@ public class FavoriController {
     }
 
     //Like card
-    @PutMapping("/card/{id}")
+    @GetMapping("/card/{id}")
     public ResponseEntity<Boolean> updateCurrentUser(@RequestParam boolean status, @PathVariable String id, @RequestHeader(name = "Authorization") String token) {
         return new ResponseEntity<>(this.favoriService.likeCard(status, id, token), HttpStatus.valueOf(200));
     }
