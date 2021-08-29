@@ -1,10 +1,9 @@
 package ahmims.scuffed_BAKURA.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,21 +18,17 @@ public class Favori {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idUtilisateur")
     private Utilisateur utilisateur;
-    @OneToMany(mappedBy = "favori", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private List<Carte> cartes;
     @ManyToMany
     @JoinTable(
-            name = "decks",
+            name = "cartes",
             joinColumns = @JoinColumn(name = "idFavori"),
-            inverseJoinColumns = @JoinColumn(name = "idDeck"))
-    private Set<Deck> decks;
+            inverseJoinColumns = @JoinColumn(name = "idCarte"))
+    private Set<Carte> cartes = new HashSet<>();
 
-    public Favori(String idFavori, Utilisateur utilisateur, List<Carte> cartes, Set<Deck> decks) {
+    public Favori(String idFavori, Utilisateur utilisateur, Set<Carte> cartes) {
         this.idFavori = idFavori;
         this.utilisateur = utilisateur;
         this.cartes = cartes;
-        this.decks = decks;
     }
 
     public Favori(Utilisateur utilisateur) {
@@ -59,19 +54,21 @@ public class Favori {
         this.utilisateur = utilisateur;
     }
 
-    public List<Carte> getCartes() {
+    public Set<Carte> getCartes() {
         return cartes;
     }
 
-    public void setCartes(List<Carte> cartes) {
+    public void setCartes(Set<Carte> cartes) {
         this.cartes = cartes;
     }
-
-    public Set<Deck> getDecks() {
-        return decks;
+    
+    public void addCarte(Carte carte) {
+        this.cartes.add(carte);
+        carte.getFavoris().add(this);
     }
 
-    public void setDecks(Set<Deck> decks) {
-        this.decks = decks;
+    public void removeCarte(Carte carte) {
+        this.cartes.remove(carte);
+        carte.getFavoris().remove(this);
     }
 }

@@ -7,8 +7,8 @@ import java.util.Set;
 @Entity
 @Table(name = "trap")
 public class Trap extends Carte {
-    public Trap(String idCarte, String nomCarte, String descriptionCarte, int givenCarteId, String typeCarte, Image imageCarte, Archetype archetype, Administrateur administrateur, Set<Deck> decks, Favori favori) {
-        super(idCarte, nomCarte, descriptionCarte, givenCarteId, typeCarte, imageCarte, archetype, administrateur, decks, favori);
+    public Trap(String idCarte, String nomCarte, String descriptionCarte, int givenCarteId, String typeCarte, Image imageCarte, Archetype archetype, Administrateur administrateur, Set<Favori> favoris) {
+        super(idCarte, nomCarte, descriptionCarte, givenCarteId, typeCarte, imageCarte, archetype, administrateur, favoris);
     }
 
     public Trap(String nomCarte, String descriptionCarte, int givenCarteId, String typeCarte, Image imageCarte, Archetype archetype, Administrateur administrateur) {

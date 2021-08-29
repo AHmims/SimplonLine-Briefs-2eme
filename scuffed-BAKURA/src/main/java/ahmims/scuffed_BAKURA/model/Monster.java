@@ -22,8 +22,8 @@ public class Monster extends Carte {
     @JoinColumn(name = "idRace")
     private Race race;
 
-    public Monster(String idCarte, String nomCarte, String descriptionCarte, int givenCarteId, String typeCarte, Image imageCarte, Archetype archetype, Administrateur administrateur, Set<Deck> decks, Favori favori, int monsterAtk, int monsterDef, int monsterLvl, int monsterScale, Attribute attribute, Race race) {
-        super(idCarte, nomCarte, descriptionCarte, givenCarteId, typeCarte, imageCarte, archetype, administrateur, decks, favori);
+    public Monster(String idCarte, String nomCarte, String descriptionCarte, int givenCarteId, String typeCarte, Image imageCarte, Archetype archetype, Administrateur administrateur, Set<Favori> favoris, int monsterAtk, int monsterDef, int monsterLvl, int monsterScale, Attribute attribute, Race race) {
+        super(idCarte, nomCarte, descriptionCarte, givenCarteId, typeCarte, imageCarte, archetype, administrateur, favoris);
         this.monsterAtk = monsterAtk;
         this.monsterDef = monsterDef;
         this.monsterLvl = monsterLvl;
