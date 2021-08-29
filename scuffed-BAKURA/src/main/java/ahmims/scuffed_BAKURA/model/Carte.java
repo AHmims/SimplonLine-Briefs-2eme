@@ -3,6 +3,7 @@ package ahmims.scuffed_BAKURA.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -31,8 +32,13 @@ public abstract class Carte {
     @ManyToOne
     @JoinColumn(name = "idAdministrateur")
     private Administrateur administrateur;
+    @ManyToMany(mappedBy = "cartes")
+    private Set<Deck> decks;
+    @ManyToOne
+    @JoinColumn(name = "idFavori")
+    private Favori favori;
 
-    public Carte(String idCarte, String nomCarte, String descriptionCarte, int givenCarteId, String typeCarte, Image imageCarte, Archetype archetype, Administrateur administrateur) {
+    public Carte(String idCarte, String nomCarte, String descriptionCarte, int givenCarteId, String typeCarte, Image imageCarte, Archetype archetype, Administrateur administrateur, Set<Deck> decks, Favori favori) {
         this.idCarte = idCarte;
         this.nomCarte = nomCarte;
         this.descriptionCarte = descriptionCarte;
@@ -41,6 +47,8 @@ public abstract class Carte {
         this.imageCarte = imageCarte;
         this.archetype = archetype;
         this.administrateur = administrateur;
+        this.decks = decks;
+        this.favori = favori;
     }
 
     public Carte(String nomCarte, String descriptionCarte, int givenCarteId, String typeCarte, Image imageCarte, Archetype archetype, Administrateur administrateur) {
@@ -124,5 +132,21 @@ public abstract class Carte {
 
     public void setAdministrateur(Administrateur administrateur) {
         this.administrateur = administrateur;
+    }
+
+    public Set<Deck> getDecks() {
+        return decks;
+    }
+
+    public void setDecks(Set<Deck> decks) {
+        this.decks = decks;
+    }
+
+    public Favori getFavori() {
+        return favori;
+    }
+
+    public void setFavori(Favori favori) {
+        this.favori = favori;
     }
 }
