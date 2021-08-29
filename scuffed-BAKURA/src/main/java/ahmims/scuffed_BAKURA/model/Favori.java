@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Favori {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idUtilisateur")
+    @JsonIgnore
     private Utilisateur utilisateur;
     @ManyToMany
     @JoinTable(
@@ -61,7 +63,7 @@ public class Favori {
     public void setCartes(Set<Carte> cartes) {
         this.cartes = cartes;
     }
-    
+
     public void addCarte(Carte carte) {
         this.cartes.add(carte);
         carte.getFavoris().add(this);
