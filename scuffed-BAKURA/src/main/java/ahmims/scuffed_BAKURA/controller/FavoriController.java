@@ -17,13 +17,13 @@ public class FavoriController {
     }
 
     //Like card
-    @GetMapping("/card/{id}")
+    @PutMapping("/card/{id}")
     public ResponseEntity<Boolean> updateCurrentUser(@RequestParam boolean status, @PathVariable String id, @RequestHeader(name = "Authorization") String token) {
         return new ResponseEntity<>(this.favoriService.likeCard(status, id, token), HttpStatus.valueOf(200));
     }
 
     //Like card
-    @PutMapping("/me")
+    @GetMapping("/me")
     public ResponseEntity<Favori> getUserFavorites(@RequestHeader(name = "Authorization") String token) {
         return new ResponseEntity<>(this.favoriService.getUserFavorites(token), HttpStatus.valueOf(200));
     }
