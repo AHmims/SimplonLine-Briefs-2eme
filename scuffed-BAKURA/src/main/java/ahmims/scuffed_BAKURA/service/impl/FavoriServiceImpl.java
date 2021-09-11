@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.service.impl;
 
+import ahmims.scuffed_BAKURA.dto.UpdateRes;
 import ahmims.scuffed_BAKURA.exception.RequestException;
 import ahmims.scuffed_BAKURA.model.Carte;
 import ahmims.scuffed_BAKURA.model.Favori;
@@ -27,7 +28,7 @@ public class FavoriServiceImpl implements FavoriService {
     }
 
     @Override
-    public boolean likeCard(boolean status, String cardId, String token) {
+    public UpdateRes likeCard(String cardId, String token) {
         try {
             if (token == null || token.length() == 0) {
                 throw new RequestException("Invalid token", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -46,17 +47,17 @@ public class FavoriServiceImpl implements FavoriService {
                 throw new RequestException("Card id is invalid", HttpStatus.BAD_REQUEST);
             }
 
-            Favori favoriSearchResult = this.favoriRepository.findTopByCartes_idCarte(cardId);
+            Favori favoriSearchResult = this.favoriRepository.findTopByCartes_idCarteAndUtilisateur(cardId, utilisateur);
 
-            if (status && favoriSearchResult == null) {
+            if (favoriSearchResult == null) {
                 favori.addCarte(card);
                 this.favoriRepository.save(favori);
-            } else if (!status && favoriSearchResult != null) {
+            } else {
                 favori.removeCarte(card);
                 this.favoriRepository.save(favori);
             }
 
-            return true;
+            return new UpdateRes(favoriSearchResult == null, cardId, Favori.class.getSimpleName());
         } catch (Exception e) {
             throw new RequestException("Error while adding/removing card as a favorite", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -73,6 +74,29 @@ public class FavoriServiceImpl implements FavoriService {
             Utilisateur utilisateur = utilisateurRepository.findTopByEmailUtilisateur(userEmail);
 
             return this.favoriRepository.findTopByUtilisateur(utilisateur);
+        } catch (Exception e) {
+            throw new RequestException("Error while getting list of favorites", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public boolean isCardLiked(String cardId, String token) {
+        try {
+            if (token == null || token.length() == 0) {
+                throw new RequestException("Invalid token", HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            String userEmail = jwtManager.getEmail(token.substring(7));
+            Utilisateur utilisateur = utilisateurRepository.findTopByEmailUtilisateur(userEmail);
+
+            Carte card = this.carteRepository.findTopByIdCarte(cardId);
+            if (card == null) {
+                throw new RequestException("Card id is invalid", HttpStatus.BAD_REQUEST);
+            }
+
+            Favori favoriSearchResult = this.favoriRepository.findTopByCartes_idCarteAndUtilisateur(cardId, utilisateur);
+
+            return favoriSearchResult != null;
         } catch (Exception e) {
             throw new RequestException("Error while getting list of favorites", HttpStatus.INTERNAL_SERVER_ERROR);
         }

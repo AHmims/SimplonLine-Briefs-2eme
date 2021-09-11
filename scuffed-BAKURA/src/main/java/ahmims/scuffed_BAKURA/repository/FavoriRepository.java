@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface FavoriRepository extends JpaRepository<Favori, String> {
     Favori findTopByUtilisateur(Utilisateur user);
 
-    Favori findTopByCartes_idCarte(String id);
+    Favori findTopByCartes_idCarteAndUtilisateur(String id, Utilisateur user);
 }
 

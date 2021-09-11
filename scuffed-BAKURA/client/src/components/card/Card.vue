@@ -10,15 +10,18 @@
       <span>{{ card.typeCarte }} | </span>
       <span v-if="card.race">{{ card.race.libelleRace }}</span>
     </p>
+    <like-card-button v-model="card.liked" :card="card.idCarte"/>
   </div>
 </template>
 
 <script lang="ts">
 import Util from '@/helpers/Util';
 import Card from '@/models/card/Card';
+import LikeCardButton from '@/components/card/LikeCardButton.vue';
 
 export default {
   name: 'card',
+  components: {LikeCardButton},
   mixins: [Util],
   props: {
     value: {

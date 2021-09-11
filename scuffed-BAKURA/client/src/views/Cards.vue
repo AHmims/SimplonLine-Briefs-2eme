@@ -55,6 +55,7 @@ import Pagination from '@/components/common/Pagination.vue';
 import MiniCard from '@/components/card/MiniCard.vue';
 import Archetype from '@/models/card/Archetype';
 import {getArchetypesList} from '@/services/Archetypes';
+import {all} from '@/services/Favorites';
 
 export default {
   name: 'cards',
@@ -105,8 +106,26 @@ export default {
       if (response.status === true) {
         this.currentPage = response.data.number;
         this.totalPages = response.data.totalPages;
-        this.cards = response.data.content;
         this.cardsCount = response.data.totalElements;
+
+        let cardsData = response.data.content;
+        const likedCards = await all();
+
+        if (likedCards.status === true) {
+          cardsData.forEach(card => {
+            let liked = false;
+            for (let i = 0; i < likedCards.data.cartes.length; i++) {
+              if (card.idCarte === likedCards.data.cartes[i].idCarte) {
+                liked = true;
+                break;
+              }
+            }
+
+            card.liked = liked;
+          });
+        }
+
+        this.cards = cardsData;
 
         await this.$store.dispatch('setCurrentPage', this.currentPage);
         await this.$store.dispatch('setTotalPages', this.totalPages);

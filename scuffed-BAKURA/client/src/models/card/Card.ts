@@ -18,5 +18,6 @@ export default interface Card {
   monsterLvl: number,
   monsterScale: number,
   attribute: Attribute,
-  race: Race
+  race: Race,
+  liked: boolean
 }

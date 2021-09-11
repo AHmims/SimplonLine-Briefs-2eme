@@ -1,5 +1,6 @@
 package ahmims.scuffed_BAKURA.controller;
 
+import ahmims.scuffed_BAKURA.dto.UpdateRes;
 import ahmims.scuffed_BAKURA.model.Favori;
 import ahmims.scuffed_BAKURA.service.FavoriService;
 import org.springframework.http.HttpStatus;
@@ -18,11 +19,17 @@ public class FavoriController {
 
     //Like card
     @PutMapping("/card/{id}")
-    public ResponseEntity<Boolean> updateCurrentUser(@RequestParam boolean status, @PathVariable String id, @RequestHeader(name = "Authorization") String token) {
-        return new ResponseEntity<>(this.favoriService.likeCard(status, id, token), HttpStatus.valueOf(200));
+    public ResponseEntity<UpdateRes> updateCurrentUser(@PathVariable String id, @RequestHeader(name = "Authorization") String token) {
+        return new ResponseEntity<>(this.favoriService.likeCard(id, token), HttpStatus.valueOf(200));
     }
 
-    //Like card
+    //Check if card is liked
+    @GetMapping("/card/{id}")
+    public ResponseEntity<Boolean> isCardLiked(@PathVariable String id, @RequestHeader(name = "Authorization") String token) {
+        return new ResponseEntity<>(this.favoriService.isCardLiked(id, token), HttpStatus.valueOf(200));
+    }
+
+    //Get all liked cards
     @GetMapping("/me")
     public ResponseEntity<Favori> getUserFavorites(@RequestHeader(name = "Authorization") String token) {
         return new ResponseEntity<>(this.favoriService.getUserFavorites(token), HttpStatus.valueOf(200));
