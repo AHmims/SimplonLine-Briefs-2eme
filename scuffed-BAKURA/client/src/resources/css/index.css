@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  body {
+    @apply bg-blueGray-50;
+  }
+  #app {
+    @apply font-Inter max-w-7xl mx-auto;
+  }
+  .navbar-nav-container .router-link-exact-active {
+    @apply border-b-2 border-blueGray-800;
+  }
+  .btn-sec {
+    @apply px-6 py-1 space-x-1.5 bg-transparent border-2 border-blueGray-300 text-blueGray-600 text-base font-medium tracking-tight rounded-lg;
+  }
+  .btn-main-dark {
+    @apply px-6 py-1.5 space-x-2.5 bg-blueGray-700 text-blueGray-100 text-base font-medium tracking-tight rounded-lg;
+  }
+  .navBar-menu-option {
+    @apply flex items-center justify-between text-sm font-medium p-1 px-2 rounded-md transition-colors duration-100 hover:bg-blueGray-100 cursor-pointer;
+  }
+}
