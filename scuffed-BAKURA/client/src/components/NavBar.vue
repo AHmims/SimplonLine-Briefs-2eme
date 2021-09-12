@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex items-center p-6 space-x-24">
+  <div class="w-full flex items-center p-6 space-x-24 mb-6">
     <div>
       <svg
         width="115"
@@ -26,7 +26,15 @@
       </svg>
     </div>
     <div
-      class="space-x-6 text-base tracking-tighter text-blueGray-700 font-medium capitalize"
+      class="
+        navbar-nav-container
+        space-x-6
+        text-base
+        tracking-tighter
+        text-blueGray-700
+        font-medium
+        capitalize
+      "
     >
       <router-link to="/">Home</router-link>
       <router-link to="/cards">Cards</router-link>
@@ -41,7 +49,15 @@
           type="text"
           v-model="searchValue"
           placeholder="search..."
-          class="bg-transparent flex-1 placeholder-blueGray-600 text-blueGray-700 font-medium text-xs outline-none"
+          class="
+            bg-transparent
+            flex-1
+            placeholder-blueGray-600
+            text-blueGray-700
+            font-medium
+            text-xs
+            outline-none
+          "
         />
         <select
           v-model="searchCardType"
@@ -103,10 +119,7 @@
       </div>
     </div>
     <div v-if="isAuthenticated">
-      <div v-if="user === null">
-        <span>Loading...</span>
-      </div>
-      <div v-else class="flex items-center space-x-2 relative">
+      <div class="flex items-center space-x-2 relative">
         <img
           v-if="user !== null"
           :src="getImageUrl(user.avatar.lienImage)"
@@ -132,7 +145,18 @@
         </button>
         <div
           v-if="showMenuButton"
-          class="bg-white flex flex-col w-32 p-1 border-2 border-blueGray-100 rounded-lg absolute top-12 right-0"
+          class="
+            bg-white
+            flex flex-col
+            w-32
+            p-1
+            border-2 border-blueGray-100
+            rounded-lg
+            absolute
+            top-12
+            right-0
+            z-10
+          "
         >
           <router-link to="/profile" class="navBar-menu-option">
             <span>{{ user.nom }}</span>
