@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <h3>Cards</h3>
-    <div>
+  <div class="">
+    <div class="flex items-center justify-end mb-6 space-x-2">
+      <span class="text-xs text-blueGray-700 font-medium">Flter by:</span>
       <select
         v-model="cardsFilterType"
         @change="filterCards"
         :disabled="isLoadingCards"
+        class="bg-blueGray-200 p-1 rounded"
       >
         <option value="all">All</option>
         <option value="monster">Monsters</option>
@@ -16,6 +17,7 @@
         v-model="cardsFilterArchetype"
         @change="filterCards"
         :disabled="isLoadingCards"
+        class="bg-blueGray-200 p-1 rounded"
       >
         <option value="">All</option>
         <option
@@ -26,6 +28,45 @@
           {{ archetype.libelleArchetype }}
         </option>
       </select>
+    </div>
+    <div class="">
+      <div
+        v-if="isLoadingCards"
+        class="flex flex-col items-center justify-center"
+      >
+        <span>Loading cards</span>
+        <svg
+          class="animate-spin -ml-1 mr-3 h-5 w-5 text-blueGray-500"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+      </div>
+      <div v-else class="grid grid-cols-4 gap-5">
+        <card v-for="card in cards" :value="card" :key="card.idCarte" />
+      </div>
+    </div>
+    <div
+      v-if="!isLoadingCards"
+      class="flex items-center justify-end my-4 space-x-2"
+    >
+      <span class="text-xs text-blueGray-600 font-bold"
+        >{{ getTotalPassedCards() }} / {{ cardsCount }}</span
+      >
       <pagination
         v-model="totalPages"
         :offset="3"
@@ -36,24 +77,6 @@
         @paginated="initCards"
       />
     </div>
-    <div>
-      <h4 v-if="isLoadingCards">
-        Traveling through the cards verse to get cards...
-      </h4>
-      <h5>Cards {{ getTotalPassedCards() }} / {{ cardsCount }}</h5>
-      <div
-        style="
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          width: 50%;
-          margin: 0 auto;
-          grid-gap: 20px;
-        "
-      >
-        <card v-for="card in cards" :value="card" :key="card.idCarte" />
-      </div>
-    </div>
-    <div></div>
   </div>
 </template>
 
@@ -76,7 +99,7 @@ export default {
       isLoadingCards: false as boolean,
       currentPage: -1 as Number,
       totalPages: null,
-      cardsPerPage: 25,
+      cardsPerPage: 28,
       cardsFilterType: "all",
       cardsFilterArchetype: "",
       archetypes: [] as Archetype[],

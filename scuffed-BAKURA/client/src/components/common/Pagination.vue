@@ -1,56 +1,92 @@
 <template>
-  <div style="display: flex; flex-direction: row; justify-content: center; margin: 10px 0;">
-    <button style="width: 50px;" @click="navigate(currentPage - 1)" :disabled="disabled"><</button>
-    <div v-for="(pagination, index) in currentPagesView">
-      <button style="width: 26px; height: 40px" @click="navigate(pagination - 1)" :disabled="disabled">
-        <template v-if="currentPage + 1 === pagination">
-          <strong>{{ pagination }}</strong>
-        </template>
-        <template v-else>{{ pagination }}</template>
+  <div class="pagination">
+    <button
+      class="pagination-control-button mr-2"
+      @click="navigate(currentPage - 1)"
+      :disabled="disabled"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </button>
+    <div v-for="(pagination, index) in currentPagesView" :key="index">
+      <button
+        class="pagination-nav"
+        :class="{ 'pagination-nav-selected': currentPage + 1 === pagination }"
+        @click="navigate(pagination - 1)"
+        :disabled="disabled"
+      >
+        <span>{{ pagination }}</span>
       </button>
     </div>
-    <button style="width: 50px;" @click="navigate(currentPage + 1)" :disabled="disabled">></button>
+    <button
+      class="pagination-control-button ml-2"
+      @click="navigate(currentPage + 1)"
+      :disabled="disabled"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </button>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'pagination',
+  name: "pagination",
   props: {
     value: {
       type: Number,
-      required: true
+      required: true,
     },
     paginationCount: {
       type: Number,
       required: false,
-      default: 10
+      default: 10,
     },
     enableNavigation: {
       type: Boolean,
       required: false,
-      default: true
+      default: true,
     },
     offset: {
       type: Number,
       required: false,
-      default: 3
+      default: 3,
     },
     startingPage: {
       type: Number,
       required: false,
-      default: 1
+      default: 1,
     },
     disabled: {
       type: Boolean,
       required: false,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      currentPage: this.startingPage - 1 as Number,
-      currentPagesView: []
+      currentPage: (this.startingPage - 1) as Number,
+      currentPagesView: [],
     };
   },
   created() {
@@ -68,13 +104,14 @@ export default {
         }
 
         this.setupPaginationView();
-        this.$emit('paginated', this.currentPage);
+        this.$emit("paginated", this.currentPage);
       }
     },
     setupPaginationView() {
       let count = 0;
       let newCurrentPagesView = [];
-      let startingIndex = this.offset < this.currentPage ? this.currentPage - this.offset : 0;
+      let startingIndex =
+        this.offset < this.currentPage ? this.currentPage - this.offset : 0;
 
       for (let i = startingIndex; i < this.value; i++) {
         newCurrentPagesView.push(i + 1);
@@ -86,7 +123,7 @@ export default {
       }
 
       this.currentPagesView = newCurrentPagesView;
-    }
+    },
   },
   watch: {
     value(newVal: Number, oldVal: Number) {
@@ -99,7 +136,7 @@ export default {
         this.currentPage = newVal - 1;
         this.setupPaginationView();
       }
-    }
-  }
+    },
+  },
 };
 </script>

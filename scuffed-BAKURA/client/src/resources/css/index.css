@@ -23,4 +23,16 @@
   .navBar-menu-option {
     @apply flex items-center justify-between text-sm font-medium p-1 px-2 rounded-md transition-colors duration-100 hover:bg-blueGray-100 cursor-pointer;
   }
+  .pagination {
+    @apply flex items-center;
+  }
+  .pagination .pagination-control-button {
+    @apply px-2 py-1 bg-blueGray-200 hover:bg-blueGray-300 rounded-lg text-blueGray-800;
+  }
+  .pagination .pagination-nav {
+    @apply px-2 py-1 bg-blueGray-50 hover:bg-blueGray-100 rounded-lg text-blueGray-800;
+  }
+  .pagination .pagination-nav-selected {
+    @apply bg-blueGray-200 font-bold;
+  }
 }
