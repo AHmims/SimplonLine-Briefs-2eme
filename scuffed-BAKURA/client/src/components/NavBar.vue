@@ -120,12 +120,13 @@
     </div>
     <div v-if="isAuthenticated">
       <div class="flex items-center space-x-2 relative">
-        <img
-          v-if="user !== null"
-          :src="getImageUrl(user.avatar.lienImage)"
-          alt="Avatar"
-          class="w-9 h-9 object-cover rounded-full"
-        />
+        <router-link to="/profile" v-if="user !== null">
+          <img
+            :src="getImageUrl(user.avatar.lienImage)"
+            alt="Avatar"
+            class="w-9 h-9 object-cover rounded-full shadow-inner"
+          />
+        </router-link>
         <div v-else class="w-9 h-9 bg-blueGray-200 rounded-full"></div>
         <button type="button" @click="showMenuButton = !showMenuButton">
           <svg

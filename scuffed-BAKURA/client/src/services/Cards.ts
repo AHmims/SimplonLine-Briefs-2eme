@@ -63,4 +63,5 @@ function getCardData(cardId: String): Promise<CustomResponse> {
   });
 }
 
+
 export {getAllCards, searchForCards, getCardData};

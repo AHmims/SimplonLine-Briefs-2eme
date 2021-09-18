@@ -25,7 +25,7 @@
         {{ card.nomCarte }}
       </p>
       <span class="font-normal text-[10px] text-blueGray-400 mb-1.5"
-        >{{ card.givenCarteId }}
+      >{{ card.givenCarteId }}
       </span>
       <div class="flex items-center mb-1">
         <img
@@ -62,7 +62,7 @@
         </span>
       </div>
       <span class="text-[10px] text-blueGray-700 font-medium mb-1.5"
-        >{{ card.monsterAtk }} ATK - {{ card.monsterDef }} DEF</span
+      >{{ card.monsterAtk }} ATK - {{ card.monsterDef }} DEF</span
       >
       <div class="flex flex-col space-y-1">
         <span
@@ -78,7 +78,7 @@
             whitespace-nowrap
             w-min
           "
-          >{{ card.race.libelleRace }}</span
+        >{{ card.race.libelleRace }}</span
         >
         <span
           class="
@@ -92,10 +92,11 @@
             whitespace-nowrap
             w-min
           "
-          >{{ card.typeCarte }}</span
+        >{{ card.typeCarte }}</span
         >
       </div>
       <like-card-button
+        v-if="showLike"
         v-model="card.liked"
         :card="card.idCarte"
         class="absolute top-2 left-2"
@@ -105,19 +106,24 @@
 </template>
 
 <script lang="ts">
-import Util from "@/helpers/Util";
-import Card from "@/models/card/Card";
-import LikeCardButton from "@/components/card/LikeCardButton.vue";
+import Util from '@/helpers/Util';
+import Card from '@/models/card/Card';
+import LikeCardButton from '@/components/card/LikeCardButton.vue';
 
 export default {
-  name: "card",
-  components: { LikeCardButton },
+  name: 'card',
+  components: {LikeCardButton},
   mixins: [Util],
   props: {
     value: {
       type: Object,
       required: true,
     },
+    showLike: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
   },
   data() {
     return {
@@ -128,15 +134,16 @@ export default {
     // @ts-ignore
     this.card = this.value;
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     showPreview() {
       if (this.card.idCarte != this.$store.getters.getCardPreviewId) {
-        this.$store.dispatch("setCardPreviewId", this.card.idCarte);
-        this.$store.dispatch("setCardPreviewData", this.card);
+        this.$store.dispatch('setCardPreviewId', this.card.idCarte);
+        this.$store.dispatch('setCardPreviewData', this.card);
       }
       if (!this.$store.getters.isCardPreviewVisible) {
-        this.$store.dispatch("setCardPreviewVisible", true);
+        this.$store.dispatch('setCardPreviewVisible', true);
       }
     },
   },
