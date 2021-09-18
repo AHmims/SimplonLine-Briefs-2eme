@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav-bar />
-    <div class="relative">
+    <div class="relative px-6">
       <router-view style="flex: 1" />
       <card-preview />
     </div>

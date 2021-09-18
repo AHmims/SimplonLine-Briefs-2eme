@@ -56,8 +56,8 @@
           ></path>
         </svg>
       </div>
-      <div v-else class="grid grid-cols-4 gap-5">
-        <card v-for="card in cards" :value="card" :key="card.idCarte"/>
+      <div v-else class="grid grid-cols-4 gap-3">
+        <card v-for="card in cards" :value="card" :key="card.idCarte" />
       </div>
     </div>
     <div
@@ -65,7 +65,7 @@
       class="flex items-center justify-end my-4 space-x-2"
     >
       <span class="text-xs text-blueGray-600 font-bold"
-      >{{ getTotalPassedCards() }} / {{ cardsCount }}</span
+        >{{ getTotalPassedCards() }} / {{ cardsCount }}</span
       >
       <pagination
         v-model="totalPages"
@@ -81,17 +81,17 @@
 </template>
 
 <script lang="ts">
-import Card from '@/models/card/Card';
-import {getAllCards} from '@/services/Cards';
-import CardComponent from '@/components/card/Card.vue';
-import Pagination from '@/components/common/Pagination.vue';
-import Archetype from '@/models/card/Archetype';
-import {getArchetypesList} from '@/services/Archetypes';
-import {all} from '@/services/Favorites';
+import Card from "@/models/card/Card";
+import { getAllCards } from "@/services/Cards";
+import CardComponent from "@/components/card/Card.vue";
+import Pagination from "@/components/common/Pagination.vue";
+import Archetype from "@/models/card/Archetype";
+import { getArchetypesList } from "@/services/Archetypes";
+import { all } from "@/services/Favorites";
 
 export default {
-  name: 'cards',
-  components: {Pagination, CardComponent},
+  name: "cards",
+  components: { Pagination, CardComponent },
   props: {},
   data() {
     return {
@@ -100,8 +100,8 @@ export default {
       currentPage: -1 as Number,
       totalPages: null,
       cardsPerPage: 28,
-      cardsFilterType: 'all',
-      cardsFilterArchetype: '',
+      cardsFilterType: "all",
+      cardsFilterArchetype: "",
       archetypes: [] as Archetype[],
       cardsCount: 0 as Number,
     };
@@ -162,12 +162,12 @@ export default {
 
         this.cards = cardsData;
 
-        await this.$store.dispatch('setCurrentPage', this.currentPage);
-        await this.$store.dispatch('setTotalPages', this.totalPages);
-        await this.$store.dispatch('setCards', this.cards);
-        await this.$store.dispatch('setCardsType', this.cardsFilterType);
-        await this.$store.dispatch('setArchetype', this.cardsFilterArchetype);
-        await this.$store.dispatch('setCardsCount', this.cardsCount);
+        await this.$store.dispatch("setCurrentPage", this.currentPage);
+        await this.$store.dispatch("setTotalPages", this.totalPages);
+        await this.$store.dispatch("setCards", this.cards);
+        await this.$store.dispatch("setCardsType", this.cardsFilterType);
+        await this.$store.dispatch("setArchetype", this.cardsFilterArchetype);
+        await this.$store.dispatch("setCardsCount", this.cardsCount);
       } else {
         console.error(response.data);
       }

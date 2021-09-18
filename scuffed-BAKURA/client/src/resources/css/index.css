@@ -35,6 +35,18 @@
   .pagination .pagination-nav-selected {
     @apply bg-blueGray-200 font-bold;
   }
+  .inactive-avatar {
+    @apply opacity-50 filter grayscale;
+  }
+  .input-combo {
+    @apply flex flex-col space-y-3 max-w-[350px];
+  }
+  .input-combo .label {
+    @apply text-base text-blueGray-800 font-semibold;
+  }
+  .input-combo .input {
+    @apply text-sm w-full border border-blueGray-200 shadow rounded-lg p-2.5 h-9 outline-none ring-blueGray-300 focus:ring;
+  }
 }
 
 .profile-banner {
