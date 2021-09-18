@@ -88,7 +88,7 @@
       </form>
       <div
         v-if="showSearchResults"
-        class="absolute top-12 w-full bg-blueGray-100 rounded-lg py-3"
+        class="absolute top-12 w-full bg-blueGray-100 rounded-lg py-3 z-10"
       >
         <div class="w-full flex items-center justify-between mb-3 px-5">
           <span class="text-sm">Search results</span>

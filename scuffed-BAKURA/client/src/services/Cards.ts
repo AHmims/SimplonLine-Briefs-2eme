@@ -8,8 +8,7 @@ function getAllCards(
 ): Promise<CustomResponse> {
   return new Promise((resolve, reject) => {
     // @ts-ignore
-    axios
-      .get(`${API_ENDPOINT}/card`, {
+    axios.get(`${API_ENDPOINT}/card`, {
         params: {
           page,
           size,
@@ -34,8 +33,7 @@ function searchForCards(
 ): Promise<CustomResponse> {
   return new Promise((resolve, reject) => {
     // @ts-ignore
-    axios
-      .get(`${API_ENDPOINT}/card/search/minified`, {
+    axios.get(`${API_ENDPOINT}/card/search/minified`, {
         params: {
           searchText,
           page,
@@ -55,8 +53,7 @@ function searchForCards(
 function getCardData(cardId: String): Promise<CustomResponse> {
   return new Promise((resolve, reject) => {
     // @ts-ignore
-    axios
-      .get(`${API_ENDPOINT}/card/${cardId}`)
+    axios.get(`${API_ENDPOINT}/card/${cardId}`)
       .then(({data}: any) => {
         resolve(responseHandler(true, data));
       })
