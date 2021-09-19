@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <nav-bar />
-    <div class="relative px-6">
-      <router-view style="flex: 1" />
+    <div class="relative px-6 flex flex-col flex-1">
+      <router-view />
       <card-preview />
     </div>
   </div>

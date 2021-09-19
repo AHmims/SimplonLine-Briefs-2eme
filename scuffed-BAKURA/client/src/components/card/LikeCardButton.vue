@@ -58,7 +58,7 @@ export default {
       if (response.status === true) {
         this.$emit("input", response.data.changed);
       } else {
-        console.error(response.data);
+        toastjs.logErrorActive(response.data.response.data.message);
       }
     },
   },

@@ -9,7 +9,7 @@
     @apply bg-blueGray-50;
   }
   #app {
-    @apply font-Inter max-w-7xl mx-auto;
+    @apply font-Inter max-w-7xl mx-auto min-h-screen flex flex-col;
   }
   .navbar-nav-container .router-link-exact-active {
     @apply border-b-2 border-blueGray-800;
@@ -39,13 +39,13 @@
     @apply opacity-50 filter grayscale;
   }
   .input-combo {
-    @apply flex flex-col space-y-3 max-w-[350px];
+    @apply flex flex-col space-y-3 w-full max-w-[350px];
   }
   .input-combo .label {
     @apply text-base text-blueGray-800 font-semibold;
   }
   .input-combo .input {
-    @apply text-sm w-full border border-blueGray-200 shadow rounded-lg p-2.5 h-9 outline-none ring-blueGray-300 focus:ring;
+    @apply bg-white text-sm w-full border border-blueGray-200 shadow rounded-lg p-2.5 h-9 outline-none ring-blueGray-300 focus:ring;
   }
 }
 

@@ -271,7 +271,7 @@ export default {
 
         await this.$store.dispatch("setUserData", this.user);
       } else {
-        console.error(userResponse.data);
+        toastjs.logErrorActive(userResponse.data.response.data.message);
       }
     },
     logOut() {
@@ -294,7 +294,7 @@ export default {
       if (response.status === true) {
         this.searchedCards = response.data.content;
       } else {
-        console.error(response.data);
+        toastjs.logErrorActive(response.data.response.data.message);
       }
     },
   },

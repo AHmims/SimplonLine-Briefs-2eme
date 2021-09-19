@@ -96,7 +96,7 @@ export default {
       if (response.status === true) {
         await this.$store.dispatch("setUserData", response.data);
       } else {
-        console.error(response.data);
+        toastjs.logErrorActive(response.data.response.data.message);
       }
     },
   },

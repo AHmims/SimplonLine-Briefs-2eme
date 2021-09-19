@@ -62,7 +62,7 @@ export default {
       if (favoritesResponse.status === true) {
         this.favCards = favoritesResponse.data.cartes;
       } else {
-        console.error(favoritesResponse.data);
+        toastjs.logErrorActive(favoritesResponse.data.response.data.message);
       }
     },
   },

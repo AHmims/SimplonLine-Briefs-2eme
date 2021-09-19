@@ -221,7 +221,7 @@ export default {
         await this.$store.dispatch("setCardPreviewData", this.card);
         await this.$store.dispatch("setCardPreviewId", this.card.idCarte);
       } else {
-        console.error(response.data);
+        toastjs.logErrorActive(response.data.response.data.message);
       }
     },
     hidePreview() {

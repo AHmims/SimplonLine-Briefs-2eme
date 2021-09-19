@@ -169,7 +169,7 @@ export default {
         await this.$store.dispatch("setArchetype", this.cardsFilterArchetype);
         await this.$store.dispatch("setCardsCount", this.cardsCount);
       } else {
-        console.error(response.data);
+        toastjs.logErrorActive(response.data.response.data.message);
       }
     },
     filterCards() {
@@ -181,7 +181,7 @@ export default {
       if (response.status === true) {
         this.archetypes = response.data;
       } else {
-        console.error(response.data);
+        toastjs.logErrorActive(response.data.response.data.message);
       }
     },
     getTotalPassedCards(): Number {

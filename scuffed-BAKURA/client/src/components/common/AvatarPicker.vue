@@ -72,7 +72,7 @@ export default {
           };
         });
       } else {
-        console.error(response.data);
+        toastjs.logErrorActive(response.data.response.data.message);
       }
     },
     selectAvatar(index) {
@@ -109,7 +109,7 @@ export default {
     },
     async updateAvatar() {
       if (this.getUserAvatar() === null) {
-        console.error("Select an image first");
+        toastjs.logErrorActive("Select an image first");
         return;
       }
 
@@ -121,7 +121,7 @@ export default {
 
         await this.$store.dispatch("setUserData", userData);
       } else {
-        console.error(response.data);
+        toastjs.logErrorActive(response.data.response.data.message);
       }
     },
   },
